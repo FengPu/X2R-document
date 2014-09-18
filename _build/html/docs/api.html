@@ -1,0 +1,861 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API &mdash; X2R 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="X2R 1.0 documentation" href="../index.html" />
+    <link rel="next" title="License" href="license.html" />
+    <link rel="prev" title="X2R" href="x2r.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="license.html" title="License"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="x2r.html" title="X2R"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">X2R 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="extractor">
+<h2>Extractor<a class="headerlink" href="#extractor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Extractor">
+<em class="property">class </em><tt class="descname">Extractor</tt><a class="headerlink" href="#Extractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extractor class is the class for modeling the
+URI extracting &amp; analyzing process as below.</p>
+<p>Step 1. Load the RDF content to a Graph data structure</p>
+<p>Step 2. Traverse the Graph to finding all the URIs</p>
+<p>Step 3. Transform filtered URIs to search friendly terms, where the filtered URI means the all but those URI listed in the <cite>filtered URI list</cite></p>
+<p>Step 4. Wrap these terms as a JSON output</p>
+<dl class="method">
+<dt id="Extractor::getQueryTerms">
+<tt class="descname">getQueryTerms</tt><big>(</big><big>)</big><a class="headerlink" href="#Extractor::getQueryTerms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract terms from URIs of given RDF, and wrapp terms
+with their contextual information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A JSON string of terms derived from extracted URIs of a given RDF file with corresponding metadata,</td>
+</tr>
+</tbody>
+</table>
+<p>including <cite>originalURI</cite>, <cite>replacedURI</cite>, <cite>status</cite>, <cite>lineNumbers</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Extractor::getFiltedUris">
+<tt class="descname">getFiltedUris</tt><big>(</big><big>)</big><a class="headerlink" href="#Extractor::getFiltedUris" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current URI filter list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An array of filtered URI.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Extractor::addFilteredUri">
+<tt class="descname">addFilteredUri</tt><big>(</big><em>$furi</em><big>)</big><a class="headerlink" href="#Extractor::addFilteredUri" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the given URI, $furi, to the URI filter list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$furi</strong> (<em>string</em>) &#8211; The URI to be filtered</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Extractor::removeFilteredUri">
+<tt class="descname">removeFilteredUri</tt><big>(</big><em>$furi</em><big>)</big><a class="headerlink" href="#Extractor::removeFilteredUri" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the given URI, $furi, from the URI filter list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$furi</strong> (<em>string</em>) &#8211; The URI to be filtered</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="rdfgraph">
+<h2>RdfGraph<a class="headerlink" href="#rdfgraph" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="RdfGraph">
+<em class="property">class </em><tt class="descname">RdfGraph</tt><a class="headerlink" href="#RdfGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>RdfGraph class is a standard interface for wrapping or adapting existing RDF parsers into X2R.</p>
+<dl class="method">
+<dt id="RdfGraph::parseRdf">
+<tt class="descname">parseRdf</tt><big>(</big><em>$data</em><big>)</big><a class="headerlink" href="#RdfGraph::parseRdf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$data</strong> (<em>string</em>) &#8211; The content of RDF file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RdfGraph::serializeRdfAs">
+<tt class="descname">serializeRdfAs</tt><big>(</big><em>$format</em><big>)</big><a class="headerlink" href="#RdfGraph::serializeRdfAs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$format</strong> (<em>string</em>) &#8211; The file format of serialized RDF.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the string representation of serialized RDF in specified format.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="easyrdfadapter">
+<h3>EasyRdfAdapter<a class="headerlink" href="#easyrdfadapter" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="EasyRdfAdapter">
+<em class="property">class </em><tt class="descname">EasyRdfAdapter</tt><a class="headerlink" href="#EasyRdfAdapter" title="Permalink to this definition">¶</a></dt>
+<dd><p>EasyRdfAdapter class is an implemantion of RdfGraph. It is a warpper of an open source RDF parser - EasyRDF.</p>
+<dl class="method">
+<dt id="EasyRdfAdapter::parseRdf">
+<tt class="descname">parseRdf</tt><big>(</big><em>$data</em><big>)</big><a class="headerlink" href="#EasyRdfAdapter::parseRdf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$data</strong> (<em>string</em>) &#8211; The content of RDF file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="EasyRdfAdapter::serializeRdfAs">
+<tt class="descname">serializeRdfAs</tt><big>(</big><em>$format</em><big>)</big><a class="headerlink" href="#EasyRdfAdapter::serializeRdfAs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$format</strong> (<em>string</em>) &#8211; The file format of serialized RDF.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the string representation of serialized RDF in specified format.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="tokenizer">
+<h2>Tokenizer<a class="headerlink" href="#tokenizer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Tokenizer">
+<em class="property">class </em><tt class="descname">Tokenizer</tt><a class="headerlink" href="#Tokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tokenizer class is a standard interface for X2R developers to extend X2R with new types of tokenizers. Currently, two tokenizers, i.e. CaseBasedTokenizer and DelimitBasedTokenizer, are implemented and bundled with X2R::Extractor.</p>
+<dl class="method">
+<dt id="Tokenizer::tokenizeString">
+<tt class="descname">tokenizeString</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#Tokenizer::tokenizeString" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$str</strong> (<em>string</em>) &#8211; The string to be tokenized.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An array of tokenized strings.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Tokenizer::tokenizeArrayOfStrings">
+<tt class="descname">tokenizeArrayOfStrings</tt><big>(</big><em>$arr</em><big>)</big><a class="headerlink" href="#Tokenizer::tokenizeArrayOfStrings" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$arr</strong> (<em>array</em>) &#8211; The array of strings to be tokenized</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An array of tokenized strings.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Tokenizer::arrayToString">
+<tt class="descname">arrayToString</tt><big>(</big><em>$arr</em><big>)</big><a class="headerlink" href="#Tokenizer::arrayToString" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$arr</strong> (<em>array</em>) &#8211; The array of strings to be tokenized</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A string which is consisted of elements from given array $arr and is concatenated by whitespace.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="casebasedtokenizer">
+<h3>CaseBasedTokenizer<a class="headerlink" href="#casebasedtokenizer" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt>
+<em class="property">class </em><tt class="descname">Tokenizer</tt></dt>
+<dd><p>CaseBasedTokenizer class</p>
+<dl class="method">
+<dt>
+<tt class="descname">tokenizeString</tt><big>(</big><em>$str</em><big>)</big></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$str</strong> (<em>string</em>) &#8211; The string to be tokenized.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An array of tokenized strings.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">tokenizeArrayOfStrings</tt><big>(</big><em>$arr</em><big>)</big></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$arr</strong> (<em>array</em>) &#8211; The array of strings to be tokenized</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An array of tokenized strings.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="delimitbasedtokenizer">
+<h3>DelimitBasedTokenizer<a class="headerlink" href="#delimitbasedtokenizer" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt>
+<em class="property">class </em><tt class="descname">Tokenizer</tt></dt>
+<dd><p>DelimitBasedTokenizer class</p>
+<dl class="method">
+<dt>
+<tt class="descname">tokenizeString</tt><big>(</big><em>$str</em><big>)</big></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$str</strong> (<em>string</em>) &#8211; The string to be tokenized.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An array of tokenized strings.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">tokenizeArrayOfStrings</tt><big>(</big><em>$arr</em><big>)</big></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$arr</strong> (<em>array</em>) &#8211; The array of strings to be tokenized</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An array of tokenized strings.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="refactor">
+<h2>Refactor<a class="headerlink" href="#refactor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Refactor">
+<em class="property">class </em><tt class="descname">Refactor</tt><a class="headerlink" href="#Refactor" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>Refactor is the class that reserves
+the flexibility for introducing
+new kind of RDF refactoring into
+this RDF analyzing and manupilation
+framework.</div></blockquote>
+<dl class="method">
+<dt id="Refactor::refactoring">
+<tt class="descname">refactoring</tt><big>(</big><em>$change</em><big>)</big><a class="headerlink" href="#Refactor::refactoring" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$change</strong> (<em>int</em>) &#8211; The change spec. for the refacroring.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="replaceuri">
+<h3>ReplaceUri<a class="headerlink" href="#replaceuri" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="ReplaceUri">
+<em class="property">class </em><tt class="descname">ReplaceUri</tt><a class="headerlink" href="#ReplaceUri" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>ReplaceUri is an implemetation of
+Refactor class. It is the default
+refactoring used in X2R project.
+The replaceUri is to replace an existing URI
+with a new URI.</div></blockquote>
+<dl class="method">
+<dt id="ReplaceUri::refactoring">
+<tt class="descname">refactoring</tt><big>(</big><em>$change</em><big>)</big><a class="headerlink" href="#ReplaceUri::refactoring" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$change</strong> (<em>int</em>) &#8211; The change spec. for the refacroring.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="mappingentry">
+<h2>MappingEntry<a class="headerlink" href="#mappingentry" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="MappingEntry">
+<em class="property">class </em><tt class="descname">MappingEntry</tt><a class="headerlink" href="#MappingEntry" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>X2R&#8217;s components are integrated by standard message passing, where the standard message is the <cite>mapping from original URI, terms and replaced URI</cite>. This MappingEntry is the class used to model one entry of such mapping message.</div></blockquote>
+<dl class="method">
+<dt id="MappingEntry::MappingEntry">
+<tt class="descname">MappingEntry</tt><big>(</big><em>$originalURI</em>, <em>$replacedURI</em>, <em>$term</em>, <em>$lineNumbers</em><big>)</big><a class="headerlink" href="#MappingEntry::MappingEntry" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$originalURI</strong> (<em>string</em>) &#8211; The change spec. for the refacroring.</li>
+<li><strong>$replacedURI</strong> (<em>string</em>) &#8211; The change spec. for the refacroring.</li>
+<li><strong>$term</strong> (<em>string</em>) &#8211; The change spec. for the refacroring.</li>
+<li><strong>$lineNumbers</strong> (<em>string</em>) &#8211; The change spec. for the refacroring.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MappingEntry::getOriginalURI">
+<tt class="descname">getOriginalURI</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingEntry::getOriginalURI" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Either false on failure, or the <cite>Original URI</cite> for success.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MappingEntry::getReplacedURI">
+<tt class="descname">getReplacedURI</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingEntry::getReplacedURI" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Either false on failure, or the <cite>Replaced URI</cite> for success.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MappingEntry::getQueryTerm">
+<tt class="descname">getQueryTerm</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingEntry::getQueryTerm" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Either false on failure, or the <cite>Query Term</cite> for success.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MappingEntry::getLineNumbers">
+<tt class="descname">getLineNumbers</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingEntry::getLineNumbers" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Either false on failure, or the <cite>Line Numbers</cite> for success.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mappingcollection">
+<h2>MappingCollection<a class="headerlink" href="#mappingcollection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="MappingCollection">
+<em class="property">class </em><tt class="descname">MappingCollection</tt><a class="headerlink" href="#MappingCollection" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>The MappingCollection is a collection of MappingEntry. The MappingCollection object can be serialized as JSON, and serves as the integration glue among X2R&#8217;s components.</div></blockquote>
+<dl class="method">
+<dt id="MappingCollection::addMappingEntry">
+<tt class="descname">addMappingEntry</tt><big>(</big><em>$mappingentry</em><big>)</big><a class="headerlink" href="#MappingCollection::addMappingEntry" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$mappingentry</strong> (<em>MappingEntryint</em>) &#8211; An entry of mapping.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MappingCollection::toJson">
+<tt class="descname">toJson</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingCollection::toJson" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Serialize the collection of mappings in Json format.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mapper">
+<h2>Mapper<a class="headerlink" href="#mapper" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Mapper">
+<em class="property">class </em><tt class="descname">Mapper</tt><a class="headerlink" href="#Mapper" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Mapper is the class for modeling the RDF transformation (refactoring) process.</p>
+<p>Currently, the Mapper only support one kind of
+transformation (refactoring) - replaceURI.</p>
+<p>The replaceURI is to replace an existing URI
+with a new URI..</p>
+</div></blockquote>
+<dl class="method">
+<dt id="Mapper::Mapper">
+<tt class="descname">Mapper</tt><big>(</big><em>$graph</em><big>)</big><a class="headerlink" href="#Mapper::Mapper" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$graph</strong> (<em>rdfGraph</em>) &#8211; The RDF, which is holded in the rdfGraph data structure, to be refactored.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Mapper::refactoring">
+<tt class="descname">refactoring</tt><big>(</big><em>$refactorType</em>, <em>$change</em><big>)</big><a class="headerlink" href="#Mapper::refactoring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Based on the type of refactoring ($refactorType) and the desired change ($change) to conduct the refactoring on target RDF.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$refactorType</strong> (<em>string</em>) &#8211; The type of rafactor.</li>
+<li><strong>$change</strong> (<em>array</em>) &#8211; The month.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the datetime object for method chaining.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="highlight-php"><div class="highlight"><pre><span class="x">//This is an example of $change</span>
+<span class="x">array(&#39;http://127.0.0.1/中山運動中心&#39; =&gt; &#39;http://openisdm.iis.sinica.edu.tw/中山運動中心&#39;,</span>
+<span class="x">     &#39;http://127.0.0.1/大同運動中心&#39; =&gt; &#39;http://openisdm.iis.sinica.edu.tw/大同運動中心&#39;);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Currently, only one type refactor is supported, that is,
+<cite>replaceUri</cite>. More refactors can be implemented and
+integrated into Mapper.</p>
+</div>
+<dl class="method">
+<dt id="Mapper::serialize">
+<tt class="descname">serialize</tt><big>(</big><em>$format</em><big>)</big><a class="headerlink" href="#Mapper::serialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the RDF content in the format specified by $format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$format</strong> (<em>string</em>) &#8211; The format of output file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the string of refactored RDF&#8217;s content in the specified format.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="webutilities">
+<h2>WebUtilities<a class="headerlink" href="#webutilities" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="GetParameter">
+<tt class="descname">GetParameter</tt><big>(</big><em>$para</em><big>)</big><a class="headerlink" href="#GetParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of HTTP GET request by parameter&#8217;s name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$para</strong> (<em>string</em>) &#8211; The parameter&#8217;s name.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The value of given parameter&#8217;s name.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="uss">
+<h2>USS<a class="headerlink" href="#uss" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Endpoint">
+<em class="property">class </em><tt class="descname">Endpoint</tt><a class="headerlink" href="#Endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>Endpoint is the class for modeling the public Endpoint, such as DBpedia.</div></blockquote>
+<dl class="method">
+<dt id="Endpoint::issueSparqlQuery">
+<tt class="descname">issueSparqlQuery</tt><big>(</big><em>$sparqlQuery</em>, <em>$resultFormat</em><big>)</big><a class="headerlink" href="#Endpoint::issueSparqlQuery" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$sparqlQuery</strong> (<em>string</em>) &#8211; The SPARQL query.</li>
+<li><strong>$resultFormat</strong> (<em>string</em>) &#8211; The format of returned result.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The string of result in the specified format.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="SparqlQueryComposer">
+<em class="property">class </em><tt class="descname">SparqlQueryComposer</tt><a class="headerlink" href="#SparqlQueryComposer" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>SparqlQueryComposer is a class to aggregate a varity of SPARQL composition methods. Currently, only plain text terms are supported.</div></blockquote>
+<dl class="method">
+<dt id="SparqlQueryComposer::term2Sparql">
+<tt class="descname">term2Sparql</tt><big>(</big><em>$term</em><big>)</big><a class="headerlink" href="#SparqlQueryComposer::term2Sparql" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>Turn plain text terms to SPARQL query.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$term</strong> (<em>string</em>) &#8211; The desired query term..</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The SPARQL query string.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="x2r">
+<h2>X2R<a class="headerlink" href="#x2r" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="X2R">
+<em class="property">class </em><tt class="descname">X2R</tt><a class="headerlink" href="#X2R" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>X2R models the process of translating an imperfect RDF, especially for those with invalid URIs, to RDF with relatively higher quality.</div></blockquote>
+<dl class="method">
+<dt id="X2R::transformation">
+<tt class="descname">transformation</tt><big>(</big><em>$rdfGraph</em>, <em>$configuration</em><big>)</big><a class="headerlink" href="#X2R::transformation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$graph</strong> (<em>rdfGraph</em>) &#8211; The RDF, which is holded in the rdfGraph data structure, to be refactored.</li>
+<li><strong>configuration</strong> &#8211; to be defined.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The refactored RDF.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API</a><ul>
+<li><a class="reference internal" href="#extractor">Extractor</a></li>
+<li><a class="reference internal" href="#rdfgraph">RdfGraph</a><ul>
+<li><a class="reference internal" href="#easyrdfadapter">EasyRdfAdapter</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tokenizer">Tokenizer</a><ul>
+<li><a class="reference internal" href="#casebasedtokenizer">CaseBasedTokenizer</a></li>
+<li><a class="reference internal" href="#delimitbasedtokenizer">DelimitBasedTokenizer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#refactor">Refactor</a><ul>
+<li><a class="reference internal" href="#replaceuri">ReplaceUri</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mappingentry">MappingEntry</a></li>
+<li><a class="reference internal" href="#mappingcollection">MappingCollection</a></li>
+<li><a class="reference internal" href="#mapper">Mapper</a></li>
+<li><a class="reference internal" href="#webutilities">WebUtilities</a></li>
+<li><a class="reference internal" href="#uss">USS</a></li>
+<li><a class="reference internal" href="#x2r">X2R</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="x2r.html"
+                        title="previous chapter">X2R</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="license.html"
+                        title="next chapter">License</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/docs/api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="license.html" title="License"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="x2r.html" title="X2R"
+             >previous</a> |</li>
+        <li><a href="../index.html">X2R 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Feng-Pu Yang.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
