@@ -775,6 +775,61 @@ integrated into Mapper.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="hot-spots">
+<h2>Hot Spots<a class="headerlink" href="#hot-spots" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="QueryRefiner">
+<em class="property">class </em><tt class="descname">QueryRefiner</tt><a class="headerlink" href="#QueryRefiner" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>QueryRefiner is an one-to-one adapter, which processes the raw query with the logics defined in it. A varity of refinement heuristics or methods can be introduced into X2R through extending this class.</div></blockquote>
+<dl class="method">
+<dt id="QueryRefiner::refine">
+<tt class="descname">refine</tt><big>(</big><em>$query</em><big>)</big><a class="headerlink" href="#QueryRefiner::refine" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$query</strong> (<em>string</em>) &#8211; The query that is directly extracted and tokenized from original URI.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The refined query.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="SearchResultSelector">
+<em class="property">class </em><tt class="descname">SearchResultSelector</tt><a class="headerlink" href="#SearchResultSelector" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>SearchResultSelector is a many-to-one selector, which selects one fittest result from a given result set. A varity of fitness function can be introduced into X2R through extending this class.</div></blockquote>
+<dl class="method">
+<dt id="SearchResultSelector::select">
+<tt class="descname">select</tt><big>(</big><em>$resultSet</em><big>)</big><a class="headerlink" href="#SearchResultSelector::select" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$resultSet</strong> (<em>array</em>) &#8211; A given result set.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The fittest result.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -806,6 +861,7 @@ integrated into Mapper.</p>
 <li><a class="reference internal" href="#webutilities">WebUtilities</a></li>
 <li><a class="reference internal" href="#uss">USS</a></li>
 <li><a class="reference internal" href="#x2r">X2R</a></li>
+<li><a class="reference internal" href="#hot-spots">Hot Spots</a></li>
 </ul>
 </li>
 </ul>

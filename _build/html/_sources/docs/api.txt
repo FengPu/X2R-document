@@ -347,3 +347,32 @@ X2R
       :param rdfGraph $graph: The RDF, which is holded in the rdfGraph data structure, to be refactored.
       :param configuration: to be defined. 
       :returns: The refactored RDF. 
+
+
+Hot Spots
+-----
+
+.. php:class:: QueryRefiner
+
+     QueryRefiner is an one-to-one adapter, which processes the raw query with the logics defined in it. A varity of refinement heuristics or methods can be introduced into X2R through extending this class.    
+
+
+  .. php:method:: refine($query)
+
+
+      :param string $query: The query that is directly extracted and tokenized from original URI.
+      :returns: The refined query. 
+
+
+
+.. php:class:: SearchResultSelector
+
+     SearchResultSelector is a many-to-one selector, which selects one fittest result from a given result set. A varity of fitness function can be introduced into X2R through extending this class.   
+
+
+  .. php:method:: select($resultSet)
+
+
+      :param array $resultSet: A given result set. 
+      :returns: The fittest result. 
+
