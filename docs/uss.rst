@@ -14,11 +14,22 @@ Refactored USS kernel
 Hooks
 -----
 
-In refined USS, three **atomic hooks** can be replaced and extended, they are: 
+In refined USS, seven **atomic hooks** can be replaced and extended, they are: 
 
-* **Query Refiner**
+* **Query Parser**
 
-  Query Refiner takes one query string as its input and output a refined query string.  
+  Query Parser parses the plain text query string into set of query terms, term refinement qualifiers, result set qualifiers and corresponding integration commands.
+
+* **Endpoint Cotainer**
+  
+
+* **Endpoint Wrapper**
+
+  Endpoint Wrapper wraps the public Endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint Wrapper accept SQARQL query and return the result set in standard format of Endpoint. 
+
+* **Term Refiner**
+
+  Term Refiner takes one query term as its input and output a refined query term.  
 
 * **Result Ranker**
 
@@ -26,7 +37,18 @@ In refined USS, three **atomic hooks** can be replaced and extended, they are:
 
 * **Result Filter**
 
-  Result Filter takes two input parameters: the filtered size and the result set. The filtered size, which determine the size of returned result set, sholud be larger than zero. The first ''filtered size'' results will be returned as the filtered result set. 
+
+
+..  (Term filters: filter some terms) Result Filter takes two input parameters: the filtered size and the result set. The filtered size, which determine the size of returned result set, sholud be larger than zero. The first ''filtered size'' results will be returned as the filtered result set. 
+
+
+
+
+* **Result Integrator**
+
+  Result Integrator takes two or more result sets and integrates them as one ranked result set. 
+
+* **Result Selector**
 
 
 Composition of atomic hooks
