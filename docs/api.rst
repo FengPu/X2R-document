@@ -303,13 +303,15 @@ WebUtilities
       :param string $para: The parameter's name.
       :returns: The value of given parameter's name.
 
+
+
 USS
 ---
 
 .. php:class:: Endpoint
 
 
-      Endpoint is the class for modeling the public Endpoint, such as DBpedia.
+      Endpoint is the class for modeling the public Endpoint, such as DBpedia. (refer to :ref:`uss`)
 
 
   .. php:method:: issueSparqlQuery($sparqlQuery, $resultFormat)

@@ -64,16 +64,24 @@
 </li>
 <li><p class="first"><strong>Endpoint Cotainer</strong></p>
 </li>
+<<<<<<< Updated upstream
 <li><p class="first"><strong>Endpoint Wrapper</strong></p>
 <p>Endpoint Wrapper wraps the public Endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint Wrapper accept SQARQL query and return the result set in standard format of Endpoint.</p>
+=======
+</ul>
+<ul>
+<li><p class="first"><strong>Endpoint</strong> (see also: <a class="reference internal" href="api.html#Endpoint" title="Endpoint"><tt class="xref php php-class docutils literal"><span class="pre">Endpoint</span></tt></a>)</p>
+<p>Endpoint wraps the public Endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint accepts SQARQL query and return the result set in standard format of Endpoint.</p>
+>>>>>>> Stashed changes
 </li>
 <li><p class="first"><strong>Term Refiner</strong></p>
 <p>Term Refiner takes one query term as its input and output a refined query term.</p>
 </li>
 <li><p class="first"><strong>Result Ranker</strong></p>
-<p>Result Ranker reorder the ranks of result set based on the heuristic that it wants to realize. In addition to heuristic, Result Ranker can also be a crowd sourcing task, which can be delegated to the crowd.</p>
+<p>Result Ranker reorders the ranks of result set based on the heuristic that it wants to realize. In addition to heuristic, Result Ranker can also be a crowd sourcing task, which can be delegated to the crowd.</p>
 </li>
 <li><p class="first"><strong>Result Filter</strong></p>
+<p>Result Filter filters result set by patterns. The typical usage of Result Filter is to resolve ambiguity.</p>
 </li>
 </ul>
 <ul>

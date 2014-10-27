@@ -22,10 +22,10 @@ In refined USS, seven **atomic hooks** can be replaced and extended, they are:
 
 * **Endpoint Cotainer**
   
+.. _Endpoint:
+* **Endpoint** (see also: :php:class:`Endpoint`)
 
-* **Endpoint Wrapper**
-
-  Endpoint Wrapper wraps the public Endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint Wrapper accept SQARQL query and return the result set in standard format of Endpoint. 
+  Endpoint wraps the public Endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint accepts SQARQL query and return the result set in standard format of Endpoint. 
 
 * **Term Refiner**
 
@@ -33,16 +33,13 @@ In refined USS, seven **atomic hooks** can be replaced and extended, they are:
 
 * **Result Ranker**
 
-  Result Ranker reorder the ranks of result set based on the heuristic that it wants to realize. In addition to heuristic, Result Ranker can also be a crowd sourcing task, which can be delegated to the crowd. 
+  Result Ranker reorders the ranks of result set based on the heuristic that it wants to realize. In addition to heuristic, Result Ranker can also be a crowd sourcing task, which can be delegated to the crowd. 
 
 * **Result Filter**
 
-
+  Result Filter filters result set by patterns. The typical usage of Result Filter is to resolve ambiguity.  
 
 ..  (Term filters: filter some terms) Result Filter takes two input parameters: the filtered size and the result set. The filtered size, which determine the size of returned result set, sholud be larger than zero. The first ''filtered size'' results will be returned as the filtered result set. 
-
-
-
 
 * **Result Integrator**
 
