@@ -14,6 +14,15 @@ This part of the guide focuses on setting up your environment for X2R and all it
     docs/x2r
 
 
+Framework Hooks
+---------------
+.. toctree::
+    :maxdepth: 2
+
+    docs/hooks/new_endpoint
+
+
+
 API Reference
 -------------
 This part of the documentation dedicates to prople who are looking for information on a specific function, class or method.
