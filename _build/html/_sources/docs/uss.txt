@@ -19,12 +19,6 @@ In refined USS, seven **atomic hooks** can be replaced and extended, they are:
 * **Query Parser**
 
   Query Parser parses the plain text query string into set of query terms, term refinement qualifiers, result set qualifiers and corresponding integration commands.
-<<<<<<< Updated upstream
-
-* **Endpoint Cotainer**
-  
-=======
->>>>>>> Stashed changes
 
 * **Endpoint Cotainer**
   
