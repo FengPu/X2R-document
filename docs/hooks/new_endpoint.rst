@@ -1,2 +1,2 @@
-Includes a new Endpoint
-----------------------
+Add a new Endpoint
+------------------

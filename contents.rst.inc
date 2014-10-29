@@ -20,6 +20,13 @@ Framework Hooks
     :maxdepth: 2
 
     docs/hooks/new_endpoint
+    docs/hooks/new_tokenizer
+    docs/hooks/new_parser
+    docs/hooks/new_refactor
+    docs/hooks/new_selector
+    docs/hooks/new_ranker
+    docs/hooks/new_refiner
+
 
 
 

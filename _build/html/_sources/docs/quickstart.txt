@@ -10,7 +10,7 @@ A Minimal Usage Scenario
 
 X2R aims to improve the quality of RDF by replacing temporary or invalid URIs with valid and representive URIs. 
 
-Before letting X2R do the URIs replacemant task for you, you should make sure the configuration file are 
+Before letting X2R do the URIs replacemant task for you, you should make sure the configuration file, X2R.conf, are 
 consistent with your requirements.  
 
 
