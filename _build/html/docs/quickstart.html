@@ -51,6 +51,76 @@
             
   <div class="section" id="quickstart">
 <span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<p>This page give a a minimal usage scenario for grasping the whole picture of X2R by example. It assumes you already have X2R installed. If you do not, head over to the <a class="reference internal" href="install.html#installation"><em>Installation</em></a> section.</p>
+<div class="section" id="a-minimal-usage-scenario">
+<h2>A Minimal Usage Scenario<a class="headerlink" href="#a-minimal-usage-scenario" title="Permalink to this headline">¶</a></h2>
+<p>X2R aims to improve the quality of RDF by replacing temporary or invalid URIs with valid and representive URIs.</p>
+<p>Before letting X2R do the URIs replacemant task for you, you should make sure the configuration file are
+consistent with your requirements.</p>
+<p><strong>X2R.conf</strong>:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">{ &quot;USS&quot;:       [</span>
+<span class="x">                 {&quot;endpoints&quot;: [</span>
+<span class="x">                                 { &quot;name&quot;  : &quot;dbpedia&quot;,</span>
+<span class="x">                                   &quot;class&quot; : &quot;endpoints/dbpedia.php&quot;</span>
+<span class="x">                                 },</span>
+<span class="x">                                 { &quot;name&quot;  : &quot;linkedgeodata&quot;,</span>
+<span class="x">                                   &quot;class&quot; : &quot;endpoints/linkedgeodata.php&quot;</span>
+<span class="x">                                 }</span>
+
+<span class="x">                               ]</span>
+<span class="x">                  },</span>
+<span class="x">                  {&quot;refiners&quot;: [</span>
+<span class="x">                                 { &quot;name&quot;  : &quot;dbpedia&quot;,</span>
+<span class="x">                                   &quot;class&quot; : &quot;endpoints/dbpedia.php&quot;</span>
+<span class="x">                                 },</span>
+<span class="x">                                 { &quot;name&quot;  : &quot;linkedgeodata&quot;,</span>
+<span class="x">                                   &quot;class&quot; : &quot;endpoints/linkedgeodata.php&quot;</span>
+<span class="x">                                 }</span>
+<span class="x">                               ]</span>
+<span class="x">                  },</span>
+<span class="x">                  {&quot;parser&quot;: {&quot;name&quot;  : &quot;dbpedia&quot;,</span>
+<span class="x">                              &quot;class&quot; : &quot;endpoints/dbpedia.php&quot;</span>
+<span class="x">                             }</span>
+<span class="x">                  },</span>
+<span class="x">                  {&quot;selector&quot;: {&quot;name&quot;  : &quot;dbpedia&quot;,</span>
+<span class="x">                                &quot;class&quot; : &quot;endpoints/dbpedia.php&quot;</span>
+<span class="x">                               }</span>
+<span class="x">                  },</span>
+<span class="x">                  {&quot;rankers&quot;: [</span>
+<span class="x">                                 { &quot;name&quot;  : &quot;dbpedia&quot;,</span>
+<span class="x">                                   &quot;class&quot; : &quot;endpoints/dbpedia.php&quot;</span>
+<span class="x">                                 },</span>
+<span class="x">                                 { &quot;name&quot;  : &quot;linkedgeodata&quot;,</span>
+<span class="x">                                   &quot;class&quot; : &quot;endpoints/linkedgeodata.php&quot;</span>
+<span class="x">                                 }</span>
+<span class="x">                              ]</span>
+
+<span class="x">                  }</span>
+
+
+
+<span class="x">               ],</span>
+
+<span class="x">  &quot;Extractor&quot;: [ {&quot;tokenizers&quot;: [</span>
+<span class="x">                                 { &quot;name&quot;  : &quot;CaseBasedTokenizer&quot;,</span>
+<span class="x">                                   &quot;class&quot; : &quot;EM/caseBasedTokenizer.class.php&quot;</span>
+<span class="x">                                 },</span>
+<span class="x">                                 { &quot;name&quot;  : &quot;DelimitBasedTokenizer&quot;,</span>
+<span class="x">                                   &quot;class&quot; : &quot;EM/delimitBasedTokenizer.class.php&quot;</span>
+<span class="x">                                 }</span>
+<span class="x">                                ]</span>
+<span class="x">                 }</span>
+
+<span class="x">               ],</span>
+
+<span class="x">  &quot;Mapper&quot;:    [</span>
+<span class="x">                  {&quot;output_format&quot;: &quot;xml/rdf&quot;</span>
+<span class="x">                  }</span>
+<span class="x">               ],</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -59,6 +129,14 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Quickstart</a><ul>
+<li><a class="reference internal" href="#a-minimal-usage-scenario">A Minimal Usage Scenario</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="install.html"
                         title="previous chapter">Installation</a></p>
