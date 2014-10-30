@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="top" title="X2R 1.0 documentation" href="../../index.html" />
-    <link rel="next" title="API" href="../api.html" />
+    <link rel="next" title="Add a new filter" href="new_filter.html" />
     <link rel="prev" title="Add a new ranker" href="new_ranker.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../api.html" title="API"
+          <a href="new_filter.html" title="Add a new filter"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="new_ranker.html" title="Add a new ranker"
@@ -50,7 +50,28 @@
           <div class="body">
             
   <div class="section" id="add-a-new-refiner">
-<h1>Add a new refiner<a class="headerlink" href="#add-a-new-refiner" title="Permalink to this headline">¶</a></h1>
+<span id="hook-refiner"></span><h1>Add a new refiner<a class="headerlink" href="#add-a-new-refiner" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="involved-files">
+<h2>Involved Files<a class="headerlink" href="#involved-files" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>queryrefiner.class.php, ussContainer.php</div></blockquote>
+</div>
+<div class="section" id="mechanism">
+<h2>Mechanism<a class="headerlink" href="#mechanism" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Create a new class in /USS/refiner/</li>
+<li>The new class should exntends QueryRefiner, for example &#8216;newRefiner.class.php&#8217;</li>
+<li>Open ussContainer.class.php, and add the dependency by adding &#8220;include_once refiner/newRefiner.class.php;&#8221; statement in it</li>
+<li>Add a case block of the new class into getRefiner() method&#8217;s switch block</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="template">
+<h2>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><a class="reference internal" href="t_uss_components.html#hook-template-uss"><em>Template: Add USS Components</em></a></div></blockquote>
+</div>
 </div>
 
 
@@ -59,12 +80,22 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Add a new refiner</a><ul>
+<li><a class="reference internal" href="#involved-files">Involved Files</a></li>
+<li><a class="reference internal" href="#mechanism">Mechanism</a></li>
+<li><a class="reference internal" href="#template">Template</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="new_ranker.html"
                         title="previous chapter">Add a new ranker</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../api.html"
-                        title="next chapter">API</a></p>
+  <p class="topless"><a href="new_filter.html"
+                        title="next chapter">Add a new filter</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../_sources/docs/hooks/new_refiner.txt"
@@ -94,7 +125,7 @@
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../api.html" title="API"
+          <a href="new_filter.html" title="Add a new filter"
              >next</a> |</li>
         <li class="right" >
           <a href="new_ranker.html" title="Add a new ranker"

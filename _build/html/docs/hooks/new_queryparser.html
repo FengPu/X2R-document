@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Add a new selector &mdash; X2R 1.0 documentation</title>
+    <title>Add a new query parser &mdash; X2R 1.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -23,9 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="X2R 1.0 documentation" href="../../index.html" />
-    <link rel="next" title="Add a new ranker" href="new_ranker.html" />
-    <link rel="prev" title="Add a new RDF refactor" href="new_refactor.html" /> 
+    <link rel="top" title="X2R 1.0 documentation" href="../../index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,12 +32,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="new_ranker.html" title="Add a new ranker"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="new_refactor.html" title="Add a new RDF refactor"
-             accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,21 +41,21 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="add-a-new-selector">
-<span id="hook-selector"></span><h1>Add a new selector<a class="headerlink" href="#add-a-new-selector" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="add-a-new-query-parser">
+<span id="hook-query-parser"></span><h1>Add a new query parser<a class="headerlink" href="#add-a-new-query-parser" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="involved-files">
 <h2>Involved Files<a class="headerlink" href="#involved-files" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div>resultselector.class.php, ussContainer.php</div></blockquote>
+<div>queryparser.class.php, ussContainer.php</div></blockquote>
 </div>
 <div class="section" id="mechanism">
 <h2>Mechanism<a class="headerlink" href="#mechanism" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ol class="arabic simple">
-<li>Create a new class in /USS/selector/</li>
-<li>The new class should exntends ResultSelector, for example &#8216;newSelector.class.php&#8217;</li>
-<li>Open ussContainer.class.php, and add the dependency by adding &#8220;include_once selector/newSelector.class.php;&#8221; statement in it</li>
-<li>Add a case block of the new class into getSelector() method&#8217;s switch block</li>
+<li>Create a new class in /USS/parser/</li>
+<li>The new class should exntends QueryParser, for example &#8216;newParser.class.php&#8217;</li>
+<li>Open ussContainer.class.php, and add the dependency by adding &#8220;include_once parser/newParser.class.php;&#8221; statement in it</li>
+<li>Add a case block of the new class into getParser() method&#8217;s switch block</li>
 </ol>
 </div></blockquote>
 </div>
@@ -82,7 +74,7 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Add a new selector</a><ul>
+<li><a class="reference internal" href="#">Add a new query parser</a><ul>
 <li><a class="reference internal" href="#involved-files">Involved Files</a></li>
 <li><a class="reference internal" href="#mechanism">Mechanism</a></li>
 <li><a class="reference internal" href="#template">Template</a></li>
@@ -90,15 +82,9 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="new_refactor.html"
-                        title="previous chapter">Add a new RDF refactor</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="new_ranker.html"
-                        title="next chapter">Add a new ranker</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../../_sources/docs/hooks/new_selector.txt"
+    <li><a href="../../_sources/docs/hooks/new_queryparser.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -124,12 +110,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="new_ranker.html" title="Add a new ranker"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="new_refactor.html" title="Add a new RDF refactor"
-             >previous</a> |</li>
         <li><a href="../../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

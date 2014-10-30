@@ -16,8 +16,19 @@ This part of the guide focuses on setting up your environment for X2R and all it
 
 Framework Hooks
 ---------------
+
+
+Hook Templates
+--------------
 .. toctree::
     :maxdepth: 2
+    
+    docs/hooks/t_uss_components
+
+Hook Instances
+---------------
+.. toctree::
+    :maxdepth: 1
 
     docs/hooks/new_endpoint
     docs/hooks/new_tokenizer
@@ -26,6 +37,7 @@ Framework Hooks
     docs/hooks/new_selector
     docs/hooks/new_ranker
     docs/hooks/new_refiner
+    docs/hooks/new_filter
 
 
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Add a new selector &mdash; X2R 1.0 documentation</title>
+    <title>Template: Add USS Components &mdash; X2R 1.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -24,8 +24,8 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="top" title="X2R 1.0 documentation" href="../../index.html" />
-    <link rel="next" title="Add a new ranker" href="new_ranker.html" />
-    <link rel="prev" title="Add a new RDF refactor" href="new_refactor.html" /> 
+    <link rel="next" title="Add a new Endpoint" href="new_endpoint.html" />
+    <link rel="prev" title="X2R" href="../x2r.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,10 +35,10 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="new_ranker.html" title="Add a new ranker"
+          <a href="new_endpoint.html" title="Add a new Endpoint"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="new_refactor.html" title="Add a new RDF refactor"
+          <a href="../x2r.html" title="X2R"
              accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
@@ -49,28 +49,35 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="add-a-new-selector">
-<span id="hook-selector"></span><h1>Add a new selector<a class="headerlink" href="#add-a-new-selector" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="involved-files">
-<h2>Involved Files<a class="headerlink" href="#involved-files" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="template-add-uss-components">
+<span id="hook-template-uss"></span><h1>Template: Add USS Components<a class="headerlink" href="#template-add-uss-components" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="involved-classes">
+<h2>Involved Classes<a class="headerlink" href="#involved-classes" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div>resultselector.class.php, ussContainer.php</div></blockquote>
+<div><strong>{List of involved classes with links}</strong></div></blockquote>
 </div>
 <div class="section" id="mechanism">
 <h2>Mechanism<a class="headerlink" href="#mechanism" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ol class="arabic simple">
-<li>Create a new class in /USS/selector/</li>
-<li>The new class should exntends ResultSelector, for example &#8216;newSelector.class.php&#8217;</li>
-<li>Open ussContainer.class.php, and add the dependency by adding &#8220;include_once selector/newSelector.class.php;&#8221; statement in it</li>
-<li>Add a case block of the new class into getSelector() method&#8217;s switch block</li>
+<li>Based on component&#8217;s type, create a new class in /USS/<strong>{component_type}</strong>/</li>
+<li>Based on the component&#8217;s type, the new class should exntends corresponding parent class</li>
+<li>Open ussContainer.class.php, and add the dependency by adding &#8220;incclude_once&#8221; statement in it</li>
+<li>Based on component&#8217;s type, find corresponding method and add the {id, class_factory} mapping to the method&#8217;s switch/case block.</li>
 </ol>
 </div></blockquote>
 </div>
-<div class="section" id="template">
-<h2>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="instances">
+<h2>Instances<a class="headerlink" href="#instances" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><a class="reference internal" href="t_uss_components.html#hook-template-uss"><em>Template: Add USS Components</em></a></div></blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="new_refiner.html#hook-refiner"><em>Add a new refiner</em></a></li>
+<li><a class="reference internal" href="new_filter.html#hook-filter"><em>Add a new filter</em></a></li>
+<li><a class="reference internal" href="new_ranker.html#hook-ranker"><em>Add a new ranker</em></a></li>
+<li><a class="reference internal" href="new_selector.html#hook-selector"><em>Add a new selector</em></a></li>
+<li><a class="reference internal" href="new_queryparser.html#hook-query-parser"><em>Add a new query parser</em></a></li>
+</ul>
+</div></blockquote>
 </div>
 </div>
 
@@ -82,23 +89,23 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Add a new selector</a><ul>
-<li><a class="reference internal" href="#involved-files">Involved Files</a></li>
+<li><a class="reference internal" href="#">Template: Add USS Components</a><ul>
+<li><a class="reference internal" href="#involved-classes">Involved Classes</a></li>
 <li><a class="reference internal" href="#mechanism">Mechanism</a></li>
-<li><a class="reference internal" href="#template">Template</a></li>
+<li><a class="reference internal" href="#instances">Instances</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="new_refactor.html"
-                        title="previous chapter">Add a new RDF refactor</a></p>
+  <p class="topless"><a href="../x2r.html"
+                        title="previous chapter">X2R</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="new_ranker.html"
-                        title="next chapter">Add a new ranker</a></p>
+  <p class="topless"><a href="new_endpoint.html"
+                        title="next chapter">Add a new Endpoint</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../../_sources/docs/hooks/new_selector.txt"
+    <li><a href="../../_sources/docs/hooks/t_uss_components.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -125,10 +132,10 @@
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="new_ranker.html" title="Add a new ranker"
+          <a href="new_endpoint.html" title="Add a new Endpoint"
              >next</a> |</li>
         <li class="right" >
-          <a href="new_refactor.html" title="Add a new RDF refactor"
+          <a href="../x2r.html" title="X2R"
              >previous</a> |</li>
         <li><a href="../../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
