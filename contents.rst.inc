@@ -4,7 +4,7 @@ User Guide
 This part of the guide focuses on setting up your environment for X2R and all its components, including Extractor, Mapper and USS. A quickstart is then presented to give an overview of X2R and its components. Finally, details of each components are presented. 
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     docs/install
     docs/quickstart
@@ -13,17 +13,23 @@ This part of the guide focuses on setting up your environment for X2R and all it
     docs/uss
     docs/x2r
 
+Framework Workflow
+------------------
+{diagram}
+
 
 Framework Hooks
 ---------------
-
+This section focuses on two topics, i.e. **hook templates** and **hook instances**. The term "hook" is used to present the cookbook or guidence for extending X2R in many different aspects. Because some hooks are similar to each other, the hook templates are extracted based on the similarity among existing hooks. Extracted hook templates can be used to instainate more hook instances to cover more aspects for increasing X2R's flexability.   
 
 Hook Templates
 --------------
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     
     docs/hooks/t_uss_components
+    docs/hooks/t_rdf_parser
+    docs/hooks/t_tokenizer
 
 Hook Instances
 ---------------

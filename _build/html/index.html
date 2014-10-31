@@ -53,38 +53,29 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/quickstart.html">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/quickstart.html#a-minimal-usage-scenario">A Minimal Usage Scenario</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/extractor.html">Extractor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/mapper.html">Mapper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/uss.html">URI Search Service</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/uss.html#refactored-uss-kernel">Refactored USS kernel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/uss.html#hooks">Hooks</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="docs/x2r.html">X2R</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/x2r.html#api-usage-examples">API Usage Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/x2r.html#user-interface">User Interface</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/uss.html">URI Search Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/x2r.html">X2R</a></li>
 </ul>
 </div>
+</div>
+<div class="section" id="framework-workflow">
+<h2>Framework Workflow<a class="headerlink" href="#framework-workflow" title="Permalink to this headline">¶</a></h2>
+<p>{diagram}</p>
 </div>
 <div class="section" id="framework-hooks">
 <h2>Framework Hooks<a class="headerlink" href="#framework-hooks" title="Permalink to this headline">¶</a></h2>
+<p>This section focuses on two topics, i.e. <strong>hook templates</strong> and <strong>hook instances</strong>. The term &#8220;hook&#8221; is used to present the cookbook or guidence for extending X2R in many different aspects. Because some hooks are similar to each other, the hook templates are extracted based on the similarity among existing hooks. Extracted hook templates can be used to instainate more hook instances to cover more aspects for increasing X2R&#8217;s flexability.</p>
 </div>
 <div class="section" id="hook-templates">
 <h2>Hook Templates<a class="headerlink" href="#hook-templates" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="docs/hooks/t_uss_components.html">Template: Add USS Components</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/hooks/t_uss_components.html#involved-classes">Involved Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/hooks/t_uss_components.html#mechanism">Mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/hooks/t_uss_components.html#instances">Instances</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/hooks/t_uss_components.html">Template: Add USS Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/hooks/t_rdf_parser.html">Template: Add wrapper for new RDF parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/hooks/t_tokenizer.html">Template: Add new tokenizer</a></li>
 </ul>
 </div>
 </div>
@@ -160,6 +151,7 @@
   <ul>
 <li><a class="reference internal" href="#">Welcome to X2R</a><ul>
 <li><a class="reference internal" href="#user-guide">User Guide</a></li>
+<li><a class="reference internal" href="#framework-workflow">Framework Workflow</a></li>
 <li><a class="reference internal" href="#framework-hooks">Framework Hooks</a></li>
 <li><a class="reference internal" href="#hook-templates">Hook Templates</a></li>
 <li><a class="reference internal" href="#hook-instances">Hook Instances</a></li>
