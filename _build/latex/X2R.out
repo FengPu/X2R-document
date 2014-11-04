@@ -1,0 +1,28 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [0][-]{chapter.2}{User Guide}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Installation}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Quickstart}{chapter.2}% 4
+\BOOKMARK [0][-]{chapter.3}{Components}{}% 5
+\BOOKMARK [1][-]{section.3.1}{Extractor}{chapter.3}% 6
+\BOOKMARK [1][-]{section.3.2}{Mapper}{chapter.3}% 7
+\BOOKMARK [1][-]{section.3.3}{URI Search Service}{chapter.3}% 8
+\BOOKMARK [1][-]{section.3.4}{X2R}{chapter.3}% 9
+\BOOKMARK [0][-]{chapter.4}{Framework Workflow}{}% 10
+\BOOKMARK [0][-]{chapter.5}{Framework Hooks}{}% 11
+\BOOKMARK [0][-]{chapter.6}{Hook Templates}{}% 12
+\BOOKMARK [1][-]{section.6.1}{Template: Add USS Components}{chapter.6}% 13
+\BOOKMARK [1][-]{section.6.2}{Template: Add wrapper for new RDF parser}{chapter.6}% 14
+\BOOKMARK [1][-]{section.6.3}{Template: Add new tokenizer}{chapter.6}% 15
+\BOOKMARK [0][-]{chapter.7}{Hook Instances}{}% 16
+\BOOKMARK [1][-]{section.7.1}{Add a new Endpoint}{chapter.7}% 17
+\BOOKMARK [1][-]{section.7.2}{Add a new tokenizer}{chapter.7}% 18
+\BOOKMARK [1][-]{section.7.3}{Add a new RDF refactor}{chapter.7}% 19
+\BOOKMARK [1][-]{section.7.4}{Add a new selector}{chapter.7}% 20
+\BOOKMARK [1][-]{section.7.5}{Add a new ranker}{chapter.7}% 21
+\BOOKMARK [1][-]{section.7.6}{Add a new refiner}{chapter.7}% 22
+\BOOKMARK [1][-]{section.7.7}{Add a new filter}{chapter.7}% 23
+\BOOKMARK [0][-]{chapter.8}{API Reference}{}% 24
+\BOOKMARK [1][-]{section.8.1}{API}{chapter.8}% 25
+\BOOKMARK [0][-]{chapter.9}{Indices and tables}{}% 26
+\BOOKMARK [0][-]{chapter.10}{Additional Note}{}% 27
+\BOOKMARK [1][-]{section.10.1}{License}{chapter.10}% 28

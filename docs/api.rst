@@ -275,8 +275,8 @@ Mapper
   .. code-block:: php
 
       //This is an example of $change
-      array('http://127.0.0.1/中山運動中心' => 'http://openisdm.iis.sinica.edu.tw/中山運動中心', 
-           'http://127.0.0.1/大同運動中心' => 'http://openisdm.iis.sinica.edu.tw/大同運動中心');
+      array('http://127.0.0.1/sport_center' => 'http://openisdm.iis.sinica.edu.tw/sport_center', 
+           'http://127.0.0.1/park' => 'http://openisdm.iis.sinica.edu.tw/park');
 
   .. note::
 

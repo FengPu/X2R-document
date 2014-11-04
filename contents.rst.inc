@@ -1,3 +1,11 @@
+Introduction
+------------
+
+X2R is a tool for helping Semantic Web application developers to translate existing data in a variety of formats into linked-data compatible formats, where the X, 2 and R stand for existing data in a variety formats, to (the homonym of two) and Linked-data compatible formats (i.e., RDF/XML), respectively. 
+
+Our vision is to smooth the transition from existing Web to Semantic Web by providing tools, which can dramatically lower the entry barrier of generating Linked-data, to developers. By providing such tools, i.e., X2R, developers can translate existing data incrementally and on-demand. 
+
+
 
 User Guide
 ---------------
@@ -6,8 +14,16 @@ This part of the guide focuses on setting up your environment for X2R and all it
 .. toctree::
     :maxdepth: 1
 
+
     docs/install
     docs/quickstart
+    docs/map
+
+Components
+-----------
+.. toctree::
+    :maxdepth: 1
+
     docs/extractor
     docs/mapper
     docs/uss
