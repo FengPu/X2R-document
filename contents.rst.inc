@@ -40,6 +40,35 @@ API Usage Scenarios
 ------------------
 Targeted Audience: **API users**
 
+**X2R**
+
+.. toctree::
+    :maxdepth: 1
+
+    docs/scenarios/x2r/replaceUri.rst
+
+**Extractor**
+
+.. toctree::
+    :maxdepth: 1
+
+    docs/scenarios/extractor/
+
+**USS**
+
+.. toctree::
+    :maxdepth: 1
+
+    docs/scenarios/uss/
+
+**Mapper**
+
+.. toctree::
+    :maxdepth: 1
+
+    docs/scenarios/mapper/
+
+
 
 
 
