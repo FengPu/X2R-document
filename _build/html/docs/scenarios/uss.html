@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>USS API Usage Scenarios &mdash; X2R 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="X2R 1.0 documentation" href="../../index.html" />
+    <link rel="next" title="Mapper API Usage Scenarios" href="mapper.html" />
+    <link rel="prev" title="Extractor API Usage Scenarios" href="extractor.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mapper.html" title="Mapper API Usage Scenarios"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="extractor.html" title="Extractor API Usage Scenarios"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">X2R 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="uss-api-usage-scenarios">
+<h1>USS API Usage Scenarios<a class="headerlink" href="#uss-api-usage-scenarios" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="operation-scenarios">
+<h2>Operation Scenarios<a class="headerlink" href="#operation-scenarios" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="search-uris-by-terms">
+<h3>Search URIs by terms<a class="headerlink" href="#search-uris-by-terms" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Include the file <strong>&#8220;urisearchservice.class.php&#8221;</strong> in your program</li>
+<li>Initialize a <strong>UriSearchService</strong> instance</li>
+<li>Call the method <strong>uriSearch</strong> with a <strong>query string</strong> as the parameter. After receving all Endpoints&#8217; respones, the <strong>result set</strong> is returned</li>
+</ol>
+</div>
+</div>
+<div class="section" id="configuration-scenarios">
+<h2>Configuration Scenarios<a class="headerlink" href="#configuration-scenarios" title="Permalink to this headline">¶</a></h2>
+<p>After initializing a <strong>UriSearchService</strong> instance, the default components are already set. If you want to change the default setting, you can reset the components as the guidences listed below.</p>
+<p>The configuration methods can be chained. Here is a code example.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">include_once (risearchservice.class.php);</span>
+<span class="x">$exampleUss = new UriSearchService();</span>
+<span class="x">//... Initialize components as $parser, $selector ...etc.</span>
+<span class="x">$exampleUss-&gt;setFederatedSearch($federatedSearch)</span>
+<span class="x">           -&gt;setParser($parser)</span>
+<span class="x">           -&gt;setProcessor($rsultProcessor)</span>
+<span class="x">           -&gt;setSelector($selector);</span>
+</pre></div>
+</div>
+<div class="section" id="set-a-parser">
+<h3>Set a Parser<a class="headerlink" href="#set-a-parser" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Initialize a parser</li>
+<li>Assign the new parser through the method <strong>setParser($parser)</strong></li>
+</ol>
+</div>
+<div class="section" id="set-federatedsearch">
+<h3>Set FederatedSearch<a class="headerlink" href="#set-federatedsearch" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Initialize a federatedSearch</li>
+<li>Assign the new federatedSearch through the method <strong>setFederatedSearch($federatedSearch)</strong></li>
+</ol>
+</div>
+<div class="section" id="set-a-result-processor-filter-and-ranker">
+<h3>Set a Result Processor (Filter and Ranker)<a class="headerlink" href="#set-a-result-processor-filter-and-ranker" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Initialize a rsultProcessor</li>
+<li>Assign the new rsultProcessor through the method <strong>setProcessor($rsultProcessor)</strong></li>
+</ol>
+</div>
+<div class="section" id="set-a-selector">
+<h3>Set a Selector<a class="headerlink" href="#set-a-selector" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Initialize a selector</li>
+<li>Assign the new selector through the method <strong>setSelector($selector)</strong></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">USS API Usage Scenarios</a><ul>
+<li><a class="reference internal" href="#operation-scenarios">Operation Scenarios</a><ul>
+<li><a class="reference internal" href="#search-uris-by-terms">Search URIs by terms</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration-scenarios">Configuration Scenarios</a><ul>
+<li><a class="reference internal" href="#set-a-parser">Set a Parser</a></li>
+<li><a class="reference internal" href="#set-federatedsearch">Set FederatedSearch</a></li>
+<li><a class="reference internal" href="#set-a-result-processor-filter-and-ranker">Set a Result Processor (Filter and Ranker)</a></li>
+<li><a class="reference internal" href="#set-a-selector">Set a Selector</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="extractor.html"
+                        title="previous chapter">Extractor API Usage Scenarios</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mapper.html"
+                        title="next chapter">Mapper API Usage Scenarios</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/docs/scenarios/uss.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mapper.html" title="Mapper API Usage Scenarios"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="extractor.html" title="Extractor API Usage Scenarios"
+             >previous</a> |</li>
+        <li><a href="../../index.html">X2R 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Feng-Pu Yang.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

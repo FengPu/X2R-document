@@ -42,56 +42,19 @@ API Usage Scenarios
 ------------------
 Targeted Audience: **API users**
 
-**X2R**
-
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 3
 
-    docs/scenarios/x2r/operation
-    docs/scenarios/x2r/configuration
-
-**Extractor**
-
-.. toctree::
-    :maxdepth: 2
-
-    docs/scenarios/extractor/operation
-    docs/scenarios/extractor/configuration
-
-    docs/scenarios/extractor/extractUri
-    docs/scenarios/extractor/verifyUri
+    docs/scenarios/x2r
 
 
+    docs/scenarios/extractor
 
-**USS**
 
-.. toctree::
-    :maxdepth: 2
+    docs/scenarios/uss
 
-    docs/scenarios/uss/operation
-    docs/scenarios/uss/configuration
 
-    docs/scenarios/uss/searchUri
-
-    docs/scenarios/uss/setParser
-    docs/scenarios/uss/setRefiner
-    docs/scenarios/uss/setEndpoints
-    docs/scenarios/uss/setFilter
-    docs/scenarios/uss/setRanker
-    docs/scenarios/uss/setSelector
-
-**Mapper**
-
-.. toctree::
-    :maxdepth: 2
-
-    docs/scenarios/mapper/operation
-    docs/scenarios/mapper/configuration
-
-    docs/scenarios/mapper/mapping
-    docs/scenarios/mapper/setRefactor
-    docs/scenarios/mapper/setRdfParser
-
+    docs/scenarios/mapper
 
 
 

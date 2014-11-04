@@ -14,7 +14,7 @@
 
 
 \title{X2R Documentation}
-\date{November 04, 2014}
+\date{November 05, 2014}
 \release{1.0}
 \author{Feng-Pu Yang}
 \newcommand{\sphinxlogo}{}
@@ -129,6 +129,9 @@
 Our motivation is to smooth the transition from existing \emph{Web} to \emph{Semantic Web} by providing tools, which can dramatically lower the entry barrier of generating Linked-data, to developers. By providing such tools, i.e., X2R, more and more developers can translate existing data on-demands, and the final vision of Semantic Web can be approached incrementally.
 
 
+\section{Roadmap}
+\label{docs/roadmap::doc}\label{docs/roadmap:roadmap}
+
 \section{Audiences}
 \label{docs/audience:audiences}\label{docs/audience::doc}
 
@@ -143,6 +146,8 @@ Our motivation is to smooth the transition from existing \emph{Web} to \emph{Sem
 
 \section{How to Use This Document}
 \label{docs/howto:how-to-use-this-document}\label{docs/howto::doc}
+The index can be found in \emph{genindex}, and the search page, \emph{search}, can be used to search within this document.
+
 
 \chapter{User Guide}
 \label{index:user-guide}
@@ -340,18 +345,126 @@ A Command Line Interface is planned to be included in version 2.0.
 \end{itemize}
 
 
-\chapter{Framework Workflow}
-\label{index:framework-workflow}
-\{diagram\}
+\chapter{API Usage Scenarios}
+\label{index:api-usage-scenarios}
+Targeted Audience: \textbf{API users}
 
+
+\section{X2R API Usage Scenarios}
+\label{docs/scenarios/x2r:x2r-api-usage-scenarios}\label{docs/scenarios/x2r::doc}
+
+\subsection{Operation Scenarios}
+\label{docs/scenarios/x2r:operation-scenarios}
+
+\subsubsection{Replace Bad URIs}
+\label{docs/scenarios/x2r:replace-bad-uris}
+
+\subsection{Configuration Scenarios}
+\label{docs/scenarios/x2r:configuration-scenarios}
+
+\subsubsection{Set an Extractor}
+\label{docs/scenarios/x2r:set-an-extractor}
+
+\subsubsection{Set a Mapper}
+\label{docs/scenarios/x2r:set-a-mapper}
+
+\subsubsection{Set an USS}
+\label{docs/scenarios/x2r:set-an-uss}
+
+\section{Extractor API Usage Scenarios}
+\label{docs/scenarios/extractor:extractor-api-usage-scenarios}\label{docs/scenarios/extractor::doc}
+
+\subsection{Operation Scenarios}
+\label{docs/scenarios/extractor:operation-scenarios}
+
+\subsubsection{Extract URIs from a Given RDF}
+\label{docs/scenarios/extractor:extract-uris-from-a-given-rdf}
+
+\subsubsection{Verify an URI}
+\label{docs/scenarios/extractor:verify-an-uri}
+
+\subsubsection{Tokenize an URI into Query Terms}
+\label{docs/scenarios/extractor:tokenize-an-uri-into-query-terms}
+
+\subsection{Configuration Scenarios}
+\label{docs/scenarios/extractor:configuration-scenarios}
+
+\subsubsection{Set an URI Tokenizer}
+\label{docs/scenarios/extractor:set-an-uri-tokenizer}
+
+\subsubsection{Set a RDF Parser}
+\label{docs/scenarios/extractor:set-a-rdf-parser}
+
+\subsubsection{Set an URI Verifier}
+\label{docs/scenarios/extractor:set-an-uri-verifier}
+
+\section{USS API Usage Scenarios}
+\label{docs/scenarios/uss::doc}\label{docs/scenarios/uss:uss-api-usage-scenarios}
+
+\subsection{Operation Scenarios}
+\label{docs/scenarios/uss:operation-scenarios}
+
+\subsubsection{Search URIs by terms}
+\label{docs/scenarios/uss:search-uris-by-terms}\begin{enumerate}
+\item {} 
+Initialize a \textbf{UriSearchService} instance
+
+\item {} 
+Call the method \textbf{uriSearch} with the query string as parameter
+
+\item {} 
+After receving all Endpoints' respones, the result set are returned
+
+\end{enumerate}
+
+
+\subsection{Configuration Scenarios}
+\label{docs/scenarios/uss:configuration-scenarios}
+
+\subsubsection{Set a Parser}
+\label{docs/scenarios/uss:set-a-parser}
+
+\subsubsection{Set a Refiner}
+\label{docs/scenarios/uss:set-a-refiner}
+
+\subsubsection{Set Endpoints}
+\label{docs/scenarios/uss:set-endpoints}
+
+\subsubsection{Set a Filter}
+\label{docs/scenarios/uss:set-a-filter}
+
+\subsubsection{Set a Ranker}
+\label{docs/scenarios/uss:set-a-ranker}
+
+\subsubsection{Set a Selector}
+\label{docs/scenarios/uss:set-a-selector}
+
+\section{Mapper API Usage Scenarios}
+\label{docs/scenarios/mapper:mapper-api-usage-scenarios}\label{docs/scenarios/mapper::doc}
+
+\subsection{Operation Scenarios}
+\label{docs/scenarios/mapper:operation-scenarios}
+
+\subsubsection{Replace Original URIs with Specified URIs}
+\label{docs/scenarios/mapper:replace-original-uris-with-specified-uris}
+
+\subsection{Configuration Scenarios}
+\label{docs/scenarios/mapper:configuration-scenarios}
+
+\subsubsection{Set a Refactor (URI Replacement)}
+\label{docs/scenarios/mapper:set-a-refactor-uri-replacement}
+
+\subsubsection{Set a RDF Parser}
+\label{docs/scenarios/mapper:set-a-rdf-parser}
 
 \chapter{Framework Hooks}
 \label{index:framework-hooks}
+Targeted Audience: \textbf{Code contributators}
+
 This section focuses on two topics, i.e. \textbf{hook templates} and \textbf{hook instances}. The term ``hook'' is used to present the cookbook or guidence for extending X2R in many different aspects. Because some hooks are similar to each other, the hook templates are extracted based on the similarity among existing hooks. Extracted hook templates can be used to instainate more hook instances to cover more aspects for increasing X2R's flexability.
 
+\textbf{Hook Templates}
 
-\chapter{Hook Templates}
-\label{index:hook-templates}
 
 \section{Template: Add USS Components}
 \label{docs/hooks/t_uss_components:template-add-uss-components}\label{docs/hooks/t_uss_components::doc}\label{docs/hooks/t_uss_components:hook-template-uss}
@@ -454,9 +567,8 @@ todo
 
 \end{itemize}
 
+\textbf{Hook Instances}
 
-\chapter{Hook Instances}
-\label{index:hook-instances}
 
 \section{Add a new Endpoint}
 \label{docs/hooks/new_endpoint::doc}\label{docs/hooks/new_endpoint:add-a-new-endpoint}
@@ -1392,20 +1504,6 @@ The fittest result.
 
 \end{fulllineitems}
 
-
-
-\chapter{Indices and tables}
-\label{index:indices-and-tables}\begin{itemize}
-\item {} 
-\emph{genindex}
-
-\item {} 
-\emph{modindex}
-
-\item {} 
-\emph{search}
-
-\end{itemize}
 
 
 \chapter{Additional Note}

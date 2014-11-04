@@ -1,0 +1,49 @@
+\indexentry{Extractor (class)|hyperindexformat{\textbf}}{15}
+\indexentry{getQueryTerms() (Extractor method)|hyperindexformat{\textbf}}{15}
+\indexentry{getFiltedUris() (Extractor method)|hyperindexformat{\textbf}}{15}
+\indexentry{addFilteredUri() (Extractor method)|hyperindexformat{\textbf}}{15}
+\indexentry{removeFilteredUri() (Extractor method)|hyperindexformat{\textbf}}{15}
+\indexentry{RdfGraph (class)|hyperindexformat{\textbf}}{16}
+\indexentry{parseRdf() (RdfGraph method)|hyperindexformat{\textbf}}{16}
+\indexentry{serializeRdfAs() (RdfGraph method)|hyperindexformat{\textbf}}{16}
+\indexentry{EasyRdfAdapter (class)|hyperindexformat{\textbf}}{16}
+\indexentry{parseRdf() (EasyRdfAdapter method)|hyperindexformat{\textbf}}{16}
+\indexentry{serializeRdfAs() (EasyRdfAdapter method)|hyperindexformat{\textbf}}{16}
+\indexentry{Tokenizer (class)|hyperindexformat{\textbf}}{16}
+\indexentry{tokenizeString() (Tokenizer method)|hyperindexformat{\textbf}}{16}
+\indexentry{tokenizeArrayOfStrings() (Tokenizer method)|hyperindexformat{\textbf}}{16}
+\indexentry{arrayToString() (Tokenizer method)|hyperindexformat{\textbf}}{17}
+\indexentry{Tokenizer (class)|hyperindexformat{\textbf}}{17}
+\indexentry{tokenizeString() (Tokenizer method)|hyperindexformat{\textbf}}{17}
+\indexentry{tokenizeArrayOfStrings() (Tokenizer method)|hyperindexformat{\textbf}}{17}
+\indexentry{Tokenizer (class)|hyperindexformat{\textbf}}{17}
+\indexentry{tokenizeString() (Tokenizer method)|hyperindexformat{\textbf}}{17}
+\indexentry{tokenizeArrayOfStrings() (Tokenizer method)|hyperindexformat{\textbf}}{17}
+\indexentry{Refactor (class)|hyperindexformat{\textbf}}{17}
+\indexentry{refactoring() (Refactor method)|hyperindexformat{\textbf}}{17}
+\indexentry{ReplaceUri (class)|hyperindexformat{\textbf}}{18}
+\indexentry{refactoring() (ReplaceUri method)|hyperindexformat{\textbf}}{18}
+\indexentry{MappingEntry (class)|hyperindexformat{\textbf}}{18}
+\indexentry{MappingEntry() (MappingEntry method)|hyperindexformat{\textbf}}{18}
+\indexentry{getOriginalURI() (MappingEntry method)|hyperindexformat{\textbf}}{18}
+\indexentry{getReplacedURI() (MappingEntry method)|hyperindexformat{\textbf}}{18}
+\indexentry{getQueryTerm() (MappingEntry method)|hyperindexformat{\textbf}}{18}
+\indexentry{getLineNumbers() (MappingEntry method)|hyperindexformat{\textbf}}{18}
+\indexentry{MappingCollection (class)|hyperindexformat{\textbf}}{19}
+\indexentry{addMappingEntry() (MappingCollection method)|hyperindexformat{\textbf}}{19}
+\indexentry{toJson() (MappingCollection method)|hyperindexformat{\textbf}}{19}
+\indexentry{Mapper (class)|hyperindexformat{\textbf}}{19}
+\indexentry{Mapper() (Mapper method)|hyperindexformat{\textbf}}{19}
+\indexentry{refactoring() (Mapper method)|hyperindexformat{\textbf}}{19}
+\indexentry{serialize() (Mapper method)|hyperindexformat{\textbf}}{19}
+\indexentry{GetParameter() (global function)|hyperindexformat{\textbf}}{20}
+\indexentry{Endpoint (class)|hyperindexformat{\textbf}}{20}
+\indexentry{issueSparqlQuery() (Endpoint method)|hyperindexformat{\textbf}}{20}
+\indexentry{SparqlQueryComposer (class)|hyperindexformat{\textbf}}{20}
+\indexentry{term2Sparql() (SparqlQueryComposer method)|hyperindexformat{\textbf}}{20}
+\indexentry{X2R (class)|hyperindexformat{\textbf}}{20}
+\indexentry{transformation() (X2R method)|hyperindexformat{\textbf}}{20}
+\indexentry{QueryRefiner (class)|hyperindexformat{\textbf}}{21}
+\indexentry{refine() (QueryRefiner method)|hyperindexformat{\textbf}}{21}
+\indexentry{SearchResultSelector (class)|hyperindexformat{\textbf}}{21}
+\indexentry{select() (SearchResultSelector method)|hyperindexformat{\textbf}}{21}
