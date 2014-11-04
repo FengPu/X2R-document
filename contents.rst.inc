@@ -8,8 +8,8 @@ Our motivation is to smooth the transition from existing *Web* to *Semantic Web*
 .. toctree::
     :maxdepth: 1
 
-    docs/audiences
-    
+    docs/audience
+
 
 User Guide
 ---------------
