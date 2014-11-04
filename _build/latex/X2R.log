@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.23)  4 NOV 2014 11:54
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.23)  4 NOV 2014 15:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -918,6 +918,8 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 125.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 127.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 135.
 [1
 
 
@@ -925,26 +927,24 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 
 ]
 Chapter 2.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 141.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 156.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 
 LaTeX Warning: Hyper reference `docs/install:installation' on page 3 undefined 
-on input line 154.
+on input line 169.
 
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 157.
 [3] [4]
 Chapter 3.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 251.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 266.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 
 LaTeX Warning: Hyper reference `docs/api:Endpoint' on page 5 undefined on input
- line 262.
+ line 277.
 
 [5
 
@@ -962,38 +962,38 @@ Chapter 5.
 Chapter 6.
 
 LaTeX Warning: Hyper reference `docs/hooks/new_refiner:hook-refiner' on page 11
- undefined on input line 371.
+ undefined on input line 386.
 
 
 LaTeX Warning: Hyper reference `docs/hooks/new_filter:hook-filter' on page 11 u
-ndefined on input line 374.
+ndefined on input line 389.
 
 
 LaTeX Warning: Hyper reference `docs/hooks/new_ranker:hook-ranker' on page 11 u
-ndefined on input line 377.
+ndefined on input line 392.
 
 
 LaTeX Warning: Hyper reference `docs/hooks/new_selector:hook-selector' on page 
-11 undefined on input line 380.
+11 undefined on input line 395.
 
 [11] [12]
 Chapter 7.
 
-Underfull \hbox (badness 10000) in paragraph at lines 474--475
+Underfull \hbox (badness 10000) in paragraph at lines 489--490
 []\T1/ptm/m/n/10 Open uss-Con-tainer.class.php, and add the de-pen-dency by add
 ing ``in-clude_once se-lec-
  []
 
 
 LaTeX Warning: Hyper reference `docs/hooks/t_tokenizer:hook-template-uss' on pa
-ge 13 undefined on input line 485.
+ge 13 undefined on input line 500.
 
 [13
 
 ]
 
 LaTeX Warning: Hyper reference `docs/hooks/t_tokenizer:hook-template-uss' on pa
-ge 14 undefined on input line 519.
+ge 14 undefined on input line 534.
 
 
 LaTeX Warning: Hyper refer

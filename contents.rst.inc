@@ -6,9 +6,11 @@ Introduction
 Our motivation is to smooth the transition from existing *Web* to *Semantic Web* by providing tools, which can dramatically lower the entry barrier of generating Linked-data, to developers. By providing such tools, i.e., X2R, more and more developers can translate existing data on-demands, and the final vision of Semantic Web can be approached incrementally.  
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
+    docs/roadmap
     docs/audience
+    docs/howto
 
 
 User Guide
@@ -23,8 +25,9 @@ This part of the guide focuses on setting up your environment for X2R and all it
     docs/quickstart
     docs/map
 
-Components
------------
+
+Components 
+-----------------------
 .. toctree::
     :maxdepth: 1
 
@@ -33,17 +36,21 @@ Components
     docs/uss
     docs/x2r
 
-Framework Workflow
+API Usage Scenarios
 ------------------
-{diagram}
+Targeted Audience: **API users**
+
+
 
 
 Framework Hooks
 ---------------
+Targeted Audience: **Code contributators**
+
 This section focuses on two topics, i.e. **hook templates** and **hook instances**. The term "hook" is used to present the cookbook or guidence for extending X2R in many different aspects. Because some hooks are similar to each other, the hook templates are extracted based on the similarity among existing hooks. Extracted hook templates can be used to instainate more hook instances to cover more aspects for increasing X2R's flexability.   
 
-Hook Templates
---------------
+**Hook Templates**
+
 .. toctree::
     :maxdepth: 1
     
@@ -51,8 +58,8 @@ Hook Templates
     docs/hooks/t_rdf_parser
     docs/hooks/t_tokenizer
 
-Hook Instances
----------------
+**Hook Instances**
+
 .. toctree::
     :maxdepth: 1
 
@@ -81,7 +88,6 @@ Indices and tables
 ------------------
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
 
@@ -90,6 +96,6 @@ Additional Note
 This part of note declares the license of X2R. 
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     docs/license

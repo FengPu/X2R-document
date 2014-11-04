@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="X2R 1.0 documentation" href="#" />
-    <link rel="next" title="Installation" href="docs/install.html" /> 
+    <link rel="next" title="Roadmap" href="docs/roadmap.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,7 +34,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="docs/install.html" title="Installation"
+          <a href="docs/roadmap.html" title="Roadmap"
              accesskey="N">next</a> |</li>
         <li><a href="#">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
@@ -52,7 +52,10 @@
 <p><strong>X2R</strong> is a tool for helping Semantic Web application developers to translate existing data in a variety of formats into Linked-data compatible formats, where the <strong>X</strong>, <strong>2</strong> and <strong>R</strong> stand for existing data in a variety formats, to (the homonym of two) and Linked-data compatible formats (i.e., RDF/XML), respectively.</p>
 <p>Our motivation is to smooth the transition from existing <em>Web</em> to <em>Semantic Web</em> by providing tools, which can dramatically lower the entry barrier of generating Linked-data, to developers. By providing such tools, i.e., X2R, more and more developers can translate existing data on-demands, and the final vision of Semantic Web can be approached incrementally.</p>
 <div class="toctree-wrapper compound">
-<ul class="simple">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/audience.html">Audiences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/howto.html">How to Use This Document</a></li>
 </ul>
 </div>
 </div>
@@ -77,16 +80,15 @@
 </ul>
 </div>
 </div>
-<div class="section" id="framework-workflow">
-<h2>Framework Workflow<a class="headerlink" href="#framework-workflow" title="Permalink to this headline">¶</a></h2>
-<p>{diagram}</p>
+<div class="section" id="api-usage-scenarios">
+<h2>API Usage Scenarios<a class="headerlink" href="#api-usage-scenarios" title="Permalink to this headline">¶</a></h2>
+<p>Targeted Audience: <strong>API users</strong></p>
 </div>
 <div class="section" id="framework-hooks">
 <h2>Framework Hooks<a class="headerlink" href="#framework-hooks" title="Permalink to this headline">¶</a></h2>
+<p>Targeted Audience: <strong>Code contributators</strong></p>
 <p>This section focuses on two topics, i.e. <strong>hook templates</strong> and <strong>hook instances</strong>. The term &#8220;hook&#8221; is used to present the cookbook or guidence for extending X2R in many different aspects. Because some hooks are similar to each other, the hook templates are extracted based on the similarity among existing hooks. Extracted hook templates can be used to instainate more hook instances to cover more aspects for increasing X2R&#8217;s flexability.</p>
-</div>
-<div class="section" id="hook-templates">
-<h2>Hook Templates<a class="headerlink" href="#hook-templates" title="Permalink to this headline">¶</a></h2>
+<p><strong>Hook Templates</strong></p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/hooks/t_uss_components.html">Template: Add USS Components</a></li>
@@ -94,9 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docs/hooks/t_tokenizer.html">Template: Add new tokenizer</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="hook-instances">
-<h2>Hook Instances<a class="headerlink" href="#hook-instances" title="Permalink to this headline">¶</a></h2>
+<p><strong>Hook Instances</strong></p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/hooks/new_endpoint.html">Add a new Endpoint</a></li>
@@ -145,7 +145,6 @@
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
 <li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
 </ul>
 </div>
@@ -154,12 +153,7 @@
 <p>This part of note declares the license of X2R.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="docs/license.html">License</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/license.html#preamble">Preamble</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/license.html#terms-and-conditions">Terms and Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/license.html#how-to-apply-these-terms-to-your-new-programs">How to Apply These Terms to Your New Programs</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/license.html">License</a></li>
 </ul>
 </div>
 </div>
@@ -177,10 +171,10 @@
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#user-guide">User Guide</a></li>
 <li><a class="reference internal" href="#components">Components</a></li>
-<li><a class="reference internal" href="#framework-workflow">Framework Workflow</a></li>
-<li><a class="reference internal" href="#framework-hooks">Framework Hooks</a></li>
-<li><a class="reference internal" href="#hook-templates">Hook Templates</a></li>
-<li><a class="reference internal" href="#hook-instances">Hook Instances</a></li>
+<li><a class="reference internal" href="#api-usage-scenarios">API Usage Scenarios</a></li>
+<li><a class="reference internal" href="#framework-hooks">Framework Hooks</a><ul>
+</ul>
+</li>
 <li><a class="reference internal" href="#api-reference">API Reference</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#additional-note">Additional Note</a></li>
@@ -189,8 +183,8 @@
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="docs/install.html"
-                        title="next chapter">Installation</a></p>
+  <p class="topless"><a href="docs/roadmap.html"
+                        title="next chapter">Roadmap</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -220,7 +214,7 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="docs/install.html" title="Installation"
+          <a href="docs/roadmap.html" title="Roadmap"
              >next</a> |</li>
         <li><a href="#">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
