@@ -55,15 +55,34 @@
 <h2>Operation Scenarios<a class="headerlink" href="#operation-scenarios" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="replace-original-uris-with-specified-uris">
 <h3>Replace Original URIs with Specified URIs<a class="headerlink" href="#replace-original-uris-with-specified-uris" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Include the file <strong>&#8220;mapper.class.php&#8221;</strong> in your program</li>
+<li>Initialize a <strong>Mapper</strong> instance by passing a <strong>rdfGraph</strong></li>
+<li>Call the method <strong>refactoring($refType, $change)</strong></li>
+<li>Call the method <strong>serialize($format)</strong></li>
+</ol>
 </div>
 </div>
 <div class="section" id="configuration-scenarios">
 <h2>Configuration Scenarios<a class="headerlink" href="#configuration-scenarios" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="set-a-refactor-uri-replacement">
-<h3>Set a Refactor (URI Replacement)<a class="headerlink" href="#set-a-refactor-uri-replacement" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="change-a-refactor-uri-replacement">
+<h3>Change a Refactor (URI Replacement)<a class="headerlink" href="#change-a-refactor-uri-replacement" title="Permalink to this headline">¶</a></h3>
+<p>Change different refactors can let Mapper be able to do different refactoring on the given RDF. In order to decouple the <strong>Mapper</strong> from specific <strong>Refactor</strong>, their dependency is injected during runtime through the method <strong>refactoring($refType, $change)</strong>.</p>
+<p>Currently, we only implement one type of <strong>Refactor</strong>, called <strong>Rename</strong> (defined in &#8220;refaRename.class.php&#8221;). Its corresponding change is an associative array, which saves the mapping from original URI to replaced URI. There is one example of <strong>change</strong> that the refactor, <strong>Rename</strong>, accepted.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$exampleChange = array(&#39;http://original.uri.1&#39; =&gt; &#39;http://replaced.uri.1&#39;,</span>
+<span class="x">                       &#39;http://original.uri.2&#39; =&gt; &#39;http://replaced.uri.2&#39;);</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="set-a-rdf-parser">
 <h3>Set a RDF Parser<a class="headerlink" href="#set-a-rdf-parser" title="Permalink to this headline">¶</a></h3>
+<p>There are many RDF parsers available. In X2R, we allow developers to set or even introduce new RDF parsers for reasons, such as better performace or wider range of input formats.</p>
+<p>Currently, we implement one wrapper, <strong>Easy_Rdf_Adapter</strong>, for EasyRdf. EasyRdf is a popular RDF parser implemented in PHP, and more information can be found in it <a class="reference external" href="http://www.easyrdf.org/">official site</a>.</p>
+<p>To set <strong>Easy_Rdf_Adapter</strong> as the RDF parser.</p>
+<ol class="arabic simple">
+<li>Initialize an instance of <strong>Easy_Rdf_Adapter</strong></li>
+<li>Initialize a <strong>Mapper</strong> instance by passing the instance just initialized</li>
+</ol>
 </div>
 </div>
 </div>
@@ -82,7 +101,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#configuration-scenarios">Configuration Scenarios</a><ul>
-<li><a class="reference internal" href="#set-a-refactor-uri-replacement">Set a Refactor (URI Replacement)</a></li>
+<li><a class="reference internal" href="#change-a-refactor-uri-replacement">Change a Refactor (URI Replacement)</a></li>
 <li><a class="reference internal" href="#set-a-rdf-parser">Set a RDF Parser</a></li>
 </ul>
 </li>
