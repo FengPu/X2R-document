@@ -12,6 +12,8 @@ Our motivation is to smooth the transition from existing *Web* to *Semantic Web*
     docs/audience
     docs/howto
 
+The index can be found in :ref:`genindex`, and the search page, :ref:`search`, can be used to search within this document. 
+
 
 User Guide
 ---------------
@@ -43,30 +45,52 @@ Targeted Audience: **API users**
 **X2R**
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
-    docs/scenarios/x2r/replaceUri.rst
+    docs/scenarios/x2r/operation
+    docs/scenarios/x2r/configuration
 
 **Extractor**
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
-    docs/scenarios/extractor/
+    docs/scenarios/extractor/operation
+    docs/scenarios/extractor/configuration
+
+    docs/scenarios/extractor/extractUri
+    docs/scenarios/extractor/verifyUri
+
+
 
 **USS**
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
-    docs/scenarios/uss/
+    docs/scenarios/uss/operation
+    docs/scenarios/uss/configuration
+
+    docs/scenarios/uss/searchUri
+
+    docs/scenarios/uss/setParser
+    docs/scenarios/uss/setRefiner
+    docs/scenarios/uss/setEndpoints
+    docs/scenarios/uss/setFilter
+    docs/scenarios/uss/setRanker
+    docs/scenarios/uss/setSelector
 
 **Mapper**
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
-    docs/scenarios/mapper/
+    docs/scenarios/mapper/operation
+    docs/scenarios/mapper/configuration
+
+    docs/scenarios/mapper/mapping
+    docs/scenarios/mapper/setRefactor
+    docs/scenarios/mapper/setRdfParser
 
 
 
@@ -113,11 +137,6 @@ This part of the documentation dedicates to prople who are looking for informati
 
     docs/api
 
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`search`
 
 
 Additional Note
@@ -128,3 +147,5 @@ This part of note declares the license of X2R.
     :maxdepth: 1
 
     docs/license
+
+
