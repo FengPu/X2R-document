@@ -14,7 +14,7 @@
 
 
 \title{X2R Documentation}
-\date{October 29, 2014}
+\date{November 04, 2014}
 \release{1.0}
 \author{Feng-Pu Yang}
 \newcommand{\sphinxlogo}{}
@@ -151,10 +151,10 @@ This page give a a minimal usage scenario for grasping the whole picture of X2R 
 \label{docs/quickstart:a-minimal-usage-scenario}
 X2R aims to improve the quality of RDF by replacing temporary or invalid URIs with valid and representive URIs.
 
-Before letting X2R do the URIs replacemant task for you, you should make sure the configuration file are
+Before letting X2R do the URIs replacemant task for you, you should make sure the configuration file, X2R.conf, are
 consistent with your requirements.
 
-X2R.conf:
+\textbf{X2R.conf}:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{x}{\PYGZob{} \PYGZdq{}USS\PYGZdq{}:       [}
@@ -315,11 +315,268 @@ A Command Line Interface is planned to be included in version 2.0.
 \end{itemize}
 
 
+\chapter{Framework Workflow}
+\label{index:framework-workflow}
+\{diagram\}
+
+
 \chapter{Framework Hooks}
 \label{index:framework-hooks}
+This section focuses on two topics, i.e. \textbf{hook templates} and \textbf{hook instances}. The term ``hook'' is used to present the cookbook or guidence for extending X2R in many different aspects. Because some hooks are similar to each other, the hook templates are extracted based on the similarity among existing hooks. Extracted hook templates can be used to instainate more hook instances to cover more aspects for increasing X2R's flexability.
 
-\section{Includes a new Endpoint}
-\label{docs/hooks/new_endpoint::doc}\label{docs/hooks/new_endpoint:includes-a-new-endpoint}
+
+\chapter{Hook Templates}
+\label{index:hook-templates}
+
+\section{Template: Add USS Components}
+\label{docs/hooks/t_uss_components:template-add-uss-components}\label{docs/hooks/t_uss_components::doc}\label{docs/hooks/t_uss_components:hook-template-uss}
+
+\subsection{Involved Classes}
+\label{docs/hooks/t_uss_components:involved-classes}\begin{quote}
+
+\textbf{\{List of involved classes with links\}}
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/t_uss_components:mechanism}\begin{enumerate}
+\item {} 
+Based on component's type, create a new class in /USS/\textbf{\{component\_type\}}/
+
+\item {} 
+Based on the component's type, the new class should exntends corresponding parent class
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``incclude\_once'' statement in it
+
+\item {} 
+Based on component's type, find corresponding method and add the \{id, class\_factory\} mapping to the method's switch/case block.
+
+\end{enumerate}
+
+
+\subsection{Instances}
+\label{docs/hooks/t_uss_components:instances}\begin{itemize}
+\item {} 
+{\hyperref[docs/hooks/new_refiner:hook-refiner]{\emph{Add a new refiner}}}
+
+\item {} 
+{\hyperref[docs/hooks/new_filter:hook-filter]{\emph{Add a new filter}}}
+
+\item {} 
+{\hyperref[docs/hooks/new_ranker:hook-ranker]{\emph{Add a new ranker}}}
+
+\item {} 
+{\hyperref[docs/hooks/new_selector:hook-selector]{\emph{Add a new selector}}}
+
+\item {} 
+\emph{hook\_query\_parser}
+
+\end{itemize}
+
+
+\section{Template: Add wrapper for new RDF parser}
+\label{docs/hooks/t_rdf_parser:template-add-wrapper-for-new-rdf-parser}\label{docs/hooks/t_rdf_parser::doc}\label{docs/hooks/t_rdf_parser:hook-template-rdf-parser}
+
+\subsection{Involved Classes}
+\label{docs/hooks/t_rdf_parser:involved-classes}\begin{quote}
+
+\textbf{\{List of involved classes with links\}}
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/t_rdf_parser:mechanism}\begin{enumerate}
+\item {} 
+todo
+
+\end{enumerate}
+
+
+\subsection{Instances}
+\label{docs/hooks/t_rdf_parser:instances}\begin{itemize}
+\item {} 
+\emph{hook\_easyRdf}
+
+\end{itemize}
+
+
+\section{Template: Add new tokenizer}
+\label{docs/hooks/t_tokenizer::doc}\label{docs/hooks/t_tokenizer:hook-template-uss}\label{docs/hooks/t_tokenizer:template-add-new-tokenizer}
+
+\subsection{Involved Classes}
+\label{docs/hooks/t_tokenizer:involved-classes}\begin{quote}
+
+\textbf{\{List of involved classes with links\}}
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/t_tokenizer:mechanism}\begin{enumerate}
+\item {} 
+todo
+
+\end{enumerate}
+
+
+\subsection{Instances}
+\label{docs/hooks/t_tokenizer:instances}\begin{itemize}
+\item {} 
+\emph{hook\_caseBasedTokenizer}
+
+\item {} 
+\emph{hook\_delimitBasedTokenizer}
+
+\end{itemize}
+
+
+\chapter{Hook Instances}
+\label{index:hook-instances}
+
+\section{Add a new Endpoint}
+\label{docs/hooks/new_endpoint::doc}\label{docs/hooks/new_endpoint:add-a-new-endpoint}
+
+\section{Add a new tokenizer}
+\label{docs/hooks/new_tokenizer::doc}\label{docs/hooks/new_tokenizer:add-a-new-tokenizer}
+
+\section{Add a new RDF refactor}
+\label{docs/hooks/new_refactor:add-a-new-rdf-refactor}\label{docs/hooks/new_refactor::doc}
+
+\section{Add a new selector}
+\label{docs/hooks/new_selector:hook-selector}\label{docs/hooks/new_selector::doc}\label{docs/hooks/new_selector:add-a-new-selector}
+
+\subsection{Involved Files}
+\label{docs/hooks/new_selector:involved-files}\begin{quote}
+
+resultselector.class.php, ussContainer.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_selector:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/selector/
+
+\item {} 
+The new class should exntends ResultSelector, for example `newSelector.class.php'
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``include\_once selector/newSelector.class.php;'' statement in it
+
+\item {} 
+Add a case block of the new class into getSelector() method's switch block
+
+\end{enumerate}
+
+
+\subsection{Template}
+\label{docs/hooks/new_selector:template}\begin{quote}
+
+{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Template: Add new tokenizer}}}
+\end{quote}
+
+
+\section{Add a new ranker}
+\label{docs/hooks/new_ranker:add-a-new-ranker}\label{docs/hooks/new_ranker::doc}\label{docs/hooks/new_ranker:hook-ranker}
+
+\subsection{Involved Files}
+\label{docs/hooks/new_ranker:involved-files}\begin{quote}
+
+resultranker.class.php, ussContainer.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_ranker:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/ranker/
+
+\item {} 
+The new class should exntends ResultRanker, for example `newRanker.class.php'
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``include\_once ranker/newRankerclass.php;'' statement in it
+
+\item {} 
+Add a case block of the new class into getRanker() method's switch block
+
+\end{enumerate}
+
+
+\subsection{Template}
+\label{docs/hooks/new_ranker:template}\begin{quote}
+
+{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Template: Add new tokenizer}}}
+\end{quote}
+
+
+\section{Add a new refiner}
+\label{docs/hooks/new_refiner:add-a-new-refiner}\label{docs/hooks/new_refiner::doc}\label{docs/hooks/new_refiner:hook-refiner}
+
+\subsection{Involved Files}
+\label{docs/hooks/new_refiner:involved-files}\begin{quote}
+
+queryrefiner.class.php, ussContainer.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_refiner:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/refiner/
+
+\item {} 
+The new class should exntends QueryRefiner, for example `newRefiner.class.php'
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``include\_once refiner/newRefiner.class.php;'' statement in it
+
+\item {} 
+Add a case block of the new class into getRefiner() method's switch block
+
+\end{enumerate}
+
+
+\subsection{Template}
+\label{docs/hooks/new_refiner:template}\begin{quote}
+
+{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Template: Add new tokenizer}}}
+\end{quote}
+
+
+\section{Add a new filter}
+\label{docs/hooks/new_filter:hook-filter}\label{docs/hooks/new_filter::doc}\label{docs/hooks/new_filter:add-a-new-filter}
+
+\subsection{Involved Classes}
+\label{docs/hooks/new_filter:involved-classes}\begin{quote}
+
+resultfilter.class.php, ussContainer.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_filter:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/filter/
+
+\item {} 
+The new class should exntends ResultFilter, for example `newFilter.class.php'
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``include\_once filter/newFilter.class.php;'' statement in it
+
+\item {} 
+Add a case block of the new class into getFilter() method's switch block
+
+\end{enumerate}
+
+
+\subsection{Template}
+\label{docs/hooks/new_filter:template}\begin{quote}
+
+{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Template: Add new tokenizer}}}
+\end{quote}
+
 
 \chapter{API Reference}
 \label{index:api-reference}
@@ -1110,6 +1367,20 @@ The fittest result.
 
 \end{fulllineitems}
 
+
+
+\chapter{Indices and tables}
+\label{index:indices-and-tables}\begin{itemize}
+\item {} 
+\emph{genindex}
+
+\item {} 
+\emph{modindex}
+
+\item {} 
+\emph{search}
+
+\end{itemize}
 
 
 \chapter{Additional Note}

@@ -57,6 +57,14 @@ This part of the documentation dedicates to prople who are looking for informati
 
     docs/api
 
+Indices and tables
+------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+
 Additional Note
 ---------------
 This part of note declares the license of X2R. 
