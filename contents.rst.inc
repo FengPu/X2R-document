@@ -6,7 +6,7 @@ Introduction
 Our motivation is to smooth the transition from existing *Web* to *Semantic Web* by providing tools, which can dramatically lower the entry barrier of generating Linked-data, to developers. By providing such tools, i.e., X2R, more and more developers can translate existing data on-demands, and the final vision of Semantic Web can be approached incrementally.  
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
     docs/audience
 
