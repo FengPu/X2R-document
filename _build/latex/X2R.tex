@@ -178,74 +178,6 @@ This page give a a minimal usage scenario for grasping the whole picture of X2R 
 \label{docs/quickstart:a-minimal-usage-scenario}
 X2R aims to improve the quality of RDF by replacing temporary or invalid URIs with valid and representive URIs.
 
-Before letting X2R do the URIs replacemant task for you, you should make sure the configuration file, X2R.conf, are
-consistent with your requirements.
-
-\textbf{X2R.conf}:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{\PYGZob{} \PYGZdq{}USS\PYGZdq{}:       [}
-\PYG{x}{                 \PYGZob{}\PYGZdq{}endpoints\PYGZdq{}: [}
-\PYG{x}{                                 \PYGZob{} \PYGZdq{}name\PYGZdq{}  : \PYGZdq{}dbpedia\PYGZdq{},}
-\PYG{x}{                                   \PYGZdq{}class\PYGZdq{} : \PYGZdq{}endpoints/dbpedia.php\PYGZdq{}}
-\PYG{x}{                                 \PYGZcb{},}
-\PYG{x}{                                 \PYGZob{} \PYGZdq{}name\PYGZdq{}  : \PYGZdq{}linkedgeodata\PYGZdq{},}
-\PYG{x}{                                   \PYGZdq{}class\PYGZdq{} : \PYGZdq{}endpoints/linkedgeodata.php\PYGZdq{}}
-\PYG{x}{                                 \PYGZcb{}}
-
-\PYG{x}{                               ]}
-\PYG{x}{                  \PYGZcb{},}
-\PYG{x}{                  \PYGZob{}\PYGZdq{}refiners\PYGZdq{}: [}
-\PYG{x}{                                 \PYGZob{} \PYGZdq{}name\PYGZdq{}  : \PYGZdq{}dbpedia\PYGZdq{},}
-\PYG{x}{                                   \PYGZdq{}class\PYGZdq{} : \PYGZdq{}endpoints/dbpedia.php\PYGZdq{}}
-\PYG{x}{                                 \PYGZcb{},}
-\PYG{x}{                                 \PYGZob{} \PYGZdq{}name\PYGZdq{}  : \PYGZdq{}linkedgeodata\PYGZdq{},}
-\PYG{x}{                                   \PYGZdq{}class\PYGZdq{} : \PYGZdq{}endpoints/linkedgeodata.php\PYGZdq{}}
-\PYG{x}{                                 \PYGZcb{}}
-\PYG{x}{                               ]}
-\PYG{x}{                  \PYGZcb{},}
-\PYG{x}{                  \PYGZob{}\PYGZdq{}parser\PYGZdq{}: \PYGZob{}\PYGZdq{}name\PYGZdq{}  : \PYGZdq{}dbpedia\PYGZdq{},}
-\PYG{x}{                              \PYGZdq{}class\PYGZdq{} : \PYGZdq{}endpoints/dbpedia.php\PYGZdq{}}
-\PYG{x}{                             \PYGZcb{}}
-\PYG{x}{                  \PYGZcb{},}
-\PYG{x}{                  \PYGZob{}\PYGZdq{}selector\PYGZdq{}: \PYGZob{}\PYGZdq{}name\PYGZdq{}  : \PYGZdq{}dbpedia\PYGZdq{},}
-\PYG{x}{                                \PYGZdq{}class\PYGZdq{} : \PYGZdq{}endpoints/dbpedia.php\PYGZdq{}}
-\PYG{x}{                               \PYGZcb{}}
-\PYG{x}{                  \PYGZcb{},}
-\PYG{x}{                  \PYGZob{}\PYGZdq{}rankers\PYGZdq{}: [}
-\PYG{x}{                                 \PYGZob{} \PYGZdq{}name\PYGZdq{}  : \PYGZdq{}dbpedia\PYGZdq{},}
-\PYG{x}{                                   \PYGZdq{}class\PYGZdq{} : \PYGZdq{}endpoints/dbpedia.php\PYGZdq{}}
-\PYG{x}{                                 \PYGZcb{},}
-\PYG{x}{                                 \PYGZob{} \PYGZdq{}name\PYGZdq{}  : \PYGZdq{}linkedgeodata\PYGZdq{},}
-\PYG{x}{                                   \PYGZdq{}class\PYGZdq{} : \PYGZdq{}endpoints/linkedgeodata.php\PYGZdq{}}
-\PYG{x}{                                 \PYGZcb{}}
-\PYG{x}{                              ]}
-
-\PYG{x}{                  \PYGZcb{}}
-
-
-
-\PYG{x}{               ],}
-
-\PYG{x}{  \PYGZdq{}Extractor\PYGZdq{}: [ \PYGZob{}\PYGZdq{}tokenizers\PYGZdq{}: [}
-\PYG{x}{                                 \PYGZob{} \PYGZdq{}name\PYGZdq{}  : \PYGZdq{}CaseBasedTokenizer\PYGZdq{},}
-\PYG{x}{                                   \PYGZdq{}class\PYGZdq{} : \PYGZdq{}EM/caseBasedTokenizer.class.php\PYGZdq{}}
-\PYG{x}{                                 \PYGZcb{},}
-\PYG{x}{                                 \PYGZob{} \PYGZdq{}name\PYGZdq{}  : \PYGZdq{}DelimitBasedTokenizer\PYGZdq{},}
-\PYG{x}{                                   \PYGZdq{}class\PYGZdq{} : \PYGZdq{}EM/delimitBasedTokenizer.class.php\PYGZdq{}}
-\PYG{x}{                                 \PYGZcb{}}
-\PYG{x}{                                ]}
-\PYG{x}{                 \PYGZcb{}}
-
-\PYG{x}{               ],}
-
-\PYG{x}{  \PYGZdq{}Mapper\PYGZdq{}:    [}
-\PYG{x}{                  \PYGZob{}\PYGZdq{}output\PYGZus{}format\PYGZdq{}: \PYGZdq{}xml/rdf\PYGZdq{}}
-\PYG{x}{                  \PYGZcb{}}
-\PYG{x}{               ],}
-\PYG{x}{\PYGZcb{}}
-\end{Verbatim}
-
 
 \chapter{Components}
 \label{index:components}
@@ -378,25 +310,52 @@ Targeted Audience: \textbf{API users}
 \label{docs/scenarios/extractor:operation-scenarios}
 
 \subsubsection{Extract URIs from a Given RDF}
-\label{docs/scenarios/extractor:extract-uris-from-a-given-rdf}
+\label{docs/scenarios/extractor:extract-uris-from-a-given-rdf}\begin{enumerate}
+\item {} 
+Include the file \textbf{``extractor.class.php''} in your program
 
-\subsubsection{Verify an URI}
-\label{docs/scenarios/extractor:verify-an-uri}
+\item {} 
+Initialize a \textbf{Extractor} instance by passing a \textbf{rdfGraph}
+
+\item {} 
+Call the method \textbf{getQueryTerms()}
+
+\end{enumerate}
+
 
 \subsubsection{Tokenize an URI into Query Terms}
 \label{docs/scenarios/extractor:tokenize-an-uri-into-query-terms}
+Extractor can help in tokenizing URI task. To tokenize a given URI, you can use the method \textbf{tokenize(\$str)}, where the \$str is the URI that you want to tokenize.
+
+Currently, we implements two representive tokenizers, \textbf{DelimitBasedTokenizer} and \textbf{CaseBasedTokenizer}, and the \textbf{tokenize(\$str)} applies these two tokenizers on the \$str.
+
 
 \subsection{Configuration Scenarios}
 \label{docs/scenarios/extractor:configuration-scenarios}
 
-\subsubsection{Set an URI Tokenizer}
-\label{docs/scenarios/extractor:set-an-uri-tokenizer}
-
 \subsubsection{Set a RDF Parser}
 \label{docs/scenarios/extractor:set-a-rdf-parser}
+There are many RDF parsers available. In X2R, we allow developers to set or even introduce new RDF parsers for reasons, such as better performace or wider range of input formats.
 
-\subsubsection{Set an URI Verifier}
-\label{docs/scenarios/extractor:set-an-uri-verifier}
+Currently, we implement one wrapper, \textbf{Easy\_Rdf\_Adapter}, for EasyRdf. EasyRdf is a popular RDF parser implemented in PHP, and more information can be found in it \href{http://www.easyrdf.org/}{official site}.
+
+To set \textbf{Easy\_Rdf\_Adapter} as the RDF parser.
+\begin{enumerate}
+\item {} 
+Initialize an instance of \textbf{Easy\_Rdf\_Adapter}
+
+\item {} 
+Initialize a \textbf{Extractor} instance by passing the instance just initialized
+
+\end{enumerate}
+
+
+\subsubsection{Set an URI Filter}
+\label{docs/scenarios/extractor:set-an-uri-filter}
+If there are some URIs that you want to ignore in the whole URI replacement process, you can use \textbf{addFilteredUri(\$furi)} to incrementally build the URI filter.
+
+You can also use \textbf{getFiltedUris()} method to get the current list of URIs that are ignored.
+
 
 \section{USS API Usage Scenarios}
 \label{docs/scenarios/uss::doc}\label{docs/scenarios/uss:uss-api-usage-scenarios}
@@ -407,37 +366,77 @@ Targeted Audience: \textbf{API users}
 \subsubsection{Search URIs by terms}
 \label{docs/scenarios/uss:search-uris-by-terms}\begin{enumerate}
 \item {} 
+Include the file \textbf{``urisearchservice.class.php''} in your program
+
+\item {} 
 Initialize a \textbf{UriSearchService} instance
 
 \item {} 
-Call the method \textbf{uriSearch} with the query string as parameter
-
-\item {} 
-After receving all Endpoints' respones, the result set are returned
+Call the method \textbf{uriSearch} with a \textbf{query string} as the parameter. After receving all Endpoints' respones, the \textbf{result set} is returned
 
 \end{enumerate}
 
 
 \subsection{Configuration Scenarios}
 \label{docs/scenarios/uss:configuration-scenarios}
+After initializing a \textbf{UriSearchService} instance, the default components are already set. If you want to change the default setting, you can reset the components as the guidences listed below.
+
+The configuration methods can be chained. Here is a code example.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{include\PYGZus{}once (risearchservice.class.php);}
+\PYG{x}{\PYGZdl{}exampleUss = new UriSearchService();}
+\PYG{x}{//... Initialize components as \PYGZdl{}parser, \PYGZdl{}selector ...etc.}
+\PYG{x}{\PYGZdl{}exampleUss\PYGZhy{}\PYGZgt{}setFederatedSearch(\PYGZdl{}federatedSearch)}
+\PYG{x}{           \PYGZhy{}\PYGZgt{}setParser(\PYGZdl{}parser)}
+\PYG{x}{           \PYGZhy{}\PYGZgt{}setProcessor(\PYGZdl{}rsultProcessor)}
+\PYG{x}{           \PYGZhy{}\PYGZgt{}setSelector(\PYGZdl{}selector);}
+\end{Verbatim}
+
 
 \subsubsection{Set a Parser}
-\label{docs/scenarios/uss:set-a-parser}
+\label{docs/scenarios/uss:set-a-parser}\begin{enumerate}
+\item {} 
+Initialize a parser
 
-\subsubsection{Set a Refiner}
-\label{docs/scenarios/uss:set-a-refiner}
+\item {} 
+Assign the new parser through the method \textbf{setParser(\$parser)}
 
-\subsubsection{Set Endpoints}
-\label{docs/scenarios/uss:set-endpoints}
+\end{enumerate}
 
-\subsubsection{Set a Filter}
-\label{docs/scenarios/uss:set-a-filter}
 
-\subsubsection{Set a Ranker}
-\label{docs/scenarios/uss:set-a-ranker}
+\subsubsection{Set FederatedSearch}
+\label{docs/scenarios/uss:set-federatedsearch}\begin{enumerate}
+\item {} 
+Initialize a federatedSearch
+
+\item {} 
+Assign the new federatedSearch through the method \textbf{setFederatedSearch(\$federatedSearch)}
+
+\end{enumerate}
+
+
+\subsubsection{Set a Result Processor (Filter and Ranker)}
+\label{docs/scenarios/uss:set-a-result-processor-filter-and-ranker}\begin{enumerate}
+\item {} 
+Initialize a rsultProcessor
+
+\item {} 
+Assign the new rsultProcessor through the method \textbf{setProcessor(\$rsultProcessor)}
+
+\end{enumerate}
+
 
 \subsubsection{Set a Selector}
-\label{docs/scenarios/uss:set-a-selector}
+\label{docs/scenarios/uss:set-a-selector}\begin{enumerate}
+\item {} 
+Initialize a selector
+
+\item {} 
+Assign the new selector through the method \textbf{setSelector(\$selector)}
+
+\end{enumerate}
+
 
 \section{Mapper API Usage Scenarios}
 \label{docs/scenarios/mapper:mapper-api-usage-scenarios}\label{docs/scenarios/mapper::doc}
@@ -446,16 +445,53 @@ After receving all Endpoints' respones, the result set are returned
 \label{docs/scenarios/mapper:operation-scenarios}
 
 \subsubsection{Replace Original URIs with Specified URIs}
-\label{docs/scenarios/mapper:replace-original-uris-with-specified-uris}
+\label{docs/scenarios/mapper:replace-original-uris-with-specified-uris}\begin{enumerate}
+\item {} 
+Include the file \textbf{``mapper.class.php''} in your program
+
+\item {} 
+Initialize a \textbf{Mapper} instance by passing a \textbf{rdfGraph}
+
+\item {} 
+Call the method \textbf{refactoring(\$refType, \$change)}
+
+\item {} 
+Call the method \textbf{serialize(\$format)}
+
+\end{enumerate}
+
 
 \subsection{Configuration Scenarios}
 \label{docs/scenarios/mapper:configuration-scenarios}
 
-\subsubsection{Set a Refactor (URI Replacement)}
-\label{docs/scenarios/mapper:set-a-refactor-uri-replacement}
+\subsubsection{Change a Refactor (URI Replacement)}
+\label{docs/scenarios/mapper:change-a-refactor-uri-replacement}
+Change different refactors can let Mapper be able to do different refactoring on the given RDF. In order to decouple the \textbf{Mapper} from specific \textbf{Refactor}, their dependency is injected during runtime through the method \textbf{refactoring(\$refType, \$change)}.
+
+Currently, we only implement one type of \textbf{Refactor}, called \textbf{Rename} (defined in ``refaRename.class.php''). Its corresponding change is an associative array, which saves the mapping from original URI to replaced URI. There is one example of \textbf{change} that the refactor, \textbf{Rename}, accepted.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{\PYGZdl{}exampleChange = array(\PYGZsq{}http://original.uri.1\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://replaced.uri.1\PYGZsq{},}
+\PYG{x}{                       \PYGZsq{}http://original.uri.2\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://replaced.uri.2\PYGZsq{});}
+\end{Verbatim}
+
 
 \subsubsection{Set a RDF Parser}
 \label{docs/scenarios/mapper:set-a-rdf-parser}
+There are many RDF parsers available. In X2R, we allow developers to set or even introduce new RDF parsers for reasons, such as better performace or wider range of input formats.
+
+Currently, we implement one wrapper, \textbf{Easy\_Rdf\_Adapter}, for EasyRdf. EasyRdf is a popular RDF parser implemented in PHP, and more information can be found in it \href{http://www.easyrdf.org/}{official site}.
+
+To set \textbf{Easy\_Rdf\_Adapter} as the RDF parser.
+\begin{enumerate}
+\item {} 
+Initialize an instance of \textbf{Easy\_Rdf\_Adapter}
+
+\item {} 
+Initialize a \textbf{Mapper} instance by passing the instance just initialized
+
+\end{enumerate}
+
 
 \chapter{Framework Hooks}
 \label{index:framework-hooks}
@@ -512,72 +548,69 @@ Based on component's type, find corresponding method and add the \{id, class\_fa
 
 \end{itemize}
 
-
-\section{Template: Add wrapper for new RDF parser}
-\label{docs/hooks/t_rdf_parser:template-add-wrapper-for-new-rdf-parser}\label{docs/hooks/t_rdf_parser::doc}\label{docs/hooks/t_rdf_parser:hook-template-rdf-parser}
-
-\subsection{Involved Classes}
-\label{docs/hooks/t_rdf_parser:involved-classes}\begin{quote}
-
-\textbf{\{List of involved classes with links\}}
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/t_rdf_parser:mechanism}\begin{enumerate}
-\item {} 
-todo
-
-\end{enumerate}
-
-
-\subsection{Instances}
-\label{docs/hooks/t_rdf_parser:instances}\begin{itemize}
-\item {} 
-\emph{hook\_easyRdf}
-
-\end{itemize}
-
-
-\section{Template: Add new tokenizer}
-\label{docs/hooks/t_tokenizer::doc}\label{docs/hooks/t_tokenizer:hook-template-uss}\label{docs/hooks/t_tokenizer:template-add-new-tokenizer}
-
-\subsection{Involved Classes}
-\label{docs/hooks/t_tokenizer:involved-classes}\begin{quote}
-
-\textbf{\{List of involved classes with links\}}
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/t_tokenizer:mechanism}\begin{enumerate}
-\item {} 
-todo
-
-\end{enumerate}
-
-
-\subsection{Instances}
-\label{docs/hooks/t_tokenizer:instances}\begin{itemize}
-\item {} 
-\emph{hook\_caseBasedTokenizer}
-
-\item {} 
-\emph{hook\_delimitBasedTokenizer}
-
-\end{itemize}
-
 \textbf{Hook Instances}
 
 
 \section{Add a new Endpoint}
-\label{docs/hooks/new_endpoint::doc}\label{docs/hooks/new_endpoint:add-a-new-endpoint}
+\label{docs/hooks/new_endpoint::doc}\label{docs/hooks/new_endpoint:add-a-new-endpoint}\label{docs/hooks/new_endpoint:hook-new-endpoint}
 
-\section{Add a new tokenizer}
-\label{docs/hooks/new_tokenizer::doc}\label{docs/hooks/new_tokenizer:add-a-new-tokenizer}
+\subsection{Involved Classes}
+\label{docs/hooks/new_endpoint:involved-classes}\begin{quote}
+
+Endpoint.class.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_endpoint:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/endpoints
+
+\item {} 
+The new class should exntends Endpoints
+
+\end{enumerate}
+
+
+\subsection{Example}
+\label{docs/hooks/new_endpoint:example}\begin{itemize}
+\item {} 
+dbpedia.php
+
+\item {} 
+linkedgeodata.php
+
+\end{itemize}
+
 
 \section{Add a new RDF refactor}
-\label{docs/hooks/new_refactor:add-a-new-rdf-refactor}\label{docs/hooks/new_refactor::doc}
+\label{docs/hooks/new_refactor:hook-refactor}\label{docs/hooks/new_refactor:add-a-new-rdf-refactor}\label{docs/hooks/new_refactor::doc}
+
+\subsection{Involved Files}
+\label{docs/hooks/new_refactor:involved-files}\begin{quote}
+
+refactor.class.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_refactor:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /EM/
+
+\item {} 
+The new class should exntends Refactor
+
+\end{enumerate}
+
+
+\subsection{Example}
+\label{docs/hooks/new_refactor:example}\begin{itemize}
+\item {} 
+{\hyperref[docs/api:ReplaceUri]{\code{ReplaceUri}}}
+
+\end{itemize}
+
 
 \section{Add a new selector}
 \label{docs/hooks/new_selector:hook-selector}\label{docs/hooks/new_selector::doc}\label{docs/hooks/new_selector:add-a-new-selector}
@@ -609,7 +642,7 @@ Add a case block of the new class into getSelector() method's switch block
 \subsection{Template}
 \label{docs/hooks/new_selector:template}\begin{quote}
 
-{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Template: Add new tokenizer}}}
+{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Add a new tokenizer}}}
 \end{quote}
 
 
@@ -643,7 +676,7 @@ Add a case block of the new class into getRanker() method's switch block
 \subsection{Template}
 \label{docs/hooks/new_ranker:template}\begin{quote}
 
-{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Template: Add new tokenizer}}}
+{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Add a new tokenizer}}}
 \end{quote}
 
 
@@ -677,7 +710,7 @@ Add a case block of the new class into getRefiner() method's switch block
 \subsection{Template}
 \label{docs/hooks/new_refiner:template}\begin{quote}
 
-{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Template: Add new tokenizer}}}
+{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Add a new tokenizer}}}
 \end{quote}
 
 
@@ -711,8 +744,69 @@ Add a case block of the new class into getFilter() method's switch block
 \subsection{Template}
 \label{docs/hooks/new_filter:template}\begin{quote}
 
-{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Template: Add new tokenizer}}}
+{\hyperref[docs/hooks/t_tokenizer:hook-template-uss]{\emph{Add a new tokenizer}}}
 \end{quote}
+
+
+\section{Add a wrapper for new RDF parser}
+\label{docs/hooks/t_rdf_parser::doc}\label{docs/hooks/t_rdf_parser:hook-template-rdf-parser}\label{docs/hooks/t_rdf_parser:add-a-wrapper-for-new-rdf-parser}
+
+\subsection{Involved Classes}
+\label{docs/hooks/t_rdf_parser:involved-classes}\begin{quote}
+
+rdfGraph.class.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/t_rdf_parser:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /EM/
+
+\item {} 
+The new class should exntends rdfGraph'
+
+\end{enumerate}
+
+
+\subsection{Example}
+\label{docs/hooks/t_rdf_parser:example}\begin{itemize}
+\item {} 
+{\hyperref[docs/api:EasyRdfAdapter]{\code{EasyRdfAdapter}}}
+
+\end{itemize}
+
+
+\section{Add a new tokenizer}
+\label{docs/hooks/t_tokenizer::doc}\label{docs/hooks/t_tokenizer:hook-template-uss}\label{docs/hooks/t_tokenizer:add-a-new-tokenizer}
+
+\subsection{Involved Classes}
+\label{docs/hooks/t_tokenizer:involved-classes}\begin{quote}
+
+tokenizer.class.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/t_tokenizer:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /EM/
+
+\item {} 
+The new class should exntends Tokenizer
+
+\end{enumerate}
+
+
+\subsection{Example}
+\label{docs/hooks/t_tokenizer:example}\begin{itemize}
+\item {} 
+{\hyperref[docs/api:CaseBasedTokenizer]{\code{CaseBasedTokenizer}}}
+
+\item {} 
+{\hyperref[docs/api:DelimitBasedTokenizer]{\code{DelimitBasedTokenizer}}}
+
+\end{itemize}
 
 
 \chapter{API Reference}
@@ -963,15 +1057,15 @@ A string which is consisted of elements from given array \$arr and is concatenat
 
 
 \subsubsection{CaseBasedTokenizer}
-\label{docs/api:casebasedtokenizer}\index{Tokenizer (class)|textbf}
+\label{docs/api:casebasedtokenizer}\index{CaseBasedTokenizer (class)|textbf}
 
 \begin{fulllineitems}
-\pysigline{\strong{class }\bfcode{Tokenizer}}
+\phantomsection\label{docs/api:CaseBasedTokenizer}\pysigline{\strong{class }\bfcode{CaseBasedTokenizer}}
 CaseBasedTokenizer class
-\index{tokenizeString() (Tokenizer method)|textbf}
+\index{tokenizeString() (CaseBasedTokenizer method)|textbf}
 
 \begin{fulllineitems}
-\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
+\phantomsection\label{docs/api:CaseBasedTokenizer::tokenizeString}\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \textbf{\$str} (\emph{string}) -- The string to be tokenized.
@@ -985,10 +1079,10 @@ An array of tokenized strings.
 
 \end{fulllineitems}
 
-\index{tokenizeArrayOfStrings() (Tokenizer method)|textbf}
+\index{tokenizeArrayOfStrings() (CaseBasedTokenizer method)|textbf}
 
 \begin{fulllineitems}
-\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
+\phantomsection\label{docs/api:CaseBasedTokenizer::tokenizeArrayOfStrings}\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
@@ -1008,15 +1102,15 @@ An array of tokenized strings.
 
 
 \subsubsection{DelimitBasedTokenizer}
-\label{docs/api:delimitbasedtokenizer}\index{Tokenizer (class)|textbf}
+\label{docs/api:delimitbasedtokenizer}\index{DelimitBasedTokenizer (class)|textbf}
 
 \begin{fulllineitems}
-\pysigline{\strong{class }\bfcode{Tokenizer}}
+\phantomsection\label{docs/api:DelimitBasedTokenizer}\pysigline{\strong{class }\bfcode{DelimitBasedTokenizer}}
 DelimitBasedTokenizer class
-\index{tokenizeString() (Tokenizer method)|textbf}
+\index{tokenizeString() (DelimitBasedTokenizer method)|textbf}
 
 \begin{fulllineitems}
-\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
+\phantomsection\label{docs/api:DelimitBasedTokenizer::tokenizeString}\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \textbf{\$str} (\emph{string}) -- The string to be tokenized.
@@ -1030,10 +1124,10 @@ An array of tokenized strings.
 
 \end{fulllineitems}
 
-\index{tokenizeArrayOfStrings() (Tokenizer method)|textbf}
+\index{tokenizeArrayOfStrings() (DelimitBasedTokenizer method)|textbf}
 
 \begin{fulllineitems}
-\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
+\phantomsection\label{docs/api:DelimitBasedTokenizer::tokenizeArrayOfStrings}\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
@@ -1424,10 +1518,10 @@ The SPARQL query string.
 
 X2R models the process of translating an imperfect RDF, especially for those with invalid URIs, to RDF with relatively higher quality.
 \end{quote}
-\index{transformation() (X2R method)|textbf}
+\index{transform() (X2R method)|textbf}
 
 \begin{fulllineitems}
-\phantomsection\label{docs/api:X2R::transformation}\pysiglinewithargsret{\bfcode{transformation}}{\emph{\$rdfGraph}, \emph{\$configuration}}{}~\begin{quote}\begin{description}
+\phantomsection\label{docs/api:X2R::transform}\pysiglinewithargsret{\bfcode{transform}}{\emph{\$rdfGraph}, \emph{\$configuration}}{}~\begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \textbf{\$graph} (\emph{rdfGraph}) -- The RDF, which is holded in the rdfGraph data structure, to be refactored.

@@ -13,12 +13,12 @@
 \indexentry{tokenizeString() (Tokenizer method)|hyperindexformat{\textbf}}{16}
 \indexentry{tokenizeArrayOfStrings() (Tokenizer method)|hyperindexformat{\textbf}}{16}
 \indexentry{arrayToString() (Tokenizer method)|hyperindexformat{\textbf}}{17}
-\indexentry{Tokenizer (class)|hyperindexformat{\textbf}}{17}
-\indexentry{tokenizeString() (Tokenizer method)|hyperindexformat{\textbf}}{17}
-\indexentry{tokenizeArrayOfStrings() (Tokenizer method)|hyperindexformat{\textbf}}{17}
-\indexentry{Tokenizer (class)|hyperindexformat{\textbf}}{17}
-\indexentry{tokenizeString() (Tokenizer method)|hyperindexformat{\textbf}}{17}
-\indexentry{tokenizeArrayOfStrings() (Tokenizer method)|hyperindexformat{\textbf}}{17}
+\indexentry{CaseBasedTokenizer (class)|hyperindexformat{\textbf}}{17}
+\indexentry{tokenizeString() (CaseBasedTokenizer method)|hyperindexformat{\textbf}}{17}
+\indexentry{tokenizeArrayOfStrings() (CaseBasedTokenizer method)|hyperindexformat{\textbf}}{17}
+\indexentry{DelimitBasedTokenizer (class)|hyperindexformat{\textbf}}{17}
+\indexentry{tokenizeString() (DelimitBasedTokenizer method)|hyperindexformat{\textbf}}{17}
+\indexentry{tokenizeArrayOfStrings() (DelimitBasedTokenizer method)|hyperindexformat{\textbf}}{17}
 \indexentry{Refactor (class)|hyperindexformat{\textbf}}{17}
 \indexentry{refactoring() (Refactor method)|hyperindexformat{\textbf}}{17}
 \indexentry{ReplaceUri (class)|hyperindexformat{\textbf}}{18}
@@ -42,7 +42,7 @@
 \indexentry{SparqlQueryComposer (class)|hyperindexformat{\textbf}}{20}
 \indexentry{term2Sparql() (SparqlQueryComposer method)|hyperindexformat{\textbf}}{20}
 \indexentry{X2R (class)|hyperindexformat{\textbf}}{20}
-\indexentry{transformation() (X2R method)|hyperindexformat{\textbf}}{20}
+\indexentry{transform() (X2R method)|hyperindexformat{\textbf}}{20}
 \indexentry{QueryRefiner (class)|hyperindexformat{\textbf}}{21}
 \indexentry{refine() (QueryRefiner method)|hyperindexformat{\textbf}}{21}
 \indexentry{SearchResultSelector (class)|hyperindexformat{\textbf}}{21}
