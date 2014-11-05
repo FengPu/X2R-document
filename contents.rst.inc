@@ -104,11 +104,12 @@ This part of the documentation dedicates to prople who are looking for informati
 
 Additional Note
 ---------------
-This part of note declares the license of X2R. 
+For code contributors' information, this part of note declares the license of X2R. In addition to license, this part of note also lists convensions enforced within X2R, including the coding style, versioning and documentation. 
 
 .. toctree::
     :maxdepth: 1
 
     docs/license
+    docs/convensions
 
 
