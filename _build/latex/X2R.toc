@@ -31,23 +31,23 @@
 \contentsline {section}{\numberline {4.2}Extractor API Usage Scenarios}{7}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Operation Scenarios}{7}{subsection.4.2.1}
 \contentsline {subsubsection}{Extract URIs from a Given RDF}{7}{subsubsection*.9}
-\contentsline {subsubsection}{Tokenize an URI into Query Terms}{7}{subsubsection*.10}
+\contentsline {subsubsection}{Tokenize an URI into Query Terms}{8}{subsubsection*.10}
 \contentsline {subsection}{\numberline {4.2.2}Configuration Scenarios}{8}{subsection.4.2.2}
 \contentsline {subsubsection}{Set a RDF Parser}{8}{subsubsection*.11}
 \contentsline {subsubsection}{Set an URI Filter}{8}{subsubsection*.12}
 \contentsline {section}{\numberline {4.3}USS API Usage Scenarios}{8}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Operation Scenarios}{8}{subsection.4.3.1}
 \contentsline {subsubsection}{Search URIs by terms}{8}{subsubsection*.13}
-\contentsline {subsection}{\numberline {4.3.2}Configuration Scenarios}{8}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.2}Configuration Scenarios}{9}{subsection.4.3.2}
 \contentsline {subsubsection}{Set a Parser}{9}{subsubsection*.14}
 \contentsline {subsubsection}{Set FederatedSearch}{9}{subsubsection*.15}
 \contentsline {subsubsection}{Set a Result Processor (Filter and Ranker)}{9}{subsubsection*.16}
 \contentsline {subsubsection}{Set a Selector}{9}{subsubsection*.17}
-\contentsline {section}{\numberline {4.4}Mapper API Usage Scenarios}{9}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Operation Scenarios}{9}{subsection.4.4.1}
-\contentsline {subsubsection}{Replace Original URIs with Specified URIs}{9}{subsubsection*.18}
-\contentsline {subsection}{\numberline {4.4.2}Configuration Scenarios}{9}{subsection.4.4.2}
-\contentsline {subsubsection}{Change a Refactor (URI Replacement)}{9}{subsubsection*.19}
+\contentsline {section}{\numberline {4.4}Mapper API Usage Scenarios}{10}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Operation Scenarios}{10}{subsection.4.4.1}
+\contentsline {subsubsection}{Replace Original URIs with Specified URIs}{10}{subsubsection*.18}
+\contentsline {subsection}{\numberline {4.4.2}Configuration Scenarios}{10}{subsection.4.4.2}
+\contentsline {subsubsection}{Change a Refactor (URI Replacement)}{10}{subsubsection*.19}
 \contentsline {subsubsection}{Set a RDF Parser}{10}{subsubsection*.20}
 \contentsline {chapter}{\numberline {5}Framework Hooks}{11}{chapter.5}
 \contentsline {section}{\numberline {5.1}Template: Add USS Components}{11}{section.5.1}
@@ -55,53 +55,56 @@
 \contentsline {subsection}{\numberline {5.1.2}Mechanism}{11}{subsection.5.1.2}
 \contentsline {subsection}{\numberline {5.1.3}Instances}{11}{subsection.5.1.3}
 \contentsline {section}{\numberline {5.2}Add a new Endpoint}{12}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Involved Classes}{12}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Mechanism}{12}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Example}{12}{subsection.5.2.3}
 \contentsline {section}{\numberline {5.3}Add a new RDF refactor}{12}{section.5.3}
 \contentsline {subsection}{\numberline {5.3.1}Involved Files}{12}{subsection.5.3.1}
 \contentsline {subsection}{\numberline {5.3.2}Mechanism}{12}{subsection.5.3.2}
-\contentsline {subsection}{\numberline {5.3.3}Example}{12}{subsection.5.3.3}
-\contentsline {section}{\numberline {5.4}Add a new selector}{12}{section.5.4}
-\contentsline {subsection}{\numberline {5.4.1}Involved Files}{12}{subsection.5.4.1}
-\contentsline {subsection}{\numberline {5.4.2}Mechanism}{12}{subsection.5.4.2}
-\contentsline {subsection}{\numberline {5.4.3}Template}{12}{subsection.5.4.3}
-\contentsline {section}{\numberline {5.5}Add a new ranker}{12}{section.5.5}
-\contentsline {subsection}{\numberline {5.5.1}Involved Files}{12}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.3.3}Example}{13}{subsection.5.3.3}
+\contentsline {section}{\numberline {5.4}Add a new selector}{13}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Involved Files}{13}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}Mechanism}{13}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.3}Template}{13}{subsection.5.4.3}
+\contentsline {section}{\numberline {5.5}Add a new ranker}{13}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Involved Files}{13}{subsection.5.5.1}
 \contentsline {subsection}{\numberline {5.5.2}Mechanism}{13}{subsection.5.5.2}
-\contentsline {subsection}{\numberline {5.5.3}Template}{13}{subsection.5.5.3}
-\contentsline {section}{\numberline {5.6}Add a new refiner}{13}{section.5.6}
-\contentsline {subsection}{\numberline {5.6.1}Involved Files}{13}{subsection.5.6.1}
-\contentsline {subsection}{\numberline {5.6.2}Mechanism}{13}{subsection.5.6.2}
-\contentsline {subsection}{\numberline {5.6.3}Template}{13}{subsection.5.6.3}
-\contentsline {section}{\numberline {5.7}Add a new filter}{13}{section.5.7}
-\contentsline {subsection}{\numberline {5.7.1}Involved Classes}{13}{subsection.5.7.1}
-\contentsline {subsection}{\numberline {5.7.2}Mechanism}{13}{subsection.5.7.2}
-\contentsline {subsection}{\numberline {5.7.3}Template}{14}{subsection.5.7.3}
-\contentsline {section}{\numberline {5.8}Add a wrapper for new RDF parser}{14}{section.5.8}
-\contentsline {subsection}{\numberline {5.8.1}Involved Classes}{14}{subsection.5.8.1}
-\contentsline {subsection}{\numberline {5.8.2}Mechanism}{14}{subsection.5.8.2}
-\contentsline {subsection}{\numberline {5.8.3}Example}{14}{subsection.5.8.3}
-\contentsline {section}{\numberline {5.9}Add a new tokenizer}{14}{section.5.9}
-\contentsline {subsection}{\numberline {5.9.1}Involved Classes}{14}{subsection.5.9.1}
-\contentsline {subsection}{\numberline {5.9.2}Mechanism}{14}{subsection.5.9.2}
-\contentsline {subsection}{\numberline {5.9.3}Example}{14}{subsection.5.9.3}
-\contentsline {chapter}{\numberline {6}API Reference}{15}{chapter.6}
-\contentsline {section}{\numberline {6.1}API}{15}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Extractor}{15}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}RdfGraph}{16}{subsection.6.1.2}
-\contentsline {subsubsection}{EasyRdfAdapter}{16}{subsubsection*.29}
-\contentsline {subsection}{\numberline {6.1.3}Tokenizer}{16}{subsection.6.1.3}
-\contentsline {subsubsection}{CaseBasedTokenizer}{17}{subsubsection*.37}
-\contentsline {subsubsection}{DelimitBasedTokenizer}{17}{subsubsection*.41}
-\contentsline {subsection}{\numberline {6.1.4}Refactor}{17}{subsection.6.1.4}
-\contentsline {subsubsection}{ReplaceUri}{18}{subsubsection*.47}
-\contentsline {subsection}{\numberline {6.1.5}MappingEntry}{18}{subsection.6.1.5}
-\contentsline {subsection}{\numberline {6.1.6}MappingCollection}{19}{subsection.6.1.6}
-\contentsline {subsection}{\numberline {6.1.7}Mapper}{19}{subsection.6.1.7}
-\contentsline {subsection}{\numberline {6.1.8}WebUtilities}{20}{subsection.6.1.8}
-\contentsline {subsection}{\numberline {6.1.9}USS}{20}{subsection.6.1.9}
-\contentsline {subsection}{\numberline {6.1.10}X2R}{20}{subsection.6.1.10}
-\contentsline {subsection}{\numberline {6.1.11}Hot Spots}{21}{subsection.6.1.11}
-\contentsline {chapter}{\numberline {7}Additional Note}{23}{chapter.7}
-\contentsline {section}{\numberline {7.1}License}{23}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}Preamble}{23}{subsection.7.1.1}
-\contentsline {subsection}{\numberline {7.1.2}Terms and Conditions}{24}{subsection.7.1.2}
-\contentsline {subsection}{\numberline {7.1.3}How to Apply These Terms to Your New Programs}{31}{subsection.7.1.3}
+\contentsline {subsection}{\numberline {5.5.3}Template}{14}{subsection.5.5.3}
+\contentsline {section}{\numberline {5.6}Add a new refiner}{14}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Involved Files}{14}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {5.6.2}Mechanism}{14}{subsection.5.6.2}
+\contentsline {subsection}{\numberline {5.6.3}Template}{14}{subsection.5.6.3}
+\contentsline {section}{\numberline {5.7}Add a new filter}{14}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Involved Classes}{14}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.2}Mechanism}{14}{subsection.5.7.2}
+\contentsline {subsection}{\numberline {5.7.3}Template}{15}{subsection.5.7.3}
+\contentsline {section}{\numberline {5.8}Add a wrapper for new RDF parser}{15}{section.5.8}
+\contentsline {subsection}{\numberline {5.8.1}Involved Classes}{15}{subsection.5.8.1}
+\contentsline {subsection}{\numberline {5.8.2}Mechanism}{15}{subsection.5.8.2}
+\contentsline {subsection}{\numberline {5.8.3}Example}{15}{subsection.5.8.3}
+\contentsline {section}{\numberline {5.9}Add a new tokenizer}{15}{section.5.9}
+\contentsline {subsection}{\numberline {5.9.1}Involved Classes}{15}{subsection.5.9.1}
+\contentsline {subsection}{\numberline {5.9.2}Mechanism}{15}{subsection.5.9.2}
+\contentsline {subsection}{\numberline {5.9.3}Example}{15}{subsection.5.9.3}
+\contentsline {chapter}{\numberline {6}API Reference}{17}{chapter.6}
+\contentsline {section}{\numberline {6.1}API}{17}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Extractor}{17}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}RdfGraph}{18}{subsection.6.1.2}
+\contentsline {subsubsection}{EasyRdfAdapter}{18}{subsubsection*.29}
+\contentsline {subsection}{\numberline {6.1.3}Tokenizer}{19}{subsection.6.1.3}
+\contentsline {subsubsection}{CaseBasedTokenizer}{19}{subsubsection*.37}
+\contentsline {subsubsection}{DelimitBasedTokenizer}{20}{subsubsection*.41}
+\contentsline {subsection}{\numberline {6.1.4}Refactor}{20}{subsection.6.1.4}
+\contentsline {subsubsection}{ReplaceUri}{20}{subsubsection*.47}
+\contentsline {subsection}{\numberline {6.1.5}MappingEntry}{21}{subsection.6.1.5}
+\contentsline {subsection}{\numberline {6.1.6}MappingCollection}{21}{subsection.6.1.6}
+\contentsline {subsection}{\numberline {6.1.7}Mapper}{22}{subsection.6.1.7}
+\contentsline {subsection}{\numberline {6.1.8}WebUtilities}{23}{subsection.6.1.8}
+\contentsline {subsection}{\numberline {6.1.9}USS}{23}{subsection.6.1.9}
+\contentsline {subsection}{\numberline {6.1.10}X2R}{24}{subsection.6.1.10}
+\contentsline {subsection}{\numberline {6.1.11}Hot Spots}{24}{subsection.6.1.11}
+\contentsline {chapter}{\numberline {7}Additional Note}{25}{chapter.7}
+\contentsline {section}{\numberline {7.1}License}{25}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Preamble}{25}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Terms and Conditions}{26}{subsection.7.1.2}
+\contentsline {subsection}{\numberline {7.1.3}How to Apply These Terms to Your New Programs}{36}{subsection.7.1.3}

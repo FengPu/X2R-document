@@ -332,11 +332,43 @@ USS
        Turn plain text terms to SPARQL query.
 
       :param string $term: The desired query term..
-      :returns: The SPARQL query string.  
+      :returns: The SPARQL query string. 
+
+
+
+.. php:class:: Dbpedia
+
+     Dbpedia is a wrapper of Dbpedia Endpoint.
+
+  .. php:method:: composeQuery(term, $dataSourceName = '', $limit = 10, $filters = array(''))
+
+      :param string $term: The SPARQL query in plain text.
+      :param string $dataSourceName: the name of data source
+      :param int $limit: the max number of results
+      :param array $filters: an array of URIs that will be ignored
+
+  .. php:method:: query($sparqlQueryString)
+
+      :param string $sparqlQuery: The SPARQL query.
+
+.. php:class:: LinkedGeoData
+
+     LinkedGeoData is a wrapper of LinkedGeoData Endpoint.
+
+  .. php:method:: composeQuery(term, $dataSourceName = '', $limit = 10, $filters = array(''))
+
+      :param string $term: The SPARQL query in plain text.
+      :param string $dataSourceName: the name of data source
+      :param int $limit: the max number of results
+      :param array $filters: an array of URIs that will be ignored
+
+  .. php:method:: query($sparqlQueryString)
+
+      :param string $sparqlQuery: The SPARQL query.
+
 
 X2R
 ---
-
 
 .. php:class:: X2R
 

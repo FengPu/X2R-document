@@ -19,5 +19,6 @@ Mechanism
 Example
 ==========
 
-   - dbpedia.php
-   - linkedgeodata.php
+
+   - :php:class:`Dbpedia`
+   - :php:class:`LinkedGeoData`
