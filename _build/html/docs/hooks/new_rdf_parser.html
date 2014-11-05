@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Add a new tokenizer &mdash; X2R 1.0 documentation</title>
+    <title>Add a wraper for a new RDF parser &mdash; X2R 1.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -23,9 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="X2R 1.0 documentation" href="../../index.html" />
-    <link rel="next" title="API" href="../api.html" />
-    <link rel="prev" title="Add a wrapper for new RDF parser" href="t_rdf_parser.html" /> 
+    <link rel="top" title="X2R 1.0 documentation" href="../../index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,12 +32,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../api.html" title="API"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="t_rdf_parser.html" title="Add a wrapper for new RDF parser"
-             accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,30 +41,31 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="add-a-new-tokenizer">
-<span id="hook-template-uss"></span><h1>Add a new tokenizer<a class="headerlink" href="#add-a-new-tokenizer" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="involved-classes">
-<h2>Involved Classes<a class="headerlink" href="#involved-classes" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="add-a-wraper-for-a-new-rdf-parser">
+<span id="hook-easyrdf"></span><h1>Add a wraper for a new RDF parser<a class="headerlink" href="#add-a-wraper-for-a-new-rdf-parser" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="involved-files">
+<h2>Involved Files<a class="headerlink" href="#involved-files" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div>tokenizer.class.php</div></blockquote>
+<div>rdfGraph.class.php</div></blockquote>
 </div>
 <div class="section" id="mechanism">
 <h2>Mechanism<a class="headerlink" href="#mechanism" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ol class="arabic simple">
 <li>Create a new class in /EM/</li>
-<li>The new class should exntends Tokenizer</li>
+<li>The new class should exntends rdfGraph</li>
 </ol>
 </div></blockquote>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><ul class="simple">
-<li><a class="reference internal" href="../api.html#CaseBasedTokenizer" title="CaseBasedTokenizer"><tt class="xref php php-class docutils literal"><span class="pre">CaseBasedTokenizer</span></tt></a></li>
-<li><a class="reference internal" href="../api.html#DelimitBasedTokenizer" title="DelimitBasedTokenizer"><tt class="xref php php-class docutils literal"><span class="pre">DelimitBasedTokenizer</span></tt></a></li>
-</ul>
-</div></blockquote>
+<div>Easy_Rdf_Adapter</div></blockquote>
+</div>
+<div class="section" id="template">
+<h2>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><a class="reference internal" href="t_rdf_parser.html#hook-template-rdf-parser"><em>Add a wrapper for new RDF parser</em></a></div></blockquote>
 </div>
 </div>
 
@@ -84,23 +77,18 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Add a new tokenizer</a><ul>
-<li><a class="reference internal" href="#involved-classes">Involved Classes</a></li>
+<li><a class="reference internal" href="#">Add a wraper for a new RDF parser</a><ul>
+<li><a class="reference internal" href="#involved-files">Involved Files</a></li>
 <li><a class="reference internal" href="#mechanism">Mechanism</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#template">Template</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="t_rdf_parser.html"
-                        title="previous chapter">Add a wrapper for new RDF parser</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../api.html"
-                        title="next chapter">API</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../../_sources/docs/hooks/t_tokenizer.txt"
+    <li><a href="../../_sources/docs/hooks/new_rdf_parser.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -126,12 +114,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../api.html" title="API"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="t_rdf_parser.html" title="Add a wrapper for new RDF parser"
-             >previous</a> |</li>
         <li><a href="../../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

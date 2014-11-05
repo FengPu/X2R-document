@@ -1,25 +1,27 @@
 .. _hook_template_uss:
 
-Template: Add new tokenizer
+Add a new tokenizer
 ----------------------------
 
 
 Involved Classes
 ================
 
-    **{List of involved classes with links}**
+    tokenizer.class.php
 
 Mechanism
 =========
 
-    #. todo
+    #. Create a new class in /EM/
+    #. The new class should exntends Tokenizer
     
 
-Instances
+Example
 ==========
 
-   - :ref:`hook_caseBasedTokenizer`
-   - :ref:`hook_delimitBasedTokenizer`
+   - :php:class:`CaseBasedTokenizer`
+   - :php:class:`DelimitBasedTokenizer`
+
 
 
 

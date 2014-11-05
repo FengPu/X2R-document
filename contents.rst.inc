@@ -71,8 +71,7 @@ This section focuses on two topics, i.e. **hook templates** and **hook instances
     :maxdepth: 1
     
     docs/hooks/t_uss_components
-    docs/hooks/t_rdf_parser
-    docs/hooks/t_tokenizer
+
 
 **Hook Instances**
 
@@ -80,13 +79,14 @@ This section focuses on two topics, i.e. **hook templates** and **hook instances
     :maxdepth: 1
 
     docs/hooks/new_endpoint
-    docs/hooks/new_tokenizer
     docs/hooks/new_parser
     docs/hooks/new_refactor
     docs/hooks/new_selector
     docs/hooks/new_ranker
     docs/hooks/new_refiner
     docs/hooks/new_filter
+    docs/hooks/t_rdf_parser
+    docs/hooks/t_tokenizer
 
 
 

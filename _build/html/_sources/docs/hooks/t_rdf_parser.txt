@@ -1,24 +1,26 @@
 .. _hook_template_rdf_parser:
 
-Template: Add wrapper for new RDF parser
+Add a wrapper for new RDF parser
 -----------------------------------------
 
 
 Involved Classes
 ================
 
-    **{List of involved classes with links}**
+    rdfGraph.class.php
 
 Mechanism
 =========
 
-    #. todo
+    #. Create a new class in /EM/
+    #. The new class should exntends rdfGraph'
     
 
-Instances
+Example
 ==========
 
-   - :ref:`hook_easyRdf`
+   - :php:class:`EasyRdfAdapter`
+
 
 
 

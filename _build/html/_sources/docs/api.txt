@@ -119,7 +119,7 @@ Tokenizer
 CaseBasedTokenizer
 ^^^^^^^^^^^^^^^^^^
 
-.. php:class:: Tokenizer
+.. php:class:: CaseBasedTokenizer
 
   CaseBasedTokenizer class
 
@@ -139,7 +139,7 @@ CaseBasedTokenizer
 DelimitBasedTokenizer
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. php:class:: Tokenizer
+.. php:class:: DelimitBasedTokenizer
 
   DelimitBasedTokenizer class
 
@@ -343,7 +343,7 @@ X2R
      X2R models the process of translating an imperfect RDF, especially for those with invalid URIs, to RDF with relatively higher quality.  
 
 
-  .. php:method:: transformation($rdfGraph, $configuration)
+  .. php:method:: transform($rdfGraph, $configuration)
 
 
       :param rdfGraph $graph: The RDF, which is holded in the rdfGraph data structure, to be refactored.

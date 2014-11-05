@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="X2R 1.0 documentation" href="../index.html" />
     <link rel="next" title="License" href="license.html" />
-    <link rel="prev" title="Add a new filter" href="hooks/new_filter.html" /> 
+    <link rel="prev" title="Add a new tokenizer" href="hooks/t_tokenizer.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,7 +38,7 @@
           <a href="license.html" title="License"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="hooks/new_filter.html" title="Add a new filter"
+          <a href="hooks/t_tokenizer.html" title="Add a new tokenizer"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
@@ -297,12 +297,12 @@ with their contextual information.</p>
 <div class="section" id="casebasedtokenizer">
 <h3>CaseBasedTokenizer<a class="headerlink" href="#casebasedtokenizer" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt>
-<em class="property">class </em><tt class="descname">Tokenizer</tt></dt>
+<dt id="CaseBasedTokenizer">
+<em class="property">class </em><tt class="descname">CaseBasedTokenizer</tt><a class="headerlink" href="#CaseBasedTokenizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>CaseBasedTokenizer class</p>
 <dl class="method">
-<dt>
-<tt class="descname">tokenizeString</tt><big>(</big><em>$str</em><big>)</big></dt>
+<dt id="CaseBasedTokenizer::tokenizeString">
+<tt class="descname">tokenizeString</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#CaseBasedTokenizer::tokenizeString" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -320,8 +320,8 @@ with their contextual information.</p>
 </dd></dl>
 
 <dl class="method">
-<dt>
-<tt class="descname">tokenizeArrayOfStrings</tt><big>(</big><em>$arr</em><big>)</big></dt>
+<dt id="CaseBasedTokenizer::tokenizeArrayOfStrings">
+<tt class="descname">tokenizeArrayOfStrings</tt><big>(</big><em>$arr</em><big>)</big><a class="headerlink" href="#CaseBasedTokenizer::tokenizeArrayOfStrings" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -344,12 +344,12 @@ with their contextual information.</p>
 <div class="section" id="delimitbasedtokenizer">
 <h3>DelimitBasedTokenizer<a class="headerlink" href="#delimitbasedtokenizer" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt>
-<em class="property">class </em><tt class="descname">Tokenizer</tt></dt>
+<dt id="DelimitBasedTokenizer">
+<em class="property">class </em><tt class="descname">DelimitBasedTokenizer</tt><a class="headerlink" href="#DelimitBasedTokenizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>DelimitBasedTokenizer class</p>
 <dl class="method">
-<dt>
-<tt class="descname">tokenizeString</tt><big>(</big><em>$str</em><big>)</big></dt>
+<dt id="DelimitBasedTokenizer::tokenizeString">
+<tt class="descname">tokenizeString</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#DelimitBasedTokenizer::tokenizeString" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -367,8 +367,8 @@ with their contextual information.</p>
 </dd></dl>
 
 <dl class="method">
-<dt>
-<tt class="descname">tokenizeArrayOfStrings</tt><big>(</big><em>$arr</em><big>)</big></dt>
+<dt id="DelimitBasedTokenizer::tokenizeArrayOfStrings">
+<tt class="descname">tokenizeArrayOfStrings</tt><big>(</big><em>$arr</em><big>)</big><a class="headerlink" href="#DelimitBasedTokenizer::tokenizeArrayOfStrings" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -753,8 +753,8 @@ integrated into Mapper.</p>
 <dd><blockquote>
 <div>X2R models the process of translating an imperfect RDF, especially for those with invalid URIs, to RDF with relatively higher quality.</div></blockquote>
 <dl class="method">
-<dt id="X2R::transformation">
-<tt class="descname">transformation</tt><big>(</big><em>$rdfGraph</em>, <em>$configuration</em><big>)</big><a class="headerlink" href="#X2R::transformation" title="Permalink to this definition">¶</a></dt>
+<dt id="X2R::transform">
+<tt class="descname">transform</tt><big>(</big><em>$rdfGraph</em>, <em>$configuration</em><big>)</big><a class="headerlink" href="#X2R::transform" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -867,8 +867,8 @@ integrated into Mapper.</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="hooks/new_filter.html"
-                        title="previous chapter">Add a new filter</a></p>
+  <p class="topless"><a href="hooks/t_tokenizer.html"
+                        title="previous chapter">Add a new tokenizer</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="license.html"
                         title="next chapter">License</a></p>
@@ -904,7 +904,7 @@ integrated into Mapper.</p>
           <a href="license.html" title="License"
              >next</a> |</li>
         <li class="right" >
-          <a href="hooks/new_filter.html" title="Add a new filter"
+          <a href="hooks/t_tokenizer.html" title="Add a new tokenizer"
              >previous</a> |</li>
         <li><a href="../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>

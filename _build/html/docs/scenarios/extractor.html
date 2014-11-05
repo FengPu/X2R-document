@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="top" title="X2R 1.0 documentation" href="../../index.html" />
-    <link rel="next" title="Operation Scenarios" href="uss/operation.html" />
+    <link rel="next" title="USS API Usage Scenarios" href="uss.html" />
     <link rel="prev" title="X2R API Usage Scenarios" href="x2r.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="uss/operation.html" title="Operation Scenarios"
+          <a href="uss.html" title="USS API Usage Scenarios"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="x2r.html" title="X2R API Usage Scenarios"
@@ -55,24 +55,34 @@
 <h2>Operation Scenarios<a class="headerlink" href="#operation-scenarios" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="extract-uris-from-a-given-rdf">
 <h3>Extract URIs from a Given RDF<a class="headerlink" href="#extract-uris-from-a-given-rdf" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="verify-an-uri">
-<h3>Verify an URI<a class="headerlink" href="#verify-an-uri" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Include the file <strong>&#8220;extractor.class.php&#8221;</strong> in your program</li>
+<li>Initialize a <strong>Extractor</strong> instance by passing a <strong>rdfGraph</strong></li>
+<li>Call the method <strong>getQueryTerms()</strong></li>
+</ol>
 </div>
 <div class="section" id="tokenize-an-uri-into-query-terms">
 <h3>Tokenize an URI into Query Terms<a class="headerlink" href="#tokenize-an-uri-into-query-terms" title="Permalink to this headline">¶</a></h3>
+<p>Extractor can help in tokenizing URI task. To tokenize a given URI, you can use the method <strong>tokenize($str)</strong>, where the $str is the URI that you want to tokenize.</p>
+<p>Currently, we implements two representive tokenizers, <strong>DelimitBasedTokenizer</strong> and <strong>CaseBasedTokenizer</strong>, and the <strong>tokenize($str)</strong> applies these two tokenizers on the $str.</p>
 </div>
 </div>
 <div class="section" id="configuration-scenarios">
 <h2>Configuration Scenarios<a class="headerlink" href="#configuration-scenarios" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="set-an-uri-tokenizer">
-<h3>Set an URI Tokenizer<a class="headerlink" href="#set-an-uri-tokenizer" title="Permalink to this headline">¶</a></h3>
-</div>
 <div class="section" id="set-a-rdf-parser">
 <h3>Set a RDF Parser<a class="headerlink" href="#set-a-rdf-parser" title="Permalink to this headline">¶</a></h3>
+<p>There are many RDF parsers available. In X2R, we allow developers to set or even introduce new RDF parsers for reasons, such as better performace or wider range of input formats.</p>
+<p>Currently, we implement one wrapper, <strong>Easy_Rdf_Adapter</strong>, for EasyRdf. EasyRdf is a popular RDF parser implemented in PHP, and more information can be found in it <a class="reference external" href="http://www.easyrdf.org/">official site</a>.</p>
+<p>To set <strong>Easy_Rdf_Adapter</strong> as the RDF parser.</p>
+<ol class="arabic simple">
+<li>Initialize an instance of <strong>Easy_Rdf_Adapter</strong></li>
+<li>Initialize a <strong>Extractor</strong> instance by passing the instance just initialized</li>
+</ol>
 </div>
-<div class="section" id="set-an-uri-verifier">
-<h3>Set an URI Verifier<a class="headerlink" href="#set-an-uri-verifier" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="set-an-uri-filter">
+<h3>Set an URI Filter<a class="headerlink" href="#set-an-uri-filter" title="Permalink to this headline">¶</a></h3>
+<p>If there are some URIs that you want to ignore in the whole URI replacement process, you can use <strong>addFilteredUri($furi)</strong> to incrementally build the URI filter.</p>
+<p>You can also use <strong>getFiltedUris()</strong> method to get the current list of URIs that are ignored.</p>
 </div>
 </div>
 </div>
@@ -88,14 +98,12 @@
 <li><a class="reference internal" href="#">Extractor API Usage Scenarios</a><ul>
 <li><a class="reference internal" href="#operation-scenarios">Operation Scenarios</a><ul>
 <li><a class="reference internal" href="#extract-uris-from-a-given-rdf">Extract URIs from a Given RDF</a></li>
-<li><a class="reference internal" href="#verify-an-uri">Verify an URI</a></li>
 <li><a class="reference internal" href="#tokenize-an-uri-into-query-terms">Tokenize an URI into Query Terms</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#configuration-scenarios">Configuration Scenarios</a><ul>
-<li><a class="reference internal" href="#set-an-uri-tokenizer">Set an URI Tokenizer</a></li>
 <li><a class="reference internal" href="#set-a-rdf-parser">Set a RDF Parser</a></li>
-<li><a class="reference internal" href="#set-an-uri-verifier">Set an URI Verifier</a></li>
+<li><a class="reference internal" href="#set-an-uri-filter">Set an URI Filter</a></li>
 </ul>
 </li>
 </ul>
@@ -106,8 +114,8 @@
   <p class="topless"><a href="x2r.html"
                         title="previous chapter">X2R API Usage Scenarios</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="uss/operation.html"
-                        title="next chapter">Operation Scenarios</a></p>
+  <p class="topless"><a href="uss.html"
+                        title="next chapter">USS API Usage Scenarios</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../_sources/docs/scenarios/extractor.txt"
@@ -137,7 +145,7 @@
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="uss/operation.html" title="Operation Scenarios"
+          <a href="uss.html" title="USS API Usage Scenarios"
              >next</a> |</li>
         <li class="right" >
           <a href="x2r.html" title="X2R API Usage Scenarios"
