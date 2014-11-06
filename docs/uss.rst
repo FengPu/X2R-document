@@ -6,14 +6,6 @@ URI Search Service
 URI Search Service (USS) 1.0 is monolithic, hard wired with the GUI and not take batch-mode search into consideration. In this revision, we conduct refactoring and introduce some flexibilities through several hooks. In the following paragraphs, the refactored USS is presented with several useful hooks.  
 
 
-Refactored USS kernel
----------------------
-
-
-
-Hooks
------
-
 In refined USS, seven **atomic hooks** can be replaced and extended, they are: 
 
 * **Query Parser**

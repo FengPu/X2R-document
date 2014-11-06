@@ -6,11 +6,12 @@ X2R
 X2R is designed for both human and machine friendly through a public API. 
 Based on the API, we releases two kinds of user interfaces for human users:
 a Web-based GUI and a Command Line Interface.
+ 
 
-In the following sections a  
-
-API Usage Examples
+API Usage
 ------------------
+
+The details of API usage can be found in next chapter.
 
 
 User Interface
