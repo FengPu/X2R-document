@@ -51,12 +51,18 @@
             
   <div class="section" id="uri-search-service">
 <span id="uss"></span><h1>URI Search Service<a class="headerlink" href="#uri-search-service" title="Permalink to this headline">¶</a></h1>
-<p>URI Search Service (USS) 1.0 is monolithic, hard wired with the GUI and not take batch-mode search into consideration. In this revision, we conduct refactoring and introduce some flexibilities through several hooks. In the following paragraphs, the refactored USS is presented with several useful hooks.</p>
-<div class="section" id="refactored-uss-kernel">
-<h2>Refactored USS kernel<a class="headerlink" href="#refactored-uss-kernel" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="hooks">
-<h2>Hooks<a class="headerlink" href="#hooks" title="Permalink to this headline">¶</a></h2>
+<p>URI Search Service (USS) is a federated search service. The general process of USS is listed below.</p>
+<ol class="arabic simple">
+<li>USS accepts a set of URI search requests</li>
+<li>USS refines the search requests (e.g. fixing typos or replace with a better term)</li>
+<li>USS composes corresponding SPARQL for each query request</li>
+<li>USS issues SPARQL queries to a set of Endpoints, which are defined in USS&#8217;s configuration</li>
+<li>USS integrates all results returned from Endpoints</li>
+<li>USS applies filters and rankers to remove the ambiguity or promote results, which are more popular</li>
+<li>USS selects one result for each request</li>
+</ol>
+<p>All steps mentioned above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we conduct adaptive maintainance on USS 0.1.</p>
+<p>USS 0.1 is monolithic, hard wired with the GUI and not take batch-mode search into consideration. In this revision, we conduct refactoring and introduce some flexibilities through several hooks. In the following paragraphs, the refactored USS is presented with several useful hooks.</p>
 <p>In refined USS, seven <strong>atomic hooks</strong> can be replaced and extended, they are:</p>
 <ul>
 <li><p class="first"><strong>Query Parser</strong></p>
@@ -87,10 +93,9 @@
 </li>
 </ul>
 <div class="section" id="composition-of-atomic-hooks">
-<h3>Composition of atomic hooks<a class="headerlink" href="#composition-of-atomic-hooks" title="Permalink to this headline">¶</a></h3>
+<h2>Composition of atomic hooks<a class="headerlink" href="#composition-of-atomic-hooks" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div>The atomic hooks can be composited through method chaining.</div></blockquote>
-</div>
 </div>
 </div>
 
@@ -103,11 +108,7 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">URI Search Service</a><ul>
-<li><a class="reference internal" href="#refactored-uss-kernel">Refactored USS kernel</a></li>
-<li><a class="reference internal" href="#hooks">Hooks</a><ul>
 <li><a class="reference internal" href="#composition-of-atomic-hooks">Composition of atomic hooks</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
