@@ -80,12 +80,14 @@ EasyRdfAdapter
 
       :param string $data: The content of RDF file.
       :returns: Either false on failure, or the true for success.
-
+      :raises ValueError: Raise if the $data cannot be parsed successfully.
 
   .. php:method:: serializeRdfAs($format)
 
       :param string $format: The file format of serialized RDF.
       :returns: Either false on failure, or the string representation of serialized RDF in specified format.
+      :raises ValueError: The $format is not an element of 'supported_format', which includes 'jsonld', 'rdfxml'.
+
 
 
 Tokenizer
@@ -302,6 +304,7 @@ WebUtilities
 
       :param string $para: The parameter's name.
       :returns: The value of given parameter's name.
+      :raises ValueError: Raise if the $para cannot be found in the request.
 
 
 
@@ -320,6 +323,9 @@ USS
       :param string $sparqlQuery: The SPARQL query.
       :param string $resultFormat: The format of returned result.
       :returns: The string of result in the specified format.
+      :raises NoResponseError: Raise if the timeout is reached.
+      :raises ValueError: Raise if the sparql is invalid.
+      
 
 .. php:class:: SparqlQueryComposer
 
