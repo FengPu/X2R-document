@@ -1,14 +1,14 @@
 Introduction
 ------------
 
-**X2R** is a tool for helping Semantic Web application developers to translate existing data in a variety of formats into Linked-data compatible formats, where the **X**, **2** and **R** stand for existing data in a variety formats, to (the homonym of two) and Linked-data compatible formats (i.e., RDF/XML), respectively. 
+**X2R** is a tool for helping developers to translate existing data in a variety of formats into linked-data compatible formats. The **X**, **2** and **R** in its name stand for existing data in a variety formats, to (the homonym of two) and linked-data compatible formats (i.e., RDF/XML), respectively. 
 
-Our motivation is to smooth the transition from existing *Web* to *Semantic Web* by providing tools, which can dramatically lower the entry barrier of generating Linked-data, to developers. By providing such tools, i.e., X2R, more and more developers can translate existing data on-demands, and the final vision of Semantic Web can be approached incrementally.  
+The motivation is to ease the transformation of data into linked-data and thus lower the entry barrier of generating linked-data. Using X2R, more developers can easily translate existing data on-demands, and creating linked-data incrementally.  
 
 .. toctree::
     :maxdepth: 1
 
-    docs/roadmap
+
     docs/audience
     docs/howto
 
@@ -38,7 +38,7 @@ Components
     docs/uss
     docs/x2r
 
-API Usage Scenarios
+API Usage 
 ------------------
 Targeted Audience: **API users**
 
@@ -57,9 +57,17 @@ Targeted Audience: **API users**
     docs/scenarios/mapper
 
 
+API Reference
+-------------
+This part of the documentation dedicates to prople who are looking for information on a specific function, class or method.
+
+.. toctree::
+    :maxdepth: 3
+
+    docs/api
 
 
-Framework Hooks
+Hooks
 ---------------
 Targeted Audience: **Code contributators**
 
@@ -91,18 +99,9 @@ This section focuses on two topics, i.e. **hook templates** and **hook instances
 
 
 
-API Reference
--------------
-This part of the documentation dedicates to prople who are looking for information on a specific function, class or method.
-
-.. toctree::
-    :maxdepth: 3
-
-    docs/api
 
 
-
-Additional Note
+Important Information
 ---------------
 For code contributors' information, this part of note declares the license of X2R. In addition to license, this part of note also lists convensions enforced within X2R, including the coding style, versioning and documentation. 
 
