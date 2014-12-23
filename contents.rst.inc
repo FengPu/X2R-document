@@ -12,12 +12,12 @@ The motivation is to ease the transformation of data into linked-data and thus l
     docs/audience
     docs/howto
 
-The index can be found in :ref:`genindex`, and the search page, :ref:`search`, can be used to search within this document. 
+The index of this document can be found in :ref:`genindex`. The search page, :ref:`search`, can be used to search within this document. 
 
 
 User Guide
 ---------------
-This part of the guide focuses on setting up your environment for X2R and all its components, including Extractor, Mapper and USS. A quickstart is then presented to give an overview of X2R and its components. Finally, details of each components are presented. 
+This part of the document focuses on how to set up an environment for X2R and all its components: Extractor, Mapper and USS. A quickstart is then presented to give an overview of X2R and its components. 
 
 .. toctree::
     :maxdepth: 1

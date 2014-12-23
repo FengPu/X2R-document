@@ -1,11 +1,11 @@
 .. _x2r:
 
-X2R
-===
+X2R User Interface
+==================
 
-X2R is designed for both human and machine friendly through a public API. 
-Based on the API, we releases two kinds of user interfaces for human users:
-a Web-based GUI and a Command Line Interface.
+X2R is designed to be both human and machine friendly through an open API. 
+Based on the API, the tool aims to provide two kinds of user interfaces for human users:
+a Web-based GUI and a command line Interface.
  
 
 API Usage
@@ -16,11 +16,8 @@ The details of API usage can be found in next chapter.
 
 User Interface
 ---------------
-User Interface is under construction. 
 
-Current status and plan: 
+X2R 1.0 provides a JQuery-powered GUI and a command line Interface is planned to be included in version 2.0. 
 
- * A JQuery-powered GUI is developed in version 1.0, and we are planned to reuse the GUI code to current architecture.
 
- * A Command Line Interface is planned to be included in version 2.0. 
 

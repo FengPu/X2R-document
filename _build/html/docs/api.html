@@ -24,8 +24,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="X2R 1.0 documentation" href="../index.html" />
-    <link rel="next" title="License" href="license.html" />
-    <link rel="prev" title="Add a new tokenizer" href="hooks/t_tokenizer.html" /> 
+    <link rel="next" title="Template: Add USS Components" href="hooks/t_uss_components.html" />
+    <link rel="prev" title="Mapper API Usage Scenarios" href="scenarios/mapper.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,10 +35,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="license.html" title="License"
+          <a href="hooks/t_uss_components.html" title="Template: Add USS Components"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="hooks/t_tokenizer.html" title="Add a new tokenizer"
+          <a href="scenarios/mapper.html" title="Mapper API Usage Scenarios"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
@@ -199,7 +199,11 @@ with their contextual information.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Either false on failure, or the true for success.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first last">Raise if the $data cannot be parsed successfully.</p>
 </td>
 </tr>
 </tbody>
@@ -218,7 +222,11 @@ with their contextual information.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the string representation of serialized RDF in specified format.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Either false on failure, or the string representation of serialized RDF in specified format.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first last">The $format is not an element of &#8216;supported_format&#8217;, which includes &#8216;jsonld&#8217;, &#8216;rdfxml&#8217;.</p>
 </td>
 </tr>
 </tbody>
@@ -679,7 +687,11 @@ integrated into Mapper.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The value of given parameter&#8217;s name.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The value of given parameter&#8217;s name.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first last">Raise if the $para cannot be found in the request.</p>
 </td>
 </tr>
 </tbody>
@@ -707,7 +719,15 @@ integrated into Mapper.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The string of result in the specified format.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The string of result in the specified format.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Raises NoResponseError:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first">Raise if the timeout is reached.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Raises ValueError:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">Raise if the sparql is invalid.</p>
 </td>
 </tr>
 </tbody>
@@ -951,11 +971,11 @@ integrated into Mapper.</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="hooks/t_tokenizer.html"
-                        title="previous chapter">Add a new tokenizer</a></p>
+  <p class="topless"><a href="scenarios/mapper.html"
+                        title="previous chapter">Mapper API Usage Scenarios</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="license.html"
-                        title="next chapter">License</a></p>
+  <p class="topless"><a href="hooks/t_uss_components.html"
+                        title="next chapter">Template: Add USS Components</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/docs/api.txt"
@@ -985,10 +1005,10 @@ integrated into Mapper.</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="license.html" title="License"
+          <a href="hooks/t_uss_components.html" title="Template: Add USS Components"
              >next</a> |</li>
         <li class="right" >
-          <a href="hooks/t_tokenizer.html" title="Add a new tokenizer"
+          <a href="scenarios/mapper.html" title="Mapper API Usage Scenarios"
              >previous</a> |</li>
         <li><a href="../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>

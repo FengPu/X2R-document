@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="X2R 1.0 documentation" href="../index.html" />
     <link rel="next" title="Quickstart" href="quickstart.html" />
-    <link rel="prev" title="Welcome to X2R" href="../index.html" /> 
+    <link rel="prev" title="How to Use This Document" href="howto.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,7 +38,7 @@
           <a href="quickstart.html" title="Quickstart"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../index.html" title="Welcome to X2R"
+          <a href="howto.html" title="How to Use This Document"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>
@@ -51,6 +51,35 @@
             
   <div class="section" id="installation">
 <span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Three steps are needed to set up an X2R server, namely installing PHP, installing Composer and installing dependent packages. The detail instructions are listed as follows.</p>
+<div class="section" id="install-php">
+<h2>Install PHP<a class="headerlink" href="#install-php" title="Permalink to this headline">¶</a></h2>
+<p>X2R is written in PHP. Before using X2R, the PHP should be installed.</p>
+<p>To install PHP, an official manual is available in <a class="reference external" href="http://php.net/manual/en/install.php">http://php.net/manual/en/install.php</a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://php.net/manual/en/install.unix.php">Installation on Unix systems</a></li>
+<li><a class="reference external" href="http://php.net/manual/en/install.macosx.php">Installation on Mac OS X</a></li>
+<li><a class="reference external" href="http://php.net/manual/en/install.windows.php">Installation on Windows systems</a></li>
+<li><a class="reference external" href="http://php.net/manual/en/install.cloud.php">Installation on Cloud Computing platforms</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="install-composer">
+<h2>Install Composer<a class="headerlink" href="#install-composer" title="Permalink to this headline">¶</a></h2>
+<p>The dependency of X2R is managed by &#8216;composer,&#8217; a PHP package management tool.
+Before trying X2R, get and install composer from <a class="reference external" href="https://getcomposer.org/">https://getcomposer.org/</a>.</p>
+<p>Run this in your terminal to get the latest Composer version:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$ curl -sS https://getcomposer.org/installer | php</span>
+</pre></div>
+</div>
+<p>Or if you don&#8217;t have curl:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$ php -r &quot;readfile(&#39;https://getcomposer.org/installer&#39;);&quot; | php</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-dependent-packages">
+<h2>Install Dependent Packages<a class="headerlink" href="#install-dependent-packages" title="Permalink to this headline">¶</a></h2>
 <p>Installing X2R is simple with <a class="reference external" href="https://getcomposer.org/">composer</a>, just use this command:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="x">$ php composer.phar install</span>
 </pre></div>
@@ -60,6 +89,7 @@
 </pre></div>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -67,9 +97,19 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#install-php">Install PHP</a></li>
+<li><a class="reference internal" href="#install-composer">Install Composer</a></li>
+<li><a class="reference internal" href="#install-dependent-packages">Install Dependent Packages</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../index.html"
-                        title="previous chapter">Welcome to X2R</a></p>
+  <p class="topless"><a href="howto.html"
+                        title="previous chapter">How to Use This Document</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="quickstart.html"
                         title="next chapter">Quickstart</a></p>
@@ -105,7 +145,7 @@
           <a href="quickstart.html" title="Quickstart"
              >next</a> |</li>
         <li class="right" >
-          <a href="../index.html" title="Welcome to X2R"
+          <a href="howto.html" title="How to Use This Document"
              >previous</a> |</li>
         <li><a href="../index.html">X2R 1.0 documentation</a> &raquo;</li> 
       </ul>

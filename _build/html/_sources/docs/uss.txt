@@ -12,14 +12,12 @@ URI Search Service (USS) is a federated search service. The general process of U
 
 #. USS integrates all results returned from Endpoints
 
-#. USS applies filters and rankers to remove the ambiguity or promote results, which are more popular
+#. USS applies filters and rankers to remove the ambiguity or promote results that are commonly used
 
 #. USS selects one result for each request
 
 
-All steps mentioned above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we conduct adaptive maintainance on USS 0.1. 
-
-USS 0.1 is monolithic, hard wired with the GUI and not take batch-mode search into consideration. In this revision, we conduct refactoring and introduce some flexibilities through several hooks. In the following paragraphs, the refactored USS is presented with several useful hooks.  
+All steps listed above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we provide the system with the following hooks.  
 
 
 In refined USS, seven **atomic hooks** can be replaced and extended, they are: 

@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="X2R 1.0 documentation" href="../index.html" />
-    <link rel="next" title="X2R" href="x2r.html" />
+    <link rel="next" title="X2R User Interface" href="x2r.html" />
     <link rel="prev" title="Mapper" href="mapper.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="x2r.html" title="X2R"
+          <a href="x2r.html" title="X2R User Interface"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="mapper.html" title="Mapper"
@@ -58,11 +58,10 @@
 <li>USS composes corresponding SPARQL for each query request</li>
 <li>USS issues SPARQL queries to a set of Endpoints, which are defined in USS&#8217;s configuration</li>
 <li>USS integrates all results returned from Endpoints</li>
-<li>USS applies filters and rankers to remove the ambiguity or promote results, which are more popular</li>
+<li>USS applies filters and rankers to remove the ambiguity or promote results that are commonly used</li>
 <li>USS selects one result for each request</li>
 </ol>
-<p>All steps mentioned above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we conduct adaptive maintainance on USS 0.1.</p>
-<p>USS 0.1 is monolithic, hard wired with the GUI and not take batch-mode search into consideration. In this revision, we conduct refactoring and introduce some flexibilities through several hooks. In the following paragraphs, the refactored USS is presented with several useful hooks.</p>
+<p>All steps listed above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we provide the system with the following hooks.</p>
 <p>In refined USS, seven <strong>atomic hooks</strong> can be replaced and extended, they are:</p>
 <ul>
 <li><p class="first"><strong>Query Parser</strong></p>
@@ -118,7 +117,7 @@
                         title="previous chapter">Mapper</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="x2r.html"
-                        title="next chapter">X2R</a></p>
+                        title="next chapter">X2R User Interface</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/docs/uss.txt"
@@ -148,7 +147,7 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="x2r.html" title="X2R"
+          <a href="x2r.html" title="X2R User Interface"
              >next</a> |</li>
         <li class="right" >
           <a href="mapper.html" title="Mapper"
