@@ -5,6 +5,12 @@ Introduction
 
 The motivation is to ease the transformation of data into linked-data and thus lower the entry barrier of generating linked-data. Using X2R, more developers can easily translate existing data on-demands, and creating linked-data incrementally.  
 
+.. figure:: ./docs/figs/workflow.PNG
+     :scale: 80%
+     :alt: test
+
+     The workflow of X2R converter.
+
 .. toctree::
     :maxdepth: 1
 

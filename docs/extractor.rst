@@ -12,7 +12,7 @@ Extractor is a tool that extracts URIs from a given RDF file, and then turns the
 Tokenizer
 ---------
 
-Tokenizer is a major component of extractor. It aims to tokenize the tail of extracted URIs into word chuncks, which can then be used as query terms to find better URIs.  
+Tokenizer is a major component of extractor. It aims to tokenize the tail of extracted URIs into word chuncks that can then be used as query terms to find better URIs.  
 
 In X2R Extractor, a tokenizer should implement two methods, tokenizeArr(array $arr) and tokenizeStr($str). 
 
