@@ -5,14 +5,14 @@ Introduction
 
 The motivation is to ease the transformation of data into linked-data and thus lower the entry barrier of generating linked-data. Using X2R, more developers can easily translate existing data on-demands, and creating linked-data incrementally.  
 
-.. figure:: ./docs/figs/dataflow.png
+.. figure:: ./docs/figs/dataflow_small.png
      :scale: 80%
      :alt: test
 
      The dataflow of X2R converter.
 
 
-X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing RDFizer(translators). For a given raw data input in X (XML, CSV, JSON or RDF/XML ...etc.) format, existing RDFizers can translated it into RDF serialization formats, such as Turtle, N-Triples, JSON-LD or RDF/XML.   
+X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing RDFizer(translators). For a given raw data input in X (XML, CSV, JSON ...etc.) format, existing RDFizers can translated it into RDF serialization formats, such as Turtle, N-Triples, JSON-LD or RDF/XML. However,     
 
 
 .. toctree::
