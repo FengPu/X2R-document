@@ -12,7 +12,7 @@ The motivation is to ease the transformation of data into linked-data and thus l
      The dataflow of X2R converter.
 
 
-X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing translators.  
+X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing RDFizer(translators). For a given raw data input in X (XML, CSV, JSON or RDF/XML ...etc.) format, existing RDFizers can translated it into RDF serialization formats, such as Turtle, N-Triples, JSON-LD or RDF/XML.   
 
 
 .. toctree::
