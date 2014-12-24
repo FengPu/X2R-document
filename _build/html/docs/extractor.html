@@ -96,30 +96,59 @@
 </tbody>
 </table>
 <p><strong>Output</strong>:</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span> <span class="nt">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">[],</span>
-  <span class="nt">&quot;mapping&quot;</span><span class="p">:</span>
-    <span class="p">[</span>
-        <span class="p">{</span><span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;N/A&quot;</span><span class="p">,</span>
-         <span class="nt">&quot;replacedURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://replaced_test1&quot;</span><span class="p">,</span>
-         <span class="nt">&quot;term&quot;</span><span class="p">:</span> <span class="s2">&quot;facilities store245&quot;</span><span class="p">,</span>
-         <span class="nt">&quot;originalURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://140.109.21.188/facilities#store245&quot;</span>
-         <span class="p">}</span>
-    <span class="p">]</span>
- <span class="p">}</span>
+<p>Components of X2R share a common data exchange format: <em>X2R data exchange format</em>. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below. Note that the &#8220;replacedURI&#8221; name/value pair is intentionally left blank in the context of Extractor.</p>
+<div class="highlight-json"><div class="highlight"><pre>{ &quot;metadata&quot;: [],
+  &quot;mapping&quot;:
+    [
+        {
+         &quot;status&quot;: status value,
+         &quot;originalURI&quot;: original URI value,
+         &quot;replacedURI&quot;: updated URI value,
+         &quot;term&quot;: term value
+         }
+    ]
+ }
 </pre></div>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">value range/format</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>status</td>
+<td>Range: {&#8220;N/A&#8221;, &#8220;200&#8221;, &#8220;303&#8221;, &#8220;error&#8221;}</td>
+</tr>
+<tr class="row-odd"><td>originalURI</td>
+<td>A URI that can be found in input file and is valid</td>
+</tr>
+<tr class="row-even"><td>replacedURI</td>
+<td>A valid URI</td>
+</tr>
+<tr class="row-odd"><td>term</td>
+<td>A string</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span> <span class="nt">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">[],</span>
   <span class="nt">&quot;mapping&quot;</span><span class="p">:</span>
     <span class="p">[</span>
-        <span class="p">{</span><span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;N/A&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+         <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;N/A&quot;</span><span class="p">,</span>
          <span class="nt">&quot;replacedURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://replaced_test1&quot;</span><span class="p">,</span>
          <span class="nt">&quot;term&quot;</span><span class="p">:</span> <span class="s2">&quot;facilities store245&quot;</span><span class="p">,</span>
          <span class="nt">&quot;originalURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://140.109.21.188/facilities#store245&quot;</span>
          <span class="p">},</span>
-        <span class="p">{</span><span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;N/A&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+         <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;N/A&quot;</span><span class="p">,</span>
          <span class="nt">&quot;replacedURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://replaced_test2&quot;</span><span class="p">,</span>
          <span class="nt">&quot;term&quot;</span><span class="p">:</span> <span class="s2">&quot;facilities store244&quot;</span><span class="p">,</span>
          <span class="nt">&quot;originalURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://140.109.21.188/facilities#store244&quot;</span>

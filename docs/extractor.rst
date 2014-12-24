@@ -30,20 +30,30 @@ rdfa     RDFa        http://www.w3.org/TR/rdfa-core/
 
 **Output**:
 
+Components of X2R share a common data exchange format: *X2R data exchange format*. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below. Note that the "replacedURI" name/value pair is intentionally left blank in the context of Extractor (the potential replacedURI is obtained in the context of USS, and is applied in the context of Mapper). 
 
 .. code-block:: json
 
  { "metadata": [],
    "mapping": 
      [
-         {"status": "N/A", 
-          "replacedURI": "http://replaced_test1", 
-          "term": "facilities store245", 
-          "originalURI": "http://140.109.21.188/facilities#store245"
+         {
+          "status": status value,
+          "originalURI": original URI value, 
+          "replacedURI": updated URI value, 
+          "term": term value
           }
      ]
   }
 
+===========  ==================================================
+name         value range/format
+===========  ==================================================
+status       Range: {"N/A", "200", "303", "error"}
+originalURI  A URI that can be found in input file and is valid
+replacedURI  A valid URI
+term         A string
+===========  ==================================================
 
 Example
 -------
@@ -54,12 +64,14 @@ Example
  { "metadata": [],
    "mapping": 
      [
-         {"status": "N/A", 
+         {
+          "status": "N/A", 
           "replacedURI": "http://replaced_test1", 
           "term": "facilities store245", 
           "originalURI": "http://140.109.21.188/facilities#store245"
           }, 
-         {"status": "N/A", 
+         {
+          "status": "N/A", 
           "replacedURI": "http://replaced_test2", 
           "term": "facilities store244", 
           "originalURI": "http://140.109.21.188/facilities#store244"
