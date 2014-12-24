@@ -6,7 +6,7 @@ Add a new RDF refactor
 Involved Files
 ================
 
-    refactor.class.php
+    Refactor.class.php
 
 Mechanism
 =========

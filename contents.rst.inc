@@ -5,11 +5,15 @@ Introduction
 
 The motivation is to ease the transformation of data into linked-data and thus lower the entry barrier of generating linked-data. Using X2R, more developers can easily translate existing data on-demands, and creating linked-data incrementally.  
 
-.. figure:: ./docs/figs/workflow.PNG
+.. figure:: ./docs/figs/data.PNG
      :scale: 80%
      :alt: test
 
-     The workflow of X2R converter.
+     The dataflow of X2R converter.
+
+
+X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing translators.  
+
 
 .. toctree::
     :maxdepth: 1

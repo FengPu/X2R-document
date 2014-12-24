@@ -7,7 +7,7 @@ Add a new filter
 Involved Classes
 ================
 
-    resultfilter.class.php, ussContainer.php
+    ResultFilter.class.php, UssContainer.php
 
 Mechanism
 =========
