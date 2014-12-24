@@ -37,4 +37,4 @@ Icon
 .Trashes
 
 # Build files
-_build
+_build/
