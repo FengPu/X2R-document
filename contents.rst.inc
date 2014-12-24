@@ -5,7 +5,7 @@ Introduction
 
 The motivation is to ease the transformation of data into linked-data and thus lower the entry barrier of generating linked-data. Using X2R, more developers can easily translate existing data on-demands, and creating linked-data incrementally.  
 
-.. figure:: ./docs/figs/data.PNG
+.. figure:: ./docs/figs/dataflow.png
      :scale: 80%
      :alt: test
 
