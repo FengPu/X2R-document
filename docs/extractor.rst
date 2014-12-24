@@ -13,7 +13,7 @@ RDF is comprised of three types of nodes: URI references, blank nodes or literal
 Input/Output
 ------------
 
-**Input**: RDF serialization formats.
+**Input**: Extractor accepts a subset of RDF serialization formats. Users of Extractor should specify the input format in terms of "value" listed in the Table below. If users have no idea of what the format of input is, they can use the "guess" value to ask Extractor to recognize the input's format for them (if it is one of the supported format list).    
 
 ======== =========== =================================================
 value    name        reference
@@ -24,6 +24,7 @@ turtle   Turtle      http://www.dajobe.org/2004/01/turtle
 rdfxml   RDF/XML     http://www.w3.org/TR/rdf-syntax-grammar
 n3       N3          http://www.w3.org/2000/10/swap/grammar/n3
 rdfa     RDFa        http://www.w3.org/TR/rdfa-core/
+guess                If user don't know the format
 ======== =========== =================================================
 
 

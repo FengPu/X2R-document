@@ -55,7 +55,7 @@
 <p>RDF is comprised of three types of nodes: URI references, blank nodes or literals.</p>
 <div class="section" id="input-output">
 <h2>Input/Output<a class="headerlink" href="#input-output" title="Permalink to this headline">¶</a></h2>
-<p><strong>Input</strong>: RDF serialization formats.</p>
+<p><strong>Input</strong>: Extractor accepts a subset of RDF serialization formats. Users of Extractor should specify the input format in terms of &#8220;value&#8221; listed in the Table below. If users have no idea of what the format of input is, they can use the &#8220;guess&#8221; value to ask Extractor to recognize the input&#8217;s format for them (if it is one of the supported format list).</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="12%" />
@@ -93,10 +93,14 @@
 <td>RDFa</td>
 <td><a class="reference external" href="http://www.w3.org/TR/rdfa-core/">http://www.w3.org/TR/rdfa-core/</a></td>
 </tr>
+<tr class="row-even"><td>guess</td>
+<td>&nbsp;</td>
+<td>If user don&#8217;t know the format</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Output</strong>:</p>
-<p>Components of X2R share a common data exchange format: <em>X2R data exchange format</em>. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below. Note that the &#8220;replacedURI&#8221; name/value pair is intentionally left blank in the context of Extractor.</p>
+<p>Components of X2R share a common data exchange format: <em>X2R data exchange format</em>. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below. Note that the &#8220;replacedURI&#8221; name/value pair is intentionally left blank in the context of Extractor (the potential replacedURI is obtained in the context of USS, and is applied in the context of Mapper).</p>
 <div class="highlight-json"><div class="highlight"><pre>{ &quot;metadata&quot;: [],
   &quot;mapping&quot;:
     [
