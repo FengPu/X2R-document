@@ -6,7 +6,7 @@ Add a new query parser
 Involved Files
 ================
 
-    queryparser.class.php, ussContainer.php
+    QueryParser.class.php, UssContainer.php
 
 Mechanism
 =========

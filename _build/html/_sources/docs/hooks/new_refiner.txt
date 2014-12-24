@@ -6,7 +6,7 @@ Add a new refiner
 Involved Files
 ================
 
-    queryrefiner.class.php, ussContainer.php
+    QueryRefiner.class.php, UssContainer.php
 
 Mechanism
 =========

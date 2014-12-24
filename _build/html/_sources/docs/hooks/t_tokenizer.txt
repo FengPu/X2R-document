@@ -7,7 +7,7 @@ Add a new tokenizer
 Involved Classes
 ================
 
-    tokenizer.class.php
+    Tokenizer.class.php
 
 Mechanism
 =========

@@ -6,7 +6,7 @@ Add a new selector
 Involved Files
 ================
 
-    resultselector.class.php, ussContainer.php
+    Resultselector.class.php, UssContainer.php
 
 Mechanism
 =========

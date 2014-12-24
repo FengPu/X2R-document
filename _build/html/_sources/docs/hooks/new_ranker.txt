@@ -6,7 +6,7 @@ Add a new ranker
 Involved Files
 ================
 
-    resultranker.class.php, ussContainer.php
+    ResultRanker.class.php, UssContainer.php
 
 Mechanism
 =========

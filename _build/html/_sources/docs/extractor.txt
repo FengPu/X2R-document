@@ -31,9 +31,41 @@ rdfa     RDFa        http://www.w3.org/TR/rdfa-core/
 **Output**:
 
 
+.. code-block:: json
+
+ { "metadata": [],
+   "mapping": 
+     [
+         {"status": "N/A", 
+          "replacedURI": "http://replaced_test1", 
+          "term": "facilities store245", 
+          "originalURI": "http://140.109.21.188/facilities#store245"
+          }
+     ]
+  }
+
+
 Example
 -------
 
+
+.. code-block:: json
+
+ { "metadata": [],
+   "mapping": 
+     [
+         {"status": "N/A", 
+          "replacedURI": "http://replaced_test1", 
+          "term": "facilities store245", 
+          "originalURI": "http://140.109.21.188/facilities#store245"
+          }, 
+         {"status": "N/A", 
+          "replacedURI": "http://replaced_test2", 
+          "term": "facilities store244", 
+          "originalURI": "http://140.109.21.188/facilities#store244"
+         }
+     ]
+  }
 
 
 Design
