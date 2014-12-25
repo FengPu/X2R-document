@@ -52,6 +52,122 @@
   <div class="section" id="mapper">
 <span id="id1"></span><h1>Mapper<a class="headerlink" href="#mapper" title="Permalink to this headline">¶</a></h1>
 <p>Mapper is a tool for systematically replacing URIs within a given RDF. When you have the mapping from original URIs to new URIs, Mapper can replace the URIs based on the mapping automatically.</p>
+<div class="section" id="input-output">
+<h2>Input/Output<a class="headerlink" href="#input-output" title="Permalink to this headline">¶</a></h2>
+<p><strong>Input</strong>: <em>X2R data exchange format</em> and <em>string in a RDF serialization format</em></p>
+<p>Components of X2R share a common data exchange format: <em>X2R data exchange format</em>. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below.</p>
+<div class="highlight-json"><div class="highlight"><pre>{ &quot;metadata&quot;: [],
+  &quot;mapping&quot;:
+    [
+        {
+         &quot;status&quot;: status value,
+         &quot;originalURI&quot;: original URI value,
+         &quot;replacedURI&quot;: updated URI value,
+         &quot;term&quot;: term value
+         }
+    ]
+ }
+</pre></div>
+</div>
+<p><strong>Output</strong>: string in a RDF serialization format</p>
+<p>Mapper allow user to specify the updated RDF in the format of a subset of RDF serialization formats listed in the Table below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="16%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">value</th>
+<th class="head">name</th>
+<th class="head">reference</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>json</td>
+<td>RDF/JSON</td>
+<td><a class="reference external" href="http://n2.talis.com/wiki/RDF_JSON_Specification">http://n2.talis.com/wiki/RDF_JSON_Specification</a></td>
+</tr>
+<tr class="row-odd"><td>ntriples</td>
+<td>N-Triples</td>
+<td><a class="reference external" href="http://www.w3.org/TR/n-triples/">http://www.w3.org/TR/n-triples/</a></td>
+</tr>
+<tr class="row-even"><td>turtle</td>
+<td>Turtle</td>
+<td><a class="reference external" href="http://www.dajobe.org/2004/01/turtle">http://www.dajobe.org/2004/01/turtle</a></td>
+</tr>
+<tr class="row-odd"><td>rdfxml</td>
+<td>RDF/XML</td>
+<td><a class="reference external" href="http://www.w3.org/TR/rdf-syntax-grammar">http://www.w3.org/TR/rdf-syntax-grammar</a></td>
+</tr>
+<tr class="row-even"><td>n3</td>
+<td>N3</td>
+<td><a class="reference external" href="http://www.w3.org/2000/10/swap/grammar/n3">http://www.w3.org/2000/10/swap/grammar/n3</a></td>
+</tr>
+<tr class="row-odd"><td>rdfa</td>
+<td>RDFa</td>
+<td><a class="reference external" href="http://www.w3.org/TR/rdfa-core/">http://www.w3.org/TR/rdfa-core/</a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="web-api-definition">
+<h3>Web API Definition<a class="headerlink" href="#web-api-definition" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="query-parameter-format-detail">
+<h4>Query Parameter Format Detail<a class="headerlink" href="#query-parameter-format-detail" title="Permalink to this headline">¶</a></h4>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">rdfContent:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">mapping:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">format:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="response-format-detail">
+<h4>Response Format Detail<a class="headerlink" href="#response-format-detail" title="Permalink to this headline">¶</a></h4>
+<p>Content-Type: application/rdf+xml</p>
+</div>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/mapper?rdfContent&amp;mapping&amp;format</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre> HTTP/1.1 200 OK
+ Vary: Accept
+ Content-Type: application/rdf+xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+    &lt;rdf:RDF
+        xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot;
+        xmlns:geo=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#&quot;
+        xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;&gt;
+&lt;rdf:Description rdf:about=&quot;http://openisdm.iis.sinica.edu.tw/VR/DaTongSportsCenter&quot;&gt;
+    &lt;rdf:type rdf:resource=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing&quot;/&gt;
+    &lt;updatedAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+        rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2013-07-31T03:23:47Z&lt;/updatedAt&gt;
+    &lt;geo:long&gt;121.516&lt;/geo:long&gt;
+    &lt;hasTelephone xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;2592-0055&lt;/hasTelephone&gt;
+    &lt;hasName xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Da Tong Sports Center&lt;/hasName&gt;
+    &lt;geo:location&gt;No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)&lt;/geo:location&gt;
+    &lt;usedFor xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Sport&lt;/usedFor&gt;
+    &lt;createdAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+        rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2012-11-28T09:05:13Z&lt;/createdAt&gt;
+    &lt;geo:lat&gt;25.0648&lt;/geo:lat&gt;
+&lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
 </div>
 
 
@@ -60,6 +176,22 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Mapper</a><ul>
+<li><a class="reference internal" href="#input-output">Input/Output</a><ul>
+<li><a class="reference internal" href="#web-api-definition">Web API Definition</a><ul>
+<li><a class="reference internal" href="#query-parameter-format-detail">Query Parameter Format Detail</a></li>
+<li><a class="reference internal" href="#response-format-detail">Response Format Detail</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="extractor.html"
                         title="previous chapter">Extractor</a></p>

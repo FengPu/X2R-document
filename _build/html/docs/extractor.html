@@ -55,60 +55,17 @@
 <p>RDF is comprised of three types of nodes: URI references, blank nodes or literals.</p>
 <div class="section" id="input-output">
 <h2>Input/Output<a class="headerlink" href="#input-output" title="Permalink to this headline">¶</a></h2>
-<p><strong>Input</strong>: Extractor accepts a subset of RDF serialization formats. Users of Extractor should specify the input format in terms of &#8220;value&#8221; listed in the Table below. If users have no idea of what the format of input is, they can use the &#8220;guess&#8221; value to ask Extractor to recognize the input&#8217;s format for them (if it is one of the supported format list).</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="12%" />
-<col width="16%" />
-<col width="72%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">value</th>
-<th class="head">name</th>
-<th class="head">reference</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>json</td>
-<td>RDF/JSON</td>
-<td><a class="reference external" href="http://n2.talis.com/wiki/RDF_JSON_Specification">http://n2.talis.com/wiki/RDF_JSON_Specification</a></td>
-</tr>
-<tr class="row-odd"><td>ntriples</td>
-<td>N-Triples</td>
-<td><a class="reference external" href="http://www.w3.org/TR/n-triples/">http://www.w3.org/TR/n-triples/</a></td>
-</tr>
-<tr class="row-even"><td>turtle</td>
-<td>Turtle</td>
-<td><a class="reference external" href="http://www.dajobe.org/2004/01/turtle">http://www.dajobe.org/2004/01/turtle</a></td>
-</tr>
-<tr class="row-odd"><td>rdfxml</td>
-<td>RDF/XML</td>
-<td><a class="reference external" href="http://www.w3.org/TR/rdf-syntax-grammar">http://www.w3.org/TR/rdf-syntax-grammar</a></td>
-</tr>
-<tr class="row-even"><td>n3</td>
-<td>N3</td>
-<td><a class="reference external" href="http://www.w3.org/2000/10/swap/grammar/n3">http://www.w3.org/2000/10/swap/grammar/n3</a></td>
-</tr>
-<tr class="row-odd"><td>rdfa</td>
-<td>RDFa</td>
-<td><a class="reference external" href="http://www.w3.org/TR/rdfa-core/">http://www.w3.org/TR/rdfa-core/</a></td>
-</tr>
-<tr class="row-even"><td>guess</td>
-<td>&nbsp;</td>
-<td>If user don&#8217;t know the format</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Output</strong>:</p>
+<p><strong>Input</strong>: RDFGraph</p>
+<p><strong>Output</strong>: <em>X2R data exchange format</em></p>
 <p>Components of X2R share a common data exchange format: <em>X2R data exchange format</em>. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below. Note that the &#8220;replacedURI&#8221; name/value pair is intentionally left blank in the context of Extractor (the potential replacedURI is obtained in the context of USS, and is applied in the context of Mapper).</p>
 <div class="highlight-json"><div class="highlight"><pre>{ &quot;metadata&quot;: [],
   &quot;mapping&quot;:
     [
         {
-         &quot;status&quot;: status value,
-         &quot;originalURI&quot;: original URI value,
-         &quot;replacedURI&quot;: updated URI value,
-         &quot;term&quot;: term value
+         &quot;status&quot;: value of status,
+         &quot;originalURI&quot;: value of original URI,
+         &quot;replacedURI&quot;: value of updated URI,
+         &quot;term&quot;: value of term
          }
     ]
  }
@@ -169,6 +126,52 @@
 </div>
 <div class="section" id="major-components">
 <h3>Major components<a class="headerlink" href="#major-components" title="Permalink to this headline">¶</a></h3>
+<p><strong>RDFGraph</strong></p>
+<p><em>one element of [&#8220;json&#8221;, &#8220;ntriples&#8221;, &#8220;turtle&#8221;, &#8220;rdfxml&#8221;, &#8220;n3&#8221;, &#8220;rdfa&#8221;, &#8220;guess&#8221;]</em> and <em>string in a RDF serialization format</em></p>
+<p>Extractor accepts a subset of RDF serialization formats. Users of Extractor should specify the input format in terms of &#8220;value&#8221; listed in the Table below. If users have no idea of what the format of input is, they can use the &#8220;guess&#8221; value to ask Extractor to recognize the input&#8217;s format for them (if it is one of the supported format list).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="16%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">value</th>
+<th class="head">name</th>
+<th class="head">reference</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>json</td>
+<td>RDF/JSON</td>
+<td><a class="reference external" href="http://n2.talis.com/wiki/RDF_JSON_Specification">http://n2.talis.com/wiki/RDF_JSON_Specification</a></td>
+</tr>
+<tr class="row-odd"><td>ntriples</td>
+<td>N-Triples</td>
+<td><a class="reference external" href="http://www.w3.org/TR/n-triples/">http://www.w3.org/TR/n-triples/</a></td>
+</tr>
+<tr class="row-even"><td>turtle</td>
+<td>Turtle</td>
+<td><a class="reference external" href="http://www.dajobe.org/2004/01/turtle">http://www.dajobe.org/2004/01/turtle</a></td>
+</tr>
+<tr class="row-odd"><td>rdfxml</td>
+<td>RDF/XML</td>
+<td><a class="reference external" href="http://www.w3.org/TR/rdf-syntax-grammar">http://www.w3.org/TR/rdf-syntax-grammar</a></td>
+</tr>
+<tr class="row-even"><td>n3</td>
+<td>N3</td>
+<td><a class="reference external" href="http://www.w3.org/2000/10/swap/grammar/n3">http://www.w3.org/2000/10/swap/grammar/n3</a></td>
+</tr>
+<tr class="row-odd"><td>rdfa</td>
+<td>RDFa</td>
+<td><a class="reference external" href="http://www.w3.org/TR/rdfa-core/">http://www.w3.org/TR/rdfa-core/</a></td>
+</tr>
+<tr class="row-even"><td>guess</td>
+<td>&nbsp;</td>
+<td>If user don&#8217;t know the format</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Tokenizer</strong> is a major component of extractor. It aims to tokenize the tail of extracted URIs into word chuncks that can then be used as query terms to find better URIs.</p>
 <p>In X2R Extractor, a tokenizer should implement two methods, tokenizeArr(array $arr) and tokenizeStr($str).</p>
 <div class="figure">
@@ -180,6 +183,78 @@
 <p class="caption">This is the caption of the figure (a simple paragraph).</p>
 </div>
 <p>X2R currently support two tokenizers, delimited-based tokenizer and cased-based tokenizer.</p>
+<p><strong>Web API Definition:</strong></p>
+<div class="section" id="query-parameter-format-detail">
+<h4>Query Parameter Format Detail<a class="headerlink" href="#query-parameter-format-detail" title="Permalink to this headline">¶</a></h4>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">excludedNamespace:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">checkUrisStatus:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">rdfContent:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="response-format-detail">
+<h4>Response Format Detail<a class="headerlink" href="#response-format-detail" title="Permalink to this headline">¶</a></h4>
+<p>Content-Type: application/json</p>
+<p>Response template:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">{&quot;metadata&quot;: [],</span>
+<span class="x"> &quot;mapping&quot;:</span>
+<span class="x">             [{&quot;status&quot;: &quot;&quot;,</span>
+<span class="x">               &quot;originalURI&quot;: &quot;&quot;,</span>
+<span class="x">               &quot;replacedURI&quot;: &quot;&quot;,</span>
+<span class="x">               &quot;term&quot;: &quot;&quot;,</span>
+<span class="x">               &quot;lineNumbers&quot;: &quot;&quot;</span>
+<span class="x">              }</span>
+<span class="x">             ]</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+<p>mapping entry:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">[{&quot;status&quot;: &quot;&quot;,</span>
+<span class="x">  &quot;originalURI&quot;: &quot;&quot;,</span>
+<span class="x">  &quot;replacedURI&quot;: &quot;&quot;,</span>
+<span class="x">  &quot;term&quot;: &quot;&quot;,</span>
+<span class="x">  &quot;lineNumbers&quot;: &quot;&quot;</span>
+<span class="x"> }</span>
+<span class="x">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/extractor?excludedNamespaces&amp;checkUrisStatus&amp;rdfContent</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre> HTTP/1.1 200 OK
+ Vary: Accept
+ Content-Type: application/json
+
+{&quot;metadata&quot;: [
+        ],
+ &quot;mapping&quot;:
+        [{&quot;status&quot;: &quot;N/A&quot;,
+          &quot;originalURI&quot;: &quot;http://127.0.0.1/autoGeneratedUri&quot;,
+          &quot;replacedURI&quot;: &quot;&quot;,
+          &quot;term&quot;: &quot;auto generated uri&quot;,
+          &quot;lineNumbers&quot;: &quot;3, 31&quot;
+         }
+        ]
+}
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 </div>
 </div>
@@ -197,7 +272,12 @@
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#design">Design</a><ul>
 <li><a class="reference internal" href="#process">Process</a></li>
-<li><a class="reference internal" href="#major-components">Major components</a></li>
+<li><a class="reference internal" href="#major-components">Major components</a><ul>
+<li><a class="reference internal" href="#query-parameter-format-detail">Query Parameter Format Detail</a></li>
+<li><a class="reference internal" href="#response-format-detail">Response Format Detail</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">Example</a></li>
 </ul>
 </li>
 </ul>

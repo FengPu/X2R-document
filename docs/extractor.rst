@@ -13,23 +13,11 @@ RDF is comprised of three types of nodes: URI references, blank nodes or literal
 Input/Output
 ------------
 
-**Input**: Extractor accepts a subset of RDF serialization formats. Users of Extractor should specify the input format in terms of "value" listed in the Table below. If users have no idea of what the format of input is, they can use the "guess" value to ask Extractor to recognize the input's format for them (if it is one of the supported format list).    
-
-======== =========== =================================================
-value    name        reference
-======== =========== =================================================
-json     RDF/JSON    http://n2.talis.com/wiki/RDF_JSON_Specification
-ntriples N-Triples   http://www.w3.org/TR/n-triples/
-turtle   Turtle      http://www.dajobe.org/2004/01/turtle
-rdfxml   RDF/XML     http://www.w3.org/TR/rdf-syntax-grammar
-n3       N3          http://www.w3.org/2000/10/swap/grammar/n3
-rdfa     RDFa        http://www.w3.org/TR/rdfa-core/
-guess                If user don't know the format
-======== =========== =================================================
+**Input**: RDFGraph
 
 
 
-**Output**:
+**Output**: *X2R data exchange format*
 
 Components of X2R share a common data exchange format: *X2R data exchange format*. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below. Note that the "replacedURI" name/value pair is intentionally left blank in the context of Extractor (the potential replacedURI is obtained in the context of USS, and is applied in the context of Mapper). 
 
@@ -39,10 +27,10 @@ Components of X2R share a common data exchange format: *X2R data exchange format
    "mapping": 
      [
          {
-          "status": status value,
-          "originalURI": original URI value, 
-          "replacedURI": updated URI value, 
-          "term": term value
+          "status": value of status,
+          "originalURI": value of original URI, 
+          "replacedURI": value of updated URI, 
+          "term": value of term
           }
      ]
   }
@@ -91,6 +79,25 @@ Major components
 ^^^^^^^^^^^^^^^^
 
 
+**RDFGraph**
+
+*one element of ["json", "ntriples", "turtle", "rdfxml", "n3", "rdfa", "guess"]* and *string in a RDF serialization format*
+
+Extractor accepts a subset of RDF serialization formats. Users of Extractor should specify the input format in terms of "value" listed in the Table below. If users have no idea of what the format of input is, they can use the "guess" value to ask Extractor to recognize the input's format for them (if it is one of the supported format list).    
+
+======== =========== =================================================
+value    name        reference
+======== =========== =================================================
+json     RDF/JSON    http://n2.talis.com/wiki/RDF_JSON_Specification
+ntriples N-Triples   http://www.w3.org/TR/n-triples/
+turtle   Turtle      http://www.dajobe.org/2004/01/turtle
+rdfxml   RDF/XML     http://www.w3.org/TR/rdf-syntax-grammar
+n3       N3          http://www.w3.org/2000/10/swap/grammar/n3
+rdfa     RDFa        http://www.w3.org/TR/rdfa-core/
+guess                If user don't know the format
+======== =========== =================================================
+
+
 
 
 **Tokenizer** is a major component of extractor. It aims to tokenize the tail of extracted URIs into word chuncks that can then be used as query terms to find better URIs.  
@@ -113,5 +120,90 @@ In X2R Extractor, a tokenizer should implement two methods, tokenizeArr(array $a
      This is the caption of the figure (a simple paragraph). 
 
 X2R currently support two tokenizers, delimited-based tokenizer and cased-based tokenizer.
+
+
+**Web API Definition:**
+
+.. http:post:: /extractor{?excludedNamespaces, checkUrisStatus, rdfContent}
+
+        
+
+
+
+   :query excludedNamespaces: *(optional)* This specifies a list of namespaces to be skipped. That is, if a found URI belonged to this list, the URI will not be processed anymore.   
+   :query checkUrisStatus: *(required)* This determines if `extractor` checks the status codes of found URIs. 
+   :query rdfContent: *(required)* This specifies the content of RDF to be processed. 
+   :resheader Content-Type: application/json
+   :statuscode 200: no error
+   :statuscode 404: exception
+   
+
+Query Parameter Format Detail
+*****************************
+
+:excludedNamespace:
+
+:checkUrisStatus:
+
+:rdfContent:
+ 
+
+Response Format Detail
+**********************
+
+Content-Type: application/json
+
+Response template::
+
+    {"metadata": [],
+     "mapping": 
+                 [{"status": "", 
+                   "originalURI": "", 
+                   "replacedURI": "", 
+                   "term": "", 
+                   "lineNumbers": ""
+                  }
+                 ]
+    }
+
+
+mapping entry::
+
+                 [{"status": "", 
+                   "originalURI": "", 
+                   "replacedURI": "", 
+                   "term": "", 
+                   "lineNumbers": ""
+                  }
+                 ]    
+
+Example
+^^^^^^^^
+
+   **Example request**:
+
+   .. sourcecode:: http
+
+      POST /extractor?excludedNamespaces&checkUrisStatus&rdfContent HTTP/1.1
+    
+   **Example response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Vary: Accept
+      Content-Type: application/json
+
+     {"metadata": [
+             ],
+      "mapping":
+             [{"status": "N/A",
+               "originalURI": "http://127.0.0.1/autoGeneratedUri",
+               "replacedURI": "",
+               "term": "auto generated uri",
+               "lineNumbers": "3, 31"
+              }
+             ]
+     }
 
 
