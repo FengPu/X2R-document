@@ -28,7 +28,7 @@ import os
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinxcontrib.phpdomain']
+extensions = ['sphinxcontrib.phpdomain','sphinxcontrib.httpdomain']
 
 # The name of the default domain.
 primary_domain = 'php'
