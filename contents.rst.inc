@@ -23,7 +23,9 @@ The motivation is to ease the transformation of data into linked-data and thus l
      The dataflow of X2R converter.
 
 
-X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing RDFizer(translators). For a given raw data input in X (XML, CSV, JSON ...etc.) format, existing RDFizers can translated it into RDF serialization formats, such as Turtle, N-Triples, JSON-LD or RDF/XML. However,     
+X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing RDFizer(translators). For a given raw data input in X (XML, CSV, JSON ...etc.) format, existing RDFizers can translated it into RDF serialization formats, such as Turtle, N-Triples, JSON-LD or RDF/XML. Using existing URIs to describe legacy data can make the data more reachable for people who nevigate popular linked data dataset or try to find data through linked data aggregators or linked data search engines. However, existing translators usually mint new URIs and lack the supports for reusing URIs. X2R bridges this gap by supporting URI finding and URI replacing functionalities to help linked data contributors in replacing URIs minted by translators with reusable URIs found in popular endpoints. 
+
+
 
 
 .. toctree::
@@ -31,8 +33,7 @@ X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure abov
 
 
     docs/audience
-    docs/howto
-
+    
 The index of this document can be found in :ref:`genindex`. The search page, :ref:`search`, can be used to search within this document. 
 
 
@@ -65,8 +66,6 @@ Targeted Audience: **API users**
 
 .. toctree::
     :maxdepth: 3
-
-    docs/scenarios/x2r
 
 
     docs/scenarios/extractor

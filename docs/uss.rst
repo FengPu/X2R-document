@@ -45,7 +45,7 @@ In refined USS, seven **atomic hooks** can be replaced and extended, they are:
 
 
 Web API Definition
-^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 
 .. http:get:: /uss{?q, sites, output, start, num}

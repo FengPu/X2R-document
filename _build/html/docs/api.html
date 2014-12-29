@@ -62,8 +62,8 @@
 <dd><p>Extractor class implements
 URI extracting &amp; analyzing process as below.</p>
 <ol class="arabic simple">
-<li>Load the RDF content to a Graph data structure.</li>
-<li>Traverse the Graph to find all the URIs, and generate a filtered URI list.</li>
+<li>Load the RDF content to a rdfGraph data structure.</li>
+<li>Traverse the rdfGraph to find all the URIs, and generate a filtered URI list.</li>
 <li>Transform URIs to search terms.</li>
 <li>Wrap search terms in JSON output.</li>
 </ol>
@@ -253,64 +253,72 @@ with their contextual information.</p>
 <dl class="method">
 <dt id="Tokenizer::tokenizeString">
 <tt class="descname">tokenizeString</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#Tokenizer::tokenizeString" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>tokenizeString accepts string and tokenize it based on the heuristics defined in this method. After tokenizing, the result tokens are stored in an array and return.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$str</strong> (<em>string</em>) &#8211; The string to be tokenized.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name" colspan="2">param string $str:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The string to be tokenized.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An array of tokenized strings.</p>
-</td>
+<tr class="field-even field"><th class="field-name">returns:</th><td class="field-body">An array of tokenized strings.</td>
 </tr>
 </tbody>
 </table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="Tokenizer::tokenizeArrayOfStrings">
 <tt class="descname">tokenizeArrayOfStrings</tt><big>(</big><em>$arr</em><big>)</big><a class="headerlink" href="#Tokenizer::tokenizeArrayOfStrings" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>tokenizeArrayOfString accepts array of string and tokenize each string based on the heuristics defined in this method. After tokenizing, the result tokens are stored in an array and return.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$arr</strong> (<em>array</em>) &#8211; The array of strings to be tokenized</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name" colspan="2">param array $arr:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The array of strings to be tokenized</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An array of tokenized strings.</p>
-</td>
+<tr class="field-even field"><th class="field-name">returns:</th><td class="field-body">An array of tokenized strings.</td>
 </tr>
 </tbody>
 </table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="Tokenizer::arrayToString">
 <tt class="descname">arrayToString</tt><big>(</big><em>$arr</em><big>)</big><a class="headerlink" href="#Tokenizer::arrayToString" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>arrayToSting is an utility function for generying a query string by concatenating string in inputed array with whitespace.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$arr</strong> (<em>array</em>) &#8211; The array of strings to be tokenized</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name" colspan="2">param array $arr:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">An array of strings</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A string which is consisted of elements from given array $arr and is concatenated by whitespace.</p>
-</td>
+<tr class="field-even field"><th class="field-name">returns:</th><td class="field-body">A string which is consisted of elements from given array $arr and is concatenated by whitespace.</td>
 </tr>
 </tbody>
 </table>
+</div></blockquote>
 </dd></dl>
 
 </dd></dl>
 
 <div class="section" id="casebasedtokenizer">
 <h3>CaseBasedTokenizer<a class="headerlink" href="#casebasedtokenizer" title="Permalink to this headline">¶</a></h3>
+<p>CaseBasedTokenizer is a tokenizer that use case as the criteria to tokenize. There are several test cases listed below to help user understand how it works.</p>
+<ul class="simple">
+<li>CapitalizedWords -&gt; capitalized words</li>
+<li>camelCaseWords -&gt; camel case words</li>
+<li>UPPERCASElowercase -&gt; uppercase lowercase</li>
+</ul>
+<p>Note that the criteria of tokenizing uppercase and camelcase are sometime conflict. For such conflict CaseBaseTokenizer is designed to make uppercase rule precedent to camelcase rule.</p>
+<p>For example, a string &#8220;abcDEFgh&#8221; will be tokenized as &#8220;abc&#8221;, &#8220;def&#8221; and &#8220;gh&#8221; instead of &#8220;abc&#8221;, &#8220;de&#8221;, &#8220;fgh&#8221;.</p>
 <dl class="class">
 <dt id="CaseBasedTokenizer">
 <em class="property">class </em><tt class="descname">CaseBasedTokenizer</tt><a class="headerlink" href="#CaseBasedTokenizer" title="Permalink to this definition">¶</a></dt>
@@ -358,6 +366,16 @@ with their contextual information.</p>
 </div>
 <div class="section" id="delimitbasedtokenizer">
 <h3>DelimitBasedTokenizer<a class="headerlink" href="#delimitbasedtokenizer" title="Permalink to this headline">¶</a></h3>
+<p>DelimitBasedTokenizer is a tokenizer that use delimits as the criteria to tokenize. There are several test cases listed below to help user understand how it works.</p>
+<ul class="simple">
+<li>lower_case_with_underscores -&gt; lower case with underscores</li>
+<li>different*delimits&amp;demo$case -&gt; different delimits demo$case</li>
+</ul>
+<p>Since all tokenizers in X2R shared a common interface, they can be composed to form composited tokenizer. For example, the composited tokenizer can tokenize the complex string listed below.</p>
+<ul class="simple">
+<li>Before tokenizing: &#8220;AB/Ddf#223-oirDDD_www-Doc ddfs,sse;O-<a class="reference external" href="mailto:W_dd&#37;&#52;&#48;iop^yydD!pp~qas">W_dd<span>&#64;</span>iop^yydD!pp~qas</a>&#8220;</li>
+<li>After tokenizing: &#8220;ab ddf 223 oir ddd www doc ddfs sse o w dd iop yydd pp qas&#8221;</li>
+</ul>
 <dl class="class">
 <dt id="DelimitBasedTokenizer">
 <em class="property">class </em><tt class="descname">DelimitBasedTokenizer</tt><a class="headerlink" href="#DelimitBasedTokenizer" title="Permalink to this definition">¶</a></dt>
@@ -469,132 +487,6 @@ with a new URI.</div></blockquote>
 </dd></dl>
 
 </div>
-</div>
-<div class="section" id="mappingentry">
-<h2>MappingEntry<a class="headerlink" href="#mappingentry" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="MappingEntry">
-<em class="property">class </em><tt class="descname">MappingEntry</tt><a class="headerlink" href="#MappingEntry" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div>X2R&#8217;s components are integrated by standard message passing, where the standard message is the <cite>mapping from original URI, terms and replaced URI</cite>. This MappingEntry is the class used to model one entry of such mapping message.</div></blockquote>
-<dl class="method">
-<dt id="MappingEntry::MappingEntry">
-<tt class="descname">MappingEntry</tt><big>(</big><em>$originalURI</em>, <em>$replacedURI</em>, <em>$term</em>, <em>$lineNumbers</em><big>)</big><a class="headerlink" href="#MappingEntry::MappingEntry" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$originalURI</strong> (<em>string</em>) &#8211; The change spec. for the refacroring.</li>
-<li><strong>$replacedURI</strong> (<em>string</em>) &#8211; The change spec. for the refacroring.</li>
-<li><strong>$term</strong> (<em>string</em>) &#8211; The change spec. for the refacroring.</li>
-<li><strong>$lineNumbers</strong> (<em>string</em>) &#8211; The change spec. for the refacroring.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="MappingEntry::getOriginalURI">
-<tt class="descname">getOriginalURI</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingEntry::getOriginalURI" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Either false on failure, or the <cite>Original URI</cite> for success.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="MappingEntry::getReplacedURI">
-<tt class="descname">getReplacedURI</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingEntry::getReplacedURI" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Either false on failure, or the <cite>Replaced URI</cite> for success.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="MappingEntry::getQueryTerm">
-<tt class="descname">getQueryTerm</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingEntry::getQueryTerm" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Either false on failure, or the <cite>Query Term</cite> for success.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="MappingEntry::getLineNumbers">
-<tt class="descname">getLineNumbers</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingEntry::getLineNumbers" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Either false on failure, or the <cite>Line Numbers</cite> for success.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="mappingcollection">
-<h2>MappingCollection<a class="headerlink" href="#mappingcollection" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="MappingCollection">
-<em class="property">class </em><tt class="descname">MappingCollection</tt><a class="headerlink" href="#MappingCollection" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div>The MappingCollection is a collection of MappingEntry. The MappingCollection object can be serialized as JSON, and serves as the integration glue among X2R&#8217;s components.</div></blockquote>
-<dl class="method">
-<dt id="MappingCollection::addMappingEntry">
-<tt class="descname">addMappingEntry</tt><big>(</big><em>$mappingentry</em><big>)</big><a class="headerlink" href="#MappingCollection::addMappingEntry" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$mappingentry</strong> (<em>MappingEntryint</em>) &#8211; An entry of mapping.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Either false on failure, or the true for success.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="MappingCollection::toJson">
-<tt class="descname">toJson</tt><big>(</big><big>)</big><a class="headerlink" href="#MappingCollection::toJson" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Serialize the collection of mappings in Json format.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="mapper">
 <h2>Mapper<a class="headerlink" href="#mapper" title="Permalink to this headline">¶</a></h2>
@@ -1080,8 +972,6 @@ integrated into Mapper.</p>
 <li><a class="reference internal" href="#replaceuri">ReplaceUri</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mappingentry">MappingEntry</a></li>
-<li><a class="reference internal" href="#mappingcollection">MappingCollection</a></li>
 <li><a class="reference internal" href="#mapper">Mapper</a></li>
 <li><a class="reference internal" href="#webutilities">WebUtilities</a></li>
 <li><a class="reference internal" href="#uss">USS</a></li>

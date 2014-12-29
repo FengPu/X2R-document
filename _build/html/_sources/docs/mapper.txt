@@ -60,11 +60,6 @@ Web API Definition
 
 
 
-
-Response Format Detail
-**********************
-
-Content-Type: application/rdf+xml
     
 Example
 ^^^^^^^

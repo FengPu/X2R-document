@@ -33,21 +33,33 @@ X2R 1.0 provides a JQuery-powered GUI and a command line Interface is planned to
      :scale: 80%
      :alt: test
 
-     e.
+     After inputting the RDF, the control is handed over to Extractor. This screenshot depicted the GUI of Extractor. There is a table that lists the extracted URIs found in the inputted RDF with the automatically tokenized terms. If the automatically tokenized terms are not representive enougth, user can use the "edit" or "delete" buttons located in the end of each row to edit or delete the terms. GUI of Extractor provides a result size selector, and user can select the number of results showed per page. 
+
+
+.. figure:: ./figs/uss_search_mapper.PNG
+     :scale: 80%
+     :alt: test
+
+     After confirming or editing the extracted terms, X2R GUI helps user to issue the terms to endpoints supported by X2R GUI. Currently, X2R supports two endpoints, Dbpedia and LinkedGeoData. User can select one of the URI result list to replace original URI by clicking "Replace" botton. To switch to other term's URI list, user can click the "Next Term" tab to switch.   
 
 
 .. figure:: ./figs/uss_mapper_format.PNG
      :scale: 80%
      :alt: test
 
-     m.
+     After replacing URI interactivelly or automatically, user can select the RDF serialization format for the updated RDF. The RDF serialization formats listed below are supported X2R 1.0.  
+
+======== =========== =================================================
+json     RDF/JSON    http://n2.talis.com/wiki/RDF_JSON_Specification
+ntriples N-Triples   http://www.w3.org/TR/n-triples/
+turtle   Turtle      http://www.dajobe.org/2004/01/turtle
+rdfxml   RDF/XML     http://www.w3.org/TR/rdf-syntax-grammar
+n3       N3          http://www.w3.org/2000/10/swap/grammar/n3
+rdfa     RDFa        http://www.w3.org/TR/rdfa-core/
+======== =========== =================================================
 
 
-.. figure:: ./figs/uss_format.PNG
-     :scale: 80%
-     :alt: test
 
-     f.
 
 
 

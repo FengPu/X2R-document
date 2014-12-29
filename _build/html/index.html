@@ -68,11 +68,10 @@
 <a class="reference internal image-reference" href="_images/dataflow_small.png"><img alt="test" src="_images/dataflow_small.png" /></a>
 <p class="caption">The dataflow of X2R converter.</p>
 </div>
-<p>X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing RDFizer(translators). For a given raw data input in X (XML, CSV, JSON ...etc.) format, existing RDFizers can translated it into RDF serialization formats, such as Turtle, N-Triples, JSON-LD or RDF/XML. However,</p>
+<p>X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing RDFizer(translators). For a given raw data input in X (XML, CSV, JSON ...etc.) format, existing RDFizers can translated it into RDF serialization formats, such as Turtle, N-Triples, JSON-LD or RDF/XML. Using existing URIs to describe legacy data can make the data more reachable for people who nevigate popular linked data dataset or try to find data through linked data aggregators or linked data search engines. However, existing translators usually mint new URIs and lack the supports for reusing URIs. X2R bridges this gap by supporting URI finding and URI replacing functionalities to help linked data contributors in replacing URIs minted by translators with reusable URIs found in popular endpoints.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/audience.html">Audiences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/howto.html">How to Use This Document</a></li>
 </ul>
 </div>
 <p>The index of this document can be found in <a class="reference internal" href="genindex.html"><em>Index</em></a>. The search page, <a class="reference internal" href="search.html"><em>Search Page</em></a>, can be used to search within this document.</p>
@@ -103,19 +102,6 @@
 <p>Targeted Audience: <strong>API users</strong></p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="docs/scenarios/x2r.html">X2R API Usage Scenarios</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/scenarios/x2r.html#operation-scenarios">Operation Scenarios</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/scenarios/x2r.html#replace-bad-uris">Replace Bad URIs</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="docs/scenarios/x2r.html#configuration-scenarios">Configuration Scenarios</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/scenarios/x2r.html#set-an-extractor">Set an Extractor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/scenarios/x2r.html#set-a-mapper">Set a Mapper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/scenarios/x2r.html#set-an-uss">Set an USS</a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="docs/scenarios/extractor.html">Extractor API Usage Scenarios</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="docs/scenarios/extractor.html#operation-scenarios">Operation Scenarios</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="docs/scenarios/extractor.html#extract-uris-from-a-given-rdf">Extract URIs from a Given RDF</a></li>
@@ -178,8 +164,6 @@
 <li class="toctree-l3"><a class="reference internal" href="docs/api.html#replaceuri">ReplaceUri</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="docs/api.html#mappingentry">MappingEntry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/api.html#mappingcollection">MappingCollection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/api.html#mapper">Mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/api.html#webutilities">WebUtilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/api.html#uss">USS</a></li>

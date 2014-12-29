@@ -70,13 +70,49 @@ a Web-based GUI and a command line Interface.</p>
 </div>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/uss_extractor.PNG"><img alt="test" src="../_images/uss_extractor.PNG" /></a>
+<p class="caption">After inputting the RDF, the control is handed over to Extractor. This screenshot depicted the GUI of Extractor. There is a table that lists the extracted URIs found in the inputted RDF with the automatically tokenized terms. If the automatically tokenized terms are not representive enougth, user can use the &#8220;edit&#8221; or &#8220;delete&#8221; buttons located in the end of each row to edit or delete the terms. GUI of Extractor provides a result size selector, and user can select the number of results showed per page.</p>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/uss_search_mapper.PNG"><img alt="test" src="../_images/uss_search_mapper.PNG" /></a>
+<p class="caption">After confirming or editing the extracted terms, X2R GUI helps user to issue the terms to endpoints supported by X2R GUI. Currently, X2R supports two endpoints, Dbpedia and LinkedGeoData. User can select one of the URI result list to replace original URI by clicking &#8220;Replace&#8221; botton. To switch to other term&#8217;s URI list, user can click the &#8220;Next Term&#8221; tab to switch.</p>
 </div>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/uss_mapper_format.PNG"><img alt="test" src="../_images/uss_mapper_format.PNG" /></a>
+<p class="caption">After replacing URI interactivelly or automatically, user can select the RDF serialization format for the updated RDF. The RDF serialization formats listed below are supported X2R 1.0.</p>
 </div>
-<div class="figure">
-<a class="reference internal image-reference" href="docs/./figs/uss_format.PNG"><img alt="test" src="docs/./figs/uss_format.PNG" /></a>
-</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="16%" />
+<col width="72%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>json</td>
+<td>RDF/JSON</td>
+<td><a class="reference external" href="http://n2.talis.com/wiki/RDF_JSON_Specification">http://n2.talis.com/wiki/RDF_JSON_Specification</a></td>
+</tr>
+<tr class="row-even"><td>ntriples</td>
+<td>N-Triples</td>
+<td><a class="reference external" href="http://www.w3.org/TR/n-triples/">http://www.w3.org/TR/n-triples/</a></td>
+</tr>
+<tr class="row-odd"><td>turtle</td>
+<td>Turtle</td>
+<td><a class="reference external" href="http://www.dajobe.org/2004/01/turtle">http://www.dajobe.org/2004/01/turtle</a></td>
+</tr>
+<tr class="row-even"><td>rdfxml</td>
+<td>RDF/XML</td>
+<td><a class="reference external" href="http://www.w3.org/TR/rdf-syntax-grammar">http://www.w3.org/TR/rdf-syntax-grammar</a></td>
+</tr>
+<tr class="row-odd"><td>n3</td>
+<td>N3</td>
+<td><a class="reference external" href="http://www.w3.org/2000/10/swap/grammar/n3">http://www.w3.org/2000/10/swap/grammar/n3</a></td>
+</tr>
+<tr class="row-even"><td>rdfa</td>
+<td>RDFa</td>
+<td><a class="reference external" href="http://www.w3.org/TR/rdfa-core/">http://www.w3.org/TR/rdfa-core/</a></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

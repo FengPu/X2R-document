@@ -11,9 +11,9 @@ Extractor
   Extractor class implements 
   URI extracting & analyzing process as below. 
         
-  #. Load the RDF content to a Graph data structure.
+  #. Load the RDF content to a rdfGraph data structure.
 
-  #. Traverse the Graph to find all the URIs, and generate a filtered URI list.
+  #. Traverse the rdfGraph to find all the URIs, and generate a filtered URI list.
 
   #. Transform URIs to search terms.
 
@@ -103,11 +103,14 @@ Tokenizer
 
   .. php:method:: tokenizeString($str)
 
+     tokenizeString accepts string and tokenize it based on the heuristics defined in this method. After tokenizing, the result tokens are stored in an array and return.
+
       :param string $str: The string to be tokenized.
       :returns: An array of tokenized strings.
 
   .. php:method:: tokenizeArrayOfStrings($arr)
 
+     tokenizeArrayOfString accepts array of string and tokenize each string based on the heuristics defined in this method. After tokenizing, the result tokens are stored in an array and return.
 
       :param array $arr: The array of strings to be tokenized
       :returns: An array of tokenized strings.
@@ -115,8 +118,9 @@ Tokenizer
 
   .. php:method:: arrayToString($arr)
 
+     arrayToSting is an utility function for generying a query string by concatenating string in inputed array with whitespace.   
 
-      :param array $arr: The array of strings to be tokenized
+      :param array $arr: An array of strings 
       :returns: A string which is consisted of elements from given array $arr and is concatenated by whitespace.
 
 
@@ -124,6 +128,17 @@ Tokenizer
 
 CaseBasedTokenizer
 ^^^^^^^^^^^^^^^^^^
+
+CaseBasedTokenizer is a tokenizer that use case as the criteria to tokenize. There are several test cases listed below to help user understand how it works. 
+
+* CapitalizedWords -> capitalized words
+* camelCaseWords -> camel case words
+* UPPERCASElowercase -> uppercase lowercase
+
+Note that the criteria of tokenizing uppercase and camelcase are sometime conflict. For such conflict CaseBaseTokenizer is designed to make uppercase rule precedent to camelcase rule. 
+
+For example, a string "abcDEFgh" will be tokenized as "abc", "def" and "gh" instead of "abc", "de", "fgh". 
+
 
 .. php:class:: CaseBasedTokenizer
 
@@ -144,6 +159,17 @@ CaseBasedTokenizer
 
 DelimitBasedTokenizer
 ^^^^^^^^^^^^^^^^^^^^^
+
+DelimitBasedTokenizer is a tokenizer that use delimits as the criteria to tokenize. There are several test cases listed below to help user understand how it works. 
+
+* lower_case_with_underscores -> lower case with underscores
+* different*delimits&demo$case -> different delimits demo$case
+
+Since all tokenizers in X2R shared a common interface, they can be composed to form composited tokenizer. For example, the composited tokenizer can tokenize the complex string listed below. 
+
+* Before tokenizing: "AB/Ddf#223-oirDDD_www-Doc ddfs,sse;O-W_dd@iop^yydD!pp~qas"
+* After tokenizing: "ab ddf 223 oir ddd www doc ddfs sse o w dd iop yydd pp qas"
+
 
 .. php:class:: DelimitBasedTokenizer
 
@@ -199,54 +225,6 @@ ReplaceUri
 
       :param int $change: The change spec. for the refacroring.
       :returns: Either false on failure, or the true for success.
-
-MappingEntry
-------------
-.. php:class:: MappingEntry
-
-        X2R's components are integrated by standard message passing, where the standard message is the `mapping from original URI, terms and replaced URI`. This MappingEntry is the class used to model one entry of such mapping message.  
-
-  .. php:method:: MappingEntry($originalURI, $replacedURI, \
-                               $term, $lineNumbers)
-
-      :param string $originalURI: The change spec. for the refacroring.
-      :param string $replacedURI: The change spec. for the refacroring.
-      :param string $term: The change spec. for the refacroring.
-      :param string $lineNumbers: The change spec. for the refacroring.
-      :returns: Either false on failure, or the true for success.
-
-  .. php:method:: getOriginalURI()
-
-      :returns: Either false on failure, or the `Original URI` for success.
-
-  .. php:method:: getReplacedURI()
-
-      :returns: Either false on failure, or the `Replaced URI` for success.
-
-  .. php:method:: getQueryTerm()
-
-      :returns: Either false on failure, or the `Query Term` for success.
-
-  .. php:method:: getLineNumbers()
-
-      :returns: Either false on failure, or the `Line Numbers` for success.
-
-
-
-MappingCollection
------------------
-.. php:class:: MappingCollection
-
-        The MappingCollection is a collection of MappingEntry. The MappingCollection object can be serialized as JSON, and serves as the integration glue among X2R's components.  
-
-  .. php:method:: addMappingEntry($mappingentry)
-
-      :param MappingEntryint $mappingentry: An entry of mapping.
-      :returns: Either false on failure, or the true for success.
-
-  .. php:method:: toJson()
-
-      :returns: Serialize the collection of mappings in Json format.
 
 
 Mapper
