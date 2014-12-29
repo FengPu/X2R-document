@@ -80,16 +80,6 @@
 <li><strong>Result Integrator</strong> - Result Integrator takes two or more result sets and integrates them as one ranked result set.</li>
 <li><strong>Result Selector</strong> - Result Selector is an abstract class defined a common interface for the task of picking one fittest URI from a set of possible URIs returned from existing Endpoints. The task can be either automatic doned by programmed heuristics or a crowdsourcing task that can be accomplished by poping up a user interface for real human to select the fittest URI.</li>
 </ul>
-<p><strong>Examples:</strong></p>
-<blockquote>
-<div><ol class="arabic simple">
-<li>This request returns the results that match the search query terms &#8220;typhoon&#8221; AND &#8220;weather&#8221; from &#8220;<a class="reference external" href="http://dbpedia.org/sparql">http://dbpedia.org/sparql</a>&#8221;.</li>
-<li>Example 2: This request returns the results that match the search query terms &#8220;country&#8221; from &#8220;<a class="reference external" href="http://dbpedia.org/sparql">http://dbpedia.org/sparql</a>&#8221; and &#8220;<a class="reference external" href="http://linkedgeodata.org/sparql">http://linkedgeodata.org/sparql</a>&#8221;.</li>
-</ol>
-</div></blockquote>
-<div class="figure">
-<a class="reference internal image-reference" href="../_images/uss_2.PNG"><img alt="test" src="../_images/uss_2.PNG" /></a>
-</div>
 <div class="section" id="web-api-definition">
 <h2>Web API Definition<a class="headerlink" href="#web-api-definition" title="Permalink to this headline">¶</a></h2>
 <dl class="get">
@@ -227,6 +217,16 @@
 <span class="p">}</span>
 </pre></div>
 </div>
+<p><strong>Two more request/response examples (With default ResultRanker)</strong></p>
+<blockquote>
+<div><div class="highlight-http"><div class="highlight"><pre>GET /uss?q=typhoon&amp;sites&amp;output=json
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>This request returns the results that match the search query terms &#8220;typhoon&#8221; AND &#8220;weather&#8221; from &#8220;<a class="reference external" href="http://dbpedia.org/sparql">http://dbpedia.org/sparql</a>&#8221;.</li>
+<li>Example 2: This request returns the results that match the search query terms &#8220;country&#8221; from &#8220;<a class="reference external" href="http://dbpedia.org/sparql">http://dbpedia.org/sparql</a>&#8221; and &#8220;<a class="reference external" href="http://linkedgeodata.org/sparql">http://linkedgeodata.org/sparql</a>&#8221;.</li>
+</ol>
+</div></blockquote>
 </div>
 </div>
 

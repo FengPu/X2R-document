@@ -175,7 +175,7 @@ Example
 
 
 
-**Two more request/response examples (With default ResultRanker) **
+**Two more request/response examples (With default ResultRanker)**
 
  .. sourcecode:: http
 
@@ -187,34 +187,6 @@ Example
 
 
 
-
-
-.. figure:: ./figs/uss_upload.PNG
-     :scale: 80%
-     :alt: test
-
-     u.
-
-
-.. figure:: ./figs/uss_extractor.PNG
-     :scale: 80%
-     :alt: test
-
-     e.
-
-
-.. figure:: ./figs/uss_mapper.PNG
-     :scale: 80%
-     :alt: test
-
-     m.
-
-
-.. figure:: ./figs/uss_format
-     :scale: 80%
-     :alt: test
-
-     f.
 
 
 

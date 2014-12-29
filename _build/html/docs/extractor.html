@@ -151,11 +151,11 @@
 <p>In X2R Extractor, a tokenizer should implement two methods, tokenizeArr(array $arr) and tokenizeStr($str).</p>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/tok_1.PNG"><img alt="test" src="../_images/tok_1.PNG" /></a>
-<p class="caption">This is the caption of the figure (a simple paragraph).</p>
+<p class="caption">Tokenizers can be composited as a composited tokenizer that accepts string and tokenized it into an array of sub-strings.</p>
 </div>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/tok_2.PNG"><img alt="test" src="../_images/tok_2.PNG" /></a>
-<p class="caption">This is the caption of the figure (a simple paragraph).</p>
+<p class="caption">Tokenizer can also composited to form a composited tokenizer that accepts an array of sub-strings to an array of sub-strings with longer length, if there are any sub-string can be further tokenized.</p>
 </div>
 <p>X2R currently support two tokenizers, delimited-based tokenizer and cased-based tokenizer.</p>
 </div>

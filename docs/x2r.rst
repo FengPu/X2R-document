@@ -21,3 +21,34 @@ X2R 1.0 provides a JQuery-powered GUI and a command line Interface is planned to
 
 
 
+
+.. figure:: ./figs/uss_upload.PNG
+     :scale: 80%
+     :alt: test
+
+     User of X2R GUI first inputs RDF file. X2R GUI provides three input methods, input through text, input through a URL or input through a file. The default method is input through text, user can change to other two methods by clicking (marked in red words "Select other sources"). After input text, user needs to specify the RDF serialization format's type (marked in red words "Select the format of file") through a dropdown menu. There are two modes provided by X2R GUI, interactive and batch. User can specify the mode through a dropdown menu (marked in red words "Select the process mode (Interactive/Batch)"). For large RDF file, batch mode is more feasible than interactive mode, the implemented heuristics will automatically select terms, find URIs and replace URIs as an improved RDF file. For small to medium size RDF files that translated from raw data with meaningless data namings, interactive mode might be a better choice. If the user selects the batch mode, user will skip next two screenshots and follow by the forth screenshot.  
+
+
+.. figure:: ./figs/uss_extractor.PNG
+     :scale: 80%
+     :alt: test
+
+     After inputting the RDF, the control is handed over to Extractor. This screenshot depicted the GUI of Extractor. There is a table that lists the extracted URIs found in the inputted RDF with the automatically tokenized terms. If the automatically tokenized terms are not representive enougth, user can use the "edit" or "delete" buttons located in the end of each row to edit or delete the terms. GUI of Extractor provides a result size selector, and user can select the number of results showed per page. 
+
+
+.. figure:: ./figs/uss_mapper_format.PNG
+     :scale: 80%
+     :alt: test
+
+     m.
+
+
+.. figure:: ./figs/uss_format.PNG
+     :scale: 80%
+     :alt: test
+
+     f.
+
+
+
+

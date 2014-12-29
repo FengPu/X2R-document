@@ -84,13 +84,13 @@ In X2R Extractor, a tokenizer should implement two methods, tokenizeArr(array $a
      :scale: 80%
      :alt: test
 
-     This is the caption of the figure (a simple paragraph).
+     Tokenizers can be composited as a composited tokenizer that accepts string and tokenized it into an array of sub-strings.
 
 .. figure:: ./figs/tok_2.PNG
      :scale: 80%
      :alt: test
 
-     This is the caption of the figure (a simple paragraph). 
+     Tokenizer can also composited to form a composited tokenizer that accepts an array of sub-strings to an array of sub-strings with longer length, if there are any sub-string can be further tokenized. 
 
 X2R currently support two tokenizers, delimited-based tokenizer and cased-based tokenizer.
 
