@@ -147,7 +147,7 @@ Example
        {
         "s": {
          "type": "uri",
-         "value": "http://wikidata.dbpedia.org/uri_1"
+         "value": "http://wikidata.dbpedia.org/resource/Q140588"
         },
         "o": {
          "type": "literal",
@@ -158,7 +158,7 @@ Example
        {
         "s": {
          "type": "uri",
-         "value": "http://dbpedia.org/resource/uri_2"
+         "value": "http://dbpedia.org/resource/Category:Typhoon_shelters_in_Hong_Kong"
         },
         "o": {
          "type": "literal",
@@ -175,15 +175,7 @@ Example
 
 
 
-**Two more request/response examples (With default ResultRanker)**
 
- .. sourcecode:: http
-
-    GET /uss?q=typhoon&sites&output=json
-
- #. This request returns the results that match the search query terms "typhoon" AND "weather" from "http://dbpedia.org/sparql".
-
- #. Example 2: This request returns the results that match the search query terms "country" from "http://dbpedia.org/sparql" and "http://linkedgeodata.org/sparql". 
 
 
 
