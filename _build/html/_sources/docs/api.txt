@@ -373,6 +373,72 @@ USS
       :param string $sparqlQuery: The SPARQL query.
 
 
+
+.. php:class:: FederatedSearch
+  
+     FederatedSearch is the class provide search and operation to endpoints.
+ 
+  .. php:method:: addEndpoints($endpointList)
+     
+     :param:  $endpointList: List of endpoints.
+
+  .. php:method:: getEndpointList()
+     :returns: List of endpoints.
+
+  .. php:method:: removeEndpoints($endpointList)
+     :param:  $endpointList: List of endpoints.
+
+  .. php:method:: search($sparqlQuery)
+     :param:  $ sparqlQuery: The composed SPARQL query string.
+     :returns:  The search result from endpoints.
+
+
+.. php:class:: ResultProcessor
+
+     ResultProcessor is the class for filtering or re-ranking a given result set.
+
+  .. php:method:: addOneRefiner($refiner)
+    
+     :param:  $refiner: The name of the refiner.
+
+  .. php:method:: addOneRanker($ranker)
+    
+      :param:  $ranker: The name of the ranker.
+
+  .. php:method:: addConfiguration($config)
+
+      :param:  $config: The configuration of result processor.
+
+  .. php:method:: getConfiguration()
+    
+      :returns:  The configuration of result processor.
+
+  .. php:method:: process()
+    
+      :returns:  The processed search result.
+
+.. php:class:: UriSearchResults
+
+     UriSearchResults is the class for representing search results from different Endpoints with different rank scores
+
+  .. php:method:: addOneResult($dataSourceName, $processedResult)
+
+      :param:  $dataSourceName: The name of endpoint which the result search from. 
+      :param:  $processedResult: The processed search result.
+
+  .. php:method:: hasNextResult()
+      :returns:  TRUE or FALSE
+
+  .. php:method:: getNextResult()
+      :returns:  The processed search result.
+  .. php:method:: removeOneResult($uri)
+      :returns:  $uri – The URI which want to remove from result.
+  .. php:method:: removeMultipleResult($uris)
+      :param:  $uris – The list of URIs which want to remove from result.
+
+
+
+
 X2R
 ---
 

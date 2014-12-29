@@ -58,3 +58,18 @@ Composition of atomic hooks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   The atomic hooks can be composited through method chaining.   
+
+
+Examples:
+
+ #. This request returns the results that match the search query terms "typhoon" AND "weather" from "http://dbpedia.org/sparql".
+ #. Example 2: This request returns the results that match the search query terms "country" from "http://dbpedia.org/sparql" and "http://linkedgeodata.org/sparql". 
+
+
+.. figure:: ./figs/uss_2.PNG
+     :scale: 80%
+     :alt: test
+
+     This is the caption of the figure (a simple paragraph).
+
+

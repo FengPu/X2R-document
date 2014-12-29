@@ -80,7 +80,71 @@ Example
 
    .. sourcecode:: http
 
-      POST /mapper?rdfContent&mapping&format HTTP/1.1
+      POST /mapper?rdfContent=input_value&mapping=mapping_value&format=rdfxml HTTP/1.1
+
+
+   *input_value*:
+       .. sourcecode:: http
+
+           <?xml version="1.0" encoding="UTF-8"?>
+               <rdf:RDF
+                   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+                   xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+                   xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+                   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+           <rdf:Description rdf:about="http://127.0.0.1/DaTongSportsCenter">
+               <rdf:type rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
+               <updatedAt xmlns="http://openisdm.iis.sinica.edu.tw/VR/" 
+                   rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-07-31T03:23:47Z</updatedAt>
+               <geo:long>121.516</geo:long>
+               <hasTelephone xmlns="http://openisdm.iis.sinica.edu.tw/VR/">2592-0055</hasTelephone>
+               <hasName xmlns="http://openisdm.iis.sinica.edu.tw/VR/">Da Tong Sports Center</hasName>
+               <geo:location>No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)</geo:location>
+               <usedFor xmlns="http://openisdm.iis.sinica.edu.tw/VR/">Sport</usedFor>
+               <createdAt xmlns="http://openisdm.iis.sinica.edu.tw/VR/" 
+                   rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-11-28T09:05:13Z</createdAt>
+               <geo:lat>25.0648</geo:lat>
+           </rdf:Description>
+
+          <rdf:Description rdf:about="http://127.0.0.1/ShilinSportsCenter">
+            <rdf:type rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
+            <updatedAt xmlns="http://openisdm.iis.sinica.edu.tw/VR/" 
+                rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-07-31T03:23:47Z</updatedAt>
+            <geo:long>121.521</geo:long>
+            <hasTelephone xmlns="http://openisdm.iis.sinica.edu.tw/VR/">2880-6066</hasTelephone>
+            <hasName xmlns="http://openisdm.iis.sinica.edu.tw/VR/">Shilin Sports Center</hasName>
+            <geo:location>No.1, Shishang Rd., Shilin Dist., Taipei City 111, Taiwan (R.O.C.)</geo:location>
+            <usedFor xmlns="http://openisdm.iis.sinica.edu.tw/VR/">Sport</usedFor>
+            <createdAt xmlns="http://openisdm.iis.sinica.edu.tw/VR/" 
+                rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-11-28T09:05:13Z</createdAt>
+            <geo:lat>25.0897</geo:lat>
+          </rdf:Description>
+
+           </rdf:RDF>
+    
+     *mapping_value*:
+       .. sourcecode:: json
+
+           { "metadata": [],
+             "mapping": 
+               [
+                   {
+                    "status": "N/A",
+                    "originalURI": "http://127.0.0.1/DaTongSportsCenter", 
+                    "replacedURI": "http://openisdm.iis.sinica.edu.tw/VR/DaTongSportsCenter", 
+                    "term": "Datong Sports Center"
+                    },
+                    {
+                    "status": "N/A",
+                    "originalURI": "http://127.0.0.1/ShilinSportsCenterr", 
+                    "replacedURI": "http://openisdm.iis.sinica.edu.tw/VR/ShilinSportsCenter", 
+                    "term": "Shilin Sports Center"
+                    }
+               ]
+            }
+
+
 
 
    **Example response**:
@@ -95,18 +159,35 @@ Example
          <rdf:RDF
              xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
              xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
-             xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
-     <rdf:Description rdf:about="http://openisdm.iis.sinica.edu.tw/VR/DaTongSportsCenter">
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+      <rdf:Description rdf:about="http://openisdm.iis.sinica.edu.tw/VR/DatongSportsCenter">
          <rdf:type rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
          <updatedAt xmlns="http://openisdm.iis.sinica.edu.tw/VR/" 
              rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-07-31T03:23:47Z</updatedAt>
          <geo:long>121.516</geo:long>
          <hasTelephone xmlns="http://openisdm.iis.sinica.edu.tw/VR/">2592-0055</hasTelephone>
-         <hasName xmlns="http://openisdm.iis.sinica.edu.tw/VR/">Da Tong Sports Center</hasName>
+         <hasName xmlns="http://openisdm.iis.sinica.edu.tw/VR/">Datong Sports Center</hasName>
          <geo:location>No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)</geo:location>
          <usedFor xmlns="http://openisdm.iis.sinica.edu.tw/VR/">Sport</usedFor>
          <createdAt xmlns="http://openisdm.iis.sinica.edu.tw/VR/" 
              rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-11-28T09:05:13Z</createdAt>
          <geo:lat>25.0648</geo:lat>
-     </rdf:Description>
+      </rdf:Description>
+
+      <rdf:Description rdf:about="http://openisdm.iis.sinica.edu.tw/VR/ShilinSportsCenter">
+        <rdf:type rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
+        <updatedAt xmlns="http://openisdm.iis.sinica.edu.tw/VR/" 
+            rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-07-31T03:23:47Z</updatedAt>
+        <geo:long>121.521</geo:long>
+        <hasTelephone xmlns="http://openisdm.iis.sinica.edu.tw/VR/">2880-6066</hasTelephone>
+        <hasName xmlns="http://openisdm.iis.sinica.edu.tw/VR/">Shilin Sports Center</hasName>
+        <geo:location>No.1, Shishang Rd., Shilin Dist., Taipei City 111, Taiwan (R.O.C.)</geo:location>
+        <usedFor xmlns="http://openisdm.iis.sinica.edu.tw/VR/">Sport</usedFor>
+        <createdAt xmlns="http://openisdm.iis.sinica.edu.tw/VR/" 
+            rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-11-28T09:05:13Z</createdAt>
+        <geo:lat>25.0897</geo:lat>
+      </rdf:Description>
+
      </rdf:RDF>

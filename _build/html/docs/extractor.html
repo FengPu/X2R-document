@@ -35,6 +35,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
+        <li class="right" >
           <a href="mapper.html" title="Mapper"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -184,6 +187,37 @@
 </div>
 <p>X2R currently support two tokenizers, delimited-based tokenizer and cased-based tokenizer.</p>
 <p><strong>Web API Definition:</strong></p>
+<dl class="post">
+<dt id="post--extractor{?excludedNamespaces, checkUrisStatus, rdfContent}">
+<tt class="descname">POST </tt><tt class="descname">/extractor{?excludedNamespaces, checkUrisStatus, rdfContent}</tt><a class="headerlink" href="#post--extractor{?excludedNamespaces, checkUrisStatus, rdfContent}" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Query Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>excludedNamespaces</strong> &#8211; <em>(optional)</em> This specifies a list of namespaces to be skipped. That is, if a found URI belonged to this list, the URI will not be processed anymore.</li>
+<li><strong>checkUrisStatus</strong> &#8211; <em>(required)</em> This determines if <cite>extractor</cite> checks the status codes of found URIs.</li>
+<li><strong>rdfContent</strong> &#8211; <em>(required)</em> This specifies the content of RDF to be processed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>Content-Type</strong> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><strong>200</strong> &#8211; no error</li>
+<li><strong>404</strong> &#8211; exception</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <div class="section" id="query-parameter-format-detail">
 <h4>Query Parameter Format Detail<a class="headerlink" href="#query-parameter-format-detail" title="Permalink to this headline">¶</a></h4>
 <table class="docutils field-list" frame="void" rules="none">
@@ -221,36 +255,204 @@
 <div class="highlight-php"><div class="highlight"><pre><span class="x">[{&quot;status&quot;: &quot;&quot;,</span>
 <span class="x">  &quot;originalURI&quot;: &quot;&quot;,</span>
 <span class="x">  &quot;replacedURI&quot;: &quot;&quot;,</span>
-<span class="x">  &quot;term&quot;: &quot;&quot;,</span>
-<span class="x">  &quot;lineNumbers&quot;: &quot;&quot;</span>
+<span class="x">  &quot;term&quot;: &quot;&quot;</span>
 <span class="x"> }</span>
 <span class="x">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><p><strong>Example request</strong>:</p>
-<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/extractor?excludedNamespaces&amp;checkUrisStatus&amp;rdfContent</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div><p>Here provides three examples of requesting Extractor Web service. Example 1 is a request without excludeNamespaces. In that case, Extractor will return all URIs found in given rdfContent with their corresponding terms. Example 2 illustrates the case of using excludeNamespaces to ignore URIs that are belonged to trustable namespaces, such as &#8220;<a class="reference external" href="http://www.w3c.org">http://www.w3c.org</a>&#8221;. Example 3 demos the usage of checkUrisStatus. Depending on the value of checkUrisStatus, &#8220;on&#8221; will let Extractor test the connection to extracted URI and get the response&#8217;s status code. In the context of X2R, only two codes, &#8220;200&#8221; and &#8220;303&#8221;, are valid. For status code other than 200 and 303, Extractor returns &#8220;error&#8221;. The connection test will cause additional delay to Extractor services. For users who need instant response, setting checkUrisStatus as &#8220;off&#8221; can save waiting time.</p>
+<p><strong>Example 1 request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/extractor?rdfContent=input_value</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </pre></div>
 </div>
-<p><strong>Example response</strong>:</p>
-<div class="highlight-http"><div class="highlight"><pre> HTTP/1.1 200 OK
- Vary: Accept
- Content-Type: application/json
+<dl class="docutils">
+<dt><em>input_value</em>:</dt>
+<dd><div class="first last highlight-http"><div class="highlight"><pre> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+     &lt;rdf:RDF
+         xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot;
+         xmlns:geo=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#&quot;
+         xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;
+         xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;&gt;
 
-{&quot;metadata&quot;: [
-        ],
- &quot;mapping&quot;:
-        [{&quot;status&quot;: &quot;N/A&quot;,
-          &quot;originalURI&quot;: &quot;http://127.0.0.1/autoGeneratedUri&quot;,
-          &quot;replacedURI&quot;: &quot;&quot;,
-          &quot;term&quot;: &quot;auto generated uri&quot;,
-          &quot;lineNumbers&quot;: &quot;3, 31&quot;
-         }
-        ]
+ &lt;rdf:Description rdf:about=&quot;http://127.0.0.1/DaTongSportsCenter&quot;&gt;
+     &lt;rdf:type rdf:resource=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing&quot;/&gt;
+     &lt;updatedAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+         rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2013-07-31T03:23:47Z&lt;/updatedAt&gt;
+     &lt;geo:long&gt;121.516&lt;/geo:long&gt;
+     &lt;hasTelephone xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;2592-0055&lt;/hasTelephone&gt;
+     &lt;hasName xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Da Tong Sports Center&lt;/hasName&gt;
+     &lt;geo:location&gt;No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)&lt;/geo:location&gt;
+     &lt;usedFor xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Sport&lt;/usedFor&gt;
+     &lt;createdAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+         rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2012-11-28T09:05:13Z&lt;/createdAt&gt;
+     &lt;geo:lat&gt;25.0648&lt;/geo:lat&gt;
+ &lt;/rdf:Description&gt;
+
+&lt;rdf:Description rdf:about=&quot;http://127.0.0.1/ShilinSportsCenter&quot;&gt;
+  &lt;rdf:type rdf:resource=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing&quot;/&gt;
+  &lt;updatedAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+      rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2013-07-31T03:23:47Z&lt;/updatedAt&gt;
+  &lt;geo:long&gt;121.521&lt;/geo:long&gt;
+  &lt;hasTelephone xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;2880-6066&lt;/hasTelephone&gt;
+  &lt;hasName xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Shilin Sports Center&lt;/hasName&gt;
+  &lt;geo:location&gt;No.1, Shishang Rd., Shilin Dist., Taipei City 111, Taiwan (R.O.C.)&lt;/geo:location&gt;
+  &lt;usedFor xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Sport&lt;/usedFor&gt;
+  &lt;createdAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+      rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2012-11-28T09:05:13Z&lt;/createdAt&gt;
+  &lt;geo:lat&gt;25.0897&lt;/geo:lat&gt;
+&lt;/rdf:Description&gt;
+
+ &lt;/rdf:RDF&gt;
+</pre></div>
+</div>
+</dd>
+</dl>
+<p><strong>Example 1 response</strong>:</p>
+<div class="highlight-json"><div class="highlight"><pre>HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json
+
+{
+&quot;metadata&quot;:[
+],
+&quot;mapping&quot;:[
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://127.0.0.1/DaTongSportsCenter&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; Da Tong Sports Center &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; 22 rdf syntax ns type &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://openisdm.iis.sinica.edu.tw/VR/updatedAt&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; updated At &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://www.w3.org/2003/01/geo/wgs84_pos#long&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; wgs84 pos long &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://openisdm.iis.sinica.edu.tw/VR/hasTelephone&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; has Telephone &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://openisdm.iis.sinica.edu.tw/VR/hasName&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; has Name &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://www.w3.org/2003/01/geo/wgs84_pos#location&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; wgs84 pos location &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://openisdm.iis.sinica.edu.tw/VR/usedFor&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; used For &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://openisdm.iis.sinica.edu.tw/VR/createdAt&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; created At &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://www.w3.org/2003/01/geo/wgs84_pos#lat&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; wgs84 pos lat &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://127.0.0.1/ShilinSportsCenter&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; Shilin Sports Center &quot;
+}
+]
+}
+</pre></div>
+</div>
+<p><strong>Example 2 request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/extractor?excludedNamespaces[]&amp;rdfContent=input_value</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<p><em>excludedNamespaces[]</em></p>
+<div class="highlight-http"><div class="highlight"><pre>excludedNamespaces[]=www.w3.org&amp;excludedNamespaces[]=openisdm.iis.sinica.edu.tw
+</pre></div>
+</div>
+<p><em>input_value</em> is the same as Example 1&#8217;s erquest.</p>
+<p><strong>Example 2 response</strong>:</p>
+<div class="highlight-json"><div class="highlight"><pre>HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json
+
+{
+&quot;metadata&quot;:[
+],
+&quot;mapping&quot;:[
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://127.0.0.1/DaTongSportsCenter&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; Da Tong Sports Center &quot;
+},
+{
+&quot;status&quot;:&quot;N/A&quot;,
+&quot;originalURI&quot;:&quot;http://127.0.0.1/ShilinSportsCenter&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; Shilin Sports Center &quot;
+}
+]
+}
+</pre></div>
+</div>
+<p><strong>Example 3 request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/extractor?excludedNamespaces[]&amp;rdfContent=input_value&amp;checkUrisStatus=on</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<p><em>excludedNamespaces[]</em> is the same as Example 2&#8217;s request.</p>
+<p><em>input_value</em> is the same as Example 1&#8217;s request.</p>
+<p><strong>Example 3 response</strong>:</p>
+<div class="highlight-json"><div class="highlight"><pre>HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json
+
+{
+&quot;metadata&quot;:[
+],
+&quot;mapping&quot;:[
+{
+&quot;status&quot;:&quot;error&quot;,
+&quot;originalURI&quot;:&quot;http://127.0.0.1/DaTongSportsCenter&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; Da Tong Sports Center &quot;
+},
+{
+&quot;status&quot;:&quot;error&quot;,
+&quot;originalURI&quot;:&quot;http://127.0.0.1/ShilinSportsCenter&quot;,
+&quot;replacedURI&quot;:&quot;&quot;,
+&quot;term&quot;:&quot; Shilin Sports Center &quot;
+}
+]
 }
 </pre></div>
 </div>
@@ -277,7 +479,7 @@
 <li><a class="reference internal" href="#response-format-detail">Response Format Detail</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id2">Example</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -318,6 +520,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
         <li class="right" >
           <a href="mapper.html" title="Mapper"
              >next</a> |</li>

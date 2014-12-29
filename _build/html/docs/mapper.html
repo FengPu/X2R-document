@@ -35,6 +35,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
+        <li class="right" >
           <a href="uss.html" title="URI Search Service"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -112,6 +115,37 @@
 </table>
 <div class="section" id="web-api-definition">
 <h3>Web API Definition<a class="headerlink" href="#web-api-definition" title="Permalink to this headline">¶</a></h3>
+<dl class="post">
+<dt id="post--mapper{?rdfContent, mapping, format}">
+<tt class="descname">POST </tt><tt class="descname">/mapper{?rdfContent, mapping, format}</tt><a class="headerlink" href="#post--mapper{?rdfContent, mapping, format}" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Query Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>rdfContent</strong> &#8211; (required) This specifies the content of RDF to be processed.</li>
+<li><strong>mapping</strong> &#8211; (required) This specifies the information needed for <cite>mapper</cite> to update the URIs found in rdfContent.</li>
+<li><strong>format</strong> &#8211; (optional) This specifies the format of output.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>Content-Type</strong> &#8211; application/rdf+xml</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><strong>200</strong> &#8211; no error</li>
+<li><strong>404</strong> &#8211; exception</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <div class="section" id="query-parameter-format-detail">
 <h4>Query Parameter Format Detail<a class="headerlink" href="#query-parameter-format-detail" title="Permalink to this headline">¶</a></h4>
 <table class="docutils field-list" frame="void" rules="none">
@@ -136,9 +170,76 @@
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p><strong>Example request</strong>:</p>
-<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/mapper?rdfContent&amp;mapping&amp;format</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/mapper?rdfContent=input_value&amp;mapping=mapping_value&amp;format=rdfxml</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </pre></div>
 </div>
+<dl class="docutils">
+<dt><em>input_value</em>:</dt>
+<dd><blockquote class="first">
+<div><div class="highlight-http"><div class="highlight"><pre> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+     &lt;rdf:RDF
+         xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot;
+         xmlns:geo=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#&quot;
+         xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;
+         xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;&gt;
+
+ &lt;rdf:Description rdf:about=&quot;http://127.0.0.1/DaTongSportsCenter&quot;&gt;
+     &lt;rdf:type rdf:resource=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing&quot;/&gt;
+     &lt;updatedAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+         rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2013-07-31T03:23:47Z&lt;/updatedAt&gt;
+     &lt;geo:long&gt;121.516&lt;/geo:long&gt;
+     &lt;hasTelephone xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;2592-0055&lt;/hasTelephone&gt;
+     &lt;hasName xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Da Tong Sports Center&lt;/hasName&gt;
+     &lt;geo:location&gt;No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)&lt;/geo:location&gt;
+     &lt;usedFor xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Sport&lt;/usedFor&gt;
+     &lt;createdAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+         rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2012-11-28T09:05:13Z&lt;/createdAt&gt;
+     &lt;geo:lat&gt;25.0648&lt;/geo:lat&gt;
+ &lt;/rdf:Description&gt;
+
+&lt;rdf:Description rdf:about=&quot;http://127.0.0.1/ShilinSportsCenter&quot;&gt;
+  &lt;rdf:type rdf:resource=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing&quot;/&gt;
+  &lt;updatedAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+      rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2013-07-31T03:23:47Z&lt;/updatedAt&gt;
+  &lt;geo:long&gt;121.521&lt;/geo:long&gt;
+  &lt;hasTelephone xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;2880-6066&lt;/hasTelephone&gt;
+  &lt;hasName xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Shilin Sports Center&lt;/hasName&gt;
+  &lt;geo:location&gt;No.1, Shishang Rd., Shilin Dist., Taipei City 111, Taiwan (R.O.C.)&lt;/geo:location&gt;
+  &lt;usedFor xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Sport&lt;/usedFor&gt;
+  &lt;createdAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+      rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2012-11-28T09:05:13Z&lt;/createdAt&gt;
+  &lt;geo:lat&gt;25.0897&lt;/geo:lat&gt;
+&lt;/rdf:Description&gt;
+
+ &lt;/rdf:RDF&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="last docutils">
+<dt><em>mapping_value</em>:</dt>
+<dd><div class="first last highlight-json"><div class="highlight"><pre><span class="p">{</span> <span class="nt">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="nt">&quot;mapping&quot;</span><span class="p">:</span>
+    <span class="p">[</span>
+        <span class="p">{</span>
+         <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;N/A&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;originalURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.0.1/DaTongSportsCenter&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;replacedURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://openisdm.iis.sinica.edu.tw/VR/DaTongSportsCenter&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;term&quot;</span><span class="p">:</span> <span class="s2">&quot;Datong Sports Center&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+         <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;N/A&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;originalURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.0.1/ShilinSportsCenterr&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;replacedURI&quot;</span><span class="p">:</span> <span class="s2">&quot;http://openisdm.iis.sinica.edu.tw/VR/ShilinSportsCenter&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;term&quot;</span><span class="p">:</span> <span class="s2">&quot;Shilin Sports Center&quot;</span>
+         <span class="p">}</span>
+    <span class="p">]</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
 <p><strong>Example response</strong>:</p>
 <div class="highlight-http"><div class="highlight"><pre> HTTP/1.1 200 OK
  Vary: Accept
@@ -148,20 +249,37 @@
     &lt;rdf:RDF
         xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot;
         xmlns:geo=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#&quot;
-        xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;&gt;
-&lt;rdf:Description rdf:about=&quot;http://openisdm.iis.sinica.edu.tw/VR/DaTongSportsCenter&quot;&gt;
+        xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;
+        xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;&gt;
+
+ &lt;rdf:Description rdf:about=&quot;http://openisdm.iis.sinica.edu.tw/VR/DatongSportsCenter&quot;&gt;
     &lt;rdf:type rdf:resource=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing&quot;/&gt;
     &lt;updatedAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
         rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2013-07-31T03:23:47Z&lt;/updatedAt&gt;
     &lt;geo:long&gt;121.516&lt;/geo:long&gt;
     &lt;hasTelephone xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;2592-0055&lt;/hasTelephone&gt;
-    &lt;hasName xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Da Tong Sports Center&lt;/hasName&gt;
+    &lt;hasName xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Datong Sports Center&lt;/hasName&gt;
     &lt;geo:location&gt;No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)&lt;/geo:location&gt;
     &lt;usedFor xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Sport&lt;/usedFor&gt;
     &lt;createdAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
         rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2012-11-28T09:05:13Z&lt;/createdAt&gt;
     &lt;geo:lat&gt;25.0648&lt;/geo:lat&gt;
-&lt;/rdf:Description&gt;
+ &lt;/rdf:Description&gt;
+
+ &lt;rdf:Description rdf:about=&quot;http://openisdm.iis.sinica.edu.tw/VR/ShilinSportsCenter&quot;&gt;
+   &lt;rdf:type rdf:resource=&quot;http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing&quot;/&gt;
+   &lt;updatedAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+       rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2013-07-31T03:23:47Z&lt;/updatedAt&gt;
+   &lt;geo:long&gt;121.521&lt;/geo:long&gt;
+   &lt;hasTelephone xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;2880-6066&lt;/hasTelephone&gt;
+   &lt;hasName xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Shilin Sports Center&lt;/hasName&gt;
+   &lt;geo:location&gt;No.1, Shishang Rd., Shilin Dist., Taipei City 111, Taiwan (R.O.C.)&lt;/geo:location&gt;
+   &lt;usedFor xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;&gt;Sport&lt;/usedFor&gt;
+   &lt;createdAt xmlns=&quot;http://openisdm.iis.sinica.edu.tw/VR/&quot;
+       rdf:datatype=&quot;http://www.w3.org/2001/XMLSchema#dateTime&quot;&gt;2012-11-28T09:05:13Z&lt;/createdAt&gt;
+   &lt;geo:lat&gt;25.0897&lt;/geo:lat&gt;
+ &lt;/rdf:Description&gt;
+
 &lt;/rdf:RDF&gt;
 </pre></div>
 </div>
@@ -226,6 +344,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
         <li class="right" >
           <a href="uss.html" title="URI Search Service"
              >next</a> |</li>

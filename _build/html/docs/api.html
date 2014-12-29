@@ -35,6 +35,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
+        <li class="right" >
           <a href="hooks/t_uss_components.html" title="Template: Add USS Components"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -848,6 +851,120 @@ integrated into Mapper.</p>
 
 </dd></dl>
 
+<dl class="class">
+<dt id="FederatedSearch">
+<em class="property">class </em><tt class="descname">FederatedSearch</tt><a class="headerlink" href="#FederatedSearch" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>FederatedSearch is the class provide search and operation to endpoints.</div></blockquote>
+<dl class="method">
+<dt id="FederatedSearch::addEndpoints">
+<tt class="descname">addEndpoints</tt><big>(</big><em>$endpointList</em><big>)</big><a class="headerlink" href="#FederatedSearch::addEndpoints" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">$endpointList: List of endpoints.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ResultProcessor">
+<em class="property">class </em><tt class="descname">ResultProcessor</tt><a class="headerlink" href="#ResultProcessor" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>ResultProcessor is the class for filtering or re-ranking a given result set.</div></blockquote>
+<dl class="method">
+<dt id="ResultProcessor::addOneRefiner">
+<tt class="descname">addOneRefiner</tt><big>(</big><em>$refiner</em><big>)</big><a class="headerlink" href="#ResultProcessor::addOneRefiner" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">$refiner: The name of the refiner.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ResultProcessor::addOneRanker">
+<tt class="descname">addOneRanker</tt><big>(</big><em>$ranker</em><big>)</big><a class="headerlink" href="#ResultProcessor::addOneRanker" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">$ranker: The name of the ranker.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ResultProcessor::addConfiguration">
+<tt class="descname">addConfiguration</tt><big>(</big><em>$config</em><big>)</big><a class="headerlink" href="#ResultProcessor::addConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">$config: The configuration of result processor.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ResultProcessor::getConfiguration">
+<tt class="descname">getConfiguration</tt><big>(</big><big>)</big><a class="headerlink" href="#ResultProcessor::getConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The configuration of result processor.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ResultProcessor::process">
+<tt class="descname">process</tt><big>(</big><big>)</big><a class="headerlink" href="#ResultProcessor::process" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The processed search result.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="UriSearchResults">
+<em class="property">class </em><tt class="descname">UriSearchResults</tt><a class="headerlink" href="#UriSearchResults" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>UriSearchResults is the class for representing search results from different Endpoints with different rank scores</div></blockquote>
+<dl class="method">
+<dt id="UriSearchResults::addOneResult">
+<tt class="descname">addOneResult</tt><big>(</big><em>$dataSourceName</em>, <em>$processedResult</em><big>)</big><a class="headerlink" href="#UriSearchResults::addOneResult" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">$dataSourceName: The name of endpoint which the result search from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">$processedResult: The processed search result.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="x2r">
 <h2>X2R<a class="headerlink" href="#x2r" title="Permalink to this headline">¶</a></h2>
@@ -1004,6 +1121,9 @@ integrated into Mapper.</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
         <li class="right" >
           <a href="hooks/t_uss_components.html" title="Template: Add USS Components"
              >next</a> |</li>
