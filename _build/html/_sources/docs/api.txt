@@ -8,16 +8,16 @@ Extractor
 
 .. php:class:: Extractor
 
-  Extractor class is the class for modeling the 
+  Extractor class implements 
   URI extracting & analyzing process as below. 
         
-  Step 1. Load the RDF content to a Graph data structure 
+  #. Load the RDF content to a Graph data structure.
 
-  Step 2. Traverse the Graph to finding all the URIs 
+  #. Traverse the Graph to find all the URIs, and generate a filtered URI list.
 
-  Step 3. Transform filtered URIs to search friendly terms, where the filtered URI means the all but those URI listed in the `filtered URI list`
+  #. Transform URIs to search terms.
 
-  Step 4. Wrap these terms as a JSON output 
+  #. Wrap search terms in JSON output. 
 
   .. php:method:: getQueryTerms()
 

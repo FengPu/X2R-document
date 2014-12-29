@@ -79,6 +79,8 @@ This means each class is in a file by itself, and is in a namespace of at least 
 		{
 		}
 
+		
+
 Versioning
 ++++++++++++
 

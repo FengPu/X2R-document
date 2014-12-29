@@ -59,12 +59,14 @@
 <dl class="class">
 <dt id="Extractor">
 <em class="property">class </em><tt class="descname">Extractor</tt><a class="headerlink" href="#Extractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extractor class is the class for modeling the
+<dd><p>Extractor class implements
 URI extracting &amp; analyzing process as below.</p>
-<p>Step 1. Load the RDF content to a Graph data structure</p>
-<p>Step 2. Traverse the Graph to finding all the URIs</p>
-<p>Step 3. Transform filtered URIs to search friendly terms, where the filtered URI means the all but those URI listed in the <cite>filtered URI list</cite></p>
-<p>Step 4. Wrap these terms as a JSON output</p>
+<ol class="arabic simple">
+<li>Load the RDF content to a Graph data structure.</li>
+<li>Traverse the Graph to find all the URIs, and generate a filtered URI list.</li>
+<li>Transform URIs to search terms.</li>
+<li>Wrap search terms in JSON output.</li>
+</ol>
 <dl class="method">
 <dt id="Extractor::getQueryTerms">
 <tt class="descname">getQueryTerms</tt><big>(</big><big>)</big><a class="headerlink" href="#Extractor::getQueryTerms" title="Permalink to this definition">¶</a></dt>
