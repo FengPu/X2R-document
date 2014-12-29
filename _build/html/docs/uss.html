@@ -64,40 +64,22 @@
 <li>USS applies filters and rankers to remove the ambiguity or promote results that are commonly used</li>
 <li>USS selects one result for each request</li>
 </ol>
-<p>All steps listed above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we provide the system with the following hooks.</p>
+<p>All steps listed above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we provide the system with the following useful hooks. These hooks can be replaced or extended independly. These atomic hooks can also be composited through method chaining.</p>
 <p>In refined USS, seven <strong>atomic hooks</strong> can be replaced and extended, they are:</p>
-<ul>
-<li><p class="first"><strong>Query Parser</strong></p>
-<p>Query Parser parses the plain text query string into set of query terms, term refinement qualifiers, result set qualifiers and corresponding integration commands.</p>
-</li>
-<li><p class="first"><strong>Endpoint Cotainer</strong></p>
-</li>
+<ul class="simple">
+<li><strong>Query Parser</strong> - Query Parser parses the plain text query string into set of query terms, term refinement qualifiers, result set qualifiers and corresponding integration commands.</li>
+<li><strong>Federated Search</strong> - Federated Search is a container of implemented Endpoint instances. By containing Endpoint instances, query issued to Federated Search can be federatedly issued to all its contained Endpoint instances, and the results from contained Endpoint instances will be aggregated and returned as one result set.</li>
 </ul>
-<ul>
-<li><p class="first"><strong>Endpoint</strong> (see also: <a class="reference internal" href="api.html#Endpoint" title="Endpoint"><tt class="xref php php-class docutils literal"><span class="pre">Endpoint</span></tt></a>)</p>
-<p>Endpoint wraps the public Endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint accepts SQARQL query and return the result set in standard format of Endpoint.</p>
-</li>
-<li><p class="first"><strong>Term Refiner</strong></p>
-<p>Term Refiner takes one query term as its input and output a refined query term.</p>
-</li>
-<li><p class="first"><strong>Result Ranker</strong></p>
-<p>Result Ranker reorders the ranks of result set based on the heuristic that it wants to realize. In addition to heuristic, Result Ranker can also be a crowd sourcing task, which can be delegated to the crowd.</p>
-</li>
-<li><p class="first"><strong>Result Filter</strong></p>
-<p>Result Filter filters result set by patterns. The typical usage of Result Filter is to resolve ambiguity.</p>
-</li>
+<ul class="simple">
+<li><strong>Endpoint</strong> (see also: <a class="reference internal" href="api.html#Endpoint" title="Endpoint"><tt class="xref php php-class docutils literal"><span class="pre">Endpoint</span></tt></a>) - Endpoint wraps a public endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint accepts SQARQL query and return the result set in the standard format of Endpoint.</li>
+<li><strong>Term Refiner</strong> - Term Refiner takes one query term as its input and produces as output a refined query term.</li>
+<li><strong>Result Ranker</strong> - Result Ranker reorders the ranks of result set based on the heuristic that it wants to realize. In addition to an extensible set of heuristics, Result Ranker can also be a crowdsourcing task, which can be delegated to the crowd.</li>
+<li><strong>Result Filter</strong> - Result Filter augments USS&#8217;s ability in selectively reducing the size of result set of possible URIs. It filters result set by a regular expression patterns. The typical usage of Result Filter is to resolve ambiguity by excluding URIs that have the desciptions matched the defined regular expression patterns.</li>
 </ul>
-<ul>
-<li><p class="first"><strong>Result Integrator</strong></p>
-<p>Result Integrator takes two or more result sets and integrates them as one ranked result set.</p>
-</li>
-<li><p class="first"><strong>Result Selector</strong></p>
-</li>
+<ul class="simple">
+<li><strong>Result Integrator</strong> - Result Integrator takes two or more result sets and integrates them as one ranked result set.</li>
+<li><strong>Result Selector</strong> - Result Selector is an abstract class defined a common interface for the task of picking one fittest URI from a set of possible URIs returned from existing Endpoints. The task can be either automatic doned by programmed heuristics or a crowdsourcing task that can be accomplished by poping up a user interface for real human to select the fittest URI.</li>
 </ul>
-<div class="section" id="composition-of-atomic-hooks">
-<h2>Composition of atomic hooks<a class="headerlink" href="#composition-of-atomic-hooks" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>The atomic hooks can be composited through method chaining.</div></blockquote>
 <p><strong>Examples:</strong></p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -107,7 +89,6 @@
 </div></blockquote>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/uss_2.PNG"><img alt="test" src="../_images/uss_2.PNG" /></a>
-</div>
 </div>
 <div class="section" id="web-api-definition">
 <h2>Web API Definition<a class="headerlink" href="#web-api-definition" title="Permalink to this headline">¶</a></h2>
@@ -258,7 +239,6 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">URI Search Service</a><ul>
-<li><a class="reference internal" href="#composition-of-atomic-hooks">Composition of atomic hooks</a></li>
 <li><a class="reference internal" href="#web-api-definition">Web API Definition</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
 </ul>

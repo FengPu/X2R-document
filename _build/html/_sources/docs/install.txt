@@ -35,10 +35,10 @@ Or if you don't have curl::
 Install Dependent Packages
 ------------------
 
-Installing X2R is simple with `composer <https://getcomposer.org/>`_, just use this command::
+Installing X2R is simple with `composer <https://getcomposer.org/>`_. Just use this command::
 
     $ php composer.phar install
 
-If you did a global install of `composer <https://getcomposer.org/>`_, run this instead::
+If you did a global install of `composer <https://getcomposer.org/>`_, run instead::
 
     $ composer install

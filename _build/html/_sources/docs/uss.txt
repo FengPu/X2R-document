@@ -17,47 +17,34 @@ URI Search Service (USS) is a federated search service. The general process of U
 #. USS selects one result for each request
 
 
-All steps listed above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we provide the system with the following hooks.  
+All steps listed above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we provide the system with the following useful hooks. These hooks can be replaced or extended independly. These atomic hooks can also be composited through method chaining.    
 
 
 In refined USS, seven **atomic hooks** can be replaced and extended, they are: 
 
-* **Query Parser**
+* **Query Parser** - Query Parser parses the plain text query string into set of query terms, term refinement qualifiers, result set qualifiers and corresponding integration commands.
 
-  Query Parser parses the plain text query string into set of query terms, term refinement qualifiers, result set qualifiers and corresponding integration commands.
-
-* **Endpoint Cotainer**
+* **Federated Search** - Federated Search is a container of implemented Endpoint instances. By containing Endpoint instances, query issued to Federated Search can be federatedly issued to all its contained Endpoint instances, and the results from contained Endpoint instances will be aggregated and returned as one result set.
   
 .. _Endpoint:
-* **Endpoint** (see also: :php:class:`Endpoint`)
+* **Endpoint** (see also: :php:class:`Endpoint`) - Endpoint wraps a public endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint accepts SQARQL query and return the result set in the standard format of Endpoint. 
 
-  Endpoint wraps the public Endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint accepts SQARQL query and return the result set in standard format of Endpoint. 
+* **Term Refiner** - Term Refiner takes one query term as its input and produces as output a refined query term.  
 
-* **Term Refiner**
+* **Result Ranker** - Result Ranker reorders the ranks of result set based on the heuristic that it wants to realize. In addition to an extensible set of heuristics, Result Ranker can also be a crowdsourcing task, which can be delegated to the crowd. 
 
-  Term Refiner takes one query term as its input and output a refined query term.  
-
-* **Result Ranker**
-
-  Result Ranker reorders the ranks of result set based on the heuristic that it wants to realize. In addition to heuristic, Result Ranker can also be a crowd sourcing task, which can be delegated to the crowd. 
-
-* **Result Filter**
-
-  Result Filter filters result set by patterns. The typical usage of Result Filter is to resolve ambiguity.  
+* **Result Filter** - Result Filter augments USS's ability in selectively reducing the size of result set of possible URIs. It filters result set by a regular expression patterns. The typical usage of Result Filter is to resolve ambiguity by excluding URIs that have the desciptions matched the defined regular expression patterns.  
 
 ..  (Term filters: filter some terms) Result Filter takes two input parameters: the filtered size and the result set. The filtered size, which determine the size of returned result set, sholud be larger than zero. The first ''filtered size'' results will be returned as the filtered result set. 
 
-* **Result Integrator**
+* **Result Integrator** - Result Integrator takes two or more result sets and integrates them as one ranked result set. 
 
-  Result Integrator takes two or more result sets and integrates them as one ranked result set. 
+* **Result Selector** - Result Selector is an abstract class defined a common interface for the task of picking one fittest URI from a set of possible URIs returned from existing Endpoints. The task can be either automatic doned by programmed heuristics or a crowdsourcing task that can be accomplished by poping up a user interface for real human to select the fittest URI.   
 
-* **Result Selector**
+  
 
 
-Composition of atomic hooks
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-  The atomic hooks can be composited through method chaining.   
+ 
 
 
 **Examples:**

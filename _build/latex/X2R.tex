@@ -14,9 +14,9 @@
 
 
 \title{X2R Documentation}
-\date{December 25, 2014}
+\date{December 29, 2014}
 \release{1.0}
-\author{Feng-Pu Yang}
+\author{Feng-Pu Yang, Gentry Yao}
 \newcommand{\sphinxlogo}{}
 \renewcommand{\releasename}{Release}
 \makeindex
@@ -112,6 +112,16 @@
 \def\PYGZat{@}
 \def\PYGZlb{[}
 \def\PYGZrb{]}
+
+\let\latexps@plain\ps@plain
+\pagenumbering{roman}
+\newcommand{\frontmatter} {\let\ps@plain\ps@empty\pagestyle{empty}}
+\newcommand{\mainmatter}{%
+\let\ps@plain\latexps@plain\pagestyle{plain}%
+\clearpage
+\pagenumbering{arabic}}
+
+
 \makeatother
 
 \begin{document}
@@ -122,2098 +132,8 @@
 
 
 
-\chapter{Introduction}
-\label{index:introduction}\label{index:welcome-to-x2r-document}
-\textbf{X2R} is a tool for helping developers to translate existing data in a variety of formats into linked-data compatible formats. The \textbf{X}, \textbf{2} and \textbf{R} in its name stand for existing data in a variety formats, to (the homonym of two) and linked-data compatible formats (i.e., RDF/XML), respectively.
-
-The motivation is to ease the transformation of data into linked-data and thus lower the entry barrier of generating linked-data. Using X2R, more developers can easily translate existing data on-demands, and creating linked-data incrementally.
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\scalebox{0.800000}{\includegraphics{dataflow_small.png}}
-\caption{The dataflow of X2R converter.}\end{figure}
-
-X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing RDFizer(translators). For a given raw data input in X (XML, CSV, JSON ...etc.) format, existing RDFizers can translated it into RDF serialization formats, such as Turtle, N-Triples, JSON-LD or RDF/XML. However,
-
-
-\section{Audiences}
-\label{docs/audience:audiences}\label{docs/audience::doc}
-Targeted users of X2R include people who develop linked-data applications and need to transform their legacy data into linked data. They can use the X2R GUI (Graphic User Interface) or batch-mode CLI (Command Line Interface). Developers who are experienced in PHP. If they feel current X2R's functionalities are sufficient, and want to build linked-data applications based on X2R. They can use X2R through API functions of the tool.
-
-People who are experienced in PHP and linked data and find that current X2R utilities are insufficient, they can extend the X2R framework based on the hooks provided by X2R.
-
-
-\section{How to Use This Document}
-\label{docs/howto:how-to-use-this-document}\label{docs/howto::doc}
-The index of this document can be found in \emph{genindex}. The search page, \emph{search}, can be used to search within this document.
-
-
-\chapter{User Guide}
-\label{index:user-guide}
-This part of the document focuses on how to set up an environment for X2R and all its components: Extractor, Mapper and USS. A quickstart is then presented to give an overview of X2R and its components.
-
-
-\section{Installation}
-\label{docs/install:installation}\label{docs/install::doc}\label{docs/install:id1}
-Three steps are needed to set up an X2R server, namely installing PHP, installing Composer and installing dependent packages. The detail instructions are listed as follows.
-
-
-\subsection{Install PHP}
-\label{docs/install:install-php}
-X2R is written in PHP. Before using X2R, the PHP should be installed.
-
-To install PHP, an official manual is available in \href{http://php.net/manual/en/install.php}{http://php.net/manual/en/install.php}.
-\begin{itemize}
-\item {} 
-\href{http://php.net/manual/en/install.unix.php}{Installation on Unix systems}
-
-\item {} 
-\href{http://php.net/manual/en/install.macosx.php}{Installation on Mac OS X}
-
-\item {} 
-\href{http://php.net/manual/en/install.windows.php}{Installation on Windows systems}
-
-\item {} 
-\href{http://php.net/manual/en/install.cloud.php}{Installation on Cloud Computing platforms}
-
-\end{itemize}
-
-
-\subsection{Install Composer}
-\label{docs/install:install-composer}
-The dependency of X2R is managed by `composer,' a PHP package management tool.
-Before trying X2R, get and install composer from \href{https://getcomposer.org/}{https://getcomposer.org/}.
-
-Run this in your terminal to get the latest Composer version:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{\PYGZdl{} curl \PYGZhy{}sS https://getcomposer.org/installer \textbar{} php}
-\end{Verbatim}
-
-Or if you don't have curl:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{\PYGZdl{} php \PYGZhy{}r \PYGZdq{}readfile(\PYGZsq{}https://getcomposer.org/installer\PYGZsq{});\PYGZdq{} \textbar{} php}
-\end{Verbatim}
-
-
-\subsection{Install Dependent Packages}
-\label{docs/install:install-dependent-packages}
-Installing X2R is simple with \href{https://getcomposer.org/}{composer}, just use this command:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{\PYGZdl{} php composer.phar install}
-\end{Verbatim}
-
-If you did a global install of \href{https://getcomposer.org/}{composer}, run this instead:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{\PYGZdl{} composer install}
-\end{Verbatim}
-
-
-\section{Quickstart}
-\label{docs/quickstart::doc}\label{docs/quickstart:quickstart}\label{docs/quickstart:id1}
-Here is a simple usage scenario for grasping the whole picture of X2R by example. It assumes you already have X2R installed. If you do not, head over to the {\hyperref[docs/install:installation]{\emph{Installation}}} section.
-
-\textless{}Example\textgreater{}
-
-X2R aims to improve the quality of RDF produced by typical format translators by replacing temporary or invalid URIs with valid and representive URIs.
-
-
-\chapter{Components}
-\label{index:components}
-
-\section{Extractor}
-\label{docs/extractor:extractor}\label{docs/extractor::doc}\label{docs/extractor:id1}
-Extractor is a tool that extracts URIs from a given RDF file, and then turns these URIs into query terms. The purpose of Extractor is to find URI that cannot be reached in the given RDF. These URIs are usually generated by typical format translators and violate linked data design rules proposed by Tim Berners-Lee, i.e., they cannot be looked up in the Web. By generating query terms for them, other X2R tools, USS and UMS, can help in finding or minting better URIs.
-
-RDF is comprised of three types of nodes: URI references, blank nodes or literals.
-
-
-\subsection{Input/Output}
-\label{docs/extractor:input-output}
-\textbf{Input}: RDFGraph
-
-\textbf{Output}: \emph{X2R data exchange format}
-
-Components of X2R share a common data exchange format: \emph{X2R data exchange format}. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below. Note that the ``replacedURI'' name/value pair is intentionally left blank in the context of Extractor (the potential replacedURI is obtained in the context of USS, and is applied in the context of Mapper).
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYGZob{} \PYGZdq{}metadata\PYGZdq{}: [],
-  \PYGZdq{}mapping\PYGZdq{}:
-    [
-        \PYGZob{}
-         \PYGZdq{}status\PYGZdq{}: value of status,
-         \PYGZdq{}originalURI\PYGZdq{}: value of original URI,
-         \PYGZdq{}replacedURI\PYGZdq{}: value of updated URI,
-         \PYGZdq{}term\PYGZdq{}: value of term
-         \PYGZcb{}
-    ]
- \PYGZcb{}
-\end{Verbatim}
-
-\begin{tabulary}{\linewidth}{|L|L|}
-\hline
-\textsf{\relax 
-name
-} & \textsf{\relax 
-value range/format
-}\\
-\hline
-status
- & 
-Range: \{``N/A'', ``200'', ``303'', ``error''\}
-\\
-
-originalURI
- & 
-A URI that can be found in input file and is valid
-\\
-
-replacedURI
- & 
-A valid URI
-\\
-
-term
- & 
-A string
-\\
-\hline\end{tabulary}
-
-
-
-\subsection{Example}
-\label{docs/extractor:example}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{p}{\PYGZob{}} \PYG{n+nt}{\PYGZdq{}metadata\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{p}{]}\PYG{p}{,}
-  \PYG{n+nt}{\PYGZdq{}mapping\PYGZdq{}}\PYG{p}{:}
-    \PYG{p}{[}
-        \PYG{p}{\PYGZob{}}
-         \PYG{n+nt}{\PYGZdq{}status\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}N/A\PYGZdq{}}\PYG{p}{,}
-         \PYG{n+nt}{\PYGZdq{}replacedURI\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://replaced\PYGZus{}test1\PYGZdq{}}\PYG{p}{,}
-         \PYG{n+nt}{\PYGZdq{}term\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}facilities store245\PYGZdq{}}\PYG{p}{,}
-         \PYG{n+nt}{\PYGZdq{}originalURI\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://140.109.21.188/facilities\PYGZsh{}store245\PYGZdq{}}
-         \PYG{p}{\PYGZcb{}}\PYG{p}{,}
-        \PYG{p}{\PYGZob{}}
-         \PYG{n+nt}{\PYGZdq{}status\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}N/A\PYGZdq{}}\PYG{p}{,}
-         \PYG{n+nt}{\PYGZdq{}replacedURI\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://replaced\PYGZus{}test2\PYGZdq{}}\PYG{p}{,}
-         \PYG{n+nt}{\PYGZdq{}term\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}facilities store244\PYGZdq{}}\PYG{p}{,}
-         \PYG{n+nt}{\PYGZdq{}originalURI\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://140.109.21.188/facilities\PYGZsh{}store244\PYGZdq{}}
-        \PYG{p}{\PYGZcb{}}
-    \PYG{p}{]}
- \PYG{p}{\PYGZcb{}}
-\end{Verbatim}
-
-
-\subsection{Design}
-\label{docs/extractor:design}
-
-\subsubsection{Process}
-\label{docs/extractor:process}
-
-\subsubsection{Major components}
-\label{docs/extractor:major-components}
-\textbf{RDFGraph}
-
-\emph{one element of {[}''json'', ``ntriples'', ``turtle'', ``rdfxml'', ``n3'', ``rdfa'', ``guess''{]}} and \emph{string in a RDF serialization format}
-
-Extractor accepts a subset of RDF serialization formats. Users of Extractor should specify the input format in terms of ``value'' listed in the Table below. If users have no idea of what the format of input is, they can use the ``guess'' value to ask Extractor to recognize the input's format for them (if it is one of the supported format list).
-
-\begin{tabulary}{\linewidth}{|L|L|L|}
-\hline
-\textsf{\relax 
-value
-} & \textsf{\relax 
-name
-} & \textsf{\relax 
-reference
-}\\
-\hline
-json
- & 
-RDF/JSON
- & 
-\href{http://n2.talis.com/wiki/RDF\_JSON\_Specification}{http://n2.talis.com/wiki/RDF\_JSON\_Specification}
-\\
-
-ntriples
- & 
-N-Triples
- & 
-\href{http://www.w3.org/TR/n-triples/}{http://www.w3.org/TR/n-triples/}
-\\
-
-turtle
- & 
-Turtle
- & 
-\href{http://www.dajobe.org/2004/01/turtle}{http://www.dajobe.org/2004/01/turtle}
-\\
-
-rdfxml
- & 
-RDF/XML
- & 
-\href{http://www.w3.org/TR/rdf-syntax-grammar}{http://www.w3.org/TR/rdf-syntax-grammar}
-\\
-
-n3
- & 
-N3
- & 
-\href{http://www.w3.org/2000/10/swap/grammar/n3}{http://www.w3.org/2000/10/swap/grammar/n3}
-\\
-
-rdfa
- & 
-RDFa
- & 
-\href{http://www.w3.org/TR/rdfa-core/}{http://www.w3.org/TR/rdfa-core/}
-\\
-
-guess
- &  & 
-If user don't know the format
-\\
-\hline\end{tabulary}
-
-
-\textbf{Tokenizer} is a major component of extractor. It aims to tokenize the tail of extracted URIs into word chuncks that can then be used as query terms to find better URIs.
-
-In X2R Extractor, a tokenizer should implement two methods, tokenizeArr(array \$arr) and tokenizeStr(\$str).
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\scalebox{0.800000}{\includegraphics{tok_1.PNG}}
-\caption{This is the caption of the figure (a simple paragraph).}\end{figure}
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\scalebox{0.800000}{\includegraphics{tok_2.PNG}}
-\caption{This is the caption of the figure (a simple paragraph).}\end{figure}
-
-X2R currently support two tokenizers, delimited-based tokenizer and cased-based tokenizer.
-
-\textbf{Web API Definition:}
-
-
-\begin{fulllineitems}
-\phantomsection\label{docs/extractor:post--extractor_?excludedNamespaces, checkUrisStatus, rdfContent_}\pysigline{\bfcode{POST~}\bfcode{/extractor\{?excludedNamespaces,~checkUrisStatus,~rdfContent\}}}~\begin{quote}\begin{description}
-\item[{Query Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{excludedNamespaces} -- \emph{(optional)} This specifies a list of namespaces to be skipped. That is, if a found URI belonged to this list, the URI will not be processed anymore.
-
-\item {} 
-\textbf{checkUrisStatus} -- \emph{(required)} This determines if \emph{extractor} checks the status codes of found URIs.
-
-\item {} 
-\textbf{rdfContent} -- \emph{(required)} This specifies the content of RDF to be processed.
-
-\end{itemize}
-
-\item[{Response Headers}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{Content-Type} -- application/json
-
-\end{itemize}
-
-\item[{Status Codes}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{200} -- no error
-
-\item {} 
-\textbf{404} -- exception
-
-\end{itemize}
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-
-\paragraph{Query Parameter Format Detail}
-\label{docs/extractor:query-parameter-format-detail}\begin{quote}\begin{description}
-\item[{excludedNamespace}] \leavevmode
-\item[{checkUrisStatus}] \leavevmode
-\item[{rdfContent}] \leavevmode
-\end{description}\end{quote}
-
-
-\paragraph{Response Format Detail}
-\label{docs/extractor:response-format-detail}
-Content-Type: application/json
-
-Response template:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{\PYGZob{}\PYGZdq{}metadata\PYGZdq{}: [],}
-\PYG{x}{ \PYGZdq{}mapping\PYGZdq{}:}
-\PYG{x}{             [\PYGZob{}\PYGZdq{}status\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
-\PYG{x}{               \PYGZdq{}originalURI\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
-\PYG{x}{               \PYGZdq{}replacedURI\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
-\PYG{x}{               \PYGZdq{}term\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
-\PYG{x}{               \PYGZdq{}lineNumbers\PYGZdq{}: \PYGZdq{}\PYGZdq{}}
-\PYG{x}{              \PYGZcb{}}
-\PYG{x}{             ]}
-\PYG{x}{\PYGZcb{}}
-\end{Verbatim}
-
-mapping entry:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{[\PYGZob{}\PYGZdq{}status\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
-\PYG{x}{  \PYGZdq{}originalURI\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
-\PYG{x}{  \PYGZdq{}replacedURI\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
-\PYG{x}{  \PYGZdq{}term\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
-\PYG{x}{  \PYGZdq{}lineNumbers\PYGZdq{}: \PYGZdq{}\PYGZdq{}}
-\PYG{x}{ \PYGZcb{}}
-\PYG{x}{]}
-\end{Verbatim}
-
-
-\subsubsection{Example}
-\label{docs/extractor:id2}\begin{quote}
-
-\textbf{Example request}:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n+nf}{POST} \PYG{n+nn}{/extractor?excludedNamespaces\PYGZam{}checkUrisStatus\PYGZam{}rdfContent} \PYG{k+kr}{HTTP}\PYG{o}{/}\PYG{l+m}{1.1}
-\end{Verbatim}
-
-\textbf{Example response}:
-
-\begin{Verbatim}[commandchars=\\\{\}]
- HTTP/1.1 200 OK
- Vary: Accept
- Content\PYGZhy{}Type: application/json
-
-\PYGZob{}\PYGZdq{}metadata\PYGZdq{}: [
-        ],
- \PYGZdq{}mapping\PYGZdq{}:
-        [\PYGZob{}\PYGZdq{}status\PYGZdq{}: \PYGZdq{}N/A\PYGZdq{},
-          \PYGZdq{}originalURI\PYGZdq{}: \PYGZdq{}http://127.0.0.1/autoGeneratedUri\PYGZdq{},
-          \PYGZdq{}replacedURI\PYGZdq{}: \PYGZdq{}\PYGZdq{},
-          \PYGZdq{}term\PYGZdq{}: \PYGZdq{}auto generated uri\PYGZdq{},
-          \PYGZdq{}lineNumbers\PYGZdq{}: \PYGZdq{}3, 31\PYGZdq{}
-         \PYGZcb{}
-        ]
-\PYGZcb{}
-\end{Verbatim}
-\end{quote}
-
-
-\section{Mapper}
-\label{docs/mapper:mapper}\label{docs/mapper::doc}\label{docs/mapper:id1}
-Mapper is a tool for systematically replacing URIs within a given RDF. When you have the mapping from original URIs to new URIs, Mapper can replace the URIs based on the mapping automatically.
-
-
-\subsection{Input/Output}
-\label{docs/mapper:input-output}
-\textbf{Input}: \emph{X2R data exchange format} and \emph{string in a RDF serialization format}
-
-Components of X2R share a common data exchange format: \emph{X2R data exchange format}. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below.
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYGZob{} \PYGZdq{}metadata\PYGZdq{}: [],
-  \PYGZdq{}mapping\PYGZdq{}:
-    [
-        \PYGZob{}
-         \PYGZdq{}status\PYGZdq{}: status value,
-         \PYGZdq{}originalURI\PYGZdq{}: original URI value,
-         \PYGZdq{}replacedURI\PYGZdq{}: updated URI value,
-         \PYGZdq{}term\PYGZdq{}: term value
-         \PYGZcb{}
-    ]
- \PYGZcb{}
-\end{Verbatim}
-
-\textbf{Output}: string in a RDF serialization format
-
-Mapper allow user to specify the updated RDF in the format of a subset of RDF serialization formats listed in the Table below.
-
-\begin{tabulary}{\linewidth}{|L|L|L|}
-\hline
-\textsf{\relax 
-value
-} & \textsf{\relax 
-name
-} & \textsf{\relax 
-reference
-}\\
-\hline
-json
- & 
-RDF/JSON
- & 
-\href{http://n2.talis.com/wiki/RDF\_JSON\_Specification}{http://n2.talis.com/wiki/RDF\_JSON\_Specification}
-\\
-
-ntriples
- & 
-N-Triples
- & 
-\href{http://www.w3.org/TR/n-triples/}{http://www.w3.org/TR/n-triples/}
-\\
-
-turtle
- & 
-Turtle
- & 
-\href{http://www.dajobe.org/2004/01/turtle}{http://www.dajobe.org/2004/01/turtle}
-\\
-
-rdfxml
- & 
-RDF/XML
- & 
-\href{http://www.w3.org/TR/rdf-syntax-grammar}{http://www.w3.org/TR/rdf-syntax-grammar}
-\\
-
-n3
- & 
-N3
- & 
-\href{http://www.w3.org/2000/10/swap/grammar/n3}{http://www.w3.org/2000/10/swap/grammar/n3}
-\\
-
-rdfa
- & 
-RDFa
- & 
-\href{http://www.w3.org/TR/rdfa-core/}{http://www.w3.org/TR/rdfa-core/}
-\\
-\hline\end{tabulary}
-
-
-
-\subsubsection{Web API Definition}
-\label{docs/mapper:web-api-definition}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/mapper:post--mapper_?rdfContent, mapping, format_}\pysigline{\bfcode{POST~}\bfcode{/mapper\{?rdfContent,~mapping,~format\}}}~\begin{quote}\begin{description}
-\item[{Query Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{rdfContent} -- (required) This specifies the content of RDF to be processed.
-
-\item {} 
-\textbf{mapping} -- (required) This specifies the information needed for \emph{mapper} to update the URIs found in rdfContent.
-
-\item {} 
-\textbf{format} -- (optional) This specifies the format of output.
-
-\end{itemize}
-
-\item[{Response Headers}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{Content-Type} -- application/rdf+xml
-
-\end{itemize}
-
-\item[{Status Codes}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{200} -- no error
-
-\item {} 
-\textbf{404} -- exception
-
-\end{itemize}
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-
-\paragraph{Query Parameter Format Detail}
-\label{docs/mapper:query-parameter-format-detail}\begin{quote}\begin{description}
-\item[{rdfContent}] \leavevmode
-\item[{mapping}] \leavevmode
-\item[{format}] \leavevmode
-\end{description}\end{quote}
-
-
-\paragraph{Response Format Detail}
-\label{docs/mapper:response-format-detail}
-Content-Type: application/rdf+xml
-
-
-\subsubsection{Example}
-\label{docs/mapper:example}\begin{quote}
-
-\textbf{Example request}:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n+nf}{POST} \PYG{n+nn}{/mapper?rdfContent\PYGZam{}mapping\PYGZam{}format} \PYG{k+kr}{HTTP}\PYG{o}{/}\PYG{l+m}{1.1}
-\end{Verbatim}
-
-\textbf{Example response}:
-
-\begin{Verbatim}[commandchars=\\\{\}]
- HTTP/1.1 200 OK
- Vary: Accept
- Content\PYGZhy{}Type: application/rdf+xml
-
-\PYGZlt{}?xml version=\PYGZdq{}1.0\PYGZdq{} encoding=\PYGZdq{}UTF\PYGZhy{}8\PYGZdq{}?\PYGZgt{}
-    \PYGZlt{}rdf:RDF
-        xmlns:rdfs=\PYGZdq{}http://www.w3.org/2000/01/rdf\PYGZhy{}schema\PYGZsh{}\PYGZdq{}
-        xmlns:geo=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}\PYGZdq{}
-        xmlns:xsd=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}\PYGZdq{}\PYGZgt{}
-\PYGZlt{}rdf:Description rdf:about=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/DaTongSportsCenter\PYGZdq{}\PYGZgt{}
-    \PYGZlt{}rdf:type rdf:resource=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}SpatialThing\PYGZdq{}/\PYGZgt{}
-    \PYGZlt{}updatedAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
-        rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2013\PYGZhy{}07\PYGZhy{}31T03:23:47Z\PYGZlt{}/updatedAt\PYGZgt{}
-    \PYGZlt{}geo:long\PYGZgt{}121.516\PYGZlt{}/geo:long\PYGZgt{}
-    \PYGZlt{}hasTelephone xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}2592\PYGZhy{}0055\PYGZlt{}/hasTelephone\PYGZgt{}
-    \PYGZlt{}hasName xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Da Tong Sports Center\PYGZlt{}/hasName\PYGZgt{}
-    \PYGZlt{}geo:location\PYGZgt{}No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)\PYGZlt{}/geo:location\PYGZgt{}
-    \PYGZlt{}usedFor xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Sport\PYGZlt{}/usedFor\PYGZgt{}
-    \PYGZlt{}createdAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
-        rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2012\PYGZhy{}11\PYGZhy{}28T09:05:13Z\PYGZlt{}/createdAt\PYGZgt{}
-    \PYGZlt{}geo:lat\PYGZgt{}25.0648\PYGZlt{}/geo:lat\PYGZgt{}
-\PYGZlt{}/rdf:Description\PYGZgt{}
-\PYGZlt{}/rdf:RDF\PYGZgt{}
-\end{Verbatim}
-\end{quote}
-
-
-\section{URI Search Service}
-\label{docs/uss:uss}\label{docs/uss::doc}\label{docs/uss:uri-search-service}
-URI Search Service (USS) is a federated search service. The general process of USS is listed below.
-\begin{enumerate}
-\item {} 
-USS accepts a set of URI search requests
-
-\item {} 
-USS refines the search requests (e.g. fixing typos or replace with a better term)
-
-\item {} 
-USS composes corresponding SPARQL for each query request
-
-\item {} 
-USS issues SPARQL queries to a set of Endpoints, which are defined in USS's configuration
-
-\item {} 
-USS integrates all results returned from Endpoints
-
-\item {} 
-USS applies filters and rankers to remove the ambiguity or promote results that are commonly used
-
-\item {} 
-USS selects one result for each request
-
-\end{enumerate}
-
-All steps listed above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we provide the system with the following hooks.
-
-In refined USS, seven \textbf{atomic hooks} can be replaced and extended, they are:
-\begin{itemize}
-\item {} 
-\textbf{Query Parser}
-
-Query Parser parses the plain text query string into set of query terms, term refinement qualifiers, result set qualifiers and corresponding integration commands.
-
-\item {} 
-\textbf{Endpoint Cotainer}
-
-\end{itemize}
-\phantomsection\label{docs/uss:endpoint}\begin{itemize}
-\item {} 
-\textbf{Endpoint} (see also: {\hyperref[docs/api:Endpoint]{\code{Endpoint}}})
-
-Endpoint wraps the public Endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint accepts SQARQL query and return the result set in standard format of Endpoint.
-
-\item {} 
-\textbf{Term Refiner}
-
-Term Refiner takes one query term as its input and output a refined query term.
-
-\item {} 
-\textbf{Result Ranker}
-
-Result Ranker reorders the ranks of result set based on the heuristic that it wants to realize. In addition to heuristic, Result Ranker can also be a crowd sourcing task, which can be delegated to the crowd.
-
-\item {} 
-\textbf{Result Filter}
-
-Result Filter filters result set by patterns. The typical usage of Result Filter is to resolve ambiguity.
-
-\end{itemize}
-\begin{itemize}
-\item {} 
-\textbf{Result Integrator}
-
-Result Integrator takes two or more result sets and integrates them as one ranked result set.
-
-\item {} 
-\textbf{Result Selector}
-
-\end{itemize}
-
-
-\subsection{Composition of atomic hooks}
-\label{docs/uss:composition-of-atomic-hooks}\begin{quote}
-
-The atomic hooks can be composited through method chaining.
-\end{quote}
-
-
-\section{X2R User Interface}
-\label{docs/x2r:x2r-user-interface}\label{docs/x2r::doc}\label{docs/x2r:x2r}
-X2R is designed to be both human and machine friendly through an open API.
-Based on the API, the tool aims to provide two kinds of user interfaces for human users:
-a Web-based GUI and a command line Interface.
-
-
-\subsection{API Usage}
-\label{docs/x2r:api-usage}
-The details of API usage can be found in next chapter.
-
-
-\subsection{User Interface}
-\label{docs/x2r:user-interface}
-X2R 1.0 provides a JQuery-powered GUI and a command line Interface is planned to be included in version 2.0.
-
-
-\chapter{API Usage}
-\label{index:api-usage}
-Targeted Audience: \textbf{API users}
-
-
-\section{X2R API Usage Scenarios}
-\label{docs/scenarios/x2r:x2r-api-usage-scenarios}\label{docs/scenarios/x2r::doc}
-
-\subsection{Operation Scenarios}
-\label{docs/scenarios/x2r:operation-scenarios}
-
-\subsubsection{Replace Bad URIs}
-\label{docs/scenarios/x2r:replace-bad-uris}
-
-\subsection{Configuration Scenarios}
-\label{docs/scenarios/x2r:configuration-scenarios}
-
-\subsubsection{Set an Extractor}
-\label{docs/scenarios/x2r:set-an-extractor}
-
-\subsubsection{Set a Mapper}
-\label{docs/scenarios/x2r:set-a-mapper}
-
-\subsubsection{Set an USS}
-\label{docs/scenarios/x2r:set-an-uss}
-
-\section{Extractor API Usage Scenarios}
-\label{docs/scenarios/extractor:extractor-api-usage-scenarios}\label{docs/scenarios/extractor::doc}
-
-\subsection{Operation Scenarios}
-\label{docs/scenarios/extractor:operation-scenarios}
-
-\subsubsection{Extract URIs from a Given RDF}
-\label{docs/scenarios/extractor:extract-uris-from-a-given-rdf}\begin{enumerate}
-\item {} 
-Include the file \textbf{``extractor.class.php''} in your program
-
-\item {} 
-Initialize a \textbf{Extractor} instance by passing a \textbf{rdfGraph}
-
-\item {} 
-Call the method \textbf{getQueryTerms()}
-
-\end{enumerate}
-
-
-\subsubsection{Tokenize an URI into Query Terms}
-\label{docs/scenarios/extractor:tokenize-an-uri-into-query-terms}
-Extractor can help in tokenizing URI task. To tokenize a given URI, you can use the method \textbf{tokenize(\$str)}, where the \$str is the URI that you want to tokenize.
-
-Currently, we implements two representive tokenizers, \textbf{DelimitBasedTokenizer} and \textbf{CaseBasedTokenizer}, and the \textbf{tokenize(\$str)} applies these two tokenizers on the \$str.
-
-
-\subsection{Configuration Scenarios}
-\label{docs/scenarios/extractor:configuration-scenarios}
-
-\subsubsection{Set a RDF Parser}
-\label{docs/scenarios/extractor:set-a-rdf-parser}
-There are many RDF parsers available. In X2R, we allow developers to set or even introduce new RDF parsers for reasons, such as better performace or wider range of input formats.
-
-Currently, we implement one wrapper, \textbf{Easy\_Rdf\_Adapter}, for EasyRdf. EasyRdf is a popular RDF parser implemented in PHP, and more information can be found in it \href{http://www.easyrdf.org/}{official site}.
-
-To set \textbf{Easy\_Rdf\_Adapter} as the RDF parser.
-\begin{enumerate}
-\item {} 
-Initialize an instance of \textbf{Easy\_Rdf\_Adapter}
-
-\item {} 
-Initialize a \textbf{Extractor} instance by passing the instance just initialized
-
-\end{enumerate}
-
-
-\subsubsection{Set an URI Filter}
-\label{docs/scenarios/extractor:set-an-uri-filter}
-If there are some URIs that you want to ignore in the whole URI replacement process, you can use \textbf{addFilteredUri(\$furi)} to incrementally build the URI filter.
-
-You can also use \textbf{getFiltedUris()} method to get the current list of URIs that are ignored.
-
-
-\section{USS API Usage Scenarios}
-\label{docs/scenarios/uss::doc}\label{docs/scenarios/uss:uss-api-usage-scenarios}
-
-\subsection{Operation Scenarios}
-\label{docs/scenarios/uss:operation-scenarios}
-
-\subsubsection{Search URIs by terms}
-\label{docs/scenarios/uss:search-uris-by-terms}\begin{enumerate}
-\item {} 
-Include the file \textbf{``urisearchservice.class.php''} in your program
-
-\item {} 
-Initialize a \textbf{UriSearchService} instance
-
-\item {} 
-Call the method \textbf{uriSearch} with a \textbf{query string} as the parameter. After receving all Endpoints' respones, the \textbf{result set} is returned
-
-\end{enumerate}
-
-
-\subsection{Configuration Scenarios}
-\label{docs/scenarios/uss:configuration-scenarios}
-After initializing a \textbf{UriSearchService} instance, the default components are already set. If you want to change the default setting, you can reset the components as the guidences listed below.
-
-The configuration methods can be chained. Here is a code example.
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{include\PYGZus{}once (risearchservice.class.php);}
-\PYG{x}{\PYGZdl{}exampleUss = new UriSearchService();}
-\PYG{x}{//... Initialize components as \PYGZdl{}parser, \PYGZdl{}selector ...etc.}
-\PYG{x}{\PYGZdl{}exampleUss\PYGZhy{}\PYGZgt{}setFederatedSearch(\PYGZdl{}federatedSearch)}
-\PYG{x}{           \PYGZhy{}\PYGZgt{}setParser(\PYGZdl{}parser)}
-\PYG{x}{           \PYGZhy{}\PYGZgt{}setProcessor(\PYGZdl{}rsultProcessor)}
-\PYG{x}{           \PYGZhy{}\PYGZgt{}setSelector(\PYGZdl{}selector);}
-\end{Verbatim}
-
-
-\subsubsection{Set a Parser}
-\label{docs/scenarios/uss:set-a-parser}\begin{enumerate}
-\item {} 
-Initialize a parser
-
-\item {} 
-Assign the new parser through the method \textbf{setParser(\$parser)}
-
-\end{enumerate}
-
-
-\subsubsection{Set FederatedSearch}
-\label{docs/scenarios/uss:set-federatedsearch}\begin{enumerate}
-\item {} 
-Initialize a federatedSearch
-
-\item {} 
-Assign the new federatedSearch through the method \textbf{setFederatedSearch(\$federatedSearch)}
-
-\end{enumerate}
-
-
-\subsubsection{Set a Result Processor (Filter and Ranker)}
-\label{docs/scenarios/uss:set-a-result-processor-filter-and-ranker}\begin{enumerate}
-\item {} 
-Initialize a rsultProcessor
-
-\item {} 
-Assign the new rsultProcessor through the method \textbf{setProcessor(\$rsultProcessor)}
-
-\end{enumerate}
-
-
-\subsubsection{Set a Selector}
-\label{docs/scenarios/uss:set-a-selector}\begin{enumerate}
-\item {} 
-Initialize a selector
-
-\item {} 
-Assign the new selector through the method \textbf{setSelector(\$selector)}
-
-\end{enumerate}
-
-
-\section{Mapper API Usage Scenarios}
-\label{docs/scenarios/mapper:mapper-api-usage-scenarios}\label{docs/scenarios/mapper::doc}
-
-\subsection{Operation Scenarios}
-\label{docs/scenarios/mapper:operation-scenarios}
-
-\subsubsection{Replace Original URIs with Specified URIs}
-\label{docs/scenarios/mapper:replace-original-uris-with-specified-uris}\begin{enumerate}
-\item {} 
-Include the file \textbf{``mapper.class.php''} in your program
-
-\item {} 
-Initialize a \textbf{Mapper} instance by passing a \textbf{rdfGraph}
-
-\item {} 
-Call the method \textbf{refactoring(\$refType, \$change)}
-
-\item {} 
-Call the method \textbf{serialize(\$format)}
-
-\end{enumerate}
-
-
-\subsection{Configuration Scenarios}
-\label{docs/scenarios/mapper:configuration-scenarios}
-
-\subsubsection{Change a Refactor (URI Replacement)}
-\label{docs/scenarios/mapper:change-a-refactor-uri-replacement}
-Change different refactors can let Mapper be able to do different refactoring on the given RDF. In order to decouple the \textbf{Mapper} from specific \textbf{Refactor}, their dependency is injected during runtime through the method \textbf{refactoring(\$refType, \$change)}.
-
-Currently, we only implement one type of \textbf{Refactor}, called \textbf{Rename} (defined in ``refaRename.class.php''). Its corresponding change is an associative array, which saves the mapping from original URI to replaced URI. There is one example of \textbf{change} that the refactor, \textbf{Rename}, accepted.
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{\PYGZdl{}exampleChange = array(\PYGZsq{}http://original.uri.1\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://replaced.uri.1\PYGZsq{},}
-\PYG{x}{                       \PYGZsq{}http://original.uri.2\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://replaced.uri.2\PYGZsq{});}
-\end{Verbatim}
-
-
-\subsubsection{Set a RDF Parser}
-\label{docs/scenarios/mapper:set-a-rdf-parser}
-There are many RDF parsers available. In X2R, we allow developers to set or even introduce new RDF parsers for reasons, such as better performace or wider range of input formats.
-
-Currently, we implement one wrapper, \textbf{Easy\_Rdf\_Adapter}, for EasyRdf. EasyRdf is a popular RDF parser implemented in PHP, and more information can be found in it \href{http://www.easyrdf.org/}{official site}.
-
-To set \textbf{Easy\_Rdf\_Adapter} as the RDF parser.
-\begin{enumerate}
-\item {} 
-Initialize an instance of \textbf{Easy\_Rdf\_Adapter}
-
-\item {} 
-Initialize a \textbf{Mapper} instance by passing the instance just initialized
-
-\end{enumerate}
-
-
-\chapter{API Reference}
-\label{index:api-reference}
-This part of the documentation dedicates to prople who are looking for information on a specific function, class or method.
-
-
-\section{API}
-\label{docs/api:api}\label{docs/api::doc}\label{docs/api:id1}
-
-\subsection{Extractor}
-\label{docs/api:extractor}\index{Extractor (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Extractor}\pysigline{\strong{class }\bfcode{Extractor}}
-Extractor class is the class for modeling the
-URI extracting \& analyzing process as below.
-
-Step 1. Load the RDF content to a Graph data structure
-
-Step 2. Traverse the Graph to finding all the URIs
-
-Step 3. Transform filtered URIs to search friendly terms, where the filtered URI means the all but those URI listed in the \emph{filtered URI list}
-
-Step 4. Wrap these terms as a JSON output
-\index{getQueryTerms() (Extractor method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Extractor::getQueryTerms}\pysiglinewithargsret{\bfcode{getQueryTerms}}{}{}
-Extract terms from URIs of given RDF, and wrapp terms
-with their contextual information.
-\begin{quote}\begin{description}
-\item[{Returns}] \leavevmode
-A JSON string of terms derived from extracted URIs of a given RDF file with corresponding metadata,
-
-\end{description}\end{quote}
-
-including \emph{originalURI}, \emph{replacedURI}, \emph{status}, \emph{lineNumbers}.
-
-\end{fulllineitems}
-
-\index{getFiltedUris() (Extractor method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Extractor::getFiltedUris}\pysiglinewithargsret{\bfcode{getFiltedUris}}{}{}
-Get current URI filter list.
-\begin{quote}\begin{description}
-\item[{Returns}] \leavevmode
-An array of filtered URI.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{addFilteredUri() (Extractor method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Extractor::addFilteredUri}\pysiglinewithargsret{\bfcode{addFilteredUri}}{\emph{\$furi}}{}
-Add the given URI, \$furi, to the URI filter list.
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$furi} (\emph{string}) -- The URI to be filtered
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the true for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{removeFilteredUri() (Extractor method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Extractor::removeFilteredUri}\pysiglinewithargsret{\bfcode{removeFilteredUri}}{\emph{\$furi}}{}
-Remove the given URI, \$furi, from the URI filter list.
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$furi} (\emph{string}) -- The URI to be filtered
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the true for success
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{RdfGraph}
-\label{docs/api:rdfgraph}\index{RdfGraph (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:RdfGraph}\pysigline{\strong{class }\bfcode{RdfGraph}}
-RdfGraph class is a standard interface for wrapping or adapting existing RDF parsers into X2R.
-\index{parseRdf() (RdfGraph method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:RdfGraph::parseRdf}\pysiglinewithargsret{\bfcode{parseRdf}}{\emph{\$data}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$data} (\emph{string}) -- The content of RDF file.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the true for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{serializeRdfAs() (RdfGraph method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:RdfGraph::serializeRdfAs}\pysiglinewithargsret{\bfcode{serializeRdfAs}}{\emph{\$format}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$format} (\emph{string}) -- The file format of serialized RDF.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the string representation of serialized RDF in specified format.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsubsection{EasyRdfAdapter}
-\label{docs/api:easyrdfadapter}\index{EasyRdfAdapter (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:EasyRdfAdapter}\pysigline{\strong{class }\bfcode{EasyRdfAdapter}}
-EasyRdfAdapter class is an implemantion of RdfGraph. It is a warpper of an open source RDF parser - EasyRDF.
-\index{parseRdf() (EasyRdfAdapter method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:EasyRdfAdapter::parseRdf}\pysiglinewithargsret{\bfcode{parseRdf}}{\emph{\$data}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$data} (\emph{string}) -- The content of RDF file.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the true for success.
-
-\item[{Raises ValueError}] \leavevmode
-Raise if the \$data cannot be parsed successfully.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{serializeRdfAs() (EasyRdfAdapter method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:EasyRdfAdapter::serializeRdfAs}\pysiglinewithargsret{\bfcode{serializeRdfAs}}{\emph{\$format}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$format} (\emph{string}) -- The file format of serialized RDF.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the string representation of serialized RDF in specified format.
-
-\item[{Raises ValueError}] \leavevmode
-The \$format is not an element of `supported\_format', which includes `jsonld', `rdfxml'.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{Tokenizer}
-\label{docs/api:tokenizer}\index{Tokenizer (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Tokenizer}\pysigline{\strong{class }\bfcode{Tokenizer}}
-Tokenizer class is a standard interface for X2R developers to extend X2R with new types of tokenizers. Currently, two tokenizers, i.e. CaseBasedTokenizer and DelimitBasedTokenizer, are implemented and bundled with X2R::Extractor.
-\index{tokenizeString() (Tokenizer method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Tokenizer::tokenizeString}\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$str} (\emph{string}) -- The string to be tokenized.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-An array of tokenized strings.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{tokenizeArrayOfStrings() (Tokenizer method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Tokenizer::tokenizeArrayOfStrings}\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-An array of tokenized strings.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{arrayToString() (Tokenizer method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Tokenizer::arrayToString}\pysiglinewithargsret{\bfcode{arrayToString}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-A string which is consisted of elements from given array \$arr and is concatenated by whitespace.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsubsection{CaseBasedTokenizer}
-\label{docs/api:casebasedtokenizer}\index{CaseBasedTokenizer (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:CaseBasedTokenizer}\pysigline{\strong{class }\bfcode{CaseBasedTokenizer}}
-CaseBasedTokenizer class
-\index{tokenizeString() (CaseBasedTokenizer method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:CaseBasedTokenizer::tokenizeString}\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$str} (\emph{string}) -- The string to be tokenized.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-An array of tokenized strings.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{tokenizeArrayOfStrings() (CaseBasedTokenizer method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:CaseBasedTokenizer::tokenizeArrayOfStrings}\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-An array of tokenized strings.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsubsection{DelimitBasedTokenizer}
-\label{docs/api:delimitbasedtokenizer}\index{DelimitBasedTokenizer (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:DelimitBasedTokenizer}\pysigline{\strong{class }\bfcode{DelimitBasedTokenizer}}
-DelimitBasedTokenizer class
-\index{tokenizeString() (DelimitBasedTokenizer method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:DelimitBasedTokenizer::tokenizeString}\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$str} (\emph{string}) -- The string to be tokenized.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-An array of tokenized strings.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{tokenizeArrayOfStrings() (DelimitBasedTokenizer method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:DelimitBasedTokenizer::tokenizeArrayOfStrings}\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-An array of tokenized strings.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{Refactor}
-\label{docs/api:refactor}\index{Refactor (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Refactor}\pysigline{\strong{class }\bfcode{Refactor}}~\begin{quote}
-
-Refactor is the class that reserves
-the flexibility for introducing
-new kind of RDF refactoring into
-this RDF analyzing and manupilation
-framework.
-\end{quote}
-\index{refactoring() (Refactor method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Refactor::refactoring}\pysiglinewithargsret{\bfcode{refactoring}}{\emph{\$change}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$change} (\emph{int}) -- The change spec. for the refacroring.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the true for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsubsection{ReplaceUri}
-\label{docs/api:replaceuri}\index{ReplaceUri (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:ReplaceUri}\pysigline{\strong{class }\bfcode{ReplaceUri}}~\begin{quote}
-
-ReplaceUri is an implemetation of
-Refactor class. It is the default
-refactoring used in X2R project.
-The replaceUri is to replace an existing URI
-with a new URI.
-\end{quote}
-\index{refactoring() (ReplaceUri method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:ReplaceUri::refactoring}\pysiglinewithargsret{\bfcode{refactoring}}{\emph{\$change}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$change} (\emph{int}) -- The change spec. for the refacroring.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the true for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{MappingEntry}
-\label{docs/api:mappingentry}\index{MappingEntry (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:MappingEntry}\pysigline{\strong{class }\bfcode{MappingEntry}}~\begin{quote}
-
-X2R's components are integrated by standard message passing, where the standard message is the \emph{mapping from original URI, terms and replaced URI}. This MappingEntry is the class used to model one entry of such mapping message.
-\end{quote}
-\index{MappingEntry() (MappingEntry method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:MappingEntry::MappingEntry}\pysiglinewithargsret{\bfcode{MappingEntry}}{\emph{\$originalURI}, \emph{\$replacedURI}, \emph{\$term}, \emph{\$lineNumbers}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$originalURI} (\emph{string}) -- The change spec. for the refacroring.
-
-\item {} 
-\textbf{\$replacedURI} (\emph{string}) -- The change spec. for the refacroring.
-
-\item {} 
-\textbf{\$term} (\emph{string}) -- The change spec. for the refacroring.
-
-\item {} 
-\textbf{\$lineNumbers} (\emph{string}) -- The change spec. for the refacroring.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the true for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{getOriginalURI() (MappingEntry method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:MappingEntry::getOriginalURI}\pysiglinewithargsret{\bfcode{getOriginalURI}}{}{}~\begin{quote}\begin{description}
-\item[{Returns}] \leavevmode
-Either false on failure, or the \emph{Original URI} for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{getReplacedURI() (MappingEntry method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:MappingEntry::getReplacedURI}\pysiglinewithargsret{\bfcode{getReplacedURI}}{}{}~\begin{quote}\begin{description}
-\item[{Returns}] \leavevmode
-Either false on failure, or the \emph{Replaced URI} for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{getQueryTerm() (MappingEntry method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:MappingEntry::getQueryTerm}\pysiglinewithargsret{\bfcode{getQueryTerm}}{}{}~\begin{quote}\begin{description}
-\item[{Returns}] \leavevmode
-Either false on failure, or the \emph{Query Term} for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{getLineNumbers() (MappingEntry method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:MappingEntry::getLineNumbers}\pysiglinewithargsret{\bfcode{getLineNumbers}}{}{}~\begin{quote}\begin{description}
-\item[{Returns}] \leavevmode
-Either false on failure, or the \emph{Line Numbers} for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{MappingCollection}
-\label{docs/api:mappingcollection}\index{MappingCollection (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:MappingCollection}\pysigline{\strong{class }\bfcode{MappingCollection}}~\begin{quote}
-
-The MappingCollection is a collection of MappingEntry. The MappingCollection object can be serialized as JSON, and serves as the integration glue among X2R's components.
-\end{quote}
-\index{addMappingEntry() (MappingCollection method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:MappingCollection::addMappingEntry}\pysiglinewithargsret{\bfcode{addMappingEntry}}{\emph{\$mappingentry}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$mappingentry} (\emph{MappingEntryint}) -- An entry of mapping.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the true for success.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{toJson() (MappingCollection method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:MappingCollection::toJson}\pysiglinewithargsret{\bfcode{toJson}}{}{}~\begin{quote}\begin{description}
-\item[{Returns}] \leavevmode
-Serialize the collection of mappings in Json format.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{Mapper}
-\label{docs/api:mapper}\index{Mapper (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Mapper}\pysigline{\strong{class }\bfcode{Mapper}}~\begin{quote}
-
-Mapper is the class for modeling the RDF transformation (refactoring) process.
-
-Currently, the Mapper only support one kind of
-transformation (refactoring) - replaceURI.
-
-The replaceURI is to replace an existing URI
-with a new URI..
-\end{quote}
-\index{Mapper() (Mapper method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Mapper::Mapper}\pysiglinewithargsret{\bfcode{Mapper}}{\emph{\$graph}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$graph} (\emph{rdfGraph}) -- The RDF, which is holded in the rdfGraph data structure, to be refactored.
-
-\end{itemize}
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{refactoring() (Mapper method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Mapper::refactoring}\pysiglinewithargsret{\bfcode{refactoring}}{\emph{\$refactorType}, \emph{\$change}}{}
-Based on the type of refactoring (\$refactorType) and the desired change (\$change) to conduct the refactoring on target RDF.
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$refactorType} (\emph{string}) -- The type of rafactor.
-
-\item {} 
-\textbf{\$change} (\emph{array}) -- The month.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the datetime object for method chaining.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{//This is an example of \PYGZdl{}change}
-\PYG{x}{array(\PYGZsq{}http://127.0.0.1/sport\PYGZus{}center\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://openisdm.iis.sinica.edu.tw/sport\PYGZus{}center\PYGZsq{},}
-\PYG{x}{     \PYGZsq{}http://127.0.0.1/park\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://openisdm.iis.sinica.edu.tw/park\PYGZsq{});}
-\end{Verbatim}
-
-\begin{notice}{note}{Note:}
-Currently, only one type refactor is supported, that is,
-\emph{replaceUri}. More refactors can be implemented and
-integrated into Mapper.
-\end{notice}
-\index{serialize() (Mapper method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Mapper::serialize}\pysiglinewithargsret{\bfcode{serialize}}{\emph{\$format}}{}
-Return the RDF content in the format specified by \$format.
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$format} (\emph{string}) -- The format of output file.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-Either false on failure, or the string of refactored RDF's content in the specified format.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{WebUtilities}
-\label{docs/api:webutilities}\index{GetParameter() (global function)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:GetParameter}\pysiglinewithargsret{\bfcode{GetParameter}}{\emph{\$para}}{}
-Get the value of HTTP GET request by parameter's name
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$para} (\emph{string}) -- The parameter's name.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-The value of given parameter's name.
-
-\item[{Raises ValueError}] \leavevmode
-Raise if the \$para cannot be found in the request.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-
-\subsection{USS}
-\label{docs/api:uss}\index{Endpoint (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Endpoint}\pysigline{\strong{class }\bfcode{Endpoint}}~\begin{quote}
-
-Endpoint is the class for modeling the public Endpoint, such as DBpedia. (refer to {\hyperref[docs/uss:uss]{\emph{URI Search Service}}})
-\end{quote}
-\index{issueSparqlQuery() (Endpoint method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Endpoint::issueSparqlQuery}\pysiglinewithargsret{\bfcode{issueSparqlQuery}}{\emph{\$sparqlQuery}, \emph{\$resultFormat}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$sparqlQuery} (\emph{string}) -- The SPARQL query.
-
-\item {} 
-\textbf{\$resultFormat} (\emph{string}) -- The format of returned result.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-The string of result in the specified format.
-
-\item[{Raises NoResponseError}] \leavevmode
-Raise if the timeout is reached.
-
-\item[{Raises ValueError}] \leavevmode
-Raise if the sparql is invalid.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-\index{SparqlQueryComposer (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:SparqlQueryComposer}\pysigline{\strong{class }\bfcode{SparqlQueryComposer}}~\begin{quote}
-
-SparqlQueryComposer is a class to aggregate a varity of SPARQL composition methods. Currently, only plain text terms are supported.
-\end{quote}
-\index{term2Sparql() (SparqlQueryComposer method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:SparqlQueryComposer::term2Sparql}\pysiglinewithargsret{\bfcode{term2Sparql}}{\emph{\$term}}{}~\begin{quote}
-
-Turn plain text terms to SPARQL query.
-\end{quote}
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$term} (\emph{string}) -- The desired query term..
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-The SPARQL query string.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-\index{Dbpedia (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Dbpedia}\pysigline{\strong{class }\bfcode{Dbpedia}}~\begin{quote}
-
-Dbpedia is a wrapper of Dbpedia Endpoint.
-\end{quote}
-\index{composeQuery() (Dbpedia method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Dbpedia::composeQuery}\pysiglinewithargsret{\bfcode{composeQuery}}{\emph{term}, \emph{\$dataSourceName = `'}, \emph{\$limit = 10}, \emph{\$filters = array(`')}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$term} (\emph{string}) -- The SPARQL query in plain text.
-
-\item {} 
-\textbf{\$dataSourceName} (\emph{string}) -- the name of data source
-
-\item {} 
-\textbf{\$limit} (\emph{int}) -- the max number of results
-
-\item {} 
-\textbf{\$filters} (\emph{array}) -- an array of URIs that will be ignored
-
-\end{itemize}
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{query() (Dbpedia method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:Dbpedia::query}\pysiglinewithargsret{\bfcode{query}}{\emph{\$sparqlQueryString}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$sparqlQuery} (\emph{string}) -- The SPARQL query.
-
-\end{itemize}
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-\index{LinkedGeoData (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:LinkedGeoData}\pysigline{\strong{class }\bfcode{LinkedGeoData}}~\begin{quote}
-
-LinkedGeoData is a wrapper of LinkedGeoData Endpoint.
-\end{quote}
-\index{composeQuery() (LinkedGeoData method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:LinkedGeoData::composeQuery}\pysiglinewithargsret{\bfcode{composeQuery}}{\emph{term}, \emph{\$dataSourceName = `'}, \emph{\$limit = 10}, \emph{\$filters = array(`')}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$term} (\emph{string}) -- The SPARQL query in plain text.
-
-\item {} 
-\textbf{\$dataSourceName} (\emph{string}) -- the name of data source
-
-\item {} 
-\textbf{\$limit} (\emph{int}) -- the max number of results
-
-\item {} 
-\textbf{\$filters} (\emph{array}) -- an array of URIs that will be ignored
-
-\end{itemize}
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{query() (LinkedGeoData method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:LinkedGeoData::query}\pysiglinewithargsret{\bfcode{query}}{\emph{\$sparqlQueryString}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$sparqlQuery} (\emph{string}) -- The SPARQL query.
-
-\end{itemize}
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{X2R}
-\label{docs/api:x2r}\index{X2R (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:X2R}\pysigline{\strong{class }\bfcode{X2R}}~\begin{quote}
-
-X2R models the process of translating an imperfect RDF, especially for those with invalid URIs, to RDF with relatively higher quality.
-\end{quote}
-\index{transform() (X2R method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:X2R::transform}\pysiglinewithargsret{\bfcode{transform}}{\emph{\$rdfGraph}, \emph{\$configuration}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$graph} (\emph{rdfGraph}) -- The RDF, which is holded in the rdfGraph data structure, to be refactored.
-
-\item {} 
-\textbf{configuration} -- to be defined.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-The refactored RDF.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{Hot Spots}
-\label{docs/api:hot-spots}\index{QueryRefiner (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:QueryRefiner}\pysigline{\strong{class }\bfcode{QueryRefiner}}~\begin{quote}
-
-QueryRefiner is an one-to-one adapter, which processes the raw query with the logics defined in it. A varity of refinement heuristics or methods can be introduced into X2R through extending this class.
-\end{quote}
-\index{refine() (QueryRefiner method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:QueryRefiner::refine}\pysiglinewithargsret{\bfcode{refine}}{\emph{\$query}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$query} (\emph{string}) -- The query that is directly extracted and tokenized from original URI.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-The refined query.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-\index{SearchResultSelector (class)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:SearchResultSelector}\pysigline{\strong{class }\bfcode{SearchResultSelector}}~\begin{quote}
-
-SearchResultSelector is a many-to-one selector, which selects one fittest result from a given result set. A varity of fitness function can be introduced into X2R through extending this class.
-\end{quote}
-\index{select() (SearchResultSelector method)|textbf}
-
-\begin{fulllineitems}
-\phantomsection\label{docs/api:SearchResultSelector::select}\pysiglinewithargsret{\bfcode{select}}{\emph{\$resultSet}}{}~\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\textbf{\$resultSet} (\emph{array}) -- A given result set.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-The fittest result.
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\chapter{Hooks}
-\label{index:hooks}
-Targeted Audience: \textbf{Code contributators}
-
-This section focuses on two topics, i.e. \textbf{hook templates} and \textbf{hook instances}. The term ``hook'' is used to present the cookbook or guidence for extending X2R in many different aspects. Because some hooks are similar to each other, the hook templates are extracted based on the similarity among existing hooks. Extracted hook templates can be used to instainate more hook instances to cover more aspects for increasing X2R's flexability.
-
-\textbf{Hook Templates}
-
-
-\section{Template: Add USS Components}
-\label{docs/hooks/t_uss_components:template-add-uss-components}\label{docs/hooks/t_uss_components::doc}\label{docs/hooks/t_uss_components:hook-template-uss}
-
-\subsection{Involved Classes}
-\label{docs/hooks/t_uss_components:involved-classes}\begin{quote}
-
-\textbf{\{List of involved classes with links\}}
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/t_uss_components:mechanism}\begin{enumerate}
-\item {} 
-Based on component's type, create a new class in /USS/\textbf{\{component\_type\}}/
-
-\item {} 
-Based on the component's type, the new class should exntends corresponding parent class
-
-\item {} 
-Open ussContainer.class.php, and add the dependency by adding ``incclude\_once'' statement in it
-
-\item {} 
-Based on component's type, find corresponding method and add the \{id, class\_factory\} mapping to the method's switch/case block.
-
-\end{enumerate}
-
-
-\subsection{Instances}
-\label{docs/hooks/t_uss_components:instances}\begin{itemize}
-\item {} 
-{\hyperref[docs/hooks/new_refiner:hook-refiner]{\emph{Add a new refiner}}}
-
-\item {} 
-{\hyperref[docs/hooks/new_filter:hook-filter]{\emph{Add a new filter}}}
-
-\item {} 
-{\hyperref[docs/hooks/new_ranker:hook-ranker]{\emph{Add a new ranker}}}
-
-\item {} 
-{\hyperref[docs/hooks/new_selector:hook-selector]{\emph{Add a new selector}}}
-
-\item {} 
-\emph{hook\_query\_parser}
-
-\end{itemize}
-
-\textbf{Hook Instances}
-
-
-\section{Add a new Endpoint}
-\label{docs/hooks/new_endpoint::doc}\label{docs/hooks/new_endpoint:add-a-new-endpoint}\label{docs/hooks/new_endpoint:hook-new-endpoint}
-
-\subsection{Involved Classes}
-\label{docs/hooks/new_endpoint:involved-classes}\begin{quote}
-
-Endpoint.class.php
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/new_endpoint:mechanism}\begin{enumerate}
-\item {} 
-Create a new class in /USS/endpoints
-
-\item {} 
-The new class should exntends Endpoints
-
-\end{enumerate}
-
-
-\subsection{Example}
-\label{docs/hooks/new_endpoint:example}\begin{itemize}
-\item {} 
-{\hyperref[docs/api:Dbpedia]{\code{Dbpedia}}}
-
-\item {} 
-{\hyperref[docs/api:LinkedGeoData]{\code{LinkedGeoData}}}
-
-\end{itemize}
-
-
-\section{Add a new RDF refactor}
-\label{docs/hooks/new_refactor:hook-refactor}\label{docs/hooks/new_refactor:add-a-new-rdf-refactor}\label{docs/hooks/new_refactor::doc}
-
-\subsection{Involved Files}
-\label{docs/hooks/new_refactor:involved-files}\begin{quote}
-
-Refactor.class.php
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/new_refactor:mechanism}\begin{enumerate}
-\item {} 
-Create a new class in /EM/
-
-\item {} 
-The new class should exntends Refactor
-
-\end{enumerate}
-
-
-\subsection{Example}
-\label{docs/hooks/new_refactor:example}\begin{itemize}
-\item {} 
-{\hyperref[docs/api:ReplaceUri]{\code{ReplaceUri}}}
-
-\end{itemize}
-
-
-\section{Add a new selector}
-\label{docs/hooks/new_selector:hook-selector}\label{docs/hooks/new_selector::doc}\label{docs/hooks/new_selector:add-a-new-selector}
-
-\subsection{Involved Files}
-\label{docs/hooks/new_selector:involved-files}\begin{quote}
-
-Resultselector.class.php, UssContainer.php
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/new_selector:mechanism}\begin{enumerate}
-\item {} 
-Create a new class in /USS/selector/
-
-\item {} 
-The new class should exntends ResultSelector, for example `newSelector.class.php'
-
-\item {} 
-Open ussContainer.class.php, and add the dependency by adding ``include\_once selector/newSelector.class.php;'' statement in it
-
-\item {} 
-Add a case block of the new class into getSelector() method's switch block
-
-\end{enumerate}
-
-
-\subsection{Template}
-\label{docs/hooks/new_selector:template}\begin{quote}
-
-{\hyperref[docs/hooks/t_uss_components:hook-template-uss]{\emph{Template: Add USS Components}}}
-\end{quote}
-
-
-\section{Add a new ranker}
-\label{docs/hooks/new_ranker:add-a-new-ranker}\label{docs/hooks/new_ranker::doc}\label{docs/hooks/new_ranker:hook-ranker}
-
-\subsection{Involved Files}
-\label{docs/hooks/new_ranker:involved-files}\begin{quote}
-
-ResultRanker.class.php, UssContainer.php
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/new_ranker:mechanism}\begin{enumerate}
-\item {} 
-Create a new class in /USS/ranker/
-
-\item {} 
-The new class should exntends ResultRanker, for example `newRanker.class.php'
-
-\item {} 
-Open ussContainer.class.php, and add the dependency by adding ``include\_once ranker/newRankerclass.php;'' statement in it
-
-\item {} 
-Add a case block of the new class into getRanker() method's switch block
-
-\end{enumerate}
-
-
-\subsection{Template}
-\label{docs/hooks/new_ranker:template}\begin{quote}
-
-{\hyperref[docs/hooks/t_uss_components:hook-template-uss]{\emph{Template: Add USS Components}}}
-\end{quote}
-
-
-\section{Add a new refiner}
-\label{docs/hooks/new_refiner:add-a-new-refiner}\label{docs/hooks/new_refiner::doc}\label{docs/hooks/new_refiner:hook-refiner}
-
-\subsection{Involved Files}
-\label{docs/hooks/new_refiner:involved-files}\begin{quote}
-
-QueryRefiner.class.php, UssContainer.php
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/new_refiner:mechanism}\begin{enumerate}
-\item {} 
-Create a new class in /USS/refiner/
-
-\item {} 
-The new class should exntends QueryRefiner, for example `newRefiner.class.php'
-
-\item {} 
-Open ussContainer.class.php, and add the dependency by adding ``include\_once refiner/newRefiner.class.php;'' statement in it
-
-\item {} 
-Add a case block of the new class into getRefiner() method's switch block
-
-\end{enumerate}
-
-
-\subsection{Template}
-\label{docs/hooks/new_refiner:template}\begin{quote}
-
-{\hyperref[docs/hooks/t_uss_components:hook-template-uss]{\emph{Template: Add USS Components}}}
-\end{quote}
-
-
-\section{Add a new filter}
-\label{docs/hooks/new_filter:hook-filter}\label{docs/hooks/new_filter::doc}\label{docs/hooks/new_filter:add-a-new-filter}
-
-\subsection{Involved Classes}
-\label{docs/hooks/new_filter:involved-classes}\begin{quote}
-
-ResultFilter.class.php, UssContainer.php
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/new_filter:mechanism}\begin{enumerate}
-\item {} 
-Create a new class in /USS/filter/
-
-\item {} 
-The new class should exntends ResultFilter, for example `newFilter.class.php'
-
-\item {} 
-Open ussContainer.class.php, and add the dependency by adding ``include\_once filter/newFilter.class.php;'' statement in it
-
-\item {} 
-Add a case block of the new class into getFilter() method's switch block
-
-\end{enumerate}
-
-
-\subsection{Template}
-\label{docs/hooks/new_filter:template}\begin{quote}
-
-{\hyperref[docs/hooks/t_uss_components:hook-template-uss]{\emph{Template: Add USS Components}}}
-\end{quote}
-
-
-\section{Add a wrapper for new RDF parser}
-\label{docs/hooks/t_rdf_parser::doc}\label{docs/hooks/t_rdf_parser:hook-template-rdf-parser}\label{docs/hooks/t_rdf_parser:add-a-wrapper-for-new-rdf-parser}
-
-\subsection{Involved Classes}
-\label{docs/hooks/t_rdf_parser:involved-classes}\begin{quote}
-
-rdfGraph.class.php
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/t_rdf_parser:mechanism}\begin{enumerate}
-\item {} 
-Create a new class in /EM/
-
-\item {} 
-The new class should exntends rdfGraph'
-
-\end{enumerate}
-
-
-\subsection{Example}
-\label{docs/hooks/t_rdf_parser:example}\begin{itemize}
-\item {} 
-{\hyperref[docs/api:EasyRdfAdapter]{\code{EasyRdfAdapter}}}
-
-\end{itemize}
-
-
-\section{Add a new tokenizer}
-\label{docs/hooks/t_tokenizer::doc}\label{docs/hooks/t_tokenizer:hook-template-uss}\label{docs/hooks/t_tokenizer:add-a-new-tokenizer}
-
-\subsection{Involved Classes}
-\label{docs/hooks/t_tokenizer:involved-classes}\begin{quote}
-
-Tokenizer.class.php
-\end{quote}
-
-
-\subsection{Mechanism}
-\label{docs/hooks/t_tokenizer:mechanism}\begin{enumerate}
-\item {} 
-Create a new class in /EM/
-
-\item {} 
-The new class should exntends Tokenizer
-
-\end{enumerate}
-
-
-\subsection{Example}
-\label{docs/hooks/t_tokenizer:example}\begin{itemize}
-\item {} 
-{\hyperref[docs/api:CaseBasedTokenizer]{\code{CaseBasedTokenizer}}}
-
-\item {} 
-{\hyperref[docs/api:DelimitBasedTokenizer]{\code{DelimitBasedTokenizer}}}
-
-\end{itemize}
-
-
 \chapter{Important Information}
-\label{index:important-information}
+\label{index:welcome-to-x2r-document}\label{index:important-information}
 For code contributors' information, this part of note declares the license of X2R. In addition to license, this part of note also lists convensions enforced within X2R, including the coding style, versioning and documentation.
 
 
@@ -2991,11 +911,105 @@ Public License instead of this License.  But first, please read
 
 \subsection{Coding Style}
 \label{docs/convensions:coding-style}
-This project follows the Python official coding style \href{http://www.php-fig.org/psr/psr-2/}{PSR-2}.
+This project follows the Python official coding style \href{http://www.php-fig.org/psr/}{PSR}.
+
+Here are some examples for developers' reference.
+\begin{itemize}
+\item {} 
+Class names MUST be declared in StudlyCaps.
+\begin{quote}
+
+For example:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZlt{}?php}
+    \PYG{k}{class}  \PYG{n+nc}{HtmlHelper}
+    \PYG{k}{class}  \PYG{n+nc}{XmlParser}
+    \PYG{k}{class}  \PYG{n+nc}{Model}
+\end{Verbatim}
+\end{quote}
+
+\item {} 
+Class constants MUST be declared in all upper case with underscore separators. For example:
+\begin{quote}
+
+For example:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZlt{}?php}
+\PYG{k}{namespace} \PYG{n+nx}{Vendor\PYGZbs{}Model}\PYG{p}{;}
+
+\PYG{k}{class} \PYG{n+nc}{Foo}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{const} \PYG{n+no}{VERSION} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}1.0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{const} \PYG{n+no}{DATE\PYGZus{}APPROVED} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}2012\PYGZhy{}06\PYGZhy{}01\PYGZsq{}}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
+\end{quote}
+
+\item {} 
+Method names MUST be declared in camelCase.
+\begin{quote}
+
+For example:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZlt{}?php}
+        \PYG{n+nx}{connect}\PYG{p}{();}
+        \PYG{n+nx}{getData}\PYG{p}{();}
+        \PYG{n+nx}{buildSomeWidget}\PYG{p}{();}
+        \PYG{n+nx}{jImport}\PYG{p}{();}
+        \PYG{n+nx}{jDoSomething}\PYG{p}{();}
+\end{Verbatim}
+\end{quote}
+
+\end{itemize}
+
+Namespaces and classes MUST follow an ``autoloading'' PSR: {[}PSR-0,PSR-4{]}.
+This means each class is in a file by itself, and is in a namespace of at least one level: a top-level vendor name.
+\begin{quote}
+\begin{quote}
+
+{\color{red}\bfseries{}*}. Class names MUST be declared in StudlyCaps. Code written for PHP 5.3 and after MUST use formal namespaces.
+\begin{quote}
+
+For example:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZlt{}?php}
+\PYG{c+c1}{// PHP 5.3 and later:}
+\PYG{k}{namespace} \PYG{n+nx}{Vendor\PYGZbs{}Model}\PYG{p}{;}
+
+\PYG{k}{class} \PYG{n+nc}{Foo}
+\PYG{p}{\PYGZob{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
+\end{quote}
+\end{quote}
+\begin{itemize}
+\item {} 
+Code written for 5.2.x and before SHOULD use the pseudo-namespacing convention of {\color{red}\bfseries{}Vendor\_} prefixes on class names.
+\begin{quote}
+\begin{quote}
+
+For example:
+\end{quote}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{ }\PYG{c+cp}{\PYGZlt{}?php}
+\PYG{c+c1}{// PHP 5.2.x and earlier:}
+\PYG{k}{class} \PYG{n+nc}{Vendor\PYGZus{}Model\PYGZus{}Foo}
+\PYG{p}{\PYGZob{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
+\end{quote}
+
+\end{itemize}
+\end{quote}
 
 
 \subsection{Versioning}
-\label{docs/convensions:psr-2}\label{docs/convensions:versioning}
+\label{docs/convensions:versioning}
 The versioning follows \href{http://semver.org/}{Semantic Versioning 2.0}.
 
 Here quote the summary of Semantic Version below:
@@ -3019,6 +1033,2615 @@ The syntax used in Sphinx is \href{http://docutils.sourceforge.net/rst.html}{reS
 Here is a full code comment example quoted from {\color{red}\bfseries{}{}`Documenting Your Project Using Sphinx{}`\_}.
 
 
+\chapter{Introduction}
+\label{index:introduction}
+\textbf{X2R} is a tool for helping developers to translate existing data in a variety of formats into linked-data compatible formats. The \textbf{X}, \textbf{2} and \textbf{R} in its name stand for existing data in a variety formats, to (the homonym of two) and linked-data compatible formats (i.e., RDF/XML), respectively.
+
+The motivation is to ease the transformation of data into linked-data and thus lower the entry barrier of generating linked-data. Using X2R, more developers can easily translate existing data on-demands, and creating linked-data incrementally.
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\scalebox{0.800000}{\includegraphics{dataflow_small.png}}
+\caption{The dataflow of X2R converter.}\end{figure}
+
+X2R is comprised of four components: Extractor, USS, UMS and Mapper. Figure above shows the dataflow of these four components and existing RDFizer(translators). For a given raw data input in X (XML, CSV, JSON ...etc.) format, existing RDFizers can translated it into RDF serialization formats, such as Turtle, N-Triples, JSON-LD or RDF/XML. However,
+
+
+\section{Audiences}
+\label{docs/audience:audiences}\label{docs/audience::doc}
+Targeted users of X2R include people who develop linked-data applications and need to transform their legacy data into linked data. They can use the X2R GUI (Graphic User Interface) or batch-mode CLI (Command Line Interface). Developers who are experienced in PHP. If they feel current X2R's functionalities are sufficient, and want to build linked-data applications based on X2R. They can use X2R through API functions of the tool.
+
+People who are experienced in PHP and linked data and find that current X2R utilities are insufficient, they can extend the X2R framework based on the hooks provided by X2R.
+
+
+\section{How to Use This Document}
+\label{docs/howto:how-to-use-this-document}\label{docs/howto::doc}
+The index of this document can be found in \emph{genindex}. The search page, \emph{search}, can be used to search within this document.
+
+
+\chapter{User Guide}
+\label{index:user-guide}
+This part of the document focuses on how to set up an environment for X2R and all its components: Extractor, Mapper and USS. A quickstart is then presented to give an overview of X2R and its components.
+
+
+\section{Installation}
+\label{docs/install:installation}\label{docs/install::doc}\label{docs/install:id1}
+Three steps are needed to set up an X2R server, namely installing PHP, installing Composer and installing dependent packages. The detail instructions are listed as follows.
+
+
+\subsection{Install PHP}
+\label{docs/install:install-php}
+X2R is written in PHP. Before using X2R, the PHP should be installed.
+
+To install PHP, an official manual is available in \href{http://php.net/manual/en/install.php}{http://php.net/manual/en/install.php}.
+\begin{itemize}
+\item {} 
+\href{http://php.net/manual/en/install.unix.php}{Installation on Unix systems}
+
+\item {} 
+\href{http://php.net/manual/en/install.macosx.php}{Installation on Mac OS X}
+
+\item {} 
+\href{http://php.net/manual/en/install.windows.php}{Installation on Windows systems}
+
+\item {} 
+\href{http://php.net/manual/en/install.cloud.php}{Installation on Cloud Computing platforms}
+
+\end{itemize}
+
+
+\subsection{Install Composer}
+\label{docs/install:install-composer}
+The dependency of X2R is managed by `composer,' a PHP package management tool.
+Before trying X2R, get and install composer from \href{https://getcomposer.org/}{https://getcomposer.org/}.
+
+Run this in your terminal to get the latest Composer version:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{\PYGZdl{} curl \PYGZhy{}sS https://getcomposer.org/installer \textbar{} php}
+\end{Verbatim}
+
+Or if you don't have curl:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{\PYGZdl{} php \PYGZhy{}r \PYGZdq{}readfile(\PYGZsq{}https://getcomposer.org/installer\PYGZsq{});\PYGZdq{} \textbar{} php}
+\end{Verbatim}
+
+
+\subsection{Install Dependent Packages}
+\label{docs/install:install-dependent-packages}
+Installing X2R is simple with \href{https://getcomposer.org/}{composer}, just use this command:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{\PYGZdl{} php composer.phar install}
+\end{Verbatim}
+
+If you did a global install of \href{https://getcomposer.org/}{composer}, run this instead:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{\PYGZdl{} composer install}
+\end{Verbatim}
+
+
+\section{Quickstart}
+\label{docs/quickstart::doc}\label{docs/quickstart:quickstart}\label{docs/quickstart:id1}
+Here is a simple usage scenario for grasping the whole picture of X2R by example. It assumes you already have X2R installed. If you do not, head over to the {\hyperref[docs/install:installation]{\emph{Installation}}} section.
+
+\textless{}Example\textgreater{}
+
+X2R aims to improve the quality of RDF produced by typical format translators by replacing temporary or invalid URIs with valid and representive URIs.
+
+
+\chapter{Components}
+\label{index:components}
+
+\section{Extractor}
+\label{docs/extractor:extractor}\label{docs/extractor::doc}\label{docs/extractor:id1}
+Extractor is a tool that extracts URIs from a given RDF file, and then turns these URIs into query terms. The purpose of Extractor is to find URI that cannot be reached in the given RDF. These URIs are usually generated by typical format translators and violate linked data design rules proposed by Tim Berners-Lee, i.e., they cannot be looked up in the Web. By generating query terms for them, other X2R tools, USS and UMS, can help in finding or minting better URIs.
+
+RDF is comprised of three types of nodes: URI references, blank nodes or literals.
+
+
+\subsection{Input/Output}
+\label{docs/extractor:input-output}
+\textbf{Input}: RDFGraph
+
+\textbf{Output}: \emph{X2R data exchange format}
+
+Components of X2R share a common data exchange format: \emph{X2R data exchange format}. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below. Note that the ``replacedURI'' name/value pair is intentionally left blank in the context of Extractor (the potential replacedURI is obtained in the context of USS, and is applied in the context of Mapper).
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZob{} \PYGZdq{}metadata\PYGZdq{}: [],
+  \PYGZdq{}mapping\PYGZdq{}:
+    [
+        \PYGZob{}
+         \PYGZdq{}status\PYGZdq{}: value of status,
+         \PYGZdq{}originalURI\PYGZdq{}: value of original URI,
+         \PYGZdq{}replacedURI\PYGZdq{}: value of updated URI,
+         \PYGZdq{}term\PYGZdq{}: value of term
+         \PYGZcb{}
+    ]
+ \PYGZcb{}
+\end{Verbatim}
+
+\begin{tabulary}{\linewidth}{|L|L|}
+\hline
+\textsf{\relax 
+name
+} & \textsf{\relax 
+value range/format
+}\\
+\hline
+status
+ & 
+Range: \{``N/A'', ``200'', ``303'', ``error''\}
+\\
+
+originalURI
+ & 
+A URI that can be found in input file and is valid
+\\
+
+replacedURI
+ & 
+A valid URI
+\\
+
+term
+ & 
+A string
+\\
+\hline\end{tabulary}
+
+
+
+\subsubsection{Major components}
+\label{docs/extractor:major-components}
+\textbf{RDFGraph}
+
+Accept \emph{one element of {[}''json'', ``ntriples'', ``turtle'', ``rdfxml'', ``n3'', ``rdfa'', ``guess''{]}} and \emph{string in a RDF serialization format}
+
+Extractor accepts RDF in the data structure of RDFGraph. RDFGraph is the internal data structure used to abstract RDF attributes and operations. Using RDFGraph also make Extractor independent from the diversity of RDF serialization formats. Currently RDFGraph accepts a subset of RDF serialization formats. To initialize a RDFGraph object, user should specify the input format in terms of ``value'' listed in the Table below. If users have no idea of what the format of input is, they can use the ``guess'' value to ask Extractor to recognize the input's format for them (if it is one of the supported format list).
+
+\begin{tabulary}{\linewidth}{|L|L|L|}
+\hline
+\textsf{\relax 
+value
+} & \textsf{\relax 
+name
+} & \textsf{\relax 
+reference
+}\\
+\hline
+json
+ & 
+RDF/JSON
+ & 
+\href{http://n2.talis.com/wiki/RDF\_JSON\_Specification}{http://n2.talis.com/wiki/RDF\_JSON\_Specification}
+\\
+
+ntriples
+ & 
+N-Triples
+ & 
+\href{http://www.w3.org/TR/n-triples/}{http://www.w3.org/TR/n-triples/}
+\\
+
+turtle
+ & 
+Turtle
+ & 
+\href{http://www.dajobe.org/2004/01/turtle}{http://www.dajobe.org/2004/01/turtle}
+\\
+
+rdfxml
+ & 
+RDF/XML
+ & 
+\href{http://www.w3.org/TR/rdf-syntax-grammar}{http://www.w3.org/TR/rdf-syntax-grammar}
+\\
+
+n3
+ & 
+N3
+ & 
+\href{http://www.w3.org/2000/10/swap/grammar/n3}{http://www.w3.org/2000/10/swap/grammar/n3}
+\\
+
+rdfa
+ & 
+RDFa
+ & 
+\href{http://www.w3.org/TR/rdfa-core/}{http://www.w3.org/TR/rdfa-core/}
+\\
+
+guess
+ &  & 
+If user don't know the format
+\\
+\hline\end{tabulary}
+
+
+\textbf{Tokenizer} is a major component of extractor. It aims to tokenize the tail of extracted URIs into word chuncks that can then be used as query terms to find better URIs.
+
+In X2R Extractor, a tokenizer should implement two methods, tokenizeArr(array \$arr) and tokenizeStr(\$str).
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\scalebox{0.800000}{\includegraphics{tok_1.PNG}}
+\caption{This is the caption of the figure (a simple paragraph).}\end{figure}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\scalebox{0.800000}{\includegraphics{tok_2.PNG}}
+\caption{This is the caption of the figure (a simple paragraph).}\end{figure}
+
+X2R currently support two tokenizers, delimited-based tokenizer and cased-based tokenizer.
+
+
+\subsubsection{Web API Definition}
+\label{docs/extractor:web-api-definition}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/extractor:post--extractor_?excludedNamespaces, checkUrisStatus, rdfContent_}\pysigline{\bfcode{POST~}\bfcode{/extractor\{?excludedNamespaces,~checkUrisStatus,~rdfContent\}}}~\begin{quote}\begin{description}
+\item[{Query Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{excludedNamespaces} -- \emph{(optional)} This specifies a list of namespaces to be skipped. That is, if a found URI belonged to this list, the URI will not be processed anymore.
+
+\item {} 
+\textbf{checkUrisStatus} -- \emph{(required)} This determines if \emph{extractor} checks the status codes of found URIs.
+
+\item {} 
+\textbf{rdfContent} -- \emph{(required)} This specifies the content of RDF to be processed.
+
+\end{itemize}
+
+\item[{Response Headers}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{Content-Type} -- application/json
+
+\end{itemize}
+
+\item[{Status Codes}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{200} -- no error
+
+\item {} 
+\textbf{404} -- exception
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\paragraph{Response Format Detail}
+\label{docs/extractor:response-format-detail}
+Content-Type: application/json
+
+Response template:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{\PYGZob{}\PYGZdq{}metadata\PYGZdq{}: [],}
+\PYG{x}{ \PYGZdq{}mapping\PYGZdq{}:}
+\PYG{x}{             [\PYGZob{}\PYGZdq{}status\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
+\PYG{x}{               \PYGZdq{}originalURI\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
+\PYG{x}{               \PYGZdq{}replacedURI\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
+\PYG{x}{               \PYGZdq{}term\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
+\PYG{x}{               \PYGZdq{}lineNumbers\PYGZdq{}: \PYGZdq{}\PYGZdq{}}
+\PYG{x}{              \PYGZcb{}}
+\PYG{x}{             ]}
+\PYG{x}{\PYGZcb{}}
+\end{Verbatim}
+
+Mapping entry:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{[\PYGZob{}\PYGZdq{}status\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
+\PYG{x}{  \PYGZdq{}originalURI\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
+\PYG{x}{  \PYGZdq{}replacedURI\PYGZdq{}: \PYGZdq{}\PYGZdq{},}
+\PYG{x}{  \PYGZdq{}term\PYGZdq{}: \PYGZdq{}\PYGZdq{}}
+\PYG{x}{ \PYGZcb{}}
+\PYG{x}{]}
+\end{Verbatim}
+
+
+\subsubsection{Examples}
+\label{docs/extractor:examples}\begin{quote}
+
+Here provides three examples of requesting Extractor Web service. Example 1 is a request without excludeNamespaces. In that case, Extractor will return all URIs found in given rdfContent with their corresponding terms. Example 2 illustrates the case of using excludeNamespaces to ignore URIs that are belonged to trustable namespaces, such as ``\href{http://www.w3c.org}{http://www.w3c.org}''. Example 3 demos the usage of checkUrisStatus. Depending on the value of checkUrisStatus, ``on'' will let Extractor test the connection to extracted URI and get the response's status code. In the context of X2R, only two codes, ``200'' and ``303'', are valid. For status code other than 200 and 303, Extractor returns ``error''. The connection test will cause additional delay to Extractor services. For users who need instant response, setting checkUrisStatus as ``off'' can save waiting time.
+
+\textbf{Example 1 request}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{POST} \PYG{n+nn}{/extractor?rdfContent=input\PYGZus{}value} \PYG{k+kr}{HTTP}\PYG{o}{/}\PYG{l+m}{1.1}
+\end{Verbatim}
+\begin{description}
+\item[{\emph{input\_value}:}] \leavevmode
+\begin{Verbatim}[commandchars=\\\{\}]
+ \PYGZlt{}?xml version=\PYGZdq{}1.0\PYGZdq{} encoding=\PYGZdq{}UTF\PYGZhy{}8\PYGZdq{}?\PYGZgt{}
+     \PYGZlt{}rdf:RDF
+         xmlns:rdfs=\PYGZdq{}http://www.w3.org/2000/01/rdf\PYGZhy{}schema\PYGZsh{}\PYGZdq{}
+         xmlns:geo=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}\PYGZdq{}
+         xmlns:xsd=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}\PYGZdq{}
+         xmlns:rdf=\PYGZdq{}http://www.w3.org/1999/02/22\PYGZhy{}rdf\PYGZhy{}syntax\PYGZhy{}ns\PYGZsh{}\PYGZdq{}\PYGZgt{}
+
+ \PYGZlt{}rdf:Description rdf:about=\PYGZdq{}http://127.0.0.1/DaTongSportsCenter\PYGZdq{}\PYGZgt{}
+     \PYGZlt{}rdf:type rdf:resource=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}SpatialThing\PYGZdq{}/\PYGZgt{}
+     \PYGZlt{}updatedAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+         rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2013\PYGZhy{}07\PYGZhy{}31T03:23:47Z\PYGZlt{}/updatedAt\PYGZgt{}
+     \PYGZlt{}geo:long\PYGZgt{}121.516\PYGZlt{}/geo:long\PYGZgt{}
+     \PYGZlt{}hasTelephone xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}2592\PYGZhy{}0055\PYGZlt{}/hasTelephone\PYGZgt{}
+     \PYGZlt{}hasName xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Da Tong Sports Center\PYGZlt{}/hasName\PYGZgt{}
+     \PYGZlt{}geo:location\PYGZgt{}No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)\PYGZlt{}/geo:location\PYGZgt{}
+     \PYGZlt{}usedFor xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Sport\PYGZlt{}/usedFor\PYGZgt{}
+     \PYGZlt{}createdAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+         rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2012\PYGZhy{}11\PYGZhy{}28T09:05:13Z\PYGZlt{}/createdAt\PYGZgt{}
+     \PYGZlt{}geo:lat\PYGZgt{}25.0648\PYGZlt{}/geo:lat\PYGZgt{}
+ \PYGZlt{}/rdf:Description\PYGZgt{}
+
+\PYGZlt{}rdf:Description rdf:about=\PYGZdq{}http://127.0.0.1/ShilinSportsCenter\PYGZdq{}\PYGZgt{}
+  \PYGZlt{}rdf:type rdf:resource=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}SpatialThing\PYGZdq{}/\PYGZgt{}
+  \PYGZlt{}updatedAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+      rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2013\PYGZhy{}07\PYGZhy{}31T03:23:47Z\PYGZlt{}/updatedAt\PYGZgt{}
+  \PYGZlt{}geo:long\PYGZgt{}121.521\PYGZlt{}/geo:long\PYGZgt{}
+  \PYGZlt{}hasTelephone xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}2880\PYGZhy{}6066\PYGZlt{}/hasTelephone\PYGZgt{}
+  \PYGZlt{}hasName xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Shilin Sports Center\PYGZlt{}/hasName\PYGZgt{}
+  \PYGZlt{}geo:location\PYGZgt{}No.1, Shishang Rd., Shilin Dist., Taipei City 111, Taiwan (R.O.C.)\PYGZlt{}/geo:location\PYGZgt{}
+  \PYGZlt{}usedFor xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Sport\PYGZlt{}/usedFor\PYGZgt{}
+  \PYGZlt{}createdAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+      rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2012\PYGZhy{}11\PYGZhy{}28T09:05:13Z\PYGZlt{}/createdAt\PYGZgt{}
+  \PYGZlt{}geo:lat\PYGZgt{}25.0897\PYGZlt{}/geo:lat\PYGZgt{}
+\PYGZlt{}/rdf:Description\PYGZgt{}
+
+ \PYGZlt{}/rdf:RDF\PYGZgt{}
+\end{Verbatim}
+
+\end{description}
+
+\textbf{Example 1 response}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+HTTP/1.1 200 OK
+Vary: Accept
+Content\PYGZhy{}Type: application/json
+
+\PYGZob{}
+\PYGZdq{}metadata\PYGZdq{}:[
+],
+\PYGZdq{}mapping\PYGZdq{}:[
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://127.0.0.1/DaTongSportsCenter\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} Da Tong Sports Center \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://www.w3.org/1999/02/22\PYGZhy{}rdf\PYGZhy{}syntax\PYGZhy{}ns\PYGZsh{}type\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} 22 rdf syntax ns type \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/updatedAt\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} updated At \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}long\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} wgs84 pos long \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/hasTelephone\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} has Telephone \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/hasName\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} has Name \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}location\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} wgs84 pos location \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/usedFor\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} used For \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/createdAt\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} created At \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}lat\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} wgs84 pos lat \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://127.0.0.1/ShilinSportsCenter\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} Shilin Sports Center \PYGZdq{}
+\PYGZcb{}
+]
+\PYGZcb{}
+\end{Verbatim}
+
+\textbf{Example 2 request}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{POST} \PYG{n+nn}{/extractor?excludedNamespaces[]\PYGZam{}rdfContent=input\PYGZus{}value} \PYG{k+kr}{HTTP}\PYG{o}{/}\PYG{l+m}{1.1}
+\end{Verbatim}
+
+\emph{excludedNamespaces{[}{]}}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+excludedNamespaces[]=www.w3.org\PYGZam{}excludedNamespaces[]=openisdm.iis.sinica.edu.tw
+\end{Verbatim}
+
+\emph{input\_value} is the same as Example 1's erquest.
+
+\textbf{Example 2 response}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+HTTP/1.1 200 OK
+Vary: Accept
+Content\PYGZhy{}Type: application/json
+
+\PYGZob{}
+\PYGZdq{}metadata\PYGZdq{}:[
+],
+\PYGZdq{}mapping\PYGZdq{}:[
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://127.0.0.1/DaTongSportsCenter\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} Da Tong Sports Center \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}N/A\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://127.0.0.1/ShilinSportsCenter\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} Shilin Sports Center \PYGZdq{}
+\PYGZcb{}
+]
+\PYGZcb{}
+\end{Verbatim}
+
+\textbf{Example 3 request}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{POST} \PYG{n+nn}{/extractor?excludedNamespaces[]\PYGZam{}rdfContent=input\PYGZus{}value\PYGZam{}checkUrisStatus=on} \PYG{k+kr}{HTTP}\PYG{o}{/}\PYG{l+m}{1.1}
+\end{Verbatim}
+
+\emph{excludedNamespaces{[}{]}} is the same as Example 2's request.
+
+\emph{input\_value} is the same as Example 1's request.
+
+\textbf{Example 3 response}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+HTTP/1.1 200 OK
+Vary: Accept
+Content\PYGZhy{}Type: application/json
+
+\PYGZob{}
+\PYGZdq{}metadata\PYGZdq{}:[
+],
+\PYGZdq{}mapping\PYGZdq{}:[
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}error\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://127.0.0.1/DaTongSportsCenter\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} Da Tong Sports Center \PYGZdq{}
+\PYGZcb{},
+\PYGZob{}
+\PYGZdq{}status\PYGZdq{}:\PYGZdq{}error\PYGZdq{},
+\PYGZdq{}originalURI\PYGZdq{}:\PYGZdq{}http://127.0.0.1/ShilinSportsCenter\PYGZdq{},
+\PYGZdq{}replacedURI\PYGZdq{}:\PYGZdq{}\PYGZdq{},
+\PYGZdq{}term\PYGZdq{}:\PYGZdq{} Shilin Sports Center \PYGZdq{}
+\PYGZcb{}
+]
+\PYGZcb{}
+\end{Verbatim}
+\end{quote}
+
+
+\section{Mapper}
+\label{docs/mapper:mapper}\label{docs/mapper::doc}\label{docs/mapper:id1}
+Mapper is a tool for systematically replacing URIs within a given RDF. When you have the mapping from original URIs to new URIs, Mapper can replace the URIs based on the mapping automatically.
+
+
+\subsection{Input/Output}
+\label{docs/mapper:input-output}
+\textbf{Input}: \emph{X2R data exchange format} and \emph{string in a RDF serialization format}
+
+Components of X2R share a common data exchange format: \emph{X2R data exchange format}. The output of Extractor is in the foramt of X2R data exchange format. The detail spec. of this exchange format is described below.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZob{} \PYGZdq{}metadata\PYGZdq{}: [],
+  \PYGZdq{}mapping\PYGZdq{}:
+    [
+        \PYGZob{}
+         \PYGZdq{}status\PYGZdq{}: status value,
+         \PYGZdq{}originalURI\PYGZdq{}: original URI value,
+         \PYGZdq{}replacedURI\PYGZdq{}: updated URI value,
+         \PYGZdq{}term\PYGZdq{}: term value
+         \PYGZcb{}
+    ]
+ \PYGZcb{}
+\end{Verbatim}
+
+\textbf{Output}: string in a RDF serialization format
+
+Mapper allow user to specify the updated RDF in the format of a subset of RDF serialization formats listed in the Table below.
+
+\begin{tabulary}{\linewidth}{|L|L|L|}
+\hline
+\textsf{\relax 
+value
+} & \textsf{\relax 
+name
+} & \textsf{\relax 
+reference
+}\\
+\hline
+json
+ & 
+RDF/JSON
+ & 
+\href{http://n2.talis.com/wiki/RDF\_JSON\_Specification}{http://n2.talis.com/wiki/RDF\_JSON\_Specification}
+\\
+
+ntriples
+ & 
+N-Triples
+ & 
+\href{http://www.w3.org/TR/n-triples/}{http://www.w3.org/TR/n-triples/}
+\\
+
+turtle
+ & 
+Turtle
+ & 
+\href{http://www.dajobe.org/2004/01/turtle}{http://www.dajobe.org/2004/01/turtle}
+\\
+
+rdfxml
+ & 
+RDF/XML
+ & 
+\href{http://www.w3.org/TR/rdf-syntax-grammar}{http://www.w3.org/TR/rdf-syntax-grammar}
+\\
+
+n3
+ & 
+N3
+ & 
+\href{http://www.w3.org/2000/10/swap/grammar/n3}{http://www.w3.org/2000/10/swap/grammar/n3}
+\\
+
+rdfa
+ & 
+RDFa
+ & 
+\href{http://www.w3.org/TR/rdfa-core/}{http://www.w3.org/TR/rdfa-core/}
+\\
+\hline\end{tabulary}
+
+
+
+\subsubsection{Web API Definition}
+\label{docs/mapper:web-api-definition}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/mapper:post--mapper_?rdfContent, mapping, format_}\pysigline{\bfcode{POST~}\bfcode{/mapper\{?rdfContent,~mapping,~format\}}}~\begin{quote}\begin{description}
+\item[{Query Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{rdfContent} -- (required) This specifies the content of RDF to be processed.
+
+\item {} 
+\textbf{mapping} -- (required) This specifies the information needed for \emph{mapper} to update the URIs found in rdfContent.
+
+\item {} 
+\textbf{format} -- (optional) This specifies the format of output.
+
+\end{itemize}
+
+\item[{Response Headers}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{Content-Type} -- application/rdf+xml
+
+\end{itemize}
+
+\item[{Status Codes}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{200} -- no error
+
+\item {} 
+\textbf{404} -- exception
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\paragraph{Response Format Detail}
+\label{docs/mapper:response-format-detail}
+Content-Type: application/rdf+xml
+
+
+\subsubsection{Example}
+\label{docs/mapper:example}\begin{quote}
+
+\textbf{Example request}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{POST} \PYG{n+nn}{/mapper?rdfContent=input\PYGZus{}value\PYGZam{}mapping=mapping\PYGZus{}value\PYGZam{}format=rdfxml} \PYG{k+kr}{HTTP}\PYG{o}{/}\PYG{l+m}{1.1}
+\end{Verbatim}
+\begin{description}
+\item[{\emph{input\_value}:}] \leavevmode\begin{quote}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+ \PYGZlt{}?xml version=\PYGZdq{}1.0\PYGZdq{} encoding=\PYGZdq{}UTF\PYGZhy{}8\PYGZdq{}?\PYGZgt{}
+     \PYGZlt{}rdf:RDF
+         xmlns:rdfs=\PYGZdq{}http://www.w3.org/2000/01/rdf\PYGZhy{}schema\PYGZsh{}\PYGZdq{}
+         xmlns:geo=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}\PYGZdq{}
+         xmlns:xsd=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}\PYGZdq{}
+         xmlns:rdf=\PYGZdq{}http://www.w3.org/1999/02/22\PYGZhy{}rdf\PYGZhy{}syntax\PYGZhy{}ns\PYGZsh{}\PYGZdq{}\PYGZgt{}
+
+ \PYGZlt{}rdf:Description rdf:about=\PYGZdq{}http://127.0.0.1/DaTongSportsCenter\PYGZdq{}\PYGZgt{}
+     \PYGZlt{}rdf:type rdf:resource=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}SpatialThing\PYGZdq{}/\PYGZgt{}
+     \PYGZlt{}updatedAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+         rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2013\PYGZhy{}07\PYGZhy{}31T03:23:47Z\PYGZlt{}/updatedAt\PYGZgt{}
+     \PYGZlt{}geo:long\PYGZgt{}121.516\PYGZlt{}/geo:long\PYGZgt{}
+     \PYGZlt{}hasTelephone xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}2592\PYGZhy{}0055\PYGZlt{}/hasTelephone\PYGZgt{}
+     \PYGZlt{}hasName xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Da Tong Sports Center\PYGZlt{}/hasName\PYGZgt{}
+     \PYGZlt{}geo:location\PYGZgt{}No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)\PYGZlt{}/geo:location\PYGZgt{}
+     \PYGZlt{}usedFor xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Sport\PYGZlt{}/usedFor\PYGZgt{}
+     \PYGZlt{}createdAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+         rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2012\PYGZhy{}11\PYGZhy{}28T09:05:13Z\PYGZlt{}/createdAt\PYGZgt{}
+     \PYGZlt{}geo:lat\PYGZgt{}25.0648\PYGZlt{}/geo:lat\PYGZgt{}
+ \PYGZlt{}/rdf:Description\PYGZgt{}
+
+\PYGZlt{}rdf:Description rdf:about=\PYGZdq{}http://127.0.0.1/ShilinSportsCenter\PYGZdq{}\PYGZgt{}
+  \PYGZlt{}rdf:type rdf:resource=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}SpatialThing\PYGZdq{}/\PYGZgt{}
+  \PYGZlt{}updatedAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+      rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2013\PYGZhy{}07\PYGZhy{}31T03:23:47Z\PYGZlt{}/updatedAt\PYGZgt{}
+  \PYGZlt{}geo:long\PYGZgt{}121.521\PYGZlt{}/geo:long\PYGZgt{}
+  \PYGZlt{}hasTelephone xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}2880\PYGZhy{}6066\PYGZlt{}/hasTelephone\PYGZgt{}
+  \PYGZlt{}hasName xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Shilin Sports Center\PYGZlt{}/hasName\PYGZgt{}
+  \PYGZlt{}geo:location\PYGZgt{}No.1, Shishang Rd., Shilin Dist., Taipei City 111, Taiwan (R.O.C.)\PYGZlt{}/geo:location\PYGZgt{}
+  \PYGZlt{}usedFor xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Sport\PYGZlt{}/usedFor\PYGZgt{}
+  \PYGZlt{}createdAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+      rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2012\PYGZhy{}11\PYGZhy{}28T09:05:13Z\PYGZlt{}/createdAt\PYGZgt{}
+  \PYGZlt{}geo:lat\PYGZgt{}25.0897\PYGZlt{}/geo:lat\PYGZgt{}
+\PYGZlt{}/rdf:Description\PYGZgt{}
+
+ \PYGZlt{}/rdf:RDF\PYGZgt{}
+\end{Verbatim}
+\end{quote}
+\begin{description}
+\item[{\emph{mapping\_value}:}] \leavevmode
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}} \PYG{n+nt}{\PYGZdq{}metadata\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{p}{]}\PYG{p}{,}
+  \PYG{n+nt}{\PYGZdq{}mapping\PYGZdq{}}\PYG{p}{:}
+    \PYG{p}{[}
+        \PYG{p}{\PYGZob{}}
+         \PYG{n+nt}{\PYGZdq{}status\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}N/A\PYGZdq{}}\PYG{p}{,}
+         \PYG{n+nt}{\PYGZdq{}originalURI\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://127.0.0.1/DaTongSportsCenter\PYGZdq{}}\PYG{p}{,}
+         \PYG{n+nt}{\PYGZdq{}replacedURI\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/DaTongSportsCenter\PYGZdq{}}\PYG{p}{,}
+         \PYG{n+nt}{\PYGZdq{}term\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}Datong Sports Center\PYGZdq{}}
+         \PYG{p}{\PYGZcb{}}\PYG{p}{,}
+         \PYG{p}{\PYGZob{}}
+         \PYG{n+nt}{\PYGZdq{}status\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}N/A\PYGZdq{}}\PYG{p}{,}
+         \PYG{n+nt}{\PYGZdq{}originalURI\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://127.0.0.1/ShilinSportsCenterr\PYGZdq{}}\PYG{p}{,}
+         \PYG{n+nt}{\PYGZdq{}replacedURI\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/ShilinSportsCenter\PYGZdq{}}\PYG{p}{,}
+         \PYG{n+nt}{\PYGZdq{}term\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}Shilin Sports Center\PYGZdq{}}
+         \PYG{p}{\PYGZcb{}}
+    \PYG{p}{]}
+ \PYG{p}{\PYGZcb{}}
+\end{Verbatim}
+
+\end{description}
+
+\end{description}
+
+\textbf{Example response}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+ HTTP/1.1 200 OK
+ Vary: Accept
+ Content\PYGZhy{}Type: application/rdf+xml
+
+\PYGZlt{}?xml version=\PYGZdq{}1.0\PYGZdq{} encoding=\PYGZdq{}UTF\PYGZhy{}8\PYGZdq{}?\PYGZgt{}
+    \PYGZlt{}rdf:RDF
+        xmlns:rdfs=\PYGZdq{}http://www.w3.org/2000/01/rdf\PYGZhy{}schema\PYGZsh{}\PYGZdq{}
+        xmlns:geo=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}\PYGZdq{}
+        xmlns:xsd=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}\PYGZdq{}
+        xmlns:rdf=\PYGZdq{}http://www.w3.org/1999/02/22\PYGZhy{}rdf\PYGZhy{}syntax\PYGZhy{}ns\PYGZsh{}\PYGZdq{}\PYGZgt{}
+
+ \PYGZlt{}rdf:Description rdf:about=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/DatongSportsCenter\PYGZdq{}\PYGZgt{}
+    \PYGZlt{}rdf:type rdf:resource=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}SpatialThing\PYGZdq{}/\PYGZgt{}
+    \PYGZlt{}updatedAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+        rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2013\PYGZhy{}07\PYGZhy{}31T03:23:47Z\PYGZlt{}/updatedAt\PYGZgt{}
+    \PYGZlt{}geo:long\PYGZgt{}121.516\PYGZlt{}/geo:long\PYGZgt{}
+    \PYGZlt{}hasTelephone xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}2592\PYGZhy{}0055\PYGZlt{}/hasTelephone\PYGZgt{}
+    \PYGZlt{}hasName xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Datong Sports Center\PYGZlt{}/hasName\PYGZgt{}
+    \PYGZlt{}geo:location\PYGZgt{}No.51, Dalong St., Datong Dist., Taipei City 103, Taiwan (R.O.C.)\PYGZlt{}/geo:location\PYGZgt{}
+    \PYGZlt{}usedFor xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Sport\PYGZlt{}/usedFor\PYGZgt{}
+    \PYGZlt{}createdAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+        rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2012\PYGZhy{}11\PYGZhy{}28T09:05:13Z\PYGZlt{}/createdAt\PYGZgt{}
+    \PYGZlt{}geo:lat\PYGZgt{}25.0648\PYGZlt{}/geo:lat\PYGZgt{}
+ \PYGZlt{}/rdf:Description\PYGZgt{}
+
+ \PYGZlt{}rdf:Description rdf:about=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/ShilinSportsCenter\PYGZdq{}\PYGZgt{}
+   \PYGZlt{}rdf:type rdf:resource=\PYGZdq{}http://www.w3.org/2003/01/geo/wgs84\PYGZus{}pos\PYGZsh{}SpatialThing\PYGZdq{}/\PYGZgt{}
+   \PYGZlt{}updatedAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+       rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2013\PYGZhy{}07\PYGZhy{}31T03:23:47Z\PYGZlt{}/updatedAt\PYGZgt{}
+   \PYGZlt{}geo:long\PYGZgt{}121.521\PYGZlt{}/geo:long\PYGZgt{}
+   \PYGZlt{}hasTelephone xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}2880\PYGZhy{}6066\PYGZlt{}/hasTelephone\PYGZgt{}
+   \PYGZlt{}hasName xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Shilin Sports Center\PYGZlt{}/hasName\PYGZgt{}
+   \PYGZlt{}geo:location\PYGZgt{}No.1, Shishang Rd., Shilin Dist., Taipei City 111, Taiwan (R.O.C.)\PYGZlt{}/geo:location\PYGZgt{}
+   \PYGZlt{}usedFor xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}\PYGZgt{}Sport\PYGZlt{}/usedFor\PYGZgt{}
+   \PYGZlt{}createdAt xmlns=\PYGZdq{}http://openisdm.iis.sinica.edu.tw/VR/\PYGZdq{}
+       rdf:datatype=\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZsh{}dateTime\PYGZdq{}\PYGZgt{}2012\PYGZhy{}11\PYGZhy{}28T09:05:13Z\PYGZlt{}/createdAt\PYGZgt{}
+   \PYGZlt{}geo:lat\PYGZgt{}25.0897\PYGZlt{}/geo:lat\PYGZgt{}
+ \PYGZlt{}/rdf:Description\PYGZgt{}
+
+\PYGZlt{}/rdf:RDF\PYGZgt{}
+\end{Verbatim}
+\end{quote}
+
+
+\section{URI Search Service}
+\label{docs/uss:uss}\label{docs/uss::doc}\label{docs/uss:uri-search-service}
+URI Search Service (USS) is a federated search service. The general process of USS is listed below.
+\begin{enumerate}
+\item {} 
+USS accepts a set of URI search requests
+
+\item {} 
+USS refines the search requests (e.g. fixing typos or replace with a better term)
+
+\item {} 
+USS composes corresponding SPARQL for each query request
+
+\item {} 
+USS issues SPARQL queries to a set of Endpoints, which are defined in USS's configuration
+
+\item {} 
+USS integrates all results returned from Endpoints
+
+\item {} 
+USS applies filters and rankers to remove the ambiguity or promote results that are commonly used
+
+\item {} 
+USS selects one result for each request
+
+\end{enumerate}
+
+All steps listed above should be easily replacable. These steps can also be outsourced to human instead of heuristics. In order to make USS a flexible system, we provide the system with the following hooks.
+
+In refined USS, seven \textbf{atomic hooks} can be replaced and extended, they are:
+\begin{itemize}
+\item {} 
+\textbf{Query Parser}
+
+Query Parser parses the plain text query string into set of query terms, term refinement qualifiers, result set qualifiers and corresponding integration commands.
+
+\item {} 
+\textbf{Endpoint Cotainer}
+
+\end{itemize}
+\phantomsection\label{docs/uss:endpoint}\begin{itemize}
+\item {} 
+\textbf{Endpoint} (see also: {\hyperref[docs/api:Endpoint]{\code{Endpoint}}})
+
+Endpoint wraps the public Endpoint, such as DBpedia, and handles the errors, such as Endpoint service downtime. Endpoint accepts SQARQL query and return the result set in standard format of Endpoint.
+
+\item {} 
+\textbf{Term Refiner}
+
+Term Refiner takes one query term as its input and output a refined query term.
+
+\item {} 
+\textbf{Result Ranker}
+
+Result Ranker reorders the ranks of result set based on the heuristic that it wants to realize. In addition to heuristic, Result Ranker can also be a crowd sourcing task, which can be delegated to the crowd.
+
+\item {} 
+\textbf{Result Filter}
+
+Result Filter filters result set by patterns. The typical usage of Result Filter is to resolve ambiguity.
+
+\end{itemize}
+\begin{itemize}
+\item {} 
+\textbf{Result Integrator}
+
+Result Integrator takes two or more result sets and integrates them as one ranked result set.
+
+\item {} 
+\textbf{Result Selector}
+
+\end{itemize}
+
+
+\subsection{Composition of atomic hooks}
+\label{docs/uss:composition-of-atomic-hooks}\begin{quote}
+
+The atomic hooks can be composited through method chaining.
+\end{quote}
+
+\textbf{Examples:}
+\begin{enumerate}
+\item {} 
+This request returns the results that match the search query terms ``typhoon'' AND ``weather'' from ``\href{http://dbpedia.org/sparql}{http://dbpedia.org/sparql}''.
+
+\item {} 
+Example 2: This request returns the results that match the search query terms ``country'' from ``\href{http://dbpedia.org/sparql}{http://dbpedia.org/sparql}'' and ``\href{http://linkedgeodata.org/sparql}{http://linkedgeodata.org/sparql}''.
+
+\end{enumerate}
+\begin{figure}[htbp]
+\centering
+
+\scalebox{0.800000}{\includegraphics{uss_2.PNG}}
+\end{figure}
+
+
+\subsection{Web API Definition}
+\label{docs/uss:web-api-definition}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/uss:get--uss_?q, sites, output, start, num_}\pysigline{\bfcode{GET~}\bfcode{/uss\{?q,~sites,~output,~start,~num\}}}~\begin{quote}\begin{description}
+\item[{Query Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{q} -- \emph{(required)} Search term of interest.
+
+\item {} 
+\textbf{sites} -- \emph{(required)} The sites to search term. Has default value.
+
+\item {} 
+\textbf{format} -- \emph{(required)} The format of returned result.
+
+\item {} 
+\textbf{start} -- \emph{(optional)} The offset to specify the index of returned result.
+
+\item {} 
+\textbf{num} -- \emph{(optional)} The number of returned result. Use with start in the search query.
+
+\end{itemize}
+
+\item[{Response Headers}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{Content-Type} -- application/json
+
+\end{itemize}
+
+\item[{Status Codes}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{200} -- no error
+
+\item {} 
+\textbf{404} -- exception
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+Response template:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZob{}
+ “term”:”typhoon”,
+ “data”:[array of searched URI results]
+\PYGZcb{}
+\end{Verbatim}
+
+Data entry:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZdq{}data\PYGZdq{}: [
+ \PYGZob{}
+  \PYGZdq{}dataSourceName\PYGZdq{}: \PYGZdq{}http://dbpedia.org\PYGZdq{},
+  \PYGZdq{}response\PYGZdq{}: \PYGZob{}
+   \PYGZdq{}head\PYGZdq{}: \PYGZob{}
+    \PYGZdq{}link\PYGZdq{}: [],
+    \PYGZdq{}vars\PYGZdq{}: [
+     \PYGZdq{}s\PYGZdq{},
+     \PYGZdq{}o\PYGZdq{}
+    ]
+   \PYGZcb{},
+   \PYGZdq{}results\PYGZdq{}: \PYGZob{}objects of returned URI results\PYGZcb{}
+   \PYGZcb{}
+\PYGZcb{}
+]
+\end{Verbatim}
+
+Result entry
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZdq{}results\PYGZdq{}: \PYGZob{}
+    \PYGZdq{}distinct\PYGZdq{}: false,
+    \PYGZdq{}ordered\PYGZdq{}: true,
+    \PYGZdq{}bindings\PYGZdq{}: [
+     \PYGZob{}
+      \PYGZdq{}s\PYGZdq{}: \PYGZob{}
+       \PYGZdq{}type\PYGZdq{}: \PYGZdq{}uri\PYGZdq{},
+       \PYGZdq{}value\PYGZdq{}: \PYGZdq{}http://wikidata.dbpedia.org/uri\PYGZus{}1\PYGZdq{}
+      \PYGZcb{},
+      \PYGZdq{}o\PYGZdq{}: \PYGZob{}
+       \PYGZdq{}type\PYGZdq{}: \PYGZdq{}literal\PYGZdq{},
+       \PYGZdq{}xml:lang\PYGZdq{}: \PYGZdq{}en\PYGZdq{},
+       \PYGZdq{}value\PYGZdq{}: \PYGZdq{}typhoon\PYGZdq{}
+      \PYGZcb{}
+     \PYGZcb{}
+   ]
+\PYGZcb{}
+\end{Verbatim}
+
+
+\subsection{Example}
+\label{docs/uss:example}
+\textbf{Example request:}
+\begin{quote}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+GET /uss?q=typhoon\PYGZam{}sites\PYGZam{}output=json
+\end{Verbatim}
+\end{quote}
+
+\textbf{Example response:}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+ \PYG{n+nt}{\PYGZdq{}term\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}typhoon\PYGZdq{}}\PYG{p}{,}
+ \PYG{n+nt}{\PYGZdq{}data\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}
+ \PYG{p}{\PYGZob{}}
+  \PYG{n+nt}{\PYGZdq{}dataSourceName\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://dbpedia.org\PYGZdq{}}\PYG{p}{,}
+  \PYG{n+nt}{\PYGZdq{}response\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}
+   \PYG{n+nt}{\PYGZdq{}head\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}
+    \PYG{n+nt}{\PYGZdq{}link\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n+nt}{\PYGZdq{}vars\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}
+     \PYG{l+s+s2}{\PYGZdq{}s\PYGZdq{}}\PYG{p}{,}
+     \PYG{l+s+s2}{\PYGZdq{}o\PYGZdq{}}
+    \PYG{p}{]}
+   \PYG{p}{\PYGZcb{}}\PYG{p}{,}
+   \PYG{n+nt}{\PYGZdq{}results\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}
+    \PYG{n+nt}{\PYGZdq{}distinct\PYGZdq{}}\PYG{p}{:} \PYG{k+kc}{false}\PYG{p}{,}
+    \PYG{n+nt}{\PYGZdq{}ordered\PYGZdq{}}\PYG{p}{:} \PYG{k+kc}{true}\PYG{p}{,}
+    \PYG{n+nt}{\PYGZdq{}bindings\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}
+     \PYG{p}{\PYGZob{}}
+      \PYG{n+nt}{\PYGZdq{}s\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}
+       \PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}uri\PYGZdq{}}\PYG{p}{,}
+       \PYG{n+nt}{\PYGZdq{}value\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://wikidata.dbpedia.org/uri\PYGZus{}1\PYGZdq{}}
+      \PYG{p}{\PYGZcb{}}\PYG{p}{,}
+      \PYG{n+nt}{\PYGZdq{}o\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}
+       \PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}literal\PYGZdq{}}\PYG{p}{,}
+       \PYG{n+nt}{\PYGZdq{}xml:lang\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}en\PYGZdq{}}\PYG{p}{,}
+       \PYG{n+nt}{\PYGZdq{}value\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}typhoon\PYGZdq{}}
+      \PYG{p}{\PYGZcb{}}
+     \PYG{p}{\PYGZcb{}}\PYG{p}{,}
+     \PYG{p}{\PYGZob{}}
+      \PYG{n+nt}{\PYGZdq{}s\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}
+       \PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}uri\PYGZdq{}}\PYG{p}{,}
+       \PYG{n+nt}{\PYGZdq{}value\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}http://dbpedia.org/resource/uri\PYGZus{}2\PYGZdq{}}
+      \PYG{p}{\PYGZcb{}}\PYG{p}{,}
+      \PYG{n+nt}{\PYGZdq{}o\PYGZdq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}
+       \PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}literal\PYGZdq{}}\PYG{p}{,}
+       \PYG{n+nt}{\PYGZdq{}xml:lang\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}en\PYGZdq{}}\PYG{p}{,}
+       \PYG{n+nt}{\PYGZdq{}value\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}Typhoon shelters in Hong Kong\PYGZdq{}}
+      \PYG{p}{\PYGZcb{}}
+     \PYG{p}{\PYGZcb{}}
+    \PYG{p}{]}
+   \PYG{p}{\PYGZcb{}}
+  \PYG{p}{\PYGZcb{}}
+ \PYG{p}{\PYGZcb{}}
+\PYG{p}{]}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
+
+
+\section{X2R User Interface}
+\label{docs/x2r:x2r-user-interface}\label{docs/x2r::doc}\label{docs/x2r:x2r}
+X2R is designed to be both human and machine friendly through an open API.
+Based on the API, the tool aims to provide two kinds of user interfaces for human users:
+a Web-based GUI and a command line Interface.
+
+
+\subsection{API Usage}
+\label{docs/x2r:api-usage}
+The details of API usage can be found in next chapter.
+
+
+\subsection{User Interface}
+\label{docs/x2r:user-interface}
+X2R 1.0 provides a JQuery-powered GUI and a command line Interface is planned to be included in version 2.0.
+
+
+\chapter{API Usage}
+\label{index:api-usage}
+Targeted Audience: \textbf{API users}
+
+
+\section{X2R API Usage Scenarios}
+\label{docs/scenarios/x2r:x2r-api-usage-scenarios}\label{docs/scenarios/x2r::doc}
+
+\subsection{Operation Scenarios}
+\label{docs/scenarios/x2r:operation-scenarios}
+
+\subsubsection{Replace Bad URIs}
+\label{docs/scenarios/x2r:replace-bad-uris}
+
+\subsection{Configuration Scenarios}
+\label{docs/scenarios/x2r:configuration-scenarios}
+
+\subsubsection{Set an Extractor}
+\label{docs/scenarios/x2r:set-an-extractor}
+
+\subsubsection{Set a Mapper}
+\label{docs/scenarios/x2r:set-a-mapper}
+
+\subsubsection{Set an USS}
+\label{docs/scenarios/x2r:set-an-uss}
+
+\section{Extractor API Usage Scenarios}
+\label{docs/scenarios/extractor:extractor-api-usage-scenarios}\label{docs/scenarios/extractor::doc}
+
+\subsection{Operation Scenarios}
+\label{docs/scenarios/extractor:operation-scenarios}
+
+\subsubsection{Extract URIs from a Given RDF}
+\label{docs/scenarios/extractor:extract-uris-from-a-given-rdf}\begin{enumerate}
+\item {} 
+Include the file \textbf{``extractor.class.php''} in your program
+
+\item {} 
+Initialize a \textbf{Extractor} instance by passing a \textbf{rdfGraph}
+
+\item {} 
+Call the method \textbf{getQueryTerms()}
+
+\end{enumerate}
+
+
+\subsubsection{Tokenize an URI into Query Terms}
+\label{docs/scenarios/extractor:tokenize-an-uri-into-query-terms}
+Extractor can help in tokenizing URI task. To tokenize a given URI, you can use the method \textbf{tokenize(\$str)}, where the \$str is the URI that you want to tokenize.
+
+Currently, we implements two representive tokenizers, \textbf{DelimitBasedTokenizer} and \textbf{CaseBasedTokenizer}, and the \textbf{tokenize(\$str)} applies these two tokenizers on the \$str.
+
+
+\subsection{Configuration Scenarios}
+\label{docs/scenarios/extractor:configuration-scenarios}
+
+\subsubsection{Set a RDF Parser}
+\label{docs/scenarios/extractor:set-a-rdf-parser}
+There are many RDF parsers available. In X2R, we allow developers to set or even introduce new RDF parsers for reasons, such as better performace or wider range of input formats.
+
+Currently, we implement one wrapper, \textbf{Easy\_Rdf\_Adapter}, for EasyRdf. EasyRdf is a popular RDF parser implemented in PHP, and more information can be found in it \href{http://www.easyrdf.org/}{official site}.
+
+To set \textbf{Easy\_Rdf\_Adapter} as the RDF parser.
+\begin{enumerate}
+\item {} 
+Initialize an instance of \textbf{Easy\_Rdf\_Adapter}
+
+\item {} 
+Initialize a \textbf{Extractor} instance by passing the instance just initialized
+
+\end{enumerate}
+
+
+\subsubsection{Set an URI Filter}
+\label{docs/scenarios/extractor:set-an-uri-filter}
+If there are some URIs that you want to ignore in the whole URI replacement process, you can use \textbf{addFilteredUri(\$furi)} to incrementally build the URI filter.
+
+You can also use \textbf{getFiltedUris()} method to get the current list of URIs that are ignored.
+
+
+\section{USS API Usage Scenarios}
+\label{docs/scenarios/uss::doc}\label{docs/scenarios/uss:uss-api-usage-scenarios}
+
+\subsection{Operation Scenarios}
+\label{docs/scenarios/uss:operation-scenarios}
+
+\subsubsection{Search URIs by terms}
+\label{docs/scenarios/uss:search-uris-by-terms}\begin{enumerate}
+\item {} 
+Include the file \textbf{``urisearchservice.class.php''} in your program
+
+\item {} 
+Initialize a \textbf{UriSearchService} instance
+
+\item {} 
+Call the method \textbf{uriSearch} with a \textbf{query string} as the parameter. After receving all Endpoints' respones, the \textbf{result set} is returned
+
+\end{enumerate}
+
+
+\subsection{Configuration Scenarios}
+\label{docs/scenarios/uss:configuration-scenarios}
+After initializing a \textbf{UriSearchService} instance, the default components are already set. If you want to change the default setting, you can reset the components as the guidences listed below.
+
+The configuration methods can be chained. Here is a code example.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{include\PYGZus{}once (risearchservice.class.php);}
+\PYG{x}{\PYGZdl{}exampleUss = new UriSearchService();}
+\PYG{x}{//... Initialize components as \PYGZdl{}parser, \PYGZdl{}selector ...etc.}
+\PYG{x}{\PYGZdl{}exampleUss\PYGZhy{}\PYGZgt{}setFederatedSearch(\PYGZdl{}federatedSearch)}
+\PYG{x}{           \PYGZhy{}\PYGZgt{}setParser(\PYGZdl{}parser)}
+\PYG{x}{           \PYGZhy{}\PYGZgt{}setProcessor(\PYGZdl{}rsultProcessor)}
+\PYG{x}{           \PYGZhy{}\PYGZgt{}setSelector(\PYGZdl{}selector);}
+\end{Verbatim}
+
+
+\subsubsection{Set a Parser}
+\label{docs/scenarios/uss:set-a-parser}\begin{enumerate}
+\item {} 
+Initialize a parser
+
+\item {} 
+Assign the new parser through the method \textbf{setParser(\$parser)}
+
+\end{enumerate}
+
+
+\subsubsection{Set FederatedSearch}
+\label{docs/scenarios/uss:set-federatedsearch}\begin{enumerate}
+\item {} 
+Initialize a federatedSearch
+
+\item {} 
+Assign the new federatedSearch through the method \textbf{setFederatedSearch(\$federatedSearch)}
+
+\end{enumerate}
+
+
+\subsubsection{Set a Result Processor (Filter and Ranker)}
+\label{docs/scenarios/uss:set-a-result-processor-filter-and-ranker}\begin{enumerate}
+\item {} 
+Initialize a rsultProcessor
+
+\item {} 
+Assign the new rsultProcessor through the method \textbf{setProcessor(\$rsultProcessor)}
+
+\end{enumerate}
+
+
+\subsubsection{Set a Selector}
+\label{docs/scenarios/uss:set-a-selector}\begin{enumerate}
+\item {} 
+Initialize a selector
+
+\item {} 
+Assign the new selector through the method \textbf{setSelector(\$selector)}
+
+\end{enumerate}
+
+
+\section{Mapper API Usage Scenarios}
+\label{docs/scenarios/mapper:mapper-api-usage-scenarios}\label{docs/scenarios/mapper::doc}
+
+\subsection{Operation Scenarios}
+\label{docs/scenarios/mapper:operation-scenarios}
+
+\subsubsection{Replace Original URIs with Specified URIs}
+\label{docs/scenarios/mapper:replace-original-uris-with-specified-uris}\begin{enumerate}
+\item {} 
+Include the file \textbf{``mapper.class.php''} in your program
+
+\item {} 
+Initialize a \textbf{Mapper} instance by passing a \textbf{rdfGraph}
+
+\item {} 
+Call the method \textbf{refactoring(\$refType, \$change)}
+
+\item {} 
+Call the method \textbf{serialize(\$format)}
+
+\end{enumerate}
+
+
+\subsection{Configuration Scenarios}
+\label{docs/scenarios/mapper:configuration-scenarios}
+
+\subsubsection{Change a Refactor (URI Replacement)}
+\label{docs/scenarios/mapper:change-a-refactor-uri-replacement}
+Change different refactors can let Mapper be able to do different refactoring on the given RDF. In order to decouple the \textbf{Mapper} from specific \textbf{Refactor}, their dependency is injected during runtime through the method \textbf{refactoring(\$refType, \$change)}.
+
+Currently, we only implement one type of \textbf{Refactor}, called \textbf{Rename} (defined in ``refaRename.class.php''). Its corresponding change is an associative array, which saves the mapping from original URI to replaced URI. There is one example of \textbf{change} that the refactor, \textbf{Rename}, accepted.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{\PYGZdl{}exampleChange = array(\PYGZsq{}http://original.uri.1\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://replaced.uri.1\PYGZsq{},}
+\PYG{x}{                       \PYGZsq{}http://original.uri.2\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://replaced.uri.2\PYGZsq{});}
+\end{Verbatim}
+
+
+\subsubsection{Set a RDF Parser}
+\label{docs/scenarios/mapper:set-a-rdf-parser}
+There are many RDF parsers available. In X2R, we allow developers to set or even introduce new RDF parsers for reasons, such as better performace or wider range of input formats.
+
+Currently, we implement one wrapper, \textbf{Easy\_Rdf\_Adapter}, for EasyRdf. EasyRdf is a popular RDF parser implemented in PHP, and more information can be found in it \href{http://www.easyrdf.org/}{official site}.
+
+To set \textbf{Easy\_Rdf\_Adapter} as the RDF parser.
+\begin{enumerate}
+\item {} 
+Initialize an instance of \textbf{Easy\_Rdf\_Adapter}
+
+\item {} 
+Initialize a \textbf{Mapper} instance by passing the instance just initialized
+
+\end{enumerate}
+
+
+\chapter{API Reference}
+\label{index:api-reference}
+This part of the documentation dedicates to prople who are looking for information on a specific function, class or method.
+
+
+\section{API}
+\label{docs/api:api}\label{docs/api::doc}\label{docs/api:id1}
+
+\subsection{Extractor}
+\label{docs/api:extractor}\index{Extractor (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Extractor}\pysigline{\strong{class }\bfcode{Extractor}}
+Extractor class implements
+URI extracting \& analyzing process as below.
+\begin{enumerate}
+\item {} 
+Load the RDF content to a Graph data structure.
+
+\item {} 
+Traverse the Graph to find all the URIs, and generate a filtered URI list.
+
+\item {} 
+Transform URIs to search terms.
+
+\item {} 
+Wrap search terms in JSON output.
+
+\end{enumerate}
+\index{getQueryTerms() (Extractor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Extractor::getQueryTerms}\pysiglinewithargsret{\bfcode{getQueryTerms}}{}{}
+Extract terms from URIs of given RDF, and wrapp terms
+with their contextual information.
+\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+A JSON string of terms derived from extracted URIs of a given RDF file with corresponding metadata,
+
+\end{description}\end{quote}
+
+including \emph{originalURI}, \emph{replacedURI}, \emph{status}, \emph{lineNumbers}.
+
+\end{fulllineitems}
+
+\index{getFiltedUris() (Extractor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Extractor::getFiltedUris}\pysiglinewithargsret{\bfcode{getFiltedUris}}{}{}
+Get current URI filter list.
+\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+An array of filtered URI.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{addFilteredUri() (Extractor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Extractor::addFilteredUri}\pysiglinewithargsret{\bfcode{addFilteredUri}}{\emph{\$furi}}{}
+Add the given URI, \$furi, to the URI filted list.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$furi} (\emph{string}) -- The URI to be filtered
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the true for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{removeFilteredUri() (Extractor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Extractor::removeFilteredUri}\pysiglinewithargsret{\bfcode{removeFilteredUri}}{\emph{\$furi}}{}
+Remove the given URI, \$furi, from the URI filter list.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$furi} (\emph{string}) -- The URI to be filtered
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the true for success
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsection{RdfGraph}
+\label{docs/api:rdfgraph}\index{RdfGraph (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:RdfGraph}\pysigline{\strong{class }\bfcode{RdfGraph}}
+RdfGraph is an abstract class for wrapping any existing RDF parsers. It provides a common X2R interface between the tool and existing RDF parsers used by the tool.
+\index{parseRdf() (RdfGraph method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:RdfGraph::parseRdf}\pysiglinewithargsret{\bfcode{parseRdf}}{\emph{\$data}}{}
+This method parses a string, \$data, of RDF serialization format into X2R internal data exchange model. If the model is already existed, model pased from latest assigned \$data will replace previous model.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$data} (\emph{string}) -- The content of RDF file.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the true for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{serializeRdfAs() (RdfGraph method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:RdfGraph::serializeRdfAs}\pysiglinewithargsret{\bfcode{serializeRdfAs}}{\emph{\$format}}{}
+To serialize RDF saved in RdfGraph in the RDF serialization format specified by \$format.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$format} (\emph{string}) -- The file format of serialized RDF.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the string representation of serialized RDF in specified format.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsubsection{EasyRdfAdapter}
+\label{docs/api:easyrdfadapter}\index{EasyRdfAdapter (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:EasyRdfAdapter}\pysigline{\strong{class }\bfcode{EasyRdfAdapter}}
+EasyRdfAdapter class is an implemantion of RdfGraph. It provides interface methods to invoke the open source RDF parser, EasyRDF.
+\index{parseRdf() (EasyRdfAdapter method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:EasyRdfAdapter::parseRdf}\pysiglinewithargsret{\bfcode{parseRdf}}{\emph{\$data}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$data} (\emph{string}) -- The content of RDF file.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the true for success.
+
+\item[{Raises ValueError}] \leavevmode
+Raise if the \$data cannot be parsed successfully.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{serializeRdfAs() (EasyRdfAdapter method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:EasyRdfAdapter::serializeRdfAs}\pysiglinewithargsret{\bfcode{serializeRdfAs}}{\emph{\$format}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$format} (\emph{string}) -- The file format of serialized RDF.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the string representation of serialized RDF in specified format.
+
+\item[{Raises ValueError}] \leavevmode
+The \$format is not an element of `supported\_format', which includes `jsonld', `rdfxml'.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsection{Tokenizer}
+\label{docs/api:tokenizer}\index{Tokenizer (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Tokenizer}\pysigline{\strong{class }\bfcode{Tokenizer}}
+Tokenizer is an abstract class. It defines a common interface to all tokenizer. Version 1.0 Extractor has implemented two types of tokenizers: CaseBasedTokenizer and DelimitBasedTokenizer.
+\index{tokenizeString() (Tokenizer method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Tokenizer::tokenizeString}\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$str} (\emph{string}) -- The string to be tokenized.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+An array of tokenized strings.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{tokenizeArrayOfStrings() (Tokenizer method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Tokenizer::tokenizeArrayOfStrings}\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+An array of tokenized strings.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{arrayToString() (Tokenizer method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Tokenizer::arrayToString}\pysiglinewithargsret{\bfcode{arrayToString}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+A string which is consisted of elements from given array \$arr and is concatenated by whitespace.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsubsection{CaseBasedTokenizer}
+\label{docs/api:casebasedtokenizer}\index{CaseBasedTokenizer (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:CaseBasedTokenizer}\pysigline{\strong{class }\bfcode{CaseBasedTokenizer}}
+CaseBasedTokenizer class
+\index{tokenizeString() (CaseBasedTokenizer method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:CaseBasedTokenizer::tokenizeString}\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$str} (\emph{string}) -- The string to be tokenized.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+An array of tokenized strings.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{tokenizeArrayOfStrings() (CaseBasedTokenizer method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:CaseBasedTokenizer::tokenizeArrayOfStrings}\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+An array of tokenized strings.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsubsection{DelimitBasedTokenizer}
+\label{docs/api:delimitbasedtokenizer}\index{DelimitBasedTokenizer (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:DelimitBasedTokenizer}\pysigline{\strong{class }\bfcode{DelimitBasedTokenizer}}
+DelimitBasedTokenizer class
+\index{tokenizeString() (DelimitBasedTokenizer method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:DelimitBasedTokenizer::tokenizeString}\pysiglinewithargsret{\bfcode{tokenizeString}}{\emph{\$str}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$str} (\emph{string}) -- The string to be tokenized.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+An array of tokenized strings.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{tokenizeArrayOfStrings() (DelimitBasedTokenizer method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:DelimitBasedTokenizer::tokenizeArrayOfStrings}\pysiglinewithargsret{\bfcode{tokenizeArrayOfStrings}}{\emph{\$arr}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$arr} (\emph{array}) -- The array of strings to be tokenized
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+An array of tokenized strings.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsection{Refactor}
+\label{docs/api:refactor}\index{Refactor (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Refactor}\pysigline{\strong{class }\bfcode{Refactor}}~\begin{quote}
+
+Refactor is the class that reserves
+the flexibility for introducing
+new kind of RDF refactoring into
+this RDF analyzing and manupilation
+framework.
+\end{quote}
+\index{refactoring() (Refactor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Refactor::refactoring}\pysiglinewithargsret{\bfcode{refactoring}}{\emph{\$change}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$change} (\emph{int}) -- The change spec. for the refacroring.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the true for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsubsection{ReplaceUri}
+\label{docs/api:replaceuri}\index{ReplaceUri (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:ReplaceUri}\pysigline{\strong{class }\bfcode{ReplaceUri}}~\begin{quote}
+
+ReplaceUri is an implemetation of
+Refactor class. It is the default
+refactoring used in X2R project.
+The replaceUri is to replace an existing URI
+with a new URI.
+\end{quote}
+\index{refactoring() (ReplaceUri method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:ReplaceUri::refactoring}\pysiglinewithargsret{\bfcode{refactoring}}{\emph{\$change}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$change} (\emph{int}) -- The change spec. for the refacroring.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the true for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsection{MappingEntry}
+\label{docs/api:mappingentry}\index{MappingEntry (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:MappingEntry}\pysigline{\strong{class }\bfcode{MappingEntry}}~\begin{quote}
+
+X2R's components are integrated by standard message passing, where the standard message is the \emph{mapping from original URI, terms and replaced URI}. This MappingEntry is the class used to model one entry of such mapping message.
+\end{quote}
+\index{MappingEntry() (MappingEntry method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:MappingEntry::MappingEntry}\pysiglinewithargsret{\bfcode{MappingEntry}}{\emph{\$originalURI}, \emph{\$replacedURI}, \emph{\$term}, \emph{\$lineNumbers}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$originalURI} (\emph{string}) -- The change spec. for the refacroring.
+
+\item {} 
+\textbf{\$replacedURI} (\emph{string}) -- The change spec. for the refacroring.
+
+\item {} 
+\textbf{\$term} (\emph{string}) -- The change spec. for the refacroring.
+
+\item {} 
+\textbf{\$lineNumbers} (\emph{string}) -- The change spec. for the refacroring.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the true for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{getOriginalURI() (MappingEntry method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:MappingEntry::getOriginalURI}\pysiglinewithargsret{\bfcode{getOriginalURI}}{}{}~\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+Either false on failure, or the \emph{Original URI} for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{getReplacedURI() (MappingEntry method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:MappingEntry::getReplacedURI}\pysiglinewithargsret{\bfcode{getReplacedURI}}{}{}~\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+Either false on failure, or the \emph{Replaced URI} for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{getQueryTerm() (MappingEntry method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:MappingEntry::getQueryTerm}\pysiglinewithargsret{\bfcode{getQueryTerm}}{}{}~\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+Either false on failure, or the \emph{Query Term} for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{getLineNumbers() (MappingEntry method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:MappingEntry::getLineNumbers}\pysiglinewithargsret{\bfcode{getLineNumbers}}{}{}~\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+Either false on failure, or the \emph{Line Numbers} for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsection{MappingCollection}
+\label{docs/api:mappingcollection}\index{MappingCollection (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:MappingCollection}\pysigline{\strong{class }\bfcode{MappingCollection}}~\begin{quote}
+
+The MappingCollection is a collection of MappingEntry. The MappingCollection object can be serialized as JSON, and serves as the integration glue among X2R's components.
+\end{quote}
+\index{addMappingEntry() (MappingCollection method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:MappingCollection::addMappingEntry}\pysiglinewithargsret{\bfcode{addMappingEntry}}{\emph{\$mappingentry}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$mappingentry} (\emph{MappingEntryint}) -- An entry of mapping.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the true for success.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{toJson() (MappingCollection method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:MappingCollection::toJson}\pysiglinewithargsret{\bfcode{toJson}}{}{}~\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+Serialize the collection of mappings in Json format.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsection{Mapper}
+\label{docs/api:mapper}\index{Mapper (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Mapper}\pysigline{\strong{class }\bfcode{Mapper}}~\begin{quote}
+
+Mapper is the class for modeling the RDF transformation (refactoring) process.
+
+Currently, the Mapper only support one kind of
+transformation (refactoring) - replaceURI.
+
+The replaceURI is to replace an existing URI
+with a new URI..
+\end{quote}
+\index{Mapper() (Mapper method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Mapper::Mapper}\pysiglinewithargsret{\bfcode{Mapper}}{\emph{\$graph}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$graph} (\emph{rdfGraph}) -- The RDF, which is holded in the rdfGraph data structure, to be refactored.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{refactoring() (Mapper method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Mapper::refactoring}\pysiglinewithargsret{\bfcode{refactoring}}{\emph{\$refactorType}, \emph{\$change}}{}
+Based on the type of refactoring (\$refactorType) and the desired change (\$change) to conduct the refactoring on target RDF.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$refactorType} (\emph{string}) -- The type of rafactor.
+
+\item {} 
+\textbf{\$change} (\emph{array}) -- The month.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the datetime object for method chaining.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{//This is an example of \PYGZdl{}change}
+\PYG{x}{array(\PYGZsq{}http://127.0.0.1/sport\PYGZus{}center\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://openisdm.iis.sinica.edu.tw/sport\PYGZus{}center\PYGZsq{},}
+\PYG{x}{     \PYGZsq{}http://127.0.0.1/park\PYGZsq{} =\PYGZgt{} \PYGZsq{}http://openisdm.iis.sinica.edu.tw/park\PYGZsq{});}
+\end{Verbatim}
+
+\begin{notice}{note}{Note:}
+Currently, only one type refactor is supported, that is,
+\emph{replaceUri}. More refactors can be implemented and
+integrated into Mapper.
+\end{notice}
+\index{serialize() (Mapper method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Mapper::serialize}\pysiglinewithargsret{\bfcode{serialize}}{\emph{\$format}}{}
+Return the RDF content in the format specified by \$format.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$format} (\emph{string}) -- The format of output file.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Either false on failure, or the string of refactored RDF's content in the specified format.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsection{WebUtilities}
+\label{docs/api:webutilities}\index{GetParameter() (global function)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:GetParameter}\pysiglinewithargsret{\bfcode{GetParameter}}{\emph{\$para}}{}
+Get the value of HTTP GET request by parameter's name
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$para} (\emph{string}) -- The parameter's name.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+The value of given parameter's name.
+
+\item[{Raises ValueError}] \leavevmode
+Raise if the \$para cannot be found in the request.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\subsection{USS}
+\label{docs/api:uss}\index{Endpoint (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Endpoint}\pysigline{\strong{class }\bfcode{Endpoint}}~\begin{quote}
+
+Endpoint is the class for modeling the public Endpoint, such as DBpedia. (refer to {\hyperref[docs/uss:uss]{\emph{URI Search Service}}})
+\end{quote}
+\index{issueSparqlQuery() (Endpoint method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Endpoint::issueSparqlQuery}\pysiglinewithargsret{\bfcode{issueSparqlQuery}}{\emph{\$sparqlQuery}, \emph{\$resultFormat}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$sparqlQuery} (\emph{string}) -- The SPARQL query.
+
+\item {} 
+\textbf{\$resultFormat} (\emph{string}) -- The format of returned result.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+The string of result in the specified format.
+
+\item[{Raises NoResponseError}] \leavevmode
+Raise if the timeout is reached.
+
+\item[{Raises ValueError}] \leavevmode
+Raise if the sparql is invalid.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{SparqlQueryComposer (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:SparqlQueryComposer}\pysigline{\strong{class }\bfcode{SparqlQueryComposer}}~\begin{quote}
+
+SparqlQueryComposer is a class to aggregate a varity of SPARQL composition methods. Currently, only plain text terms are supported.
+\end{quote}
+\index{term2Sparql() (SparqlQueryComposer method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:SparqlQueryComposer::term2Sparql}\pysiglinewithargsret{\bfcode{term2Sparql}}{\emph{\$term}}{}~\begin{quote}
+
+Turn plain text terms to SPARQL query.
+\end{quote}
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$term} (\emph{string}) -- The desired query term..
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+The SPARQL query string.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{Dbpedia (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Dbpedia}\pysigline{\strong{class }\bfcode{Dbpedia}}~\begin{quote}
+
+Dbpedia is a wrapper of Dbpedia Endpoint.
+\end{quote}
+\index{composeQuery() (Dbpedia method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Dbpedia::composeQuery}\pysiglinewithargsret{\bfcode{composeQuery}}{\emph{term}, \emph{\$dataSourceName = `'}, \emph{\$limit = 10}, \emph{\$filters = array(`')}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$term} (\emph{string}) -- The SPARQL query in plain text.
+
+\item {} 
+\textbf{\$dataSourceName} (\emph{string}) -- the name of data source
+
+\item {} 
+\textbf{\$limit} (\emph{int}) -- the max number of results
+
+\item {} 
+\textbf{\$filters} (\emph{array}) -- an array of URIs that will be ignored
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{query() (Dbpedia method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:Dbpedia::query}\pysiglinewithargsret{\bfcode{query}}{\emph{\$sparqlQueryString}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$sparqlQuery} (\emph{string}) -- The SPARQL query.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{LinkedGeoData (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:LinkedGeoData}\pysigline{\strong{class }\bfcode{LinkedGeoData}}~\begin{quote}
+
+LinkedGeoData is a wrapper of LinkedGeoData Endpoint.
+\end{quote}
+\index{composeQuery() (LinkedGeoData method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:LinkedGeoData::composeQuery}\pysiglinewithargsret{\bfcode{composeQuery}}{\emph{term}, \emph{\$dataSourceName = `'}, \emph{\$limit = 10}, \emph{\$filters = array(`')}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$term} (\emph{string}) -- The SPARQL query in plain text.
+
+\item {} 
+\textbf{\$dataSourceName} (\emph{string}) -- the name of data source
+
+\item {} 
+\textbf{\$limit} (\emph{int}) -- the max number of results
+
+\item {} 
+\textbf{\$filters} (\emph{array}) -- an array of URIs that will be ignored
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{query() (LinkedGeoData method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:LinkedGeoData::query}\pysiglinewithargsret{\bfcode{query}}{\emph{\$sparqlQueryString}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$sparqlQuery} (\emph{string}) -- The SPARQL query.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{FederatedSearch (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:FederatedSearch}\pysigline{\strong{class }\bfcode{FederatedSearch}}~\begin{quote}
+
+FederatedSearch is the class provide search and operation to endpoints.
+\end{quote}
+\index{addEndpoints() (FederatedSearch method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:FederatedSearch::addEndpoints}\pysiglinewithargsret{\bfcode{addEndpoints}}{\emph{\$endpointList}}{}~\begin{quote}\begin{description}
+\item[{Param}] \leavevmode
+\$endpointList: List of endpoints.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{ResultProcessor (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:ResultProcessor}\pysigline{\strong{class }\bfcode{ResultProcessor}}~\begin{quote}
+
+ResultProcessor is the class for filtering or re-ranking a given result set.
+\end{quote}
+\index{addOneRefiner() (ResultProcessor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:ResultProcessor::addOneRefiner}\pysiglinewithargsret{\bfcode{addOneRefiner}}{\emph{\$refiner}}{}~\begin{quote}\begin{description}
+\item[{Param}] \leavevmode
+\$refiner: The name of the refiner.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{addOneRanker() (ResultProcessor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:ResultProcessor::addOneRanker}\pysiglinewithargsret{\bfcode{addOneRanker}}{\emph{\$ranker}}{}~\begin{quote}\begin{description}
+\item[{Param}] \leavevmode
+\$ranker: The name of the ranker.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{addConfiguration() (ResultProcessor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:ResultProcessor::addConfiguration}\pysiglinewithargsret{\bfcode{addConfiguration}}{\emph{\$config}}{}~\begin{quote}\begin{description}
+\item[{Param}] \leavevmode
+\$config: The configuration of result processor.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{getConfiguration() (ResultProcessor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:ResultProcessor::getConfiguration}\pysiglinewithargsret{\bfcode{getConfiguration}}{}{}~\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+The configuration of result processor.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{process() (ResultProcessor method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:ResultProcessor::process}\pysiglinewithargsret{\bfcode{process}}{}{}~\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+The processed search result.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{UriSearchResults (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:UriSearchResults}\pysigline{\strong{class }\bfcode{UriSearchResults}}~\begin{quote}
+
+UriSearchResults is the class for representing search results from different Endpoints with different rank scores
+\end{quote}
+\index{addOneResult() (UriSearchResults method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:UriSearchResults::addOneResult}\pysiglinewithargsret{\bfcode{addOneResult}}{\emph{\$dataSourceName}, \emph{\$processedResult}}{}~\begin{quote}\begin{description}
+\item[{Param}] \leavevmode
+\$dataSourceName: The name of endpoint which the result search from.
+
+\item[{Param}] \leavevmode
+\$processedResult: The processed search result.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsection{X2R}
+\label{docs/api:x2r}\index{X2R (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:X2R}\pysigline{\strong{class }\bfcode{X2R}}~\begin{quote}
+
+X2R models the process of translating an imperfect RDF, especially for those with invalid URIs, to RDF with relatively higher quality.
+\end{quote}
+\index{transform() (X2R method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:X2R::transform}\pysiglinewithargsret{\bfcode{transform}}{\emph{\$rdfGraph}, \emph{\$configuration}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$graph} (\emph{rdfGraph}) -- The RDF, which is holded in the rdfGraph data structure, to be refactored.
+
+\item {} 
+\textbf{configuration} -- to be defined.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+The refactored RDF.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\subsection{Hot Spots}
+\label{docs/api:hot-spots}\index{QueryRefiner (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:QueryRefiner}\pysigline{\strong{class }\bfcode{QueryRefiner}}~\begin{quote}
+
+QueryRefiner is an one-to-one adapter, which processes the raw query with the logics defined in it. A varity of refinement heuristics or methods can be introduced into X2R through extending this class.
+\end{quote}
+\index{refine() (QueryRefiner method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:QueryRefiner::refine}\pysiglinewithargsret{\bfcode{refine}}{\emph{\$query}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$query} (\emph{string}) -- The query that is directly extracted and tokenized from original URI.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+The refined query.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{SearchResultSelector (class)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:SearchResultSelector}\pysigline{\strong{class }\bfcode{SearchResultSelector}}~\begin{quote}
+
+SearchResultSelector is a many-to-one selector, which selects one fittest result from a given result set. A varity of fitness function can be introduced into X2R through extending this class.
+\end{quote}
+\index{select() (SearchResultSelector method)|textbf}
+
+\begin{fulllineitems}
+\phantomsection\label{docs/api:SearchResultSelector::select}\pysiglinewithargsret{\bfcode{select}}{\emph{\$resultSet}}{}~\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\$resultSet} (\emph{array}) -- A given result set.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+The fittest result.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\chapter{Hooks}
+\label{index:hooks}
+Targeted Audience: \textbf{Code contributators}
+
+This section focuses on two topics, i.e. \textbf{hook templates} and \textbf{hook instances}. The term ``hook'' is used to present the cookbook or guidence for extending X2R in many different aspects. Because some hooks are similar to each other, the hook templates are extracted based on the similarity among existing hooks. Extracted hook templates can be used to instainate more hook instances to cover more aspects for increasing X2R's flexability.
+
+\textbf{Hook Templates}
+
+
+\section{Template: Add USS Components}
+\label{docs/hooks/t_uss_components:template-add-uss-components}\label{docs/hooks/t_uss_components::doc}\label{docs/hooks/t_uss_components:hook-template-uss}
+
+\subsection{Involved Classes}
+\label{docs/hooks/t_uss_components:involved-classes}\begin{quote}
+
+\textbf{\{List of involved classes with links\}}
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/t_uss_components:mechanism}\begin{enumerate}
+\item {} 
+Based on component's type, create a new class in /USS/\textbf{\{component\_type\}}/
+
+\item {} 
+Based on the component's type, the new class should exntends corresponding parent class
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``incclude\_once'' statement in it
+
+\item {} 
+Based on component's type, find corresponding method and add the \{id, class\_factory\} mapping to the method's switch/case block.
+
+\end{enumerate}
+
+
+\subsection{Instances}
+\label{docs/hooks/t_uss_components:instances}\begin{itemize}
+\item {} 
+{\hyperref[docs/hooks/new_refiner:hook-refiner]{\emph{Add a new refiner}}}
+
+\item {} 
+{\hyperref[docs/hooks/new_filter:hook-filter]{\emph{Add a new filter}}}
+
+\item {} 
+{\hyperref[docs/hooks/new_ranker:hook-ranker]{\emph{Add a new ranker}}}
+
+\item {} 
+{\hyperref[docs/hooks/new_selector:hook-selector]{\emph{Add a new selector}}}
+
+\item {} 
+\emph{hook\_query\_parser}
+
+\end{itemize}
+
+\textbf{Hook Instances}
+
+
+\section{Add a new Endpoint}
+\label{docs/hooks/new_endpoint::doc}\label{docs/hooks/new_endpoint:add-a-new-endpoint}\label{docs/hooks/new_endpoint:hook-new-endpoint}
+
+\subsection{Involved Classes}
+\label{docs/hooks/new_endpoint:involved-classes}\begin{quote}
+
+Endpoint.class.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_endpoint:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/endpoints
+
+\item {} 
+New class should implement two methods, \emph{composeQuery()} and \emph{query()}, where the composeQuery() defines how to compose a SPARQL query according to this endpoint and query() defines how to send query to this endpoint
+
+\item {} 
+The endpoint.class.php should include this new endpoint class
+
+\item {} 
+Add new case in methods composeSparqlQuery() and performQuery() of endpoint.class.php
+
+\end{enumerate}
+
+
+\subsection{Example}
+\label{docs/hooks/new_endpoint:example}\begin{itemize}
+\item {} 
+{\hyperref[docs/api:Dbpedia]{\code{Dbpedia}}}
+
+\item {} 
+{\hyperref[docs/api:LinkedGeoData]{\code{LinkedGeoData}}}
+
+\end{itemize}
+
+
+\section{Add a new RDF refactor}
+\label{docs/hooks/new_refactor:hook-refactor}\label{docs/hooks/new_refactor:add-a-new-rdf-refactor}\label{docs/hooks/new_refactor::doc}
+
+\subsection{Involved Files}
+\label{docs/hooks/new_refactor:involved-files}\begin{quote}
+
+Refactor.class.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_refactor:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /EM/
+
+\item {} 
+The new class should exntends Refactor
+
+\end{enumerate}
+
+
+\subsection{Example}
+\label{docs/hooks/new_refactor:example}\begin{itemize}
+\item {} 
+{\hyperref[docs/api:ReplaceUri]{\code{ReplaceUri}}}
+
+\end{itemize}
+
+
+\section{Add a new selector}
+\label{docs/hooks/new_selector:hook-selector}\label{docs/hooks/new_selector::doc}\label{docs/hooks/new_selector:add-a-new-selector}
+
+\subsection{Involved Files}
+\label{docs/hooks/new_selector:involved-files}\begin{quote}
+
+Resultselector.class.php, UssContainer.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_selector:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/selector/
+
+\item {} 
+The new class should exntends ResultSelector, for example `newSelector.class.php'
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``include\_once selector/newSelector.class.php;'' statement in it
+
+\item {} 
+Add a case block of the new class into getSelector() method's switch block
+
+\end{enumerate}
+
+
+\subsection{Template}
+\label{docs/hooks/new_selector:template}\begin{quote}
+
+{\hyperref[docs/hooks/t_uss_components:hook-template-uss]{\emph{Template: Add USS Components}}}
+\end{quote}
+
+
+\section{Add a new ranker}
+\label{docs/hooks/new_ranker:add-a-new-ranker}\label{docs/hooks/new_ranker::doc}\label{docs/hooks/new_ranker:hook-ranker}
+
+\subsection{Involved Files}
+\label{docs/hooks/new_ranker:involved-files}\begin{quote}
+
+ResultRanker.class.php, UssContainer.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_ranker:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/ranker/
+
+\item {} 
+The new class should exntends ResultRanker, for example `newRanker.class.php'
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``include\_once ranker/newRankerclass.php;'' statement in it
+
+\item {} 
+Add a case block of the new class into getRanker() method's switch block
+
+\end{enumerate}
+
+
+\subsection{Template}
+\label{docs/hooks/new_ranker:template}\begin{quote}
+
+{\hyperref[docs/hooks/t_uss_components:hook-template-uss]{\emph{Template: Add USS Components}}}
+\end{quote}
+
+
+\section{Add a new refiner}
+\label{docs/hooks/new_refiner:add-a-new-refiner}\label{docs/hooks/new_refiner::doc}\label{docs/hooks/new_refiner:hook-refiner}
+
+\subsection{Involved Files}
+\label{docs/hooks/new_refiner:involved-files}\begin{quote}
+
+QueryRefiner.class.php, UssContainer.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_refiner:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/refiner/
+
+\item {} 
+The new class should exntends QueryRefiner, for example `newRefiner.class.php'
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``include\_once refiner/newRefiner.class.php;'' statement in it
+
+\item {} 
+Add a case block of the new class into getRefiner() method's switch block
+
+\end{enumerate}
+
+
+\subsection{Template}
+\label{docs/hooks/new_refiner:template}\begin{quote}
+
+{\hyperref[docs/hooks/t_uss_components:hook-template-uss]{\emph{Template: Add USS Components}}}
+\end{quote}
+
+
+\section{Add a new filter}
+\label{docs/hooks/new_filter:hook-filter}\label{docs/hooks/new_filter::doc}\label{docs/hooks/new_filter:add-a-new-filter}
+
+\subsection{Involved Classes}
+\label{docs/hooks/new_filter:involved-classes}\begin{quote}
+
+ResultFilter.class.php, UssContainer.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/new_filter:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /USS/filter/
+
+\item {} 
+The new class should exntends ResultFilter, for example `newFilter.class.php'
+
+\item {} 
+Open ussContainer.class.php, and add the dependency by adding ``include\_once filter/newFilter.class.php;'' statement in it
+
+\item {} 
+Add a case block of the new class into getFilter() method's switch block
+
+\end{enumerate}
+
+
+\subsection{Template}
+\label{docs/hooks/new_filter:template}\begin{quote}
+
+{\hyperref[docs/hooks/t_uss_components:hook-template-uss]{\emph{Template: Add USS Components}}}
+\end{quote}
+
+
+\section{Add a wrapper for new RDF parser}
+\label{docs/hooks/t_rdf_parser::doc}\label{docs/hooks/t_rdf_parser:hook-template-rdf-parser}\label{docs/hooks/t_rdf_parser:add-a-wrapper-for-new-rdf-parser}
+
+\subsection{Involved Classes}
+\label{docs/hooks/t_rdf_parser:involved-classes}\begin{quote}
+
+rdfGraph.class.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/t_rdf_parser:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /EM/
+
+\item {} 
+The new class should exntends rdfGraph'
+
+\end{enumerate}
+
+
+\subsection{Example}
+\label{docs/hooks/t_rdf_parser:example}\begin{itemize}
+\item {} 
+{\hyperref[docs/api:EasyRdfAdapter]{\code{EasyRdfAdapter}}}
+
+\end{itemize}
+
+
+\section{Add a new tokenizer}
+\label{docs/hooks/t_tokenizer::doc}\label{docs/hooks/t_tokenizer:hook-template-uss}\label{docs/hooks/t_tokenizer:add-a-new-tokenizer}
+
+\subsection{Involved Classes}
+\label{docs/hooks/t_tokenizer:involved-classes}\begin{quote}
+
+Tokenizer.class.php
+\end{quote}
+
+
+\subsection{Mechanism}
+\label{docs/hooks/t_tokenizer:mechanism}\begin{enumerate}
+\item {} 
+Create a new class in /EM/
+
+\item {} 
+The new class should exntends Tokenizer
+
+\end{enumerate}
+
+
+\subsection{Example}
+\label{docs/hooks/t_tokenizer:example}\begin{itemize}
+\item {} 
+{\hyperref[docs/api:CaseBasedTokenizer]{\code{CaseBasedTokenizer}}}
+
+\item {} 
+{\hyperref[docs/api:DelimitBasedTokenizer]{\code{DelimitBasedTokenizer}}}
+
+\end{itemize}
+
+
 \renewcommand{\indexname}{HTTP Routing Table}
 \begin{theindex}
 \def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
@@ -3027,6 +3650,9 @@ Here is a full code comment example quoted from {\color{red}\bfseries{}{}`Docume
 \indexspace
 \bigletter{/mapper\{?rdfContent, mapping, format\}}
 \item {\texttt{POST /mapper\{?rdfContent, mapping, format\}}}, \pageref{docs/mapper:post--mapper_?rdfContent, mapping, format_}
+\indexspace
+\bigletter{/uss\{?q, sites, output, start, num\}}
+\item {\texttt{GET /uss\{?q, sites, output, start, num\}}}, \pageref{docs/uss:get--uss_?q, sites, output, start, num_}
 \end{theindex}
 
 \renewcommand{\indexname}{Index}
