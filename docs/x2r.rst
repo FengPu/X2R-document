@@ -49,14 +49,14 @@ X2R 1.0 provides a JQuery-powered GUI and a command line Interface is planned to
 
      After replacing URI interactivelly or automatically, user can select the RDF serialization format for the updated RDF. The RDF serialization formats listed below are supported X2R 1.0.  
 
-        ======== =========== =================================================
-		json     RDF/JSON    http://n2.talis.com/wiki/RDF_JSON_Specification
-		ntriples N-Triples   http://www.w3.org/TR/n-triples/
-		turtle   Turtle      http://www.dajobe.org/2004/01/turtle
-		rdfxml   RDF/XML     http://www.w3.org/TR/rdf-syntax-grammar
-		n3       N3          http://www.w3.org/2000/10/swap/grammar/n3
-		rdfa     RDFa        http://www.w3.org/TR/rdfa-core/
-		======== =========== =================================================
+======== =========== =================================================
+json     RDF/JSON    http://n2.talis.com/wiki/RDF_JSON_Specification
+ntriples N-Triples   http://www.w3.org/TR/n-triples/
+turtle   Turtle      http://www.dajobe.org/2004/01/turtle
+rdfxml   RDF/XML     http://www.w3.org/TR/rdf-syntax-grammar
+n3       N3          http://www.w3.org/2000/10/swap/grammar/n3
+rdfa     RDFa        http://www.w3.org/TR/rdfa-core/
+======== =========== =================================================
 
 
 
