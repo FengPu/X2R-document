@@ -163,7 +163,7 @@ DelimitBasedTokenizer
 DelimitBasedTokenizer is a tokenizer that use delimits as the criteria to tokenize. There are several test cases listed below to help user understand how it works. 
 
 * lower_case_with_underscores -> lower case with underscores
-* different*delimits&demo$case -> different delimits demo$case
+* different*delimits&demo$case -> different delimits demo case
 
 Since all tokenizers in X2R shared a common interface, they can be composed to form composited tokenizer. For example, the composited tokenizer built by composing DelimitBasedTokenizer and CaseBasedTokenizer can tokenize the complex string listed below. 
 
