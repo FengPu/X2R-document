@@ -98,7 +98,7 @@
 <h2>Composition of atomic hooks<a class="headerlink" href="#composition-of-atomic-hooks" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div>The atomic hooks can be composited through method chaining.</div></blockquote>
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>This request returns the results that match the search query terms &#8220;typhoon&#8221; AND &#8220;weather&#8221; from &#8220;<a class="reference external" href="http://dbpedia.org/sparql">http://dbpedia.org/sparql</a>&#8221;.</li>
@@ -108,6 +108,144 @@
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/uss_2.PNG"><img alt="test" src="../_images/uss_2.PNG" /></a>
 <p class="caption">This is the caption of the figure (a simple paragraph).</p>
+</div>
+</div>
+<div class="section" id="web-api-definition">
+<h2>Web API Definition<a class="headerlink" href="#web-api-definition" title="Permalink to this headline">¶</a></h2>
+<dl class="get">
+<dt id="get--uss{?q, sites, output, start, num}">
+<tt class="descname">GET </tt><tt class="descname">/uss{?q, sites, output, start, num}</tt><a class="headerlink" href="#get--uss{?q, sites, output, start, num}" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Query Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>q</strong> &#8211; <em>(required)</em> Search term of interest.</li>
+<li><strong>sites</strong> &#8211; <em>(required)</em> The sites to search term. Has default value.</li>
+<li><strong>format</strong> &#8211; <em>(required)</em> The format of returned result.</li>
+<li><strong>start</strong> &#8211; <em>(optional)</em> The offset to specify the index of returned result.</li>
+<li><strong>num</strong> &#8211; <em>(optional)</em> The number of returned result. Use with start in the search query.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>Content-Type</strong> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><strong>200</strong> &#8211; no error</li>
+<li><strong>404</strong> &#8211; exception</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Response template:</p>
+<div class="highlight-json"><div class="highlight"><pre>{
+ “term”:”typhoon”,
+ “data”:[array of searched URI results]
+}
+</pre></div>
+</div>
+<p>Data entry:</p>
+<div class="highlight-json"><div class="highlight"><pre>&quot;data&quot;: [
+ {
+  &quot;dataSourceName&quot;: &quot;http://dbpedia.org&quot;,
+  &quot;response&quot;: {
+   &quot;head&quot;: {
+    &quot;link&quot;: [],
+    &quot;vars&quot;: [
+     &quot;s&quot;,
+     &quot;o&quot;
+    ]
+   },
+   &quot;results&quot;: {objects of returned URI results}
+   }
+}
+]
+</pre></div>
+</div>
+<p>Result entry</p>
+<div class="highlight-json"><div class="highlight"><pre>&quot;results&quot;: {
+    &quot;distinct&quot;: false,
+    &quot;ordered&quot;: true,
+    &quot;bindings&quot;: [
+     {
+      &quot;s&quot;: {
+       &quot;type&quot;: &quot;uri&quot;,
+       &quot;value&quot;: &quot;http://wikidata.dbpedia.org/uri_1&quot;
+      },
+      &quot;o&quot;: {
+       &quot;type&quot;: &quot;literal&quot;,
+       &quot;xml:lang&quot;: &quot;en&quot;,
+       &quot;value&quot;: &quot;typhoon&quot;
+      }
+     }
+   ]
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p><strong>Example request:</strong></p>
+<blockquote>
+<div><div class="highlight-http"><div class="highlight"><pre>GET /uss?q=typhoon&amp;sites&amp;output=json
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Example response:</strong></p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+ <span class="nt">&quot;term&quot;</span><span class="p">:</span> <span class="s2">&quot;typhoon&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+ <span class="p">{</span>
+  <span class="nt">&quot;dataSourceName&quot;</span><span class="p">:</span> <span class="s2">&quot;http://dbpedia.org&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
+   <span class="nt">&quot;head&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;vars&quot;</span><span class="p">:</span> <span class="p">[</span>
+     <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;o&quot;</span>
+    <span class="p">]</span>
+   <span class="p">},</span>
+   <span class="nt">&quot;results&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;distinct&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;ordered&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&quot;bindings&quot;</span><span class="p">:</span> <span class="p">[</span>
+     <span class="p">{</span>
+      <span class="nt">&quot;s&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;uri&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;http://wikidata.dbpedia.org/uri_1&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;o&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;literal&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;xml:lang&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;typhoon&quot;</span>
+      <span class="p">}</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+      <span class="nt">&quot;s&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;uri&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;http://dbpedia.org/resource/uri_2&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;o&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;literal&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;xml:lang&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Typhoon shelters in Hong Kong&quot;</span>
+      <span class="p">}</span>
+     <span class="p">}</span>
+    <span class="p">]</span>
+   <span class="p">}</span>
+  <span class="p">}</span>
+ <span class="p">}</span>
+<span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -122,6 +260,8 @@
   <ul>
 <li><a class="reference internal" href="#">URI Search Service</a><ul>
 <li><a class="reference internal" href="#composition-of-atomic-hooks">Composition of atomic hooks</a></li>
+<li><a class="reference internal" href="#web-api-definition">Web API Definition</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
 </ul>
