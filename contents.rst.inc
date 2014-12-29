@@ -1,3 +1,14 @@
+Important Information
+---------------
+For code contributors' information, this part of note declares the license of X2R. In addition to license, this part of note also lists convensions enforced within X2R, including the coding style, versioning and documentation. 
+
+.. toctree::
+    :maxdepth: 1
+
+    docs/license
+    docs/convensions
+
+
 Introduction
 ------------
 
@@ -111,14 +122,5 @@ This section focuses on two topics, i.e. **hook templates** and **hook instances
 
 
 
-Important Information
----------------
-For code contributors' information, this part of note declares the license of X2R. In addition to license, this part of note also lists convensions enforced within X2R, including the coding style, versioning and documentation. 
-
-.. toctree::
-    :maxdepth: 1
-
-    docs/license
-    docs/convensions
 
 

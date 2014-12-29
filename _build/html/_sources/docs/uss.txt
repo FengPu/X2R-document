@@ -71,7 +71,7 @@ Composition of atomic hooks
      :scale: 80%
      :alt: test
 
-     This is the caption of the figure (a simple paragraph).
+
 
 
 Web API Definition

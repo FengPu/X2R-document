@@ -44,36 +44,9 @@ replacedURI  A valid URI
 term         A string
 ===========  ==================================================
 
-Example
--------
 
 
-.. code-block:: json
 
- { "metadata": [],
-   "mapping": 
-     [
-         {
-          "status": "N/A", 
-          "replacedURI": "http://replaced_test1", 
-          "term": "facilities store245", 
-          "originalURI": "http://140.109.21.188/facilities#store245"
-          }, 
-         {
-          "status": "N/A", 
-          "replacedURI": "http://replaced_test2", 
-          "term": "facilities store244", 
-          "originalURI": "http://140.109.21.188/facilities#store244"
-         }
-     ]
-  }
-
-
-Design
--------
-
-Process
-^^^^^^^
 
 Major components
 ^^^^^^^^^^^^^^^^
@@ -81,9 +54,9 @@ Major components
 
 **RDFGraph**
 
-*one element of ["json", "ntriples", "turtle", "rdfxml", "n3", "rdfa", "guess"]* and *string in a RDF serialization format*
+Accept *one element of ["json", "ntriples", "turtle", "rdfxml", "n3", "rdfa", "guess"]* and *string in a RDF serialization format*
 
-Extractor accepts a subset of RDF serialization formats. Users of Extractor should specify the input format in terms of "value" listed in the Table below. If users have no idea of what the format of input is, they can use the "guess" value to ask Extractor to recognize the input's format for them (if it is one of the supported format list).    
+Extractor accepts RDF in the data structure of RDFGraph. RDFGraph is the internal data structure used to abstract RDF attributes and operations. Using RDFGraph also make Extractor independent from the diversity of RDF serialization formats. Currently RDFGraph accepts a subset of RDF serialization formats. To initialize a RDFGraph object, user should specify the input format in terms of "value" listed in the Table below. If users have no idea of what the format of input is, they can use the "guess" value to ask Extractor to recognize the input's format for them (if it is one of the supported format list).    
 
 ======== =========== =================================================
 value    name        reference
@@ -122,7 +95,8 @@ In X2R Extractor, a tokenizer should implement two methods, tokenizeArr(array $a
 X2R currently support two tokenizers, delimited-based tokenizer and cased-based tokenizer.
 
 
-**Web API Definition:**
+Web API Definition
+^^^^^^^^^^^^^^^^^^^
 
 .. http:post:: /extractor{?excludedNamespaces, checkUrisStatus, rdfContent}
 
@@ -137,15 +111,6 @@ X2R currently support two tokenizers, delimited-based tokenizer and cased-based 
    :statuscode 200: no error
    :statuscode 404: exception
    
-
-Query Parameter Format Detail
-*****************************
-
-:excludedNamespace:
-
-:checkUrisStatus:
-
-:rdfContent:
  
 
 Response Format Detail
@@ -167,7 +132,7 @@ Response template::
     }
 
 
-mapping entry::
+Mapping entry::
 
                  [{"status": "", 
                    "originalURI": "", 

@@ -59,14 +59,7 @@ Web API Definition
    :statuscode 404: exception
 
 
-Query Parameter Format Detail
-*****************************
 
-:rdfContent:
-
-:mapping:
-
-:format:
 
 Response Format Detail
 **********************

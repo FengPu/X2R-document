@@ -24,6 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="X2R 1.0 documentation" href="../index.html" />
+    <link rel="next" title="Audiences" href="audience.html" />
     <link rel="prev" title="License" href="license.html" /> 
   </head>
   <body>
@@ -33,6 +34,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
+        <li class="right" >
+          <a href="audience.html" title="Audiences"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="license.html" title="License"
              accesskey="P">previous</a> |</li>
@@ -49,7 +56,86 @@
 <h1>Convensions<a class="headerlink" href="#convensions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="coding-style">
 <h2>Coding Style<a class="headerlink" href="#coding-style" title="Permalink to this headline">¶</a></h2>
-<p>This project follows the Python official coding style <a class="reference external" href="http://www.php-fig.org/psr/psr-2/">PSR-2</a>.</p>
+<p>This project follows the Python official coding style <a class="reference external" href="http://www.php-fig.org/psr/">PSR</a>.</p>
+<p>Here are some examples for developers&#8217; reference.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Class names MUST be declared in StudlyCaps.</p>
+<blockquote>
+<div><p>For example:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+    <span class="k">class</span>  <span class="nc">HtmlHelper</span>
+    <span class="k">class</span>  <span class="nc">XmlParser</span>
+    <span class="k">class</span>  <span class="nc">Model</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Class constants MUST be declared in all upper case with underscore separators. For example:</p>
+<blockquote>
+<div><p>For example:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">Vendor\Model</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">VERSION</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">DATE_APPROVED</span> <span class="o">=</span> <span class="s1">&#39;2012-06-01&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Method names MUST be declared in&nbsp;camelCase.</p>
+<blockquote>
+<div><p>For example:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+        <span class="nx">connect</span><span class="p">();</span>
+        <span class="nx">getData</span><span class="p">();</span>
+        <span class="nx">buildSomeWidget</span><span class="p">();</span>
+        <span class="nx">jImport</span><span class="p">();</span>
+        <span class="nx">jDoSomething</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>Namespaces and classes MUST follow an &#8220;autoloading&#8221; PSR: [PSR-0,PSR-4].
+This means each class is in a file by itself, and is in a namespace of at least one level: a top-level vendor name.</p>
+<blockquote>
+<div><blockquote>
+<div><p><a href="#id1"><span class="problematic" id="id2">*</span></a>. Class names MUST be declared in&nbsp;StudlyCaps. Code written for PHP 5.3 and after MUST use formal namespaces.</p>
+<blockquote>
+<div><p>For example:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="c1">// PHP 5.3 and later:</span>
+<span class="k">namespace</span> <span class="nx">Vendor\Model</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<ul>
+<li><p class="first">Code written for 5.2.x and before SHOULD use the pseudo-namespacing convention of&nbsp;<a href="#id3"><span class="problematic" id="id4">Vendor_</span></a>&nbsp;prefixes on class names.</p>
+<blockquote>
+<div><blockquote>
+<div><p>For example:</p>
+</div></blockquote>
+<div class="highlight-php"><div class="highlight"><pre><span class="x"> </span><span class="cp">&lt;?php</span>
+<span class="c1">// PHP 5.2.x and earlier:</span>
+<span class="k">class</span> <span class="nc">Vendor_Model_Foo</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="versioning">
 <h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
@@ -66,7 +152,7 @@ PATCH version when you make backwards-compatible bug fixes.</div></blockquote>
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <p>For documentation, this project uses <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a>, which is a Python documentation generator.
 The syntax used in Sphinx is <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>.</p>
-<p>Here is a full code comment example quoted from <a href="#id1"><span class="problematic" id="id2">`Documenting Your Project Using Sphinx`_</span></a>.</p>
+<p>Here is a full code comment example quoted from <a href="#id5"><span class="problematic" id="id6">`Documenting Your Project Using Sphinx`_</span></a>.</p>
 </div>
 </div>
 
@@ -89,6 +175,9 @@ The syntax used in Sphinx is <a class="reference external" href="http://docutils
   <h4>Previous topic</h4>
   <p class="topless"><a href="license.html"
                         title="previous chapter">License</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="audience.html"
+                        title="next chapter">Audiences</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/docs/convensions.txt"
@@ -117,6 +206,12 @@ The syntax used in Sphinx is <a class="reference external" href="http://docutils
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
+        <li class="right" >
+          <a href="audience.html" title="Audiences"
+             >next</a> |</li>
         <li class="right" >
           <a href="license.html" title="License"
              >previous</a> |</li>
