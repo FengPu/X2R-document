@@ -100,7 +100,7 @@ with their contextual information.</p>
 <dl class="method">
 <dt id="Extractor::addFilteredUri">
 <tt class="descname">addFilteredUri</tt><big>(</big><em>$furi</em><big>)</big><a class="headerlink" href="#Extractor::addFilteredUri" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add the given URI, $furi, to the URI filter list.</p>
+<dd><p>Add the given URI, $furi, to the URI filted list.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -145,11 +145,12 @@ with their contextual information.</p>
 <dl class="class">
 <dt id="RdfGraph">
 <em class="property">class </em><tt class="descname">RdfGraph</tt><a class="headerlink" href="#RdfGraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>RdfGraph class is a standard interface for wrapping or adapting existing RDF parsers into X2R.</p>
+<dd><p>RdfGraph is an abstract class for wrapping any existing RDF parsers. It provides a common X2R interface between the tool and existing RDF parsers used by the tool.</p>
 <dl class="method">
 <dt id="RdfGraph::parseRdf">
 <tt class="descname">parseRdf</tt><big>(</big><em>$data</em><big>)</big><a class="headerlink" href="#RdfGraph::parseRdf" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>This method parses a string, $data, of RDF serialization format into X2R internal data exchange model. If the model is already existed, model pased from latest assigned $data will replace previous model.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -168,7 +169,8 @@ with their contextual information.</p>
 <dl class="method">
 <dt id="RdfGraph::serializeRdfAs">
 <tt class="descname">serializeRdfAs</tt><big>(</big><em>$format</em><big>)</big><a class="headerlink" href="#RdfGraph::serializeRdfAs" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>To serialize RDF saved in RdfGraph in the RDF serialization format specified by $format.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -191,7 +193,7 @@ with their contextual information.</p>
 <dl class="class">
 <dt id="EasyRdfAdapter">
 <em class="property">class </em><tt class="descname">EasyRdfAdapter</tt><a class="headerlink" href="#EasyRdfAdapter" title="Permalink to this definition">¶</a></dt>
-<dd><p>EasyRdfAdapter class is an implemantion of RdfGraph. It is a warpper of an open source RDF parser - EasyRDF.</p>
+<dd><p>EasyRdfAdapter class is an implemantion of RdfGraph. It provides interface methods to invoke the open source RDF parser, EasyRDF.</p>
 <dl class="method">
 <dt id="EasyRdfAdapter::parseRdf">
 <tt class="descname">parseRdf</tt><big>(</big><em>$data</em><big>)</big><a class="headerlink" href="#EasyRdfAdapter::parseRdf" title="Permalink to this definition">¶</a></dt>
@@ -247,7 +249,7 @@ with their contextual information.</p>
 <dl class="class">
 <dt id="Tokenizer">
 <em class="property">class </em><tt class="descname">Tokenizer</tt><a class="headerlink" href="#Tokenizer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tokenizer class is a standard interface for X2R developers to extend X2R with new types of tokenizers. Currently, two tokenizers, i.e. CaseBasedTokenizer and DelimitBasedTokenizer, are implemented and bundled with X2R::Extractor.</p>
+<dd><p>Tokenizer is an abstract class. It defines a common interface to all tokenizer. Version 1.0 Extractor has implemented two types of tokenizers: CaseBasedTokenizer and DelimitBasedTokenizer.</p>
 <dl class="method">
 <dt id="Tokenizer::tokenizeString">
 <tt class="descname">tokenizeString</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#Tokenizer::tokenizeString" title="Permalink to this definition">¶</a></dt>
