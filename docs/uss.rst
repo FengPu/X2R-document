@@ -44,23 +44,6 @@ In refined USS, seven **atomic hooks** can be replaced and extended, they are:
   
 
 
- 
-
-
-**Examples:**
-
- #. This request returns the results that match the search query terms "typhoon" AND "weather" from "http://dbpedia.org/sparql".
-
- #. Example 2: This request returns the results that match the search query terms "country" from "http://dbpedia.org/sparql" and "http://linkedgeodata.org/sparql". 
-
-
-.. figure:: ./figs/uss_2.PNG
-     :scale: 80%
-     :alt: test
-
-
-
-
 Web API Definition
 ^^^^^^^
 
@@ -191,6 +174,47 @@ Example
   } 
 
 
+
+**Two more request/response examples (With default ResultRanker) **
+
+ .. sourcecode:: http
+
+    GET /uss?q=typhoon&sites&output=json
+
+ #. This request returns the results that match the search query terms "typhoon" AND "weather" from "http://dbpedia.org/sparql".
+
+ #. Example 2: This request returns the results that match the search query terms "country" from "http://dbpedia.org/sparql" and "http://linkedgeodata.org/sparql". 
+
+
+
+
+
+.. figure:: ./figs/uss_upload.PNG
+     :scale: 80%
+     :alt: test
+
+     u.
+
+
+.. figure:: ./figs/uss_extractor.PNG
+     :scale: 80%
+     :alt: test
+
+     e.
+
+
+.. figure:: ./figs/uss_mapper.PNG
+     :scale: 80%
+     :alt: test
+
+     m.
+
+
+.. figure:: ./figs/uss_format
+     :scale: 80%
+     :alt: test
+
+     f.
 
 
 
