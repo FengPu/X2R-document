@@ -62,7 +62,6 @@ Components
 
 API Usage 
 ------------------
-Targeted Audience: **API users**
 
 .. toctree::
     :maxdepth: 3
